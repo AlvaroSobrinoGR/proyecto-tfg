@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link href="css/inicio.css" rel="stylesheet" type="text/css">
+    <script src="script/formulario_contacto.js"></script>
 </head>
 <body>
     <div class="cabecera">
@@ -18,7 +19,12 @@
         </div>
     </div>
     <div class="cuerpo">
-        <h1>contacto</h1>
+        <form id="formulario_contacto" class="formulario_contacto">
+            <label>Nombre</label><input type="text" id="nombre"><br>
+            <label>Email</label><input type="text" id="email"><br>
+            <label>Comentario</label><textarea id="comentario"></textarea><br>
+            <input type="button" id="enviar_comentario" value="enviar">
+        </form>
     </div>
     <div class="pie">
         <h1>pie de pagina</h1>
