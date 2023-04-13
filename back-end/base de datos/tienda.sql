@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 03-04-2023 a las 12:28:23
+-- Tiempo de generación: 13-04-2023 a las 18:03:12
 -- Versión del servidor: 10.4.27-MariaDB
 -- Versión de PHP: 8.2.0
 
@@ -49,6 +49,27 @@ CREATE TABLE `compra_prodcutos` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `consultas`
+--
+
+CREATE TABLE `consultas` (
+  `id_consulta` int(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `nombre` varchar(255) NOT NULL,
+  `consulta` varchar(255) NOT NULL,
+  `estado` int(255) NOT NULL COMMENT 'si se ha respondido o no'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `consultas`
+--
+
+INSERT INTO `consultas` (`id_consulta`, `email`, `nombre`, `consulta`, `estado`) VALUES
+(1, 'alvaro@gmail.com', 'alvaro', 'pepe', 0);
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `productos`
 --
 
@@ -75,6 +96,14 @@ CREATE TABLE `usuarios` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`id_usuario`, `nombre`, `email`, `contrasenia`, `direccion`, `telefono`) VALUES
+(1, NULL, '', '', NULL, NULL),
+(2, NULL, 'alvaro@gmail.com', 'pepe', NULL, NULL);
+
+--
 -- Índices para tablas volcadas
 --
 
@@ -93,6 +122,12 @@ ALTER TABLE `compra_prodcutos`
   ADD PRIMARY KEY (`id_comrpa`,`id_prodcuto`),
   ADD KEY `id_comrpa` (`id_comrpa`,`id_prodcuto`),
   ADD KEY `id_prodcuto` (`id_prodcuto`);
+
+--
+-- Indices de la tabla `consultas`
+--
+ALTER TABLE `consultas`
+  ADD PRIMARY KEY (`id_consulta`);
 
 --
 -- Indices de la tabla `productos`
@@ -119,6 +154,12 @@ ALTER TABLE `compra`
   MODIFY `id_compra` int(255) NOT NULL AUTO_INCREMENT;
 
 --
+-- AUTO_INCREMENT de la tabla `consultas`
+--
+ALTER TABLE `consultas`
+  MODIFY `id_consulta` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=2;
+
+--
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
@@ -128,7 +169,7 @@ ALTER TABLE `productos`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(255) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_usuario` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- Restricciones para tablas volcadas

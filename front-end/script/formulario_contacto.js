@@ -6,7 +6,7 @@ function funciones(){
         let formulario = new FormData();
         formulario.append("nombre", document.getElementById("nombre").value)
         formulario.append("email", document.getElementById("email").value)
-        formulario.append("comentario", document.getElementById("comentario").value)
+        formulario.append("consulta", document.getElementById("consulta").value)
         
         let xhr = new XMLHttpRequest();
         xhr.open("POST", "../back-end/contacto.php")
