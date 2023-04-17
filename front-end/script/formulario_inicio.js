@@ -32,11 +32,27 @@ function funciones (){
             formulario.append("email", document.getElementById("register-email").value)
             formulario.append("contrasenia", document.getElementById("register-password").value)
         }
-        
         let xhr = new XMLHttpRequest();
-        xhr.open("POST", "../back-end/sesion.php")
+        xhr.open("POST", "../back-end/inicio.php")
         xhr.addEventListener("load", (respuesta)=>{
-            document.getElementById("cabecera").innerHTML=respuesta.target.response;
+            let resultado = respuesta.target.response;
+            if(this.id.includes("boton_iniciar_sesion")){
+                if(resultado.includes("La cuenta es correcta")){
+                    localStorage.setItem("usuario", resultado.split(";")[1])
+                    //recargo para que se ponga en modo usuario
+                    location.reload();
+                }else{
+                    document.getElementById("respuesta_servidor").innerHTML=resultado;
+                }
+            }else{
+                if(resultado.includes("Cuenta creada exitosamente")){
+                    localStorage.setItem("usuario", resultado.split(";")[1])
+                    //recargo para que se ponga en modo usuario
+                    location.reload();
+                }else{
+                    document.getElementById("respuesta_servidor").innerHTML=resultado;
+                }
+            }
         })
         xhr.send(formulario);
     }
