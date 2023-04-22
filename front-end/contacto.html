@@ -7,6 +7,7 @@
     <title>Document</title>
     <link href="css/inicio.css" rel="stylesheet" type="text/css">
     <script src="script/formulario_contacto.js"></script>
+    <script src="script/comprobar_sesion_iniciada.js"></script>
 </head>
 <body>
     <div class="cabecera">
@@ -14,11 +15,14 @@
             <a href="inicio.html">inicio</a>
             <a href="productos.html">productos</a>
             <a href="contacto.html">contacto</a>
-            <a href="carrito.html">carrito</a>
-            <a href="usuario.html">usuario</a>
-        </div>
+            <a href="carrito.html" id="seccion_carrito" >carrito</a>
+            <a href="usuario.html" id="seccion_usuario">usuario</a>
+          </div>
     </div>
     <div class="cuerpo">
+        <div id="sesion_no_iniciada">
+            <h1>debes iniciar sesion en el inicio para poder enviar una consulta</h1>
+        </div>
         <form id="formulario_contacto" class="formulario_contacto">
             <label>Nombre</label><input type="text" id="nombre"><br>
             <label>Email</label><input type="text" id="email"><br>
