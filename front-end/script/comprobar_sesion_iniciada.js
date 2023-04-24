@@ -4,8 +4,10 @@ function funciones() {
     if (localStorage.getItem("usuario")) {
         //comprobar que el email esta bien
         conexion()
+        
         //si el email no es valido borrar el localstorage y llamar a la funcion ocultar_contenido()
     } else {
+        
         ocultar_contenido()
     }  
 
@@ -14,16 +16,20 @@ function funciones() {
         if(archivo_actual.includes("inicio.html")){
             document.getElementById("seccion_usuario").style.display="none";
             document.getElementById("seccion_carrito").style.display="none";
+            document.getElementById("inicio_registro_sesion").style.display="block";
         }
         if(archivo_actual.includes("contacto.html")){
             document.getElementById("seccion_usuario").style.display="none";
             document.getElementById("seccion_carrito").style.display="none";
+            document.getElementById("formulario_contacto").style.display="none";
             document.getElementById("sesion_no_iniciada").style.display = "block";
+            document.getElementById("inicio_registro_sesion").style.display="block";
             
         }
         if(archivo_actual.includes("productos.html")){
             document.getElementById("seccion_usuario").style.display="none";
             document.getElementById("seccion_carrito").style.display="none";
+            document.getElementById("inicio_registro_sesion").style.display="block";
         }
     }
 

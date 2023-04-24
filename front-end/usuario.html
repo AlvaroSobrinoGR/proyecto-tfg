@@ -7,17 +7,21 @@
     <title>Document</title>
     <link href="css/inicio.css" rel="stylesheet" type="text/css">
     <script src="script/formulario_usuario.js"></script>
+    <script src="script/ir_a_formulario_inicio_registro_usuario.js"></script>
 </head>
 <body>
-    <div class="cabecera">
+    <div class="cabecera" id="cabecera">
+        <div class="informacion_usuario" id="informacion_usuario">
+          <input type="button" id="inicio_registro_sesion" name="inicio_registro" value="Registrarse">
+          <a href="carrito.html" id="seccion_carrito">carrito</a>
+          <a href="usuario.html" id="seccion_usuario">usuario</a>
+        </div>
         <div class="links">
-            <a href="inicio.html">inicio</a>
-            <a href="productos.html">productos</a>
-            <a href="contacto.html">contacto</a>
-            <a href="carrito.html">carrito</a>
-            <a href="usuario.html" id="sesion_usuario">usuario</a>
-          </div>
-    </div>
+          <a href="inicio.html">inicio</a>
+          <a href="productos.html">productos</a>
+          <a href="contacto.html">contacto</a>
+        </div>
+      </div>
     <div class="cuerpo" id="cuerpo">
         <form id="formulario_usuario">
             <label for="nombre">Nombre:</label>

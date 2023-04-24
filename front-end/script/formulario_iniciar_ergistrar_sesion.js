@@ -7,7 +7,8 @@ function funciones (){
     document.getElementById("boton_para_registrarse").addEventListener("click", cambiar_formulaio)
     document.getElementById("boton_para_iniciar_sesion").addEventListener("click", cambiar_formulaio)
     
-    function cambiar_formulaio(){ //para cambiar el formulaio de inicio de sesion y de registro
+    function cambiar_formulaio(e){ //para cambiar el formulaio de inicio de sesion y de registro
+        e.preventDefault()
         if(this.id.includes("iniciar")){
             inicio_sesion.style.display="block"
             resgistrarse.style.display="none"
@@ -39,16 +40,16 @@ function funciones (){
             if(this.id.includes("boton_iniciar_sesion")){
                 if(resultado.includes("La cuenta es correcta")){
                     localStorage.setItem("usuario", resultado.split(";")[1])
-                    //recargo para que se ponga en modo usuario
-                    location.reload();
+                    //le llevo al inicio
+                    window.location.href = "inicio.html"
                 }else{
                     document.getElementById("respuesta_servidor").innerHTML=resultado;
                 }
             }else{
                 if(resultado.includes("Cuenta creada exitosamente")){
                     localStorage.setItem("usuario", resultado.split(";")[1])
-                    //recargo para que se ponga en modo usuario
-                    location.reload();
+                    //le llevo al inicio
+                    window.location.href = "inicio.html"
                 }else{
                     document.getElementById("respuesta_servidor").innerHTML=resultado;
                 }

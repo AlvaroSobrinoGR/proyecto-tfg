@@ -8,24 +8,28 @@
     <link href="css/inicio.css" rel="stylesheet" type="text/css">
     <script src="script/formulario_contacto.js"></script>
     <script src="script/comprobar_sesion_iniciada.js"></script>
+    <script src="script/ir_a_formulario_inicio_registro_usuario.js"></script>
 </head>
 <body>
-    <div class="cabecera">
+    <div class="cabecera" id="cabecera">
+        <div class="informacion_usuario" id="informacion_usuario">
+          <input type="button" id="inicio_registro_sesion" name="inicio_registro" value="Registrarse">
+          <a href="carrito.html" id="seccion_carrito">carrito</a>
+          <a href="usuario.html" id="seccion_usuario">usuario</a>
+        </div>
         <div class="links">
-            <a href="inicio.html">inicio</a>
-            <a href="productos.html">productos</a>
-            <a href="contacto.html">contacto</a>
-            <a href="carrito.html" id="seccion_carrito" >carrito</a>
-            <a href="usuario.html" id="seccion_usuario">usuario</a>
-          </div>
-    </div>
+          <a href="inicio.html">inicio</a>
+          <a href="productos.html">productos</a>
+          <a href="contacto.html">contacto</a>
+        </div>
+      </div>
     <div class="cuerpo">
         <div id="sesion_no_iniciada">
             <h1>debes iniciar sesion en el inicio para poder enviar una consulta</h1>
         </div>
         <form id="formulario_contacto" class="formulario_contacto">
             <label>Nombre</label><input type="text" id="nombre"><br>
-            <label>Email</label><input type="text" id="email"><br>
+            <label>Email</label><input type="text" id="email"><br><!--cambiar por asunto-->
             <label>Consulta</label><textarea id="consulta" maxlength="255"></textarea><br>
             <input type="button" id="enviar_comentario" value="enviar">
         </form>

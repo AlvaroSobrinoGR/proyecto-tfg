@@ -15,7 +15,6 @@ body{
     display: flex;
     flex-direction:row;
     flex-wrap: wrap;
-    justify-content: center;
 }
 .formulario{
     width: 30%;
@@ -27,6 +26,15 @@ body{
     display: flex;
     flex-direction:row;
     justify-content: space-evenly;
+}
+.informacion_usuario{
+    width: 100%;
+    border: 1px solid rgb(144, 153, 51);
+    display: flex;
+    justify-content: right;
+}
+#inicio_registro_sesion, #sesion_no_iniciada{
+    display: none;
 }
 
 
