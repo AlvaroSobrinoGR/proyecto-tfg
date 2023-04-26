@@ -3,10 +3,23 @@
 $conexion = new mysqli("localhost", "root", "", "tienda");
 
 $email = $_POST['email'];
-$nombre = $_POST['nombre'];
+$asunto = $_POST['asunto'];
 $consulta = $_POST['consulta'];
+
+$sql = "SELECT id_usuario FROM usuarios WHERE email = '$email'";
+
+$resultado = $conexion->query($sql);
+
+$id_usuario = $resultado-> fetch_assoc()["id_usuario"];
+
+$estado = "espera";
   
-$sql = "INSERT INTO consultas (email, nombre, consulta, estado) VALUES ('$email', '$nombre', '$consulta', 0)";
+$sql = "INSERT INTO consultas (id_usuario, asunto, consulta, estado) VALUES ('$id_usuario', '$asunto', '$consulta', '$estado')";
+/*
+espera: aun no ha sido atendida
+trabajando: se esta trabajando en ella
+finalizada: consulta cerrada
+ */
 if ($conexion->query($sql) == TRUE) {
   echo "Consulta creada";
 } else {
@@ -15,3 +28,4 @@ if ($conexion->query($sql) == TRUE) {
   
 $conexion->close();
 ?>
+

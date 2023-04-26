@@ -4,61 +4,109 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
     <title>Document</title>
+
     <link href="css/inicio.css" rel="stylesheet" type="text/css">
+
     <script src="script/formulario_usuario.js"></script>
+
     <script src="script/ir_a_formulario_inicio_registro_usuario.js"></script>
+
+
+
+
 </head>
 <body>
+
+
+
+
+
     <div class="cabecera" id="cabecera">
+
         <div class="informacion_usuario" id="informacion_usuario">
+
           <input type="button" id="inicio_registro_sesion" name="inicio_registro" value="Registrarse">
+
           <a href="carrito.html" id="seccion_carrito">carrito</a>
+
           <a href="usuario.html" id="seccion_usuario">usuario</a>
+
         </div>
+
+
+
+
         <div class="links">
+
           <a href="inicio.html">inicio</a>
+
           <a href="productos.html">productos</a>
+
           <a href="contacto.html">contacto</a>
+
         </div>
-      </div>
+
+    </div>
+
+
+
+
     <div class="cuerpo" id="cuerpo">
+
+
         <form id="formulario_usuario">
-            <label for="nombre">Nombre:</label>
-            <input type="text" id="nombre" name="nombre">
-            <br>
-            <label for="email">Email:</label>
-            <input type="email" id="email" name="email" readonly>
-            <br>
-            <label for="contrasena">Contraseña:</label>
-            <input type="button" id="cambiarContraseña" value="Cambiar Contraseña">
-            <br>
-            <label for="direccion">Dirección:</label>
-            <input type="text" id="direccion" name="direccion">
-            <br>
-            <label for="telefono">Número de Teléfono:</label>
-            <input type="tel" id="telefono" name="telefono">
-            <br>
+            <label for="nombre">Nombre:</label>     <input type="text" id="nombre" name="nombre">       <br>
+            
+            <label for="email">Email:</label>       <input type="email" id="email" name="email" readonly>       <br>
+
+            <label for="contrasena">Contraseña:</label>     <input type="button" id="cambiarContraseña" value="Cambiar Contraseña">     <br>
+
+            <label for="direccion">Dirección:</label>       <input type="text" id="direccion" name="direccion">     <br>
+
+            <label for="telefono">Número de Teléfono:</label>       <input type="tel" id="telefono" name="telefono">        <br>
+
             <input type="button" id="guardarCambios" value="Guardar Cambios">
-            <h4>pedidos</h4> <!--una tabla auw ese genere con los datos de los pedidos que ha hecho el usuario-->
+
+            <h4>pedidos</h4> <!--una tabla que ese genere con los datos de los pedidos que ha hecho el usuario-->
+
+            <h4>consultas</h4> <!--una tabla que ese genere con las consultas del usuario y su estado-->
+
         </form>
+
+
+
         <form id="formulario_cambio_contraseñia" style="display: none;">
+
             <!--meter el poder ver la constraseñia que estas escribiendo-->
-            <label for="antigua-contrasena">Antigua Contraseña:</label>
-            <input type="password" id="antigua-contrasena" name="antigua-contrasena">
-            <br>
-            <label for="nueva-contrasena">Nueva Contraseña:</label>
-            <input type="password" id="nueva-contrasena" name="nueva-contrasena">
-            <br>
-            <label for="confirmacion-contrasena">Confirmación de Contraseña:</label>
-            <input type="password" id="confirmacion-contrasena" name="confirmacion-contrasena">
-            <br>
-            <input type="button" id="cancelar" value="cancelar">
-            <input type="button" id="cambiarContraseñia" value="Cambiar Contraseña">
+
+            <label for="antigua-contrasena">Antigua Contraseña:</label>     <input type="password" id="antigua-contrasena" name="antigua-contrasena">       <br>
+            
+            <label for="nueva-contrasena">Nueva Contraseña:</label>     <input type="password" id="nueva-contrasena" name="nueva-contrasena">       <br>
+            
+            <label for="confirmacion-contrasena">Confirmación de Contraseña:</label>        <input type="password" id="confirmacion-contrasena" name="confirmacion-contrasena">     <br>
+            
+            <input type="button" id="cancelar" value="cancelar">        <input type="button" id="cambiarContraseñia" value="Cambiar Contraseña">
+
         </form>
+
     </div>
+
+
+
+
     <div class="pie">
+
         <h1>pie de pagina</h1>
+
     </div>
+
+
+
+
+
 </body>
 </html>

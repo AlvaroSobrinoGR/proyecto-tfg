@@ -41,13 +41,29 @@ if ($tipo == "inicio") {
        
         $consulta = "INSERT INTO usuarios (email, contrasenia) VALUES ('$email', '$contrasenia')";
         if ($conexion->query($consulta) == TRUE) {
+
+            enviarEmail($_POST["email"]);
+
             echo "Cuenta creada exitosamente;".$_POST["email"];
+
         } else {
             echo "Error al crear la cuenta: " . $conexion->error;
         }
     }
 }
 
+function enviarEmail($email){
+    $to = 'estudiosalvaroestudios@gmail.com';
+    $subject = 'Asunto del correo electrónico';
+    $message = 'Este es el cuerpo del correo electrónico';
+    $headers = 'From: paginatiendapruebas@gmail.com';
+
+    if(mail($to, $subject, $message, $headers)){
+        echo "correcto";
+    }else{
+        echo mail($to, $subject, $message, $headers);
+    };
+}
 
 $conexion->close();
 ?>

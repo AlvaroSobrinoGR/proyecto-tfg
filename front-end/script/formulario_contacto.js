@@ -4,9 +4,9 @@ function funciones(){
     document.getElementById("enviar_comentario").addEventListener("click", conexion)
     function conexion(){
         let formulario = new FormData();
-        formulario.append("nombre", document.getElementById("nombre").value)
-        formulario.append("email", document.getElementById("email").value)
+        formulario.append("asunto", document.getElementById("asunto").value)
         formulario.append("consulta", document.getElementById("consulta").value)
+        formulario.append("email", localStorage.getItem("usuario"))
         
         let xhr = new XMLHttpRequest();
         xhr.open("POST", "../back-end/contacto.php")
