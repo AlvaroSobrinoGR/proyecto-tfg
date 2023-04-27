@@ -1,5 +1,6 @@
 <?php
 
+require_once 'envio_de_correos.php'; // es el documento donde esta el envio de emails
 
 $conexion = new mysqli("localhost", "root", "", "tienda");
 
@@ -18,7 +19,7 @@ if ($tipo == "inicio") {
         
         $row = $resultado->fetch_assoc();
         if ($contrasenia === $row["contrasenia"]) {
-        
+
             echo "La cuenta es correcta;".$_POST["email"];
         } else {
         
@@ -38,32 +39,30 @@ if ($tipo == "inicio") {
        
         echo "Ya existe una cuenta con este email";
     } else {
+
+        $codgioConfirmacion = uniqid();
        
-        $consulta = "INSERT INTO usuarios (email, contrasenia) VALUES ('$email', '$contrasenia')";
+        $consulta = "INSERT INTO usuarios (email, contrasenia, validada, codigo) VALUES ('$email', '$contrasenia', '0', '$codgioConfirmacion')";
         if ($conexion->query($consulta) == TRUE) {
 
-            enviarEmail($_POST["email"]);
+            $ultimo_id = mysqli_insert_id($conexion);
 
-            echo "Cuenta creada exitosamente;".$_POST["email"];
+            $resultado = enviarCorreo($email, "Confirmar creacion de cuenta", "esta es la confirmacion de la creacion de la cuenta '$codgioConfirmacion'");
+
+            if($resultado=="enviado"){
+                echo "exito;$email";
+            }else{
+                $consulta = "DELETE FROM usuarios WHERE id_usuario = '$ultimo_id'";
+                $conexion->query($consulta);
+                echo "el email no se ha enviado";
+            }
 
         } else {
-            echo "Error al crear la cuenta: " . $conexion->error;
+            echo "No que consiguio insertar los datos en las tablas: " . $conexion->error;
         }
     }
 }
 
-function enviarEmail($email){
-    $to = 'estudiosalvaroestudios@gmail.com';
-    $subject = 'Asunto del correo electrónico';
-    $message = 'Este es el cuerpo del correo electrónico';
-    $headers = 'From: paginatiendapruebas@gmail.com';
-
-    if(mail($to, $subject, $message, $headers)){
-        echo "correcto";
-    }else{
-        echo mail($to, $subject, $message, $headers);
-    };
-}
 
 $conexion->close();
 ?>

@@ -41,15 +41,15 @@ function funciones (){
                 if(resultado.includes("La cuenta es correcta")){
                     localStorage.setItem("usuario", resultado.split(";")[1])
                     //le llevo al inicio
-                    //window.location.href = "inicio.html"
+                    window.location.href = "inicio.html"
                 }else{
                     document.getElementById("respuesta_servidor").innerHTML=resultado;
                 }
             }else{
-                if(resultado.includes("Cuenta creada exitosamente")){
-                    localStorage.setItem("usuario", resultado) //resultado.split(";")[1]
+                if(resultado.includes("exito")){
+                    localStorage.setItem("usuario", resultado.split(";")[1])
                     //le llevo al inicio
-                    //window.location.href = "inicio.html"
+                    window.location.href = "codigo_verificacion_cuenta.html"
                 }else{
                     document.getElementById("respuesta_servidor").innerHTML=resultado;
                 }
