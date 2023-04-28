@@ -32,6 +32,12 @@ function funciones (){
             formulario.append("tipo", "creacion")
             formulario.append("email", document.getElementById("register-email").value)
             formulario.append("contrasenia", document.getElementById("register-password").value)
+            if(document.getElementsByName("novedades")[0].checked){
+                formulario.append("novedades", 1)
+            }else{
+                formulario.append("novedades", 0)
+            }
+            
         }
         let xhr = new XMLHttpRequest();
         xhr.open("POST", "../back-end/formulario_iniciar_registrar_sesion.php")
@@ -39,7 +45,11 @@ function funciones (){
             let resultado = respuesta.target.response;
             if(this.id.includes("boton_iniciar_sesion")){
                 if(resultado.includes("La cuenta es correcta")){
-                    localStorage.setItem("usuario", resultado.split(";")[1])
+                    if(document.getElementsByName("guardar_sesion")[0].checked){
+                        localStorage.setItem("usuario", resultado.split(";")[1])
+                    }else{
+                        sessionStorage.setItem("usuario", resultado.split(";")[1])
+                    }
                     //le llevo al inicio
                     window.location.href = "inicio.html"
                 }else{
@@ -47,9 +57,9 @@ function funciones (){
                 }
             }else{
                 if(resultado.includes("exito")){
-                    localStorage.setItem("usuario", resultado.split(";")[1])
+                    //localStorage.setItem("usuario", resultado.split(";")[1])
                     //le llevo al inicio
-                    window.location.href = "codigo_verificacion_cuenta.html"
+                    window.location.href = "inicio.html"
                 }else{
                     document.getElementById("respuesta_servidor").innerHTML=resultado;
                 }

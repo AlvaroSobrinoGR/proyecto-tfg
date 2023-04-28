@@ -1,11 +1,13 @@
 window.addEventListener("load", funciones)
 function funciones() {
     //comprobamos si habia una sesion iniciada o no.
+    
     if (localStorage.getItem("usuario")) {
         //comprobar que el email esta bien
-        conexion()
-        
+        conexion(localStorage.getItem("usuario"))
         //si el email no es valido borrar el localstorage y llamar a la funcion ocultar_contenido()
+    } else if (sessionStorage.getItem("usuario")){
+        conexion(sessionStorage.getItem("usuario"))
     } else {
         
         ocultar_contenido()
@@ -31,11 +33,17 @@ function funciones() {
             document.getElementById("seccion_carrito").style.display="none";
             document.getElementById("inicio_registro_sesion").style.display="block";
         }
+        if(archivo_actual.includes("usuario.html")){
+            window.location.href = "inicio.html"
+        }
+        if(archivo_actual.includes("carrito.html")){
+            window.location.href = "inicio.html"
+        }
     }
 
-    function conexion(){
+    function conexion(usuario){
         let formulario = new FormData();
-        formulario.append("email", localStorage.getItem("usuario"))
+        formulario.append("email", usuario)
 
         let xhr = new XMLHttpRequest();
         xhr.open("POST", "../back-end/comprobar_sesion_iniciada.php")

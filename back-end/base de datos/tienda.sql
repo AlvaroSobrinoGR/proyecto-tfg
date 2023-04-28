@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-04-2023 a las 14:51:30
+-- Tiempo de generación: 28-04-2023 a las 15:33:25
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -61,13 +61,6 @@ CREATE TABLE `consultas` (
   `estado` varchar(255) NOT NULL COMMENT 'espera: aun no ha sido atendida\r\ntrabajando: se esta trabajando en ella\r\nfinalizada: consulta cerrada'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Volcado de datos para la tabla `consultas`
---
-
-INSERT INTO `consultas` (`id_consulta`, `id_usuario`, `id_empleado`, `asunto`, `consulta`, `estado`) VALUES
-(2, 2, NULL, 'hola', 'hola pepe', 'espera');
-
 -- --------------------------------------------------------
 
 --
@@ -118,20 +111,16 @@ CREATE TABLE `usuarios` (
   `direccion` varchar(500) DEFAULT NULL,
   `telefono` int(255) DEFAULT NULL,
   `validada` int(20) NOT NULL COMMENT 'contiene 1 si la cuenta esta confirmada y 0 si aun no lo esta',
-  `codigo` varchar(150) DEFAULT NULL COMMENT 'contiene codigos para realizas ciertas confirmaciones'
+  `codigo` varchar(150) DEFAULT NULL COMMENT 'contiene codigos para realizas ciertas confirmaciones',
+  `novedades` int(20) NOT NULL COMMENT '1 si quiere novedades 0 si no quiere novedades'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
 -- Volcado de datos para la tabla `usuarios`
 --
 
-INSERT INTO `usuarios` (`id_usuario`, `nombre`, `email`, `contrasenia`, `direccion`, `telefono`, `validada`, `codigo`) VALUES
-(2, NULL, 'alvaro@gmail.com', 'pepe', NULL, NULL, 0, NULL),
-(3, NULL, 'sonia@gmail.com', 'sonia', NULL, NULL, 0, NULL),
-(12, NULL, 'sads', 'asd', NULL, NULL, 0, NULL),
-(13, NULL, 'asdasdas', 'asd', NULL, NULL, 0, NULL),
-(14, NULL, 'aasd', 'asdasd', NULL, NULL, 0, NULL),
-(21, NULL, 'estudiosalvaroestudios@gmail.com', 'asd', NULL, NULL, 0, NULL);
+INSERT INTO `usuarios` (`id_usuario`, `nombre`, `email`, `contrasenia`, `direccion`, `telefono`, `validada`, `codigo`, `novedades`) VALUES
+(29, NULL, 'estudiosalvaroestudios@gmail.com', 'asd', NULL, NULL, 1, '0', 1);
 
 --
 -- Índices para tablas volcadas
@@ -214,7 +203,7 @@ ALTER TABLE `productos`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
+  MODIFY `id_usuario` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=30;
 
 --
 -- Restricciones para tablas volcadas

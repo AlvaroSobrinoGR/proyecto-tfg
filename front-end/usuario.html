@@ -13,6 +13,8 @@
 
     <script src="script/formulario_usuario.js"></script>
 
+    <script src="script/comprobar_sesion_iniciada.js"></script>
+
     <script src="script/ir_a_formulario_inicio_registro_usuario.js"></script>
 
 
@@ -63,7 +65,7 @@
             
             <label for="email">Email:</label>       <input type="email" id="email" name="email" readonly>       <br>
 
-            <label for="contrasena">Contraseña:</label>     <input type="button" id="cambiarContraseña" value="Cambiar Contraseña">     <br>
+            <label for="contrasena">Contraseña:</label>     <input type="button" id="cambiarContraseña" value="Cambiar Contraseña">     <span id="respuesta_contraeña"></span>     <br>
 
             <label for="direccion">Dirección:</label>       <input type="text" id="direccion" name="direccion">     <br>
 
@@ -77,21 +79,6 @@
 
         </form>
 
-
-
-        <form id="formulario_cambio_contraseñia" style="display: none;">
-
-            <!--meter el poder ver la constraseñia que estas escribiendo-->
-
-            <label for="antigua-contrasena">Antigua Contraseña:</label>     <input type="password" id="antigua-contrasena" name="antigua-contrasena">       <br>
-            
-            <label for="nueva-contrasena">Nueva Contraseña:</label>     <input type="password" id="nueva-contrasena" name="nueva-contrasena">       <br>
-            
-            <label for="confirmacion-contrasena">Confirmación de Contraseña:</label>        <input type="password" id="confirmacion-contrasena" name="confirmacion-contrasena">     <br>
-            
-            <input type="button" id="cancelar" value="cancelar">        <input type="button" id="cambiarContraseñia" value="Cambiar Contraseña">
-
-        </form>
 
     </div>
 

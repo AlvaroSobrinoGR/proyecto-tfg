@@ -4,22 +4,14 @@ function funciones (){
     //cambio de formulario
     let formulario_usuario =  document.getElementById("formulario_usuario");
     let formulario_cambio_contrasena =  document.getElementById("formulario_cambio_contraseñia");
-    document.getElementById("cambiarContraseña").addEventListener("click", cambiar_formulaio)
-    document.getElementById("cancelar").addEventListener("click", cambiar_formulaio)
     
-    function cambiar_formulaio(){ //para cambiar el formulaio de inicio de sesion y de registro
-        if(this.id.includes("cancelar")){
-            formulario_usuario.style.display="block"
-            formulario_cambio_contrasena.style.display="none"
-        }else{
-            formulario_usuario.style.display="none"
-            formulario_cambio_contrasena.style.display="block"
-        }
-    }
 
     //enviar informacion del formulario usuario
     document.getElementById("guardarCambios").addEventListener("click", conexion)
-    document.getElementById("cambiarContraseñia").addEventListener("click", conexion)
+
+    document.getElementById("cambiarContraseña").addEventListener("click", conexion)
+
+
     function conexion() {
     let formulario = new FormData();
     if(this.id.includes("guardarCambios")){
@@ -29,13 +21,20 @@ function funciones (){
         formulario.append("telefono", document.getElementById("telefono").value);
     }else{
         formulario.append("tipo", "contraseñia");
-        formulario.append("contraAntigua", document.getElementById("antigua-contrasena").value);
-        formulario.append("contraNueva", document.getElementById("nueva-contrasena").value);
+        if (localStorage.getItem("usuario")) {
+            formulario.append("email", localStorage.getItem("usuario"))
+        } else if (sessionStorage.getItem("usuario")){
+            formulario.append("email", sessionStorage.getItem("usuario"))
+        }
     }
     let xhr = new XMLHttpRequest();
     xhr.open("POST", "../back-end/configuracion_usuario.php");
     xhr.addEventListener("load", (respuesta) => {
-        document.getElementById("cuerpo").innerHTML = respuesta.target.response;
+        if(respuesta.target.response.includes("exito")){
+            document.getElementById("respuesta_contraeña").innerHTML="se te ha enviado un email para cambiar la contraseña"
+        }else{
+            document.getElementById("cuerpo").innerHTML = respuesta.target.response;
+        }
     });
     xhr.send(formulario);
     }

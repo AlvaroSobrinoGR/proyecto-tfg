@@ -1,37 +1,29 @@
 window.addEventListener("load", funciones)
 
 function funciones(){
-    window.addEventListener("beforeunload", cancelar)
+    let queryParams = new URLSearchParams(window.location.search);
+    if(queryParams.get('hash')!=null && queryParams.get('email')!=null){
+        let email = queryParams.get('email');
+        let codigo = queryParams.get('hash');
+        conexion(email, codigo)
+    }
     
-    function cancelar(){
-        conexion("confirmar", codigo)
-    }
+    
 
-    document.getElementById("confirmar").addEventListener("click", confirmar)
-
-    function confirmar(){
-        let codigo = document.getElementById("codigo_confirmacion").value
-        if(codigo.length>0){
-            conexion("confirmar", codigo)
-        }
-    }
-
-    function conexion(tipo, valor){
+    function conexion(email, codigo){
         let formulario = new FormData();
+        formulario.append("email", email)
         formulario.append("codigo", codigo)
+
 
         let xhr = new XMLHttpRequest();
         xhr.open("POST", "../back-end/codigo_verificacion_cuenta.php")
         xhr.addEventListener("load", (respuesta)=>{
-            let resultado = respuesta.target.response;
-            if(resultado.includes("correcto")){
-                localStorage.setItem("usuario", resultado.split(";")[1])
-                window.location.href = "inicio.html"
-            }else{
-                ocultar_contenido()
-            }
+           console.log(respuesta.target.response);
         })
+
         xhr.send(formulario);
     }
+
 
 }

@@ -1,4 +1,5 @@
 <?php
+require_once 'envio_de_correos.php';
 // Recoger datos del formulario
 $tipo = $_POST['tipo'];
 
@@ -14,11 +15,29 @@ if ($tipo === "configuracion") {
   echo "Teléfono: " . $telefono . "<br>";
 } else {
   // Recoger datos del formulario para cambiar contraseña
-  $contraAntigua = $_POST['contraAntigua'];
-  $contraNueva = $_POST['contraNueva'];
+  $email = $_POST["email"];
 
-  // Imprimir los datos recogidos para cambiar contraseña
-  echo "Contraseña Antigua: " . $contraAntigua . "<br>";
-  echo "Contraseña Nueva: " . $contraNueva . "<br>";
+  $conexion = new mysqli("localhost", "root", "", "tienda");
+
+  $codgioConfirmacion = uniqid();
+
+  $consulta = "UPDATE usuarios SET codigo = '$codgioConfirmacion'  WHERE email = '$email'";
+
+  if ($conexion->query($consulta) == TRUE) {
+
+      $resultado = enviarCorreo($email, "Cambiar contraseñia", "En este enlace podras cambiar tu contraseñia http://localhost/proyecto%20tfg/front-end/cambiar_contraseña.html?email=$email&hash=$codgioConfirmacion");
+
+      if($resultado=="enviado"){
+          echo "exito";
+      }else{
+          $consulta = "UPDATE usuarios SET codigo = 0  WHERE email = '$email'";
+          $conexion->query($consulta);
+          echo "el email no se ha enviado";
+      }
+
+  } else {
+      echo "No que consiguio insertar los datos en las tablas: " . $conexion->error;
+  }
+
 }
 ?>
