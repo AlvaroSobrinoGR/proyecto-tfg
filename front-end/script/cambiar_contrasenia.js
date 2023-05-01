@@ -31,7 +31,9 @@ function funciones(){
         let xhr = new XMLHttpRequest();
         xhr.open("POST", "../back-end/cambiar_contraseñia.php")
         xhr.addEventListener("load", (respuesta)=>{
-            document.getElementById("formulario_cambio_contraseñia").innerHTML = respuesta.target.response
+            if(respuesta.target.response.includes("exito")){
+                window.location.href = "inicio.html"
+            }
         })
 
         xhr.send(formulario);

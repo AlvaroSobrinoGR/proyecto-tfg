@@ -27,23 +27,36 @@
 
         
         <!--inicio de sesion-->
-        <form class="inicio_sesion" id="inicio_sesion">
+        <div class="inicio_sesion" id="inicio_sesion">
 
           <label for="email">Email:</label>   <input type="email" id="email" name="email" required />   <br/>
 
           <label for="password">Contraseña:</label>   <input type="password" id="password" name="password" required />    <br/>
 
+          <a href="" id="olvido_contrasenia">Se me olvido la contrasenia</a>    <br>
+
           <input type="checkbox" id="guardar_sesion" name="guardar_sesion" >     <label form="guardar_sesion">Mantener sesion iniciada</label>    <br/>
 
           <input type="button" id="boton_iniciar_sesion" value="iniciar sesion">    <a href="" id="boton_para_registrarse">Resgistrarse</a>
 
-        </form>
+        </div>
+
+        <!--recuperar cuenta-->
+        <div class="recuperar_cuenta" id="recuperar_cuenta"  style="display: none;">
+
+            <h5>Escribe tu email para enviarte un emil de recuperacion de cuenta</h5>
+
+            <label for="email_recuperacion">Email:</label>   <input type="email" id="email_recuperacion" name="email_recuperacion" required />   <br/>
+
+            <input type="button" id="enviar_recuperacion" value="Enviar email">    <a href="" id="cancelar">Cancelar</a>
+  
+          </div>
 
 
 
 
         <!--registrarse-->
-        <form class="resgistrarse" id="resgistrarse" style="display: none;">
+        <div class="resgistrarse" id="resgistrarse" style="display: none;">
 
             <label for="register-email">Email:</label>    <input type="email" id="register-email" name="register-email" required>   <br>
             
@@ -55,7 +68,7 @@
             
             <input type="button" id="boton_registrarse" value="Registrarse">    <a href="" id="boton_para_iniciar_sesion">Iniciar sesion</a>
 
-        </form>
+        </div>
 
 
     </div>
