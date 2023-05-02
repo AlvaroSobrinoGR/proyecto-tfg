@@ -94,20 +94,39 @@ function funciones (){
     document.getElementById("consultas").addEventListener("click", listarConsultas)
     function listarConsultas(e){
         e.preventDefault()
-        let formulario = new FormData();
-        formulario.append("email", email);
- 
-        let xhr = new XMLHttpRequest();
-        xhr.open("POST", "../back-end/usuario_consultas.php");
-        xhr.addEventListener("load", (resultado) => {
-            let respuesta = resultado.target.response
-            //pintar datos
-            let json = JSON.parse(respuesta)
-
-            console.log(json)
-             
-        });
-        xhr.send(formulario);
+        if(document.getElementById("lista_consultas").innerHTML.length>0){
+            document.getElementById("lista_consultas").innerHTML=""
+        }else{
+            let formulario = new FormData();
+            formulario.append("email", email);
+     
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST", "../back-end/usuario_consultas.php");
+            xhr.addEventListener("load", (respuesta) => {
+                let json = JSON.parse(respuesta.target.response)
+                //pintar datos
+                tabla = document.createElement("table")
+                propiedades = ["id_consulta", "asunto", "consulta", "estado", "fecha"]
+                tabla.setAttribute("id", "tabla_consultas")
+    
+                //lo que hago aquie es recorrer el arry al reves para pintar al principio de la tabla las consultas mas recientes
+                for (let i = json.length-1; i >= 0; i--) {
+                    tr = document.createElement("tr")
+                    tr.setAttribute("id", "fila_consultas;"+(i-(json.length-1)))
+                    //para evitar un codigo mas largo tengo las keys de las posiciones en el array propiedades y asi voy sacandolas en cada fila
+                    for (let j = 0; j < Object.keys(json[i]).length; j++) {
+                        td = document.createElement("td")
+                        td.setAttribute("id", propiedades[j]+";"+(i-(json.length-1)))
+                        td.innerHTML = json[i][propiedades[j]]
+                        tr.appendChild(td)
+                    }
+                    tabla.appendChild(tr)
+                }
+                
+                 document.getElementById("lista_consultas").appendChild(tabla)
+            });
+            xhr.send(formulario)
+        }
     }
     
 }

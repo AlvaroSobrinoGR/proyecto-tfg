@@ -6,9 +6,15 @@ function funciones(){
         let formulario = new FormData();
         formulario.append("asunto", document.getElementById("asunto").value)
         formulario.append("consulta", document.getElementById("consulta").value)
-        formulario.append("email", localStorage.getItem("usuario"))
+        let email = "";
+        if (localStorage.getItem("usuario")) {
+            email =  localStorage.getItem("usuario")
+        } else if (sessionStorage.getItem("usuario")){
+            email =  sessionStorage.getItem("usuario")
+        }
+        formulario.append("email", email)
         let fechaActual = new Date();
-        let fechaActualFormateada = fechaActual.getFullYear() + '-' + (fechaActual.getMonth() + 1).toString().padStart(2, '0') + '-' + fechaActual.getDate().toString().padStart(2, '0') + ';' + fechaActual.getHours().toString().padStart(2, '0') + ':' + fechaActual.getMinutes().toString().padStart(2, '0') + ':' + fechaActual.getSeconds().toString().padStart(2, '0');
+        let fechaActualFormateada = fechaActual.getFullYear() + '-' + (fechaActual.getMonth() + 1).toString().padStart(2, '0') + '-' + fechaActual.getDate().toString().padStart(2, '0') + ' ' + fechaActual.getHours().toString().padStart(2, '0') + ':' + fechaActual.getMinutes().toString().padStart(2, '0') + ':' + fechaActual.getSeconds().toString().padStart(2, '0');
         formulario.append("fecha", fechaActualFormateada)
         
         let xhr = new XMLHttpRequest();

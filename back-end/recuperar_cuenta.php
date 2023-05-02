@@ -16,9 +16,13 @@ require_once 'envio_de_correos.php';
     $consulta = "UPDATE usuarios SET codigo = '$codgioConfirmacion'  WHERE email = '$email'";
   
     if ($conexion->query($consulta) == TRUE) {
+        try {
+            $resultado = enviarCorreo($email, "Recuperar cuenta", "En este enlace podras cambiar tu contraseñia y recuperar tu cuenta http://localhost/proyecto%20tfg/front-end/cambiar_contraseña.html?email=$email&hash=$codgioConfirmacion");
   
-      $resultado = enviarCorreo($email, "Recuperar cuenta", "En este enlace podras cambiar tu contraseñia y recuperar tu cuenta http://localhost/proyecto%20tfg/front-end/cambiar_contraseña.html?email=$email&hash=$codgioConfirmacion");
-  
+        } catch (Throwable $t) {
+            echo "Ha ocurrido un error: " . $t->getMessage();
+        }
+      
       if($resultado=="enviado"){
           echo "exito";
       }else{

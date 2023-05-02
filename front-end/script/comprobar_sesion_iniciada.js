@@ -1,6 +1,11 @@
 window.addEventListener("load", funciones)
 function funciones() {
     //comprobamos si habia una sesion iniciada o no.
+    let sesionIniciada = false;
+
+    function saberEstadoSesion(){
+        return sesionIniciada;
+    }
     
     if (localStorage.getItem("usuario")) {
         //comprobar que el email esta bien
@@ -49,10 +54,16 @@ function funciones() {
         xhr.open("POST", "../back-end/comprobar_sesion_iniciada.php")
         xhr.addEventListener("load", (respuesta)=>{
             let resultado = respuesta.target.response;
-            if(resultado.includes("La cuenta si existe")){
-                //no hacer cambios
-            }else{
+            if(!resultado.includes("La cuenta si existe")){
                 ocultar_contenido()
+                if (localStorage.getItem("usuario")) {
+                    localStorage.removeItem("usuario")
+                } else if (sessionStorage.getItem("usuario")){
+                    sessionStorage.removeItem("usuario")
+                }
+                window.location.href = "inicio.html"
+            }else{
+                sesionIniciada = true;
             }
         })
         xhr.send(formulario);

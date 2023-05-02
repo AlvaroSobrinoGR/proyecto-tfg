@@ -1,6 +1,7 @@
 <?php
 
-$email = $_POST['email'];
+//$email = $_POST['email'];
+$email = "estudiosalvaroestudios@gmail.com";
 
 $conexion = new mysqli("localhost", "root", "", "tienda");
 
@@ -24,7 +25,7 @@ while ($fila = $resultado-> fetch_assoc()){
     $json .= "\"id_consulta\" : \"".$fila["id_consulta"]."\",";
     $json .= "\"asunto\" : \"".$fila["asunto"]."\",";
     $json .= "\"consulta\" : \"".$fila["consulta"]."\",";
-    $json .= "\"estado\" : \"".$fila["estado"]."\"";//1 hay stock 0 no hay stock
+    $json .= "\"estado\" : \"".$fila["estado"]."\",";//1 hay stock 0 no hay stock
     $json .= "\"fecha\" : \"".$fila["fecha"]."\"";
     $json .= "},";
 }

@@ -32,16 +32,45 @@ function funciones(){
             let img = document.createElement("img")
             let h4 = document.createElement("h4")
             let p = document.createElement("p")
+            let comprar = document.createElement("input")
+            let avisar = document.createElement("input")
+
+            if(json[index]["stock"]==0){
+                avisar.setAttribute("type", "button")
+                avisar.setAttribute("id", "avisar_producto;"+json[index]["id_producto"])
+                avisar.setAttribute("value", "Avisar")
+                avisar.style.backgroundColor="yellow"
+            }else{
+                comprar.style.backgroundColor="green"
+                comprar.setAttribute("type", "button")
+                comprar.setAttribute("id", "comprar_producto;"+json[index]["id_producto"])
+                comprar.setAttribute("value", "Comprar")
+            }
+
             //creo los elementos que ire añadiendo al cuerpo donde iran los productos
             //un div, con la imagen, con el titulo que es el nombre y el p que es la descripcion
             img.setAttribute("src", "img_productos/"+json[index]["id_producto"]+".jpg")
             //las imagenes de los productos tienen como nombre el mismo id_producto quye tiene el producto en la base de datos
             h4.innerHTML = json[index]["nombre"];
             p.innerHTML = json[index]["descripcion"];
+            div.setAttribute("id", "producto;"+json[index]["id_producto"])
             div.appendChild(img);
             div.appendChild(h4);
             div.appendChild(p);
+            if(json[index]["stock"]==0){
+                div.appendChild(avisar);
+            }else{
+                div.appendChild(comprar);
+            }
+
             document.getElementById("cuerpo").appendChild(div)
+            if (localStorage.getItem("usuario") || sessionStorage.getItem("usuario")) {
+                if(json[index]["stock"]==0){
+                    document.getElementById("avisar_producto;"+json[index]["id_producto"]).addEventListener("click", avisarProducto);
+                }else{
+                    document.getElementById("comprar_producto;"+json[index]["id_producto"]).addEventListener("click", comprarProducto);
+                }
+            }
         }
         //ahora hacemos los botondes de nuemero de pagina
         let div = document.createElement("div");
@@ -75,4 +104,24 @@ function funciones(){
         conexion(this.id.split(";")[1])
         //hacemos esta funcion para que el this.id funcione, y asi poder recoger de su id que numero de pagina lanzo el evento para asi decirle a conexion() el numero de pagina que to0ca
     }
+
+    //comprar
+
+    function comprarProducto(){
+        if(sessionStorage.getItem("carrito")){
+            if(!sessionStorage.getItem("carrito").includes(";"+this.id.split(";")[1]+";")){
+                sessionStorage.setItem("carrito", sessionStorage.getItem("carrito")+this.id.split(";")[1]+";")
+            }
+        }else{
+            sessionStorage.setItem("carrito", ";"+this.id.split(";")[1]+";")
+        }
+        
+    }
+
+    //avisar
+
+    function avisarProducto(){
+        console.log(this.id)
+    }
+
 }

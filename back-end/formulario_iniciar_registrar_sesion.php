@@ -70,10 +70,14 @@ function crear($conexion, $email, $contrasenia, $novedades){
        
     $consulta = "INSERT INTO usuarios (email, contrasenia, validada, codigo, novedades) VALUES ('$email', '$contrasenia', '0', '$codgioConfirmacion', '$novedades')";
     if ($conexion->query($consulta) == TRUE) {
+        try {
+            $ultimo_id = mysqli_insert_id($conexion);
 
-        $ultimo_id = mysqli_insert_id($conexion);
-
-        $resultado = enviarCorreo($email, "Confirmar creacion de cuenta", "esta es la confirmacion de la creacion de la cuenta http://localhost/proyecto%20tfg/front-end/inicio.html?email=$email&hash=$codgioConfirmacion");
+            $resultado = enviarCorreo($email, "Confirmar creacion de cuenta", "esta es la confirmacion de la creacion de la cuenta http://localhost/proyecto%20tfg/front-end/inicio.html?email=$email&hash=$codgioConfirmacion");
+    
+          } catch (Throwable $t) {
+            echo "Ha ocurrido un error: " . $t->getMessage();
+          }
 
         if($resultado=="enviado"){
             echo "exito;$email";
