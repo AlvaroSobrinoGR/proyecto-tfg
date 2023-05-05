@@ -44,7 +44,22 @@ if($tipo === "cargar"){ //cargar los datos
     echo "los datos no se han actualizado, ha surgido un error";
   }
 
-} else {  //comtrasenia
+} else if($tipo === "configuracionCarrito"){
+
+  $email = $_POST['email'];
+  $nombre = $_POST['nombre'];
+  $direccion = $_POST['direccion'];
+  $telefono = $_POST['telefono'];
+
+  $consulta = "UPDATE usuarios SET nombre = '$nombre', direccion = '$direccion', telefono = '$telefono'  WHERE email = '$email';";
+
+  if ($conexion->query($consulta) == TRUE) {
+    echo "los datos se han actualizado";
+  }else{
+    echo "los datos no se han actualizado, ha surgido un error";
+  }
+
+}else {  //comtrasenia
   // Recoger datos del formulario para cambiar contraseña
   $email = $_POST["email"];
 

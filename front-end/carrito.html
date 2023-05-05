@@ -25,7 +25,6 @@
     <script src="script/carrito.js"></script>
 
 
-
 </head>
 <body>
 
@@ -61,16 +60,16 @@
 
 
 
-    <div class="cesta1">
-        <div id="movimiento">
+    <div class="cesta1" id="cesta1">
+        <div id="movimiento1">
 
-            <a href="" id="siguiente1">Siguiente pagina</a>
+            <a href="" id="siguiente1" style="display: none;">Siguiente pagina</a>
             <!--Solo estara activo despues de haber pasado una vez a la siguiente pagina-->
 
         </div>
 
 
-        <div id="contenido">
+        <div id="contenido1">
 
             <table id="cestaCompra">
                 <tr id="cabecera">
@@ -91,31 +90,72 @@
         </div>
     </div>
 
-    <div class="cesta2" style="display: none;">
-        <div id="movimiento">
+    <div class="cesta2" id="cesta2" style="display: none;">
+        <div id="movimiento2">
 
-            <a href="" id="atras1">Pagina anterior</a>
+            <a href="" id="atras1" >Pagina anterior</a>
 
-            <a href="" id="siguiente2">Siguiente pagina</a>
+            <a href="" id="siguiente2" style="display: none;">Siguiente pagina</a>
             <!--Solo estara activo despues de haber pasado una vez a la siguiente pagina-->
+            
+        </div>
+        <div id="contenido2">
+
+            <label for="nombre">Nombre:</label>     <input type="text" id="nombre" name="nombre">       <br>
+            
+            <label for="direccion">Dirección:</label>       <input type="text" id="direccion" name="direccion">     <br>
+
+            <label for="telefono">Número de Teléfono:</label>       <input type="text" id="telefono" name="telefono">        <br>
 
         </div>
-        <div id="contenido"></div>
     </div>
 
-    <div class="cesta3" style="display: none;">
-        <div id="movimiento">
+    <div class="cesta3" id="cesta3" style="display: none;">
+        <div id="movimiento3">
 
             <a href="" id="atras2">Pagina anterior</a>
             <!--Solo estara activo despues de haber pasado una vez a la siguiente pagina-->
 
         </div>
-        <div id="contenido"></div>
+        
+        <div id="contenido3">
+            <div id="paypal-button-container"></div>  
+        
+            <script src="https://www.paypal.com/sdk/js?client-id=Ab-pjiPTvH0T_SFtqwnt_eNHo7RLQON6T6u01aWjkqrFOpdg32yMloGaDU7UnQ4OX2nZ8TvaKUzs6w_Q&currency=EUR"></script>
+            
+            <script>
+                paypal.Buttons({
+                    createOrder: function(data, actions){
+                        return actions.order.create({
+                            purchase_units:[{
+                                amount:{
+                                    value:parseFloat(document.getElementById("totalMasIva").innerText).toFixed(2) //dinero
+                                }
+                            }]
+                        })
+                    },
+
+                    onApprove: function(data/* cintiene toda la informacion que se va a tratar*/, actions /* indica funciones que puda realizar*/){
+                        actions.order.capture().then(function(detalles){
+                            console.log(detalles)
+                            //id es el id de la transaccion
+                            //create_times: momento del pago
+                        })
+                    },
+
+                    onCancel: function(data){//esto se lanza cuando el usuario cancela el pago
+                        alert("pago cancelado")
+                    }
+                }).render('#paypal-button-container')
+            </script>
+        </div>
     </div>
 
-    <div class="cesta4" style="display: none;">
+    <div class="cesta4" id="cesta4" style="display: none;">
         <div id="movimiento"></div>
-        <div id="contenido"></div>
+        <div id="contenido">
+
+        </div>
     </div>
 
 
@@ -125,9 +165,6 @@
         <h1>pie de pagina</h1>
 
     </div>
-
-
-
 
 
 </body>

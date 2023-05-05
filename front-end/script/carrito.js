@@ -1,9 +1,12 @@
 window.addEventListener("load", funciones)
 
 function funciones() {
+
+    //cesta1
     let numeroProductos = 1;
     //carrito
     if(sessionStorage.getItem("carrito")){
+        document.getElementById("siguiente1").style.display = "block";
        pedirProductos(sessionStorage.getItem("carrito"))
     }
 
@@ -79,12 +82,7 @@ function funciones() {
             a.innerText = "eliminar"
             td.appendChild(a);
             tr.appendChild(td);
-            document.getElementById("cestaCompra").getElementsByTagName("tbody")[0].appendChild(tr);
-        
-            //hacer existir cosas
-                //las unidades
-                
-                
+            document.getElementById("cestaCompra").getElementsByTagName("tbody")[0].appendChild(tr); 
         
         }
         let contenidoFinal = `<tr id="pieSumaSinIva">
@@ -123,6 +121,7 @@ function funciones() {
         carrito = carrito.slice(1,carrito.length-1)
         if(carrito.length==1){
             sessionStorage.removeItem("carrito")
+            document.getElementById("siguiente1").style.display = "none";
         }else{
             numeros = carrito.filter(numero => numero !== producto);
             sessionStorage.setItem("carrito", ";"+numeros.join(";")+";")
@@ -150,9 +149,109 @@ function funciones() {
         document.getElementById("totalMasIva").innerHTML=((precioTotal*21/100)+precioTotal).toFixed(2)
     }
 
+    //cesta2
+    document.getElementById("siguiente1").addEventListener("click", moverse)
+    document.getElementById("siguiente2").addEventListener("click", moverse)
+    document.getElementById("atras1").addEventListener("click", moverse)
+    document.getElementById("atras2").addEventListener("click", moverse)
+
+    function moverse(e){
+        e.preventDefault()
+        if(this.id=="siguiente1"){
+            document.getElementById("cesta1").style.display="none"
+            document.getElementById("cesta2").style.display="block"
+            conexionCargar()
+        }else if(this.id=="atras1"){
+            document.getElementById("cesta1").style.display="block"
+            document.getElementById("cesta2").style.display="none"
+        }else if(this.id=="siguiente2"){
+            document.getElementById("cesta2").style.display="none"
+            document.getElementById("cesta3").style.display="block"
+        }else if(this.id=="atras2"){
+            document.getElementById("cesta2").style.display="block"
+            document.getElementById("cesta3").style.display="none"
+        }
+        
+    }
+
+//datos del usuario
+    //mostrar datos usuario
+    function conexionCargar() {
+        let formulario = new FormData();
+        let email = "";
+        if (localStorage.getItem("usuario")) {
+            email =  localStorage.getItem("usuario")
+        } else if (sessionStorage.getItem("usuario")){
+            email =  sessionStorage.getItem("usuario")
+        }
+        formulario.append("tipo", "cargar");
+        formulario.append("email", email);
+ 
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", "../back-end/configuracion_usuario.php");
+        xhr.addEventListener("load", (resultado) => {
+            let respuesta = resultado.target.response
+            let json = JSON.parse(respuesta)
+            document.getElementById("nombre").value = json[0]["nombre"]
+            document.getElementById("direccion").value = json[0]["direccion"]
+            document.getElementById("telefono").value = json[0]["telefono"]
+            comprobacion()
+        });
+        xhr.send(formulario);
+    }
+    //cambios en los inputs
+    document.getElementById("nombre").addEventListener("input", comprobacion)
+    document.getElementById("direccion").addEventListener("input", comprobacion)
+    document.getElementById("telefono").addEventListener("input", comprobacion)
+
+    function comprobacion(){ //ahi que implementar patrones
+        if(document.getElementById("nombre").value.length>0 && document.getElementById("direccion").value.length>0 && document.getElementById("telefono").value.length>0){
+            document.getElementById("siguiente2").style.display = "block";
+            document.getElementById("siguiente2").addEventListener("click", conexionGuardar)
+        }else{
+            document.getElementById("siguiente2").style.display = "none";
+        }
+    }
+
+    //enviar informacion del formulario usuario
 
 
-    /*
+    function conexionGuardar(e) {
+    e.preventDefault()
+    let formulario = new FormData();
+    let email = "";
+
+    if (localStorage.getItem("usuario")) {
+        email =  localStorage.getItem("usuario")
+    } else if (sessionStorage.getItem("usuario")){
+        email =  sessionStorage.getItem("usuario")
+    }
+    formulario.append("tipo", "configuracionCarrito");
+    formulario.append("email", email);
+    formulario.append("nombre", document.getElementById("nombre").value);
+    formulario.append("direccion", document.getElementById("direccion").value);
+    formulario.append("telefono", document.getElementById("telefono").value);
+
+
+    let xhr = new XMLHttpRequest();
+    xhr.open("POST", "../back-end/configuracion_usuario.php");
+    xhr.addEventListener("load", (resultado) => {
+        let respuesta = resultado.target.response
+
+
+        console.log(respuesta)
+
+
+    });
+    xhr.send(formulario);
+    }
+
+
+    
+        
+        
+        
+        /*
         1-cuando llegue al carrito que se forme una tabla con las cosas compradas y opciones
             1-a medida vaya modificando estos valores tiene que ir viendose como va saliendo el pago
         2-saldran los campos de los datos del usuario, cuando pase a la siguiente pagina estos datos se guardaran en la base de datos
