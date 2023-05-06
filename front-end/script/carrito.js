@@ -106,8 +106,9 @@ function funciones() {
             document.getElementById("unidades;"+productos[i]["id_producto"]).addEventListener("change", precioUnidad)
             document.getElementById("liminarProducto;"+i+";"+productos[i]["id_producto"]).addEventListener("click", eliminarProducto)
         }
-        
 
+
+        
     }
 
     function eliminarProducto(e){

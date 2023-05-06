@@ -137,15 +137,56 @@
 
                     onApprove: function(data/* cintiene toda la informacion que se va a tratar*/, actions /* indica funciones que puda realizar*/){
                         actions.order.capture().then(function(detalles){
-                            console.log(detalles)
-                            //id es el id de la transaccion
-                            //create_times: momento del pago
+                            let formulario = new FormData();
+                            let email = "";
+                            if (localStorage.getItem("usuario")) {
+                                email =  localStorage.getItem("usuario")
+                            } else if (sessionStorage.getItem("usuario")){
+                                email =  sessionStorage.getItem("usuario")
+                            }
+                            formulario.append("email", email);
+                            //tiempo_locar_se_realizo_compra
+                            let fechaActual = new Date();
+                            formulario.append("fechaActual", fechaActual.getFullYear() + '-' + (fechaActual.getMonth() + 1).toString().padStart(2, '0') + '-' + fechaActual.getDate().toString().padStart(2, '0') + ' ' + fechaActual.getHours().toString().padStart(2, '0') + ':' + fechaActual.getMinutes().toString().padStart(2, '0') + ':' + fechaActual.getSeconds().toString().padStart(2, '0'));
+                            //zulu_time_comrpa
+                            formulario.append("zulu_time_compra",detalles.update_time);
+                            //id_orden_compra
+                            formulario.append("id_orden_compra", detalles.id);
+                            //id_pagador
+                            formulario.append("id_pagador", detalles.payer.payer_id);
+                            //email_pagador
+                            formulario.append("email_pagador", detalles.payer.email_address);
+                            //nombre_apellido_pagador
+                            formulario.append("nombre_apellido_pagador",detalles.payer.name["given_name"]+" "+detalles.payer.name["surname"]);
+                            //importe_total
+                            formulario.append("importe_total", detalles.purchase_units[0]["amount"]["value"])
+
+                            //productos_cantidades
+                            let productos_cantidades = ";"
+                            let tr = document.getElementById("cestaCompra").getElementsByTagName("tbody")[0].getElementsByTagName("tr");
+                            let cantidad_productos = tr.length-4
+                            for (let index = 1; index < cantidad_productos+1; index++) {
+                                let numero_producto = tr[index].getElementsByTagName("td")[0].id.split(";")[1]
+                                productos_cantidades+=numero_producto+"-";
+                                productos_cantidades+= document.getElementById("unidades;"+numero_producto).value+";"
+                            }
+                            formulario.append("productos_cantidades", productos_cantidades)
+
+                
+                            let xhr = new XMLHttpRequest();
+                            xhr.open("POST", "../back-end/compra.php");
+                            xhr.addEventListener("load", (respuesta) => {
+                                console.log(respuesta.target.response)
+                            });
+                            xhr.send(formulario);
                         })
                     },
 
-                    onCancel: function(data){//esto se lanza cuando el usuario cancela el pago
-                        alert("pago cancelado")
+
+                    onCancel: function pepe (data){//esto se lanza cuando el usuario cancela el pago
+                                    alert("pago cancelado")
                     }
+                    
                 }).render('#paypal-button-container')
             </script>
         </div>
