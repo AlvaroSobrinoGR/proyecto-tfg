@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 06-05-2023 a las 16:16:08
+-- Tiempo de generación: 07-05-2023 a las 13:50:47
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -58,15 +58,9 @@ CREATE TABLE `compra` (
 --
 
 INSERT INTO `compra` (`id_compra`, `id_usuario`, `nombre_apellido_comprador`, `direccion_comprador`, `telefono_comprador`, `tiempo_local_compra`, `zulu_time_compra`, `id_orden_compra`, `id_pagador`, `email_pagador`, `nombre_apellido_pagador`, `importe_total`) VALUES
-(5, 30, 'pepe', 'sonia', 1234, '2023-05-06 15:54:25', '2023-05-06T13:54:24Z', '47509592MN539135E', 'EU2AG9GA88P58', 'sb-pipgx25897233@personal.example.com', 'John Doe', 85.23),
-(6, 30, 'pepe', 'sonia', 1234, '2023-05-06 15:55:08', '2023-05-06T13:55:07Z', '8HR07708FA443442U', 'EU2AG9GA88P58', 'sb-pipgx25897233@personal.example.com', 'John Doe', 170.48),
-(7, 30, 'pepe', 'sonia', 1234, '2023-05-06 15:55:54', '2023-05-06T13:55:53Z', '94A88852HW872694D', 'EU2AG9GA88P58', 'sb-pipgx25897233@personal.example.com', 'John Doe', 85.23),
-(8, 30, 'pepe', 'sonia', 1234, '2023-05-06 15:57:02', '2023-05-06T13:57:01Z', '4HH43453P24122037', 'EU2AG9GA88P58', 'sb-pipgx25897233@personal.example.com', 'John Doe', 85.23),
-(9, 30, 'pepe', 'sonia', 1234, '2023-05-06 15:58:02', '2023-05-06T13:58:01Z', '6CW84721L14420538', 'EU2AG9GA88P58', 'sb-pipgx25897233@personal.example.com', 'John Doe', 170.48),
-(10, 30, 'pepe', 'sonia', 1234, '2023-05-06 15:59:42', '2023-05-06T13:59:41Z', '4C9805336X4527143', 'EU2AG9GA88P58', 'sb-pipgx25897233@personal.example.com', 'John Doe', 170.48),
-(11, 30, 'pepe', 'sonia', 1234, '2023-05-06 16:01:25', '2023-05-06T14:01:24Z', '5DW31124XK592810Y', 'EU2AG9GA88P58', 'sb-pipgx25897233@personal.example.com', 'John Doe', 170.48),
-(12, 30, 'pepe', 'sonia', 1234, '2023-05-06 16:02:41', '2023-05-06T14:02:41Z', '3LR8360520748800T', 'EU2AG9GA88P58', 'sb-pipgx25897233@personal.example.com', 'John Doe', 170.48),
-(13, 30, 'pepe', 'sonia', 1234, '2023-05-06 16:03:42', '2023-05-06T14:03:41Z', '0UV37126GG2227249', 'EU2AG9GA88P58', 'sb-pipgx25897233@personal.example.com', 'John Doe', 170.48);
+(32, 30, 'pepe', 'sonia', 1234, '2023-05-07 13:43:46', '2023-05-07T11:43:44Z', '73041140LS9951305', 'EU2AG9GA88P58', 'sb-pipgx25897233@personal.example.com', 'John Doe', 24.20),
+(33, 30, 'pepe', 'sonia', 1234, '2023-05-07 13:44:49', '2023-05-07T11:44:48Z', '53L69999WA066253H', 'EU2AG9GA88P58', 'sb-pipgx25897233@personal.example.com', 'John Doe', 24.20),
+(34, 30, 'pepe', 'sonia', 1234, '2023-05-07 13:48:20', '2023-05-07T11:48:18Z', '77B40324422320149', 'EU2AG9GA88P58', 'sb-pipgx25897233@personal.example.com', 'John Doe', 24.20);
 
 -- --------------------------------------------------------
 
@@ -80,6 +74,15 @@ CREATE TABLE `compra_productos` (
   `cantidad` int(255) NOT NULL,
   `precio` double(155,2) NOT NULL COMMENT 'Es el precio indivudual del producto'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `compra_productos`
+--
+
+INSERT INTO `compra_productos` (`id_compra`, `id_producto`, `cantidad`, `precio`) VALUES
+(32, 1, 1, 20.00),
+(33, 1, 1, 20.00),
+(34, 1, 1, 20.00);
 
 -- --------------------------------------------------------
 
@@ -155,11 +158,11 @@ CREATE TABLE `productos` (
 
 INSERT INTO `productos` (`id_producto`, `nombre`, `descripcion`, `stock`, `precio`, `activo`) VALUES
 (0, 'telefono1', 'El teléfono es un dispositivo electrónico de comunicación, compacto y portátil, que permite hacer llamadas, enviar mensajes de texto, navegar por internet, tomar fotos, ver videos y mucho más. Con una pantalla táctil de alta resolución, cámara integrada, conectividad inalámbrica y potentes capacidades de procesamiento, el teléfono es una herramienta multifuncional que combina comunicación, entretenimiento y productividad en un solo dispositivo. Diseñado con elegancia y estilo, el teléfono se ha convertido en una parte esencial de la vida cotidiana, facilitando la comunicación y el acceso a la información en cualquier momento y lugar.', 0, 30.00, 1),
-(1, 'telefono2', 'El teléfono es un dispositivo electrónico de comunicación, compacto y portátil, que permite hacer llamadas, enviar mensajes de texto, navegar por internet, tomar fotos, ver videos y mucho más. Con una pantalla táctil de alta resolución, cámara integrada, conectividad inalámbrica y potentes capacidades de procesamiento, el teléfono es una herramienta multifuncional que combina comunicación, entretenimiento y productividad en un solo dispositivo. Diseñado con elegancia y estilo, el teléfono se ha convertido en una parte esencial de la vida cotidiana, facilitando la comunicación y el acceso a la información en cualquier momento y lugar.', 3, 20.00, 1),
+(1, 'telefono2', 'El teléfono es un dispositivo electrónico de comunicación, compacto y portátil, que permite hacer llamadas, enviar mensajes de texto, navegar por internet, tomar fotos, ver videos y mucho más. Con una pantalla táctil de alta resolución, cámara integrada, conectividad inalámbrica y potentes capacidades de procesamiento, el teléfono es una herramienta multifuncional que combina comunicación, entretenimiento y productividad en un solo dispositivo. Diseñado con elegancia y estilo, el teléfono se ha convertido en una parte esencial de la vida cotidiana, facilitando la comunicación y el acceso a la información en cualquier momento y lugar.', 0, 20.00, 1),
 (2, 'telefono3', 'El teléfono es un dispositivo electrónico de comunicación, compacto y portátil, que permite hacer llamadas, enviar mensajes de texto, navegar por internet, tomar fotos, ver videos y mucho más. Con una pantalla táctil de alta resolución, cámara integrada, conectividad inalámbrica y potentes capacidades de procesamiento, el teléfono es una herramienta multifuncional que combina comunicación, entretenimiento y productividad en un solo dispositivo. Diseñado con elegancia y estilo, el teléfono se ha convertido en una parte esencial de la vida cotidiana, facilitando la comunicación y el acceso a la información en cualquier momento y lugar.', 0, 19.99, 1),
-(3, 'telefono4', 'El teléfono es un dispositivo electrónico de comunicación, compacto y portátil, que permite hacer llamadas, enviar mensajes de texto, navegar por internet, tomar fotos, ver videos y mucho más. Con una pantalla táctil de alta resolución, cámara integrada, conectividad inalámbrica y potentes capacidades de procesamiento, el teléfono es una herramienta multifuncional que combina comunicación, entretenimiento y productividad en un solo dispositivo. Diseñado con elegancia y estilo, el teléfono se ha convertido en una parte esencial de la vida cotidiana, facilitando la comunicación y el acceso a la información en cualquier momento y lugar.', 3, 19.99, 1),
+(3, 'telefono4', 'El teléfono es un dispositivo electrónico de comunicación, compacto y portátil, que permite hacer llamadas, enviar mensajes de texto, navegar por internet, tomar fotos, ver videos y mucho más. Con una pantalla táctil de alta resolución, cámara integrada, conectividad inalámbrica y potentes capacidades de procesamiento, el teléfono es una herramienta multifuncional que combina comunicación, entretenimiento y productividad en un solo dispositivo. Diseñado con elegancia y estilo, el teléfono se ha convertido en una parte esencial de la vida cotidiana, facilitando la comunicación y el acceso a la información en cualquier momento y lugar.', 0, 19.99, 1),
 (4, 'telefono5', 'El teléfono es un dispositivo electrónico de comunicación, compacto y portátil, que permite hacer llamadas, enviar mensajes de texto, navegar por internet, tomar fotos, ver videos y mucho más. Con una pantalla táctil de alta resolución, cámara integrada, conectividad inalámbrica y potentes capacidades de procesamiento, el teléfono es una herramienta multifuncional que combina comunicación, entretenimiento y productividad en un solo dispositivo. Diseñado con elegancia y estilo, el teléfono se ha convertido en una parte esencial de la vida cotidiana, facilitando la comunicación y el acceso a la información en cualquier momento y lugar.', 3, 14.45, 0),
-(5, 'telefono6', 'El teléfono es un dispositivo electrónico de comunicación, compacto y portátil, que permite hacer llamadas, enviar mensajes de texto, navegar por internet, tomar fotos, ver videos y mucho más. Con una pantalla táctil de alta resolución, cámara integrada, conectividad inalámbrica y potentes capacidades de procesamiento, el teléfono es una herramienta multifuncional que combina comunicación, entretenimiento y productividad en un solo dispositivo. Diseñado con elegancia y estilo, el teléfono se ha convertido en una parte esencial de la vida cotidiana, facilitando la comunicación y el acceso a la información en cualquier momento y lugar.', 3, 30.45, 1);
+(5, 'telefono6', 'El teléfono es un dispositivo electrónico de comunicación, compacto y portátil, que permite hacer llamadas, enviar mensajes de texto, navegar por internet, tomar fotos, ver videos y mucho más. Con una pantalla táctil de alta resolución, cámara integrada, conectividad inalámbrica y potentes capacidades de procesamiento, el teléfono es una herramienta multifuncional que combina comunicación, entretenimiento y productividad en un solo dispositivo. Diseñado con elegancia y estilo, el teléfono se ha convertido en una parte esencial de la vida cotidiana, facilitando la comunicación y el acceso a la información en cualquier momento y lugar.', 0, 30.45, 1);
 
 -- --------------------------------------------------------
 
@@ -257,7 +260,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `compra`
 --
 ALTER TABLE `compra`
-  MODIFY `id_compra` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_compra` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
 
 --
 -- AUTO_INCREMENT de la tabla `consultas`

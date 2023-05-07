@@ -159,15 +159,12 @@ function funciones() {
     function moverse(e){
         e.preventDefault()
         if(this.id=="siguiente1"){
-            document.getElementById("cesta1").style.display="none"
-            document.getElementById("cesta2").style.display="block"
-            conexionCargar()
+            comprobarStock("siguiente1")
         }else if(this.id=="atras1"){
             document.getElementById("cesta1").style.display="block"
             document.getElementById("cesta2").style.display="none"
         }else if(this.id=="siguiente2"){
-            document.getElementById("cesta2").style.display="none"
-            document.getElementById("cesta3").style.display="block"
+            comprobarStock("siguiente2")
         }else if(this.id=="atras2"){
             document.getElementById("cesta2").style.display="block"
             document.getElementById("cesta3").style.display="none"
@@ -239,16 +236,55 @@ function funciones() {
     xhr.addEventListener("load", (resultado) => {
         let respuesta = resultado.target.response
 
-
         console.log(respuesta)
-
 
     });
     xhr.send(formulario);
     }
 
 
-    
+    function comprobarStock(tipo){
+        let formulario = new FormData();
+        let productos_cantidades = ";"
+        let tr = document.getElementById("cestaCompra").getElementsByTagName("tbody")[0].getElementsByTagName("tr");
+        let cantidad_productos = tr.length-4
+        for (let index = 1; index < cantidad_productos+1; index++) {
+            let numero_producto = tr[index].getElementsByTagName("td")[0].id.split(";")[1]
+            productos_cantidades+=numero_producto+"-";
+            productos_cantidades+= document.getElementById("unidades;"+numero_producto).value+";"
+        }
+        formulario.append("productos_cantidades", productos_cantidades)
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", "../back-end/compraStock.php");
+        xhr.addEventListener("load", (resultado) => {
+            if(resultado.target.response.length>0){
+                if(tipo=="siguiente2"){
+                    document.getElementById("cesta2").style.display="none"
+                    document.getElementById("cesta1").style.display="block"
+                }
+                alert(resultado.target.response)
+                if(resultado.target.response.includes("agotado")){
+                    document.getElementById("cestaCompra").getElementsByTagName("tbody")[0].innerHTML=""
+                    document.getElementById("cestaCompra").getElementsByTagName("tbody")[0].innerHTML='<tr id="cabecera">' +
+                    '<td>Cantidad</td>' +
+                    '<td>Producto</td>' +
+                    '<td>Precio unitario</td>' +
+                    '<td>Precio Total</td>' +
+                    '<td></td>' +
+                '</tr>'
+                    pedirProductos(sessionStorage.getItem("carrito"))
+                }
+            }else if(tipo=="siguiente1"){
+                document.getElementById("cesta1").style.display="none"
+                document.getElementById("cesta2").style.display="block"
+                conexionCargar()
+            }else if (tipo=="siguiente2"){
+                document.getElementById("cesta2").style.display="none"
+                document.getElementById("cesta3").style.display="block"
+            }
+        });
+        xhr.send(formulario);
+    }
         
         
         

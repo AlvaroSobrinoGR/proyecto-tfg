@@ -127,15 +127,15 @@
                 paypal.Buttons({
                     createOrder: function(data, actions){
                         return actions.order.create({
-                            purchase_units:[{
-                                amount:{
-                                    value:parseFloat(document.getElementById("totalMasIva").innerText).toFixed(2) //dinero
-                                }
-                            }]
-                        })
+                                    purchase_units:[{
+                                        amount:{
+                                        value:parseFloat(document.getElementById("totalMasIva").innerText).toFixed(2) //dinero
+                                        }
+                                    }]
+                                })
                     },
 
-                    onApprove: function(data/* cintiene toda la informacion que se va a tratar*/, actions /* indica funciones que puda realizar*/){
+                    onApprove: function(data, actions ){
                         actions.order.capture().then(function(detalles){
                             let formulario = new FormData();
                             let email = "";
@@ -171,20 +171,18 @@
                                 productos_cantidades+= document.getElementById("unidades;"+numero_producto).value+";"
                             }
                             formulario.append("productos_cantidades", productos_cantidades)
-
                 
                             let xhr = new XMLHttpRequest();
                             xhr.open("POST", "../back-end/compra.php");
                             xhr.addEventListener("load", (respuesta) => {
-                                console.log(respuesta.target.response)
                             });
                             xhr.send(formulario);
                         })
                     },
 
 
-                    onCancel: function pepe (data){//esto se lanza cuando el usuario cancela el pago
-                                    alert("pago cancelado")
+                    onCancel: function (data){//esto se lanza cuando el usuario cancela el pago
+                        alert("pago cancelado")
                     }
                     
                 }).render('#paypal-button-container')
