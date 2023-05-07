@@ -15,10 +15,10 @@ try{
 
 
   // si se encontró un usuario con ese email, se inserta la compra en la tabla "compra"
-    $fila = $resultado->fetch_assoc();
-    $id_usuario = $fila['id_usuario'];
-    $nombre_apellido_comprador = $fila['nombre'];
-    $direccion_comprador = $fila['direccion'];
+  $fila = $resultado->fetch_assoc();
+  $id_usuario = $fila['id_usuario'];
+  $nombre_apellido_comprador = $fila['nombre'];
+  $direccion_comprador = $fila['direccion'];
     $telefono_comprador = $fila['telefono'];
     $tiempo_local_compra = $_POST['fechaActual'];
     $zulu_time_compra = $_POST['zulu_time_compra'];
@@ -28,7 +28,7 @@ try{
     $nombre_apellido_pagador = $_POST['nombre_apellido_pagador'];
     $importe_total = $_POST['importe_total'];
 
-    //$conexion->autocommit(FALSE);
+    $conexion->autocommit(false);
 
     $consulta = "INSERT INTO compra (id_usuario, nombre_apellido_comprador, direccion_comprador, telefono_comprador, tiempo_local_compra, zulu_time_compra, id_orden_compra, id_pagador, email_pagador, nombre_apellido_pagador, importe_total)
     VALUES ('$id_usuario', '$nombre_apellido_comprador', '$direccion_comprador', '$telefono_comprador', '$tiempo_local_compra', '$zulu_time_compra', '$id_orden_compra', '$id_pagador', '$email_pagador', '$nombre_apellido_pagador', '$importe_total')";
@@ -43,43 +43,20 @@ try{
             $temporal = explode("-", $productos_cantidades[$i]);//[0] producto [1] cantida
             $consulta = "SELECT * FROM productos WHERE id_producto = '$temporal[0]'";
             $resultado;
-            
-            try{
-              $conexion->query($consulta);
-              $resultado = $conexion->query($consulta);
-            }catch (Throwable $t) {
-              $conexion->rollback(); //devuelve la base de datos al estaod anterior a las operacions
-              ERROR($_POST['email']);
-              $error = true;
-            }
-
-            
-
+            $conexion->query($consulta);
+            $resultado = $conexion->query($consulta);
             $fila = $resultado->fetch_assoc();
             $precio = $fila["precio"];
             $consulta = "INSERT INTO compra_productos (id_compra, id_producto, cantidad, precio) VALUES ('$ultimo_id', '$temporal[0]', '$temporal[1]', '$precio')";
-
-            try{
-              $conexion->query($consulta);
-            }catch (Throwable $t) {
-              $conexion->rollback(); //devuelve la base de datos al estaod anterior a las operacions
-              ERROR($_POST['email']);
-              $error = true;
-            }
-
-
+            $conexion->query($consulta);
             $stock = $fila["stock"];
             $stock = $stock-$temporal[1];
             $consulta = "UPDATE productos SET stock = '$stock' WHERE id_producto = '$temporal[0]'";
-            try{
-              $conexion->query($consulta);
-            }catch (Throwable $t) {
-              $conexion->rollback(); //devuelve la base de datos al estaod anterior a las operacions
-              ERROR($_POST['email']);
-              $error = true;
-            }
-
+            $conexion->query($consulta);
           }
+
+          $conexion->autocommit(true);
+
 }catch (Throwable $t) {
   $conexion->rollback(); //devuelve la base de datos al estaod anterior a las operacions
   ERROR($_POST['email']);

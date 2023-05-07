@@ -174,7 +174,10 @@
                 
                             let xhr = new XMLHttpRequest();
                             xhr.open("POST", "../back-end/compra.php");
-                            xhr.addEventListener("load", (respuesta) => {
+                            xhr.addEventListener("load", (resultado) => {
+                                if(resultado.target.response.length>0){
+                                    alert(resultado.target.response)
+                                }
                             });
                             xhr.send(formulario);
                         })
