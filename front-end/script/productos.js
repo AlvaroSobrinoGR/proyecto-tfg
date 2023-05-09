@@ -2,19 +2,44 @@ window.addEventListener("load", funciones)
 
 function funciones(){
 
-    conexion(1) //primero llamo una vez al metodo para que dibuje la primera pagina
+    conexiontipos()
 
-    function conexion(numero_pagina){ //en esta funcion se hace la conexion
+    function conexiontipos(){
+        let formulario = new FormData();
+        formulario.append("tipo", "tipos");
         let xhr = new XMLHttpRequest();
+        xhr.open("POST", "../back-end/productos.php");
+        xhr.addEventListener("load", (respuesta) => {
+            let json = JSON.parse(respuesta.target.response)
+            for (let index = 0; index < json.length; index++) {
+                let opcion = document.createElement("option");
+                opcion.setAttribute("id", json[index])
+                opcion.innerHTML = json[index]
+                document.getElementById("tipo").appendChild(opcion)
+            }
+        });
+        xhr.send(formulario);
+    }
+
+
+    conexionProductos(1) //primero llamo una vez al metodo para que dibuje la primera pagina
+
+    function conexionProductos(numero_pagina){ //en esta funcion se hace la conexion
+        let xhr = new XMLHttpRequest();
+        let formulario = new FormData();
+        formulario.append("tipo", "productos");
         xhr.open("POST", "../back-end/productos.php");
         xhr.addEventListener("load", (respuesta) => {//recojo el json que pinto en php
             let json = JSON.parse(respuesta.target.response)
-            pintar(json, numero_pagina);//paso  a la funcion que se encarga de piuntar la lista de productos el json y la pagina en la que se encunrta el suario
+            pintarProdcutos(json, numero_pagina);//paso  a la funcion que se encarga de piuntar la lista de productos el json y la pagina en la que se encunrta el suario
         });
-        xhr.send();
+        xhr.send(formulario);
     }
     
-    function pintar(json, numero_pagina){
+    function pintarProdcutos(json, numero_pagina){
+        //tipos productos
+
+
         document.getElementById("cuerpo").innerHTML=""; //limpio siempre primero donde estan los productos, para que no se solapen las paginas
         let cantidad_producto = 4 //cantidad de productos por paginas
         for (let index = ((numero_pagina*cantidad_producto)-cantidad_producto); index < json.length && index < (numero_pagina*cantidad_producto); index++) {
@@ -32,6 +57,7 @@ function funciones(){
             let img = document.createElement("img")
             let h4 = document.createElement("h4")
             let p = document.createElement("p")
+            let precio = document.createElement("p")
             let comprar = document.createElement("input")
             let avisar = document.createElement("input")
 
@@ -53,10 +79,12 @@ function funciones(){
             //las imagenes de los productos tienen como nombre el mismo id_producto quye tiene el producto en la base de datos
             h4.innerHTML = json[index]["nombre"];
             p.innerHTML = json[index]["descripcion"];
+            precio.innerHTML = json[index]["precio"];
             div.setAttribute("id", "producto;"+json[index]["id_producto"])
             div.appendChild(img);
             div.appendChild(h4);
             div.appendChild(p);
+            div.appendChild(precio);
             if(json[index]["stock"]==0){
                 div.appendChild(avisar);
             }else{
@@ -93,7 +121,7 @@ function funciones(){
         for (let index = 1; index < Math.ceil((json.length)/cantidad_producto)+1; index++) {
             //funciona exactamente igual que el anterior for
             //lo que hago es asociar el addEventListener a ids que son pagina;[el numero de esa iteracion], como hicimos al crearlos
-            //y estos llaman a otra funcion que no es conexion() ahi se explicara por que
+            //y estos llaman a otra funcion que no es conexionProductos() ahi se explicara por que
             document.getElementById("pagina;"+index).addEventListener("click", llamado_paso_pagina)
         }
     }
@@ -101,8 +129,9 @@ function funciones(){
     function llamado_paso_pagina(e){
         e.preventDefault()
         //tenemos que hacer  e.preventDefault() para que el link no recargue la apgina
-        conexion(this.id.split(";")[1])
-        //hacemos esta funcion para que el this.id funcione, y asi poder recoger de su id que numero de pagina lanzo el evento para asi decirle a conexion() el numero de pagina que to0ca
+
+        cambiarLista(this.id.split(";")[1])
+        //hacemos esta funcion para que el this.id funcione, y asi poder recoger de su id que numero de pagina lanzo el evento para asi decirle a conexionProductos() el numero de pagina que to0ca
     }
 
     //comprar
@@ -122,6 +151,35 @@ function funciones(){
 
     function avisarProducto(){
         console.log(this.id)
+    }
+
+    //cambiar el orden
+
+    document.getElementById("tipo").addEventListener("change", cambiarListaAntes)
+    document.getElementById("ordenacion").addEventListener("change", cambiarListaAntes)
+
+    function cambiarListaAntes(){
+        cambiarLista(1)
+    }
+
+    function cambiarLista(numero_pagina){
+        let tipo = document.getElementById("tipo").value;
+        let orden = document.getElementById("ordenacion").value;
+        conexionNuevaLista(tipo, orden, numero_pagina)
+    }
+
+    function conexionNuevaLista(tipo, orden, numero_pagina){ //en esta funcion se hace la conexion
+        let xhr = new XMLHttpRequest();
+        let formulario = new FormData();
+        formulario.append("tipo", "nuevo orden");
+        formulario.append("para", tipo);
+        formulario.append("forma", orden);
+        xhr.open("POST", "../back-end/productos.php");
+        xhr.addEventListener("load", (respuesta) => {//recojo el json que pinto en php
+            let json = JSON.parse(respuesta.target.response)
+            pintarProdcutos(json, numero_pagina);//paso  a la funcion que se encarga de piuntar la lista de productos el json y la pagina en la que se encunrta el suario
+        });
+        xhr.send(formulario);
     }
 
 }

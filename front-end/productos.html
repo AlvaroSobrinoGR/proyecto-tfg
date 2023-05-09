@@ -26,6 +26,15 @@
             width: 15em;
             height: 15em;
         }
+        .opciones{
+            width: 100%;
+            display: flex;
+            flex-direction: row;
+        }
+        .opciones section{
+            width: 15em;
+            height: 15em;
+        }
     </style>
 
 
@@ -73,7 +82,17 @@
     </div>
 
 
-
+    <div class="opciones" id="opciones">
+        <select id="tipo">
+            <option selected id="todos"> Todos los productos</option>
+        </select>
+        <select id="ordenacion">
+            <option selected id="sinOrden">Sin orden</option>
+            <option id="sinOrden">Precio Ascendente</option>
+            <option id="sinOrden">Precio Descendente</option>
+            <!--meter una opcion por relevancia, una nueva columna, que se va incrementando con cada compra-->
+        </select>
+    </div>
     <div class="cuerpo" id="cuerpo">
         <h1>productos</h1>
 

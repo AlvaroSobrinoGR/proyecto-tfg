@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 07-05-2023 a las 13:50:47
+-- Tiempo de generación: 09-05-2023 a las 19:52:09
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -35,15 +35,25 @@ CREATE TABLE `avissos_disponibilidad` (
 -- --------------------------------------------------------
 
 --
+-- Estructura de tabla para la tabla `codigo_descuento`
+--
+
+CREATE TABLE `codigo_descuento` (
+  `id_codigo` varchar(155) NOT NULL,
+  `procentaje` double(65,2) NOT NULL,
+  `estado` int(11) NOT NULL COMMENT '0 no esta activo este descuento, 1 esta activo este descuento'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
 -- Estructura de tabla para la tabla `compra`
 --
 
 CREATE TABLE `compra` (
   `id_compra` int(255) NOT NULL,
   `id_usuario` int(255) NOT NULL,
-  `nombre_apellido_comprador` varchar(255) NOT NULL COMMENT 'nombre_apellido del usuario que ahce la compra en ese momento',
-  `direccion_comprador` varchar(255) NOT NULL COMMENT 'direccion del usuario que ahce la compra en ese momento',
-  `telefono_comprador` int(255) NOT NULL COMMENT 'telefono del usuario que ahce la compra en ese momento',
+  `id_datos_comprador` int(255) NOT NULL,
   `tiempo_local_compra` varchar(255) NOT NULL COMMENT 'fecha y hora local de cuando se hizo la compra',
   `zulu_time_compra` varchar(255) NOT NULL COMMENT 'es el tiempo universal en el que se ha hecho la compra\r\n\r\nSe encuentra en create_time',
   `id_orden_compra` varchar(255) NOT NULL COMMENT 'se encuentra en id, bajo create_time',
@@ -52,15 +62,6 @@ CREATE TABLE `compra` (
   `nombre_apellido_pagador` varchar(255) NOT NULL COMMENT 'se encuentra en player, name, give_name y el surename',
   `importe_total` double(155,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `compra`
---
-
-INSERT INTO `compra` (`id_compra`, `id_usuario`, `nombre_apellido_comprador`, `direccion_comprador`, `telefono_comprador`, `tiempo_local_compra`, `zulu_time_compra`, `id_orden_compra`, `id_pagador`, `email_pagador`, `nombre_apellido_pagador`, `importe_total`) VALUES
-(32, 30, 'pepe', 'sonia', 1234, '2023-05-07 13:43:46', '2023-05-07T11:43:44Z', '73041140LS9951305', 'EU2AG9GA88P58', 'sb-pipgx25897233@personal.example.com', 'John Doe', 24.20),
-(33, 30, 'pepe', 'sonia', 1234, '2023-05-07 13:44:49', '2023-05-07T11:44:48Z', '53L69999WA066253H', 'EU2AG9GA88P58', 'sb-pipgx25897233@personal.example.com', 'John Doe', 24.20),
-(34, 30, 'pepe', 'sonia', 1234, '2023-05-07 13:48:20', '2023-05-07T11:48:18Z', '77B40324422320149', 'EU2AG9GA88P58', 'sb-pipgx25897233@personal.example.com', 'John Doe', 24.20);
 
 -- --------------------------------------------------------
 
@@ -74,15 +75,6 @@ CREATE TABLE `compra_productos` (
   `cantidad` int(255) NOT NULL,
   `precio` double(155,2) NOT NULL COMMENT 'Es el precio indivudual del producto'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `compra_productos`
---
-
-INSERT INTO `compra_productos` (`id_compra`, `id_producto`, `cantidad`, `precio`) VALUES
-(32, 1, 1, 20.00),
-(33, 1, 1, 20.00),
-(34, 1, 1, 20.00);
 
 -- --------------------------------------------------------
 
@@ -100,15 +92,30 @@ CREATE TABLE `consultas` (
   `fecha` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
+-- --------------------------------------------------------
+
 --
--- Volcado de datos para la tabla `consultas`
+-- Estructura de tabla para la tabla `datos_usuario`
 --
 
-INSERT INTO `consultas` (`id_consulta`, `id_usuario`, `id_empleado`, `asunto`, `consulta`, `estado`, `fecha`) VALUES
-(4, 30, NULL, 'hola', 'pepe', 'espera', '2023-05-01 14:43:02'),
-(8, 30, NULL, 'asdasd', 'asdasddas', 'espera', '2023-05-02 10:47:43'),
-(14, 30, NULL, 'asdasd', 'asdasd', 'espera', '2023-05-02 12:01:27'),
-(15, 30, NULL, 'asdasd', 'asdasd', 'espera', '2023-05-02 12:01:29');
+CREATE TABLE `datos_usuario` (
+  `id_datos` int(255) NOT NULL,
+  `nombre_apellido` varchar(255) NOT NULL,
+  `direccion` varchar(255) NOT NULL,
+  `telefono` int(155) NOT NULL
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+-- --------------------------------------------------------
+
+--
+-- Estructura de tabla para la tabla `descuentos`
+--
+
+CREATE TABLE `descuentos` (
+  `id_descuento` int(155) NOT NULL,
+  `porcentaje` decimal(65,2) NOT NULL,
+  `id_producto` int(155) NOT NULL COMMENT 'no puede haber el mismo producot dos veces con dos descuentos'
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
 
@@ -129,7 +136,6 @@ CREATE TABLE `empleados` (
 
 CREATE TABLE `incidencias` (
   `id_incidencia` int(255) NOT NULL,
-  `id_usuario` int(255) NOT NULL,
   `id_empleado` int(255) DEFAULT NULL,
   `id_compra` int(255) NOT NULL,
   `asunto` varchar(255) NOT NULL,
@@ -147,6 +153,7 @@ CREATE TABLE `productos` (
   `id_producto` int(255) NOT NULL,
   `nombre` varchar(255) NOT NULL,
   `descripcion` varchar(1000) NOT NULL,
+  `tipo` varchar(255) NOT NULL,
   `stock` int(255) NOT NULL,
   `precio` double(155,2) NOT NULL,
   `activo` int(20) NOT NULL COMMENT '0 no esta activo, 1 esta activo'
@@ -156,13 +163,13 @@ CREATE TABLE `productos` (
 -- Volcado de datos para la tabla `productos`
 --
 
-INSERT INTO `productos` (`id_producto`, `nombre`, `descripcion`, `stock`, `precio`, `activo`) VALUES
-(0, 'telefono1', 'El teléfono es un dispositivo electrónico de comunicación, compacto y portátil, que permite hacer llamadas, enviar mensajes de texto, navegar por internet, tomar fotos, ver videos y mucho más. Con una pantalla táctil de alta resolución, cámara integrada, conectividad inalámbrica y potentes capacidades de procesamiento, el teléfono es una herramienta multifuncional que combina comunicación, entretenimiento y productividad en un solo dispositivo. Diseñado con elegancia y estilo, el teléfono se ha convertido en una parte esencial de la vida cotidiana, facilitando la comunicación y el acceso a la información en cualquier momento y lugar.', 0, 30.00, 1),
-(1, 'telefono2', 'El teléfono es un dispositivo electrónico de comunicación, compacto y portátil, que permite hacer llamadas, enviar mensajes de texto, navegar por internet, tomar fotos, ver videos y mucho más. Con una pantalla táctil de alta resolución, cámara integrada, conectividad inalámbrica y potentes capacidades de procesamiento, el teléfono es una herramienta multifuncional que combina comunicación, entretenimiento y productividad en un solo dispositivo. Diseñado con elegancia y estilo, el teléfono se ha convertido en una parte esencial de la vida cotidiana, facilitando la comunicación y el acceso a la información en cualquier momento y lugar.', 0, 20.00, 1),
-(2, 'telefono3', 'El teléfono es un dispositivo electrónico de comunicación, compacto y portátil, que permite hacer llamadas, enviar mensajes de texto, navegar por internet, tomar fotos, ver videos y mucho más. Con una pantalla táctil de alta resolución, cámara integrada, conectividad inalámbrica y potentes capacidades de procesamiento, el teléfono es una herramienta multifuncional que combina comunicación, entretenimiento y productividad en un solo dispositivo. Diseñado con elegancia y estilo, el teléfono se ha convertido en una parte esencial de la vida cotidiana, facilitando la comunicación y el acceso a la información en cualquier momento y lugar.', 0, 19.99, 1),
-(3, 'telefono4', 'El teléfono es un dispositivo electrónico de comunicación, compacto y portátil, que permite hacer llamadas, enviar mensajes de texto, navegar por internet, tomar fotos, ver videos y mucho más. Con una pantalla táctil de alta resolución, cámara integrada, conectividad inalámbrica y potentes capacidades de procesamiento, el teléfono es una herramienta multifuncional que combina comunicación, entretenimiento y productividad en un solo dispositivo. Diseñado con elegancia y estilo, el teléfono se ha convertido en una parte esencial de la vida cotidiana, facilitando la comunicación y el acceso a la información en cualquier momento y lugar.', 0, 19.99, 1),
-(4, 'telefono5', 'El teléfono es un dispositivo electrónico de comunicación, compacto y portátil, que permite hacer llamadas, enviar mensajes de texto, navegar por internet, tomar fotos, ver videos y mucho más. Con una pantalla táctil de alta resolución, cámara integrada, conectividad inalámbrica y potentes capacidades de procesamiento, el teléfono es una herramienta multifuncional que combina comunicación, entretenimiento y productividad en un solo dispositivo. Diseñado con elegancia y estilo, el teléfono se ha convertido en una parte esencial de la vida cotidiana, facilitando la comunicación y el acceso a la información en cualquier momento y lugar.', 3, 14.45, 0),
-(5, 'telefono6', 'El teléfono es un dispositivo electrónico de comunicación, compacto y portátil, que permite hacer llamadas, enviar mensajes de texto, navegar por internet, tomar fotos, ver videos y mucho más. Con una pantalla táctil de alta resolución, cámara integrada, conectividad inalámbrica y potentes capacidades de procesamiento, el teléfono es una herramienta multifuncional que combina comunicación, entretenimiento y productividad en un solo dispositivo. Diseñado con elegancia y estilo, el teléfono se ha convertido en una parte esencial de la vida cotidiana, facilitando la comunicación y el acceso a la información en cualquier momento y lugar.', 0, 30.45, 1);
+INSERT INTO `productos` (`id_producto`, `nombre`, `descripcion`, `tipo`, `stock`, `precio`, `activo`) VALUES
+(0, 'telefono1', 'El teléfono es un dispositivo electrónico de comunicación, compacto y portátil, que permite hacer llamadas, enviar mensajes de texto, navegar por internet, tomar fotos, ver videos y mucho más. Con una pantalla táctil de alta resolución, cámara integrada, conectividad inalámbrica y potentes capacidades de procesamiento, el teléfono es una herramienta multifuncional que combina comunicación, entretenimiento y productividad en un solo dispositivo. Diseñado con elegancia y estilo, el teléfono se ha convertido en una parte esencial de la vida cotidiana, facilitando la comunicación y el acceso a la información en cualquier momento y lugar.', 'tecología', 0, 30.00, 1),
+(1, 'camiseta1', 'Esta camiseta está confeccionada en suave algodón de alta calidad, con un diseño gráfico llamativo en tonos vibrantes que resalta su estilo moderno y urbano. Con corte clásico y ajuste regular, es cómoda y perfecta para llevar en cualquier ocasión. Su versatilidad te permite combinarla con pantalones, shorts o faldas, para crear diferentes looks y expresar tu personalidad. Además, su durabilidad garantiza que podrás disfrutar de ella por mucho tiempo. Una prenda imprescindible en cualquier guardarropa.', 'ropa', 1, 20.00, 1),
+(2, 'telefono3', 'El teléfono es un dispositivo electrónico de comunicación, compacto y portátil, que permite hacer llamadas, enviar mensajes de texto, navegar por internet, tomar fotos, ver videos y mucho más. Con una pantalla táctil de alta resolución, cámara integrada, conectividad inalámbrica y potentes capacidades de procesamiento, el teléfono es una herramienta multifuncional que combina comunicación, entretenimiento y productividad en un solo dispositivo. Diseñado con elegancia y estilo, el teléfono se ha convertido en una parte esencial de la vida cotidiana, facilitando la comunicación y el acceso a la información en cualquier momento y lugar.', 'tecología', 2, 19.99, 1),
+(3, 'camiseta2', 'Esta camiseta está confeccionada en suave algodón de alta calidad, con un diseño gráfico llamativo en tonos vibrantes que resalta su estilo moderno y urbano. Con corte clásico y ajuste regular, es cómoda y perfecta para llevar en cualquier ocasión. Su versatilidad te permite combinarla con pantalones, shorts o faldas, para crear diferentes looks y expresar tu personalidad. Además, su durabilidad garantiza que podrás disfrutar de ella por mucho tiempo. Una prenda imprescindible en cualquier guardarropa.', 'ropa', 3, 19.99, 1),
+(4, 'telefono5', 'El teléfono es un dispositivo electrónico de comunicación, compacto y portátil, que permite hacer llamadas, enviar mensajes de texto, navegar por internet, tomar fotos, ver videos y mucho más. Con una pantalla táctil de alta resolución, cámara integrada, conectividad inalámbrica y potentes capacidades de procesamiento, el teléfono es una herramienta multifuncional que combina comunicación, entretenimiento y productividad en un solo dispositivo. Diseñado con elegancia y estilo, el teléfono se ha convertido en una parte esencial de la vida cotidiana, facilitando la comunicación y el acceso a la información en cualquier momento y lugar.', 'tecología', 3, 14.45, 0),
+(5, 'accesorio1', 'Este accesorio es el complemento perfecto para cualquier atuendo. Confeccionado con materiales de alta calidad, su diseño elegante y sofisticado lo hace ideal para lucir en ocasiones especiales. Su practicidad y funcionalidad lo hacen perfecto para el día a día, mientras que su estilo atemporal lo hace una inversión duradera en tu guardarropa. Con detalles cuidadosamente elaborados, este accesorio resaltará tu estilo y personalidad. Además, su versatilidad te permite combinarlo con diferentes prendas y estilos para crear looks únicos y destacar en cualquier situación.', 'accesorio', 4, 30.45, 1);
 
 -- --------------------------------------------------------
 
@@ -172,22 +179,13 @@ INSERT INTO `productos` (`id_producto`, `nombre`, `descripcion`, `stock`, `preci
 
 CREATE TABLE `usuarios` (
   `id_usuario` int(255) NOT NULL,
-  `nombre` varchar(255) DEFAULT NULL,
   `email` varchar(255) NOT NULL,
   `contrasenia` varchar(255) NOT NULL,
-  `direccion` varchar(500) DEFAULT NULL,
-  `telefono` int(255) DEFAULT NULL,
+  `id_datos` int(255) DEFAULT NULL,
   `validada` int(20) NOT NULL COMMENT 'contiene 1 si la cuenta esta confirmada y 0 si aun no lo esta',
   `codigo` varchar(150) DEFAULT NULL COMMENT 'contiene codigos para realizas ciertas confirmaciones',
   `novedades` int(20) NOT NULL COMMENT '1 si quiere novedades 0 si no quiere novedades'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
-
---
--- Volcado de datos para la tabla `usuarios`
---
-
-INSERT INTO `usuarios` (`id_usuario`, `nombre`, `email`, `contrasenia`, `direccion`, `telefono`, `validada`, `codigo`, `novedades`) VALUES
-(30, 'pepe', 'estudiosalvaroestudios@gmail.com', 'pepe', 'sonia', 1234, 1, '644f938fe45ad', 1);
 
 --
 -- Índices para tablas volcadas
@@ -207,7 +205,8 @@ ALTER TABLE `avissos_disponibilidad`
 ALTER TABLE `compra`
   ADD PRIMARY KEY (`id_compra`),
   ADD KEY `id_usuario` (`id_usuario`),
-  ADD KEY `id_compra` (`id_compra`);
+  ADD KEY `id_compra` (`id_compra`),
+  ADD KEY `id_datos_comprador` (`id_datos_comprador`);
 
 --
 -- Indices de la tabla `compra_productos`
@@ -226,17 +225,36 @@ ALTER TABLE `consultas`
   ADD KEY `id_empleado` (`id_empleado`);
 
 --
+-- Indices de la tabla `datos_usuario`
+--
+ALTER TABLE `datos_usuario`
+  ADD PRIMARY KEY (`id_datos`),
+  ADD KEY `id_datos` (`id_datos`);
+
+--
+-- Indices de la tabla `descuentos`
+--
+ALTER TABLE `descuentos`
+  ADD PRIMARY KEY (`id_descuento`),
+  ADD UNIQUE KEY `id_producto` (`id_producto`);
+
+--
 -- Indices de la tabla `empleados`
 --
 ALTER TABLE `empleados`
   ADD PRIMARY KEY (`id_empleado`),
-  ADD KEY `id_empleado` (`id_empleado`);
+  ADD KEY `id_empleado` (`id_empleado`),
+  ADD KEY `id_empleado_2` (`id_empleado`);
 
 --
 -- Indices de la tabla `incidencias`
 --
 ALTER TABLE `incidencias`
-  ADD PRIMARY KEY (`id_incidencia`);
+  ADD PRIMARY KEY (`id_incidencia`),
+  ADD KEY `id_incidencia` (`id_incidencia`),
+  ADD KEY `id_incidencia_2` (`id_incidencia`),
+  ADD KEY `id_empleado` (`id_empleado`),
+  ADD KEY `id_compra` (`id_compra`);
 
 --
 -- Indices de la tabla `productos`
@@ -250,7 +268,8 @@ ALTER TABLE `productos`
 --
 ALTER TABLE `usuarios`
   ADD PRIMARY KEY (`id_usuario`),
-  ADD KEY `id_usuario` (`id_usuario`);
+  ADD KEY `id_usuario` (`id_usuario`),
+  ADD KEY `id_datos` (`id_datos`);
 
 --
 -- AUTO_INCREMENT de las tablas volcadas
@@ -260,13 +279,25 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `compra`
 --
 ALTER TABLE `compra`
-  MODIFY `id_compra` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=35;
+  MODIFY `id_compra` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT de la tabla `consultas`
 --
 ALTER TABLE `consultas`
   MODIFY `id_consulta` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=16;
+
+--
+-- AUTO_INCREMENT de la tabla `datos_usuario`
+--
+ALTER TABLE `datos_usuario`
+  MODIFY `id_datos` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+
+--
+-- AUTO_INCREMENT de la tabla `descuentos`
+--
+ALTER TABLE `descuentos`
+  MODIFY `id_descuento` int(155) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `empleados`
@@ -307,7 +338,8 @@ ALTER TABLE `avissos_disponibilidad`
 -- Filtros para la tabla `compra`
 --
 ALTER TABLE `compra`
-  ADD CONSTRAINT `compra_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `compra_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `compra_ibfk_2` FOREIGN KEY (`id_datos_comprador`) REFERENCES `datos_usuario` (`id_datos`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `compra_productos`
@@ -322,6 +354,25 @@ ALTER TABLE `compra_productos`
 ALTER TABLE `consultas`
   ADD CONSTRAINT `consultas_ibfk_1` FOREIGN KEY (`id_empleado`) REFERENCES `empleados` (`id_empleado`) ON DELETE CASCADE ON UPDATE CASCADE,
   ADD CONSTRAINT `consultas_ibfk_2` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `descuentos`
+--
+ALTER TABLE `descuentos`
+  ADD CONSTRAINT `descuentos_ibfk_1` FOREIGN KEY (`id_producto`) REFERENCES `productos` (`id_producto`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `incidencias`
+--
+ALTER TABLE `incidencias`
+  ADD CONSTRAINT `incidencias_ibfk_1` FOREIGN KEY (`id_empleado`) REFERENCES `empleados` (`id_empleado`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `incidencias_ibfk_2` FOREIGN KEY (`id_compra`) REFERENCES `compra` (`id_compra`) ON DELETE CASCADE ON UPDATE CASCADE;
+
+--
+-- Filtros para la tabla `usuarios`
+--
+ALTER TABLE `usuarios`
+  ADD CONSTRAINT `usuarios_ibfk_1` FOREIGN KEY (`id_datos`) REFERENCES `datos_usuario` (`id_datos`) ON DELETE CASCADE ON UPDATE CASCADE;
 COMMIT;
 
 /*!40101 SET CHARACTER_SET_CLIENT=@OLD_CHARACTER_SET_CLIENT */;
