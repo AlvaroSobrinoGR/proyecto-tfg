@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 09-05-2023 a las 19:52:09
+-- Tiempo de generación: 11-05-2023 a las 16:17:16
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -39,10 +39,18 @@ CREATE TABLE `avissos_disponibilidad` (
 --
 
 CREATE TABLE `codigo_descuento` (
-  `id_codigo` varchar(155) NOT NULL,
-  `procentaje` double(65,2) NOT NULL,
+  `id_cupon` varchar(155) NOT NULL,
+  `porcentaje` double(65,2) NOT NULL,
   `estado` int(11) NOT NULL COMMENT '0 no esta activo este descuento, 1 esta activo este descuento'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `codigo_descuento`
+--
+
+INSERT INTO `codigo_descuento` (`id_cupon`, `porcentaje`, `estado`) VALUES
+('PEPE', 20.00, 1),
+('SONIA', 10.00, 0);
 
 -- --------------------------------------------------------
 
@@ -60,7 +68,11 @@ CREATE TABLE `compra` (
   `id_pagador` varchar(255) NOT NULL COMMENT 'se encuentra en payer, player_id',
   `email_pagador` varchar(255) NOT NULL COMMENT 'se encuentra en player, adress, email_adress',
   `nombre_apellido_pagador` varchar(255) NOT NULL COMMENT 'se encuentra en player, name, give_name y el surename',
-  `importe_total` double(155,2) NOT NULL
+  `precio_total` double(155,2) NOT NULL,
+  `id_cupon` varchar(150) DEFAULT NULL,
+  `total_tras_codigo` double(155,2) NOT NULL,
+  `iva` double(155,2) NOT NULL,
+  `total_final_con_iva` double(155,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -73,7 +85,10 @@ CREATE TABLE `compra_productos` (
   `id_compra` int(255) NOT NULL,
   `id_producto` int(255) NOT NULL,
   `cantidad` int(255) NOT NULL,
-  `precio` double(155,2) NOT NULL COMMENT 'Es el precio indivudual del producto'
+  `precio_inicial` double(155,2) NOT NULL COMMENT 'Es el precio indivudual del producto',
+  `precio_total` double(155,2) NOT NULL COMMENT 'el precio inicial por las unidades',
+  `porcentaje_descuento` double(155,2) NOT NULL DEFAULT 0.00,
+  `total_tras_descuento` double(155,2) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 -- --------------------------------------------------------
@@ -100,10 +115,20 @@ CREATE TABLE `consultas` (
 
 CREATE TABLE `datos_usuario` (
   `id_datos` int(255) NOT NULL,
-  `nombre_apellido` varchar(255) NOT NULL,
-  `direccion` varchar(255) NOT NULL,
-  `telefono` int(155) NOT NULL
+  `nombre_apellido` varchar(255) DEFAULT NULL,
+  `direccion` varchar(255) DEFAULT NULL,
+  `telefono` int(155) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `datos_usuario`
+--
+
+INSERT INTO `datos_usuario` (`id_datos`, `nombre_apellido`, `direccion`, `telefono`) VALUES
+(6, 'pepe', '', 0),
+(7, 'pepe', 'sonia', 0),
+(8, 'pepe', 'sonia', 123),
+(9, 'pepe', 'asd', 123);
 
 -- --------------------------------------------------------
 
@@ -116,6 +141,14 @@ CREATE TABLE `descuentos` (
   `porcentaje` decimal(65,2) NOT NULL,
   `id_producto` int(155) NOT NULL COMMENT 'no puede haber el mismo producot dos veces con dos descuentos'
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `descuentos`
+--
+
+INSERT INTO `descuentos` (`id_descuento`, `porcentaje`, `id_producto`) VALUES
+(3, 20.00, 3),
+(4, 10.00, 2);
 
 -- --------------------------------------------------------
 
@@ -188,6 +221,13 @@ CREATE TABLE `usuarios` (
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
 --
+-- Volcado de datos para la tabla `usuarios`
+--
+
+INSERT INTO `usuarios` (`id_usuario`, `email`, `contrasenia`, `id_datos`, `validada`, `codigo`, `novedades`) VALUES
+(32, 'estudiosalvaroestudios@gmail.com', 'pepe2', 9, 1, '0', 0);
+
+--
 -- Índices para tablas volcadas
 --
 
@@ -200,13 +240,21 @@ ALTER TABLE `avissos_disponibilidad`
   ADD KEY `id_producto` (`id_producto`);
 
 --
+-- Indices de la tabla `codigo_descuento`
+--
+ALTER TABLE `codigo_descuento`
+  ADD PRIMARY KEY (`id_cupon`),
+  ADD KEY `id_codigo` (`id_cupon`);
+
+--
 -- Indices de la tabla `compra`
 --
 ALTER TABLE `compra`
   ADD PRIMARY KEY (`id_compra`),
   ADD KEY `id_usuario` (`id_usuario`),
   ADD KEY `id_compra` (`id_compra`),
-  ADD KEY `id_datos_comprador` (`id_datos_comprador`);
+  ADD KEY `id_datos_comprador` (`id_datos_comprador`),
+  ADD KEY `id_codigo_desceunto` (`id_cupon`);
 
 --
 -- Indices de la tabla `compra_productos`
@@ -291,13 +339,13 @@ ALTER TABLE `consultas`
 -- AUTO_INCREMENT de la tabla `datos_usuario`
 --
 ALTER TABLE `datos_usuario`
-  MODIFY `id_datos` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_datos` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=10;
 
 --
 -- AUTO_INCREMENT de la tabla `descuentos`
 --
 ALTER TABLE `descuentos`
-  MODIFY `id_descuento` int(155) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
+  MODIFY `id_descuento` int(155) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
 
 --
 -- AUTO_INCREMENT de la tabla `empleados`
@@ -321,7 +369,7 @@ ALTER TABLE `productos`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=31;
+  MODIFY `id_usuario` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
 
 --
 -- Restricciones para tablas volcadas
@@ -339,7 +387,8 @@ ALTER TABLE `avissos_disponibilidad`
 --
 ALTER TABLE `compra`
   ADD CONSTRAINT `compra_ibfk_1` FOREIGN KEY (`id_usuario`) REFERENCES `usuarios` (`id_usuario`) ON DELETE CASCADE ON UPDATE CASCADE,
-  ADD CONSTRAINT `compra_ibfk_2` FOREIGN KEY (`id_datos_comprador`) REFERENCES `datos_usuario` (`id_datos`) ON DELETE CASCADE ON UPDATE CASCADE;
+  ADD CONSTRAINT `compra_ibfk_2` FOREIGN KEY (`id_datos_comprador`) REFERENCES `datos_usuario` (`id_datos`) ON DELETE CASCADE ON UPDATE CASCADE,
+  ADD CONSTRAINT `compra_ibfk_3` FOREIGN KEY (`id_cupon`) REFERENCES `codigo_descuento` (`id_cupon`) ON DELETE CASCADE ON UPDATE CASCADE;
 
 --
 -- Filtros para la tabla `compra_productos`

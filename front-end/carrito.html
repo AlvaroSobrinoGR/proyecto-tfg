@@ -164,7 +164,7 @@
                             //productos_cantidades
                             let productos_cantidades = ";"
                             let tr = document.getElementById("cestaCompra").getElementsByTagName("tbody")[0].getElementsByTagName("tr");
-                            let cantidad_productos = tr.length-4
+                            let cantidad_productos = tr.length-5
                             for (let index = 1; index < cantidad_productos+1; index++) {
                                 let numero_producto = tr[index].getElementsByTagName("td")[0].id.split(";")[1]
                                 productos_cantidades+=numero_producto+"-";

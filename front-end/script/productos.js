@@ -39,7 +39,8 @@ function funciones(){
     function pintarProdcutos(json, numero_pagina){
         //tipos productos
 
-
+        
+        console.log(json)
         document.getElementById("cuerpo").innerHTML=""; //limpio siempre primero donde estan los productos, para que no se solapen las paginas
         let cantidad_producto = 4 //cantidad de productos por paginas
         for (let index = ((numero_pagina*cantidad_producto)-cantidad_producto); index < json.length && index < (numero_pagina*cantidad_producto); index++) {
@@ -79,7 +80,13 @@ function funciones(){
             //las imagenes de los productos tienen como nombre el mismo id_producto quye tiene el producto en la base de datos
             h4.innerHTML = json[index]["nombre"];
             p.innerHTML = json[index]["descripcion"];
-            precio.innerHTML = json[index]["precio"];
+
+            if(json[index]["descuento"]>0){
+                precio.innerHTML = "<del>"+json[index]["precio"]+"</del>"+" "+json[index]["descuento"]+"%"+" --> "+json[index]["precio_con_descuento"];
+            }else{
+                precio.innerHTML = json[index]["precio"];
+            }
+
             div.setAttribute("id", "producto;"+json[index]["id_producto"])
             div.appendChild(img);
             div.appendChild(h4);

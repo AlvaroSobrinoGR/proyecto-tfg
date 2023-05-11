@@ -17,10 +17,25 @@ if($tipo === "cargar"){ //cargar los datos
 
     $fila = $resultado-> fetch_assoc();
     $json .= "{";
-    $json .= "\"nombre\" : \"".$fila["nombre"]."\",";
-    $json .= "\"direccion\" : \"".$fila["direccion"]."\",";
-    $json .= "\"telefono\" : \"".$fila["telefono"]."\",";
-    $json .= "\"novedades\" : \"".$fila["novedades"]."\"";//1 hay stock 0 no hay stock
+    
+    $id_datos = $fila["id_datos"];
+    $json .= "\"novedades\" : \"".$fila["novedades"]."\",";//1 hay stock 0 no hay stock
+
+    if(strlen($id_datos) > 0){
+      $consulta = "SELECT * FROM datos_usuario  WHERE id_datos = '$id_datos'";
+      if ($conexion->query($consulta) == TRUE) {
+        $resultado = $conexion->query($consulta);
+        $fila = $resultado-> fetch_assoc();
+        $json .= "\"nombre\" : \"".$fila["nombre_apellido"]."\",";
+        $json .= "\"direccion\" : \"".$fila["direccion"]."\",";
+        $json .= "\"telefono\" : \"".($fila["telefono"]!=0?$fila["telefono"]:"")."\"";
+      }
+    }else{
+      $json .= "\"nombre\" : \"\",";
+      $json .= "\"direccion\" : \"\",";
+      $json .= "\"telefono\" : \"\"";
+    }
+
     $json .= "}";
 
     echo $json."]";
@@ -36,7 +51,37 @@ if($tipo === "cargar"){ //cargar los datos
   $telefono = $_POST['telefono'];
   $novedades = $_POST['novedades'];
 
-  $consulta = "UPDATE usuarios SET nombre = '$nombre', direccion = '$direccion', telefono = '$telefono', novedades = '$novedades' WHERE email = '$email';";
+  //primero ver los datos en datos_usuario
+  $id_datos;
+  $consulta = "SELECT id_datos FROM datos_usuario WHERE nombre_apellido='$nombre' AND direccion='$direccion' AND telefono='$telefono'";
+  $resultado = $conexion->query($consulta);
+
+  if ($resultado->num_rows > 0) {
+      // Los datos ya están registrados, obtener el ID
+      $row = $resultado->fetch_assoc();
+      $id_datos = $row['id_datos'];
+  } else {
+      // Los datos no están registrados, insertar nueva fila
+      $consulta = "INSERT INTO datos_usuario (nombre_apellido, direccion, telefono) VALUES ('$nombre', '$direccion', '$telefono')";
+      if ($conexion->query($consulta) === TRUE) {
+        $id_datos = mysqli_insert_id($conexion);
+      } else {
+          echo "Error: " . $consulta . "<br>" . $conexion->error;
+      }
+  }
+  //insertamos el nuevo id de datos_usuario al usario
+  if($id_datos != "ya existe"){
+    $consulta = "UPDATE usuarios SET id_datos = '$id_datos' WHERE email = '$email';";
+
+    if ($conexion->query($consulta) == TRUE) {
+      echo "los datos se han actualizado";
+    }else{
+      echo "los datos no se han actualizado, ha surgido un error";
+    }  
+  }
+
+
+  $consulta = "UPDATE usuarios SET id_datos='$id_datos', novedades = '$novedades' WHERE email = '$email';";
 
   if ($conexion->query($consulta) == TRUE) {
     echo "los datos se han actualizado";
@@ -51,19 +96,39 @@ if($tipo === "cargar"){ //cargar los datos
   $direccion = $_POST['direccion'];
   $telefono = $_POST['telefono'];
 
-  $consulta = "UPDATE usuarios SET nombre = '$nombre', direccion = '$direccion', telefono = '$telefono'  WHERE email = '$email';";
+  
 
-  if ($conexion->query($consulta) == TRUE) {
-    echo "los datos se han actualizado";
-  }else{
-    echo "los datos no se han actualizado, ha surgido un error";
+  //primero ver los datos en datos_usuario
+  $id_datos = "";
+  $consulta = "SELECT id_datos FROM datos_usuario WHERE nombre_apellido='$nombre' AND direccion='$direccion' AND telefono='$telefono'";
+  $resultado = $conexion->query($consulta);
+
+  if ($resultado->num_rows > 0) {
+      // Los datos ya están registrados, obtener el ID
+      $id_datos = "ya existe";
+  } else {
+      // Los datos no están registrados, insertar nueva fila
+      $consulta = "INSERT INTO datos_usuario (nombre_apellido, direccion, telefono) VALUES ('$nombre', '$direccion', '$telefono')";
+      if ($conexion->query($consulta) === TRUE) {
+        $id_datos = mysqli_insert_id($conexion);
+      } else {
+          echo "Error: " . $consulta . "<br>" . $conexion->error;
+      }
   }
+  //insertamos el nuevo id de datos_usuario al usario
+  if($id_datos > 0){
+    $consulta = "UPDATE usuarios SET id_datos = '$id_datos' WHERE email = '$email';";
 
+    if ($conexion->query($consulta) == TRUE) {
+      echo "los datos se han actualizado";
+    }else{
+      echo "los datos no se han actualizado, ha surgido un error";
+    }  
+  }
+  
 }else {  //comtrasenia
   // Recoger datos del formulario para cambiar contraseña
   $email = $_POST["email"];
-
-  $conexion = new mysqli("localhost", "root", "", "tienda");
 
   $codgioConfirmacion = uniqid();
 

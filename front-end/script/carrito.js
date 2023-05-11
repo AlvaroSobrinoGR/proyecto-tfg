@@ -66,12 +66,25 @@ function funciones() {
             //precio
             td = document.createElement("td");
             td.setAttribute("id", "precio;"+productos[i]["id_producto"])
-            td.innerText = productos[i]["precio"]
+
+            if(productos[i]["descuento"]>0){
+                td.innerHTML = "<del>"+productos[i]["precio"]+"</del>"+" "+productos[i]["descuento"]+"%"+" --> "+productos[i]["precio_con_descuento"];
+            }else{
+                td.innerHTML = productos[i]["precio"]
+            }
+            
+
             tr.appendChild(td);
             //precio total
             td = document.createElement("td");
             td.setAttribute("id", "precioTotal;"+productos[i]["id_producto"])
-            td.innerText = productos[i]["precio"]
+
+            if(productos[i]["descuento"]>0){
+                td.innerHTML = productos[i]["precio_con_descuento"];
+            }else{
+                td.innerHTML = productos[i]["precio"]
+            }
+
             tr.appendChild(td);
             //eliminar
             td = document.createElement("td");
@@ -90,6 +103,19 @@ function funciones() {
                                 <td id="sumaSinIva"></td>
                                 <td></td>
                             </tr>
+                            <tr id="piecupon">
+                                <td colspan="2">Aplicar codigo descuento:</td>
+                                <td id="tdcupon">
+                                    <input type="text" id="codigoDescuento">
+                                </td>
+                                <td id="porcentajeCupon"></td>
+                                <td id="errorCupon"></td>
+                            </tr>
+                            <tr id="piecupon2">
+                                <td colspan="3">Tras codigo descuento:</td>
+                                <td id="precioCupon"></td>
+                                <td ></td>
+                            </tr>
                             <tr id="pieiva">
                                 <td colspan="3">IVA 21%:</td>
                                 <td id="iva"></td>
@@ -106,8 +132,7 @@ function funciones() {
             document.getElementById("unidades;"+productos[i]["id_producto"]).addEventListener("change", precioUnidad)
             document.getElementById("liminarProducto;"+i+";"+productos[i]["id_producto"]).addEventListener("click", eliminarProducto)
         }
-
-
+        document.getElementById("codigoDescuento").addEventListener("change", ponerCodigoDescuento)
         
     }
 
@@ -132,8 +157,13 @@ function funciones() {
 
     function precioUnidad(){
         let idproducto = this.id.split(";")[1]
-        let unidades = document.getElementById(this.id).value 
-        let precioUnitario = parseFloat(document.getElementById("precio;"+idproducto).innerText)
+        let unidades = document.getElementById(this.id).value
+        let precioUnitario = document.getElementById("precio;"+idproducto).innerText; 
+        if(precioUnitario.length>6){
+            precioUnitario = precioUnitario.split('-->');
+            precioUnitario = parseFloat(precioUnitario[1].trim());
+        }
+        precioUnitario = parseFloat(precioUnitario)
         document.getElementById("precioTotal;"+idproducto).innerText = (unidades*precioUnitario).toFixed(2)
         calculos()
     }
@@ -146,8 +176,42 @@ function funciones() {
             }
         }
         document.getElementById("sumaSinIva").innerHTML=precioTotal.toFixed(2)
+        
+
+        if(document.getElementById("porcentajeCupon").innerText.length>0){
+            let contenido = document.getElementById("porcentajeCupon").innerText;
+            contenido = contenido.substring(1,contenido.length-2);
+            if(!isNaN(parseFloat(contenido).toFixed(2))){
+                document.getElementById("precioCupon").innerHTML=(precioTotal.toFixed(2)-(precioTotal.toFixed(2)*parseFloat(contenido)/100)).toFixed(2);
+                precioTotal = (precioTotal.toFixed(2)-(precioTotal.toFixed(2)*parseFloat(contenido)/100)).toFixed(2);
+            }else{
+                document.getElementById("precioCupon").innerHTML=precioTotal.toFixed(2)
+            }
+        }else{
+            document.getElementById("precioCupon").innerHTML=precioTotal.toFixed(2)
+        }
+
         document.getElementById("iva").innerHTML=(precioTotal*21/100).toFixed(2)
-        document.getElementById("totalMasIva").innerHTML=((precioTotal*21/100)+precioTotal).toFixed(2)
+        document.getElementById("totalMasIva").innerHTML=parseFloat((parseFloat(precioTotal*21/100))+parseFloat(precioTotal)).toFixed(2)
+    }
+
+    function ponerCodigoDescuento(){
+        let formulario = new FormData();
+        formulario.append("codigoDescuento", document.getElementById("codigoDescuento").value)
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", "../back-end/carrito_codigo.php");
+        xhr.addEventListener("load", (respuesta) => {//recojo el json que pinto en php
+            let resultado = respuesta.target.response;
+            if(resultado!="el codigo esta desabilitado" && resultado!="el codigo no existe"){
+                document.getElementById("porcentajeCupon").innerHTML = "-"+resultado+"%"
+                document.getElementById("errorCupon").innerHTML = ""
+            }else{
+                document.getElementById("porcentajeCupon").innerHTML = ""
+                document.getElementById("errorCupon").innerHTML = resultado
+            }
+            calculos()
+        });
+        xhr.send(formulario);
     }
 
     //cesta2
@@ -212,7 +276,6 @@ function funciones() {
     }
 
     //enviar informacion del formulario usuario
-
 
     function conexionGuardar(e) {
     e.preventDefault()
