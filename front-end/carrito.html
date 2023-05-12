@@ -158,8 +158,8 @@
                             formulario.append("email_pagador", detalles.payer.email_address);
                             //nombre_apellido_pagador
                             formulario.append("nombre_apellido_pagador",detalles.payer.name["given_name"]+" "+detalles.payer.name["surname"]);
-                            //importe_total
-                            formulario.append("importe_total", detalles.purchase_units[0]["amount"]["value"])
+                            //importe_total_email
+                            formulario.append("importe_total_email", detalles.purchase_units[0]["amount"]["value"])
 
                             //productos_cantidades
                             let productos_cantidades = ";"
@@ -168,9 +168,12 @@
                             for (let index = 1; index < cantidad_productos+1; index++) {
                                 let numero_producto = tr[index].getElementsByTagName("td")[0].id.split(";")[1]
                                 productos_cantidades+=numero_producto+"-";
-                                productos_cantidades+= document.getElementById("unidades;"+numero_producto).value+";"
+                                if(document.getElementById("unidades;"+numero_producto)!=null){
+                                    productos_cantidades+= document.getElementById("unidades;"+numero_producto).value+";"
+                                }
                             }
                             formulario.append("productos_cantidades", productos_cantidades)
+                            formulario.append("codigo_descuento", document.getElementById("codigoDescuento").value)
                 
                             let xhr = new XMLHttpRequest();
                             xhr.open("POST", "../back-end/compra.php");

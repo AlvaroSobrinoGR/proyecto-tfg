@@ -99,7 +99,7 @@ if($tipo === "cargar"){ //cargar los datos
   
 
   //primero ver los datos en datos_usuario
-  $id_datos = "";
+  $id_datos = "ya existe";
   $consulta = "SELECT id_datos FROM datos_usuario WHERE nombre_apellido='$nombre' AND direccion='$direccion' AND telefono='$telefono'";
   $resultado = $conexion->query($consulta);
 
@@ -116,7 +116,7 @@ if($tipo === "cargar"){ //cargar los datos
       }
   }
   //insertamos el nuevo id de datos_usuario al usario
-  if($id_datos > 0){
+  if($id_datos != "ya existe"){
     $consulta = "UPDATE usuarios SET id_datos = '$id_datos' WHERE email = '$email';";
 
     if ($conexion->query($consulta) == TRUE) {

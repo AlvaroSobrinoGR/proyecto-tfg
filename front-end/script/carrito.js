@@ -106,10 +106,11 @@ function funciones() {
                             <tr id="piecupon">
                                 <td colspan="2">Aplicar codigo descuento:</td>
                                 <td id="tdcupon">
-                                    <input type="text" id="codigoDescuento">
+                                    <input type="text" id="codigoDescuento"><br>
+                                    <span id="errorCupon"></span>
                                 </td>
                                 <td id="porcentajeCupon"></td>
-                                <td id="errorCupon"></td>
+                                <td></td>
                             </tr>
                             <tr id="piecupon2">
                                 <td colspan="3">Tras codigo descuento:</td>
@@ -208,6 +209,7 @@ function funciones() {
             }else{
                 document.getElementById("porcentajeCupon").innerHTML = ""
                 document.getElementById("errorCupon").innerHTML = resultado
+                document.getElementById("errorCupon").style.color = "red"
             }
             calculos()
         });
@@ -314,7 +316,9 @@ function funciones() {
         for (let index = 1; index < cantidad_productos+1; index++) {
             let numero_producto = tr[index].getElementsByTagName("td")[0].id.split(";")[1]
             productos_cantidades+=numero_producto+"-";
-            productos_cantidades+= document.getElementById("unidades;"+numero_producto).value+";"
+            if(document.getElementById("unidades;"+numero_producto)!=null){
+                productos_cantidades+= document.getElementById("unidades;"+numero_producto).value+";"
+            }
         }
         formulario.append("productos_cantidades", productos_cantidades)
         let xhr = new XMLHttpRequest();
