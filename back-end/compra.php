@@ -71,6 +71,14 @@ try{
 
     $total_final_con_iva = $total_tras_cupon+($total_tras_cupon*$porcentaje_iva/100);
 
+    
+    $tolerancia = 0.2;
+    if (abs($_POST["importe_total_paypal"] - $total_final_con_iva) <= $tolerancia) {// Los números son iguales con una tolerancia de 0.1 decimales
+
+    } else {// Los números son diferentes
+      throw new Exception('Los precios son diferentes');
+    }
+
     $conexion->autocommit(false);
     $consulta;
     if(strlen($id_cupon)>0){

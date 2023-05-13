@@ -124,15 +124,51 @@
             <script src="https://www.paypal.com/sdk/js?client-id=Ab-pjiPTvH0T_SFtqwnt_eNHo7RLQON6T6u01aWjkqrFOpdg32yMloGaDU7UnQ4OX2nZ8TvaKUzs6w_Q&currency=EUR"></script>
             
             <script>
+                //ESTO PERMITE QUE SEA EL SERVIDOR CON LOS MINIMOS DATOS CRITICOS NECESARIOS PONER EL PRECIO EN EL PAGO
+                function calcularPrecio(callback){
+                let formulario = new FormData();
+                let productos_cantidades = ";"
+                let tr = document.getElementById("cestaCompra").getElementsByTagName("tbody")[0].getElementsByTagName("tr");
+                let cantidad_productos = tr.length-5
+                for (let index = 1; index < cantidad_productos+1; index++) {
+                    let numero_producto = tr[index].getElementsByTagName("td")[0].id.split(";")[1]
+                    productos_cantidades+=numero_producto+"-";
+                    if(document.getElementById("unidades;"+numero_producto)!=null){
+                    productos_cantidades+= document.getElementById("unidades;"+numero_producto).value+";"
+                    }
+                }
+                formulario.append("productos_cantidades", productos_cantidades)
+                formulario.append("codigo_descuento", document.getElementById("codigoDescuento").value)
+                let xhr = new XMLHttpRequest();
+                xhr.open("POST", "../back-end/calcular_precio_carrito.php");
+                xhr.addEventListener("load", function(resultado) {
+                    if(resultado.target.response.includes("ha surgido")){
+                    callback(NaN); // Si hay un error, llama a la devolución de llamada con NaN
+                    } else {
+                    callback(parseFloat(resultado.target.response)); // Llama a la devolución de llamada con el precio procesado
+                    }
+                });
+                xhr.send(formulario);
+                }
+
                 paypal.Buttons({
+
                     createOrder: function(data, actions){
-                        return actions.order.create({
-                                    purchase_units:[{
-                                        amount:{
-                                        value:parseFloat(document.getElementById("totalMasIva").innerText).toFixed(2) //dinero
-                                        }
-                                    }]
-                                })
+                    return new Promise(function(resolve, reject) {
+                        calcularPrecio(function(precio) {
+                        if (isNaN(precio)) {
+                            reject(new Error('El precio no es válido'));
+                        } else {
+                            resolve(actions.order.create({
+                            purchase_units: [{
+                                amount: {
+                                value: parseFloat(precio).toFixed(2)
+                                }
+                            }]
+                            }));
+                        }
+                        });
+                    });
                     },
 
                     onApprove: function(data, actions ){
@@ -159,7 +195,7 @@
                             //nombre_apellido_pagador
                             formulario.append("nombre_apellido_pagador",detalles.payer.name["given_name"]+" "+detalles.payer.name["surname"]);
                             //importe_total_email
-                            formulario.append("importe_total_email", detalles.purchase_units[0]["amount"]["value"])
+                            formulario.append("importe_total_paypal", detalles.purchase_units[0]["amount"]["value"])
 
                             //productos_cantidades
                             let productos_cantidades = ";"
