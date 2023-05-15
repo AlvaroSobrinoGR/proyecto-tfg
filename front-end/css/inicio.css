@@ -37,6 +37,11 @@ body{
     display: none;
 }
 
+#factura img{
+    width: 5em;
+    height: 5em;
+}
+
 
 
 /*color bordes*/
