@@ -136,6 +136,52 @@ function funciones (){
         }
     }
 
+    //incidencias
+    document.getElementById("incidencias").addEventListener("click", listarIncidencias)
+    function listarIncidencias(e){
+        e.preventDefault()
+        if(document.getElementById("lista_incidencias").innerHTML.length>0){
+            document.getElementById("lista_incidencias").innerHTML=""
+        }else{
+            let email
+            if (localStorage.getItem("usuario")) {
+                email = localStorage.getItem("usuario")
+            } else if (sessionStorage.getItem("usuario")){
+                email = sessionStorage.getItem("usuario")
+            }
+            let formulario = new FormData();
+            formulario.append("email", email);
+     
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST", "../back-end/usuario_incidencias.php");
+            xhr.addEventListener("load", (respuesta) => {
+                let json = JSON.parse(respuesta.target.response)
+                //pintar datos
+                tabla = document.createElement("table")
+                tabla.innerHTML = '<tr><th>Id incidencia</th><th>Id pedido</th><th>Asunto</th><th>Consulta</th><th>Estado</th><th>Fecha</th></tr>'
+                propiedades = ["id_incidencia","id_compra", "asunto", "consulta", "estado", "fecha"]
+                tabla.setAttribute("id", "tabla_consultas")
+    
+                //lo que hago aquie es recorrer el arry al reves para pintar al principio de la tabla las consultas mas recientes
+                for (let i = json.length-1; i >= 0; i--) {
+                    tr = document.createElement("tr")
+                    tr.setAttribute("id", "fila_consultas;"+(i-(json.length-1)))
+                    //para evitar un codigo mas largo tengo las keys de las posiciones en el array propiedades y asi voy sacandolas en cada fila
+                    for (let j = 0; j < Object.keys(json[i]).length; j++) {
+                        td = document.createElement("td")
+                        td.setAttribute("id", propiedades[j]+";"+((json.length-1)-i))
+                        td.innerHTML = json[i][propiedades[j]]
+                        tr.appendChild(td)
+                    }
+                    tabla.appendChild(tr)
+                }
+                
+                 document.getElementById("lista_incidencias").appendChild(tabla)
+            });
+            xhr.send(formulario)
+        }
+    }
+
     //pedidos
     document.getElementById("pedidos").addEventListener("click", listarPedidos)
     function listarPedidos(e){
@@ -196,8 +242,8 @@ function funciones (){
                 for (let i= 0; i < json.length; i++) {
                     for (let j = 0; j < acciones.length; j++) {
                         document.getElementById("link_detalles;"+i).addEventListener("click", detallesPedido);
-                        document.getElementById("link_habrir_incidencia;"+i).addEventListener("click", habrirIncidencia);
-                        document.getElementById("link_devolver_pedido;"+i).addEventListener("click", devolverPedido);
+                        document.getElementById("link_habrir_incidencia;"+i).addEventListener("click", detallesPedido);
+                        document.getElementById("link_devolver_pedido;"+i).addEventListener("click", detallesPedido);
                     }
                 }
             });
@@ -226,7 +272,11 @@ function funciones (){
         xhr.addEventListener("load", (resultado) => {
             let respuesta = resultado.target.response
             if(respuesta.includes("bien")){
-                pintarFactura(pedido)
+                if(this.id.includes("link_detalles")){
+                    pintarFactura(pedido)
+                }else if(this.id.includes("link_habrir_incidencia")){
+                    habrirIncidencia(pedido)
+                }
             }
         });
         xhr.send(formulario);
@@ -241,16 +291,69 @@ function funciones (){
             let respuesta = resultado.target.response
             document.getElementById("formulario_usuario").style.display = "none";
             document.getElementById("factura").style.display = "block";
-            document.getElementById("factura").innerHTML = respuesta
+            document.getElementById("factura_contenido").innerHTML = respuesta
         });
         xhr.send(formulario);
 
     }
+
+    document.getElementById("atras1").addEventListener("click", (e) => {
+        e.preventDefault()
+        document.getElementById("formulario_usuario").style.display = "block";
+        document.getElementById("factura").style.display = "none";
+        document.getElementById("factura_contenido").innerHTML = ""
+    })
+
+    document.getElementById("atras2").addEventListener("click", (e) => {
+        e.preventDefault()
+        document.getElementById("formulario_usuario").style.display = "block";
+        document.getElementById("incidencia").style.display = "none";
+    })
     
-    function habrirIncidencia(e){
-        e.preventDefault();
-        console.log(this.id)
+    function habrirIncidencia(pedido){
+        let formulario = new FormData();
+        formulario.append("id_pedido", pedido);
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", "../back-end/pintar_factura_pedidos.php");
+        xhr.addEventListener("load", (resultado) => {
+            let respuesta = resultado.target.response
+            document.getElementById("formulario_usuario").style.display = "none";
+            document.getElementById("incidencia").style.display = "block";
+            if(!document.getElementById("indicencia_id_pedido").value.includes(pedido)){
+
+                document.getElementById("indicencia_id_pedido").value = pedido;
+                document.getElementById("indicencia_asunto").value = "";
+                document.getElementById("indicencia_consulta").value = "";
+            }
+        });
+        xhr.send(formulario);
     }
+
+    document.getElementById("enviar_incidencia").addEventListener("click", enviarIncidencia)
+    function enviarIncidencia(){
+        let formulario = new FormData();
+        let email = "";
+        if (localStorage.getItem("usuario")) {
+            email =  localStorage.getItem("usuario")
+        } else if (sessionStorage.getItem("usuario")){
+            email =  sessionStorage.getItem("usuario")
+        }
+        formulario.append("email", email)
+        formulario.append("id_pedido", document.getElementById("indicencia_id_pedido").value)
+        formulario.append("asunto", document.getElementById("indicencia_asunto").value)
+        formulario.append("consulta", document.getElementById("indicencia_consulta").value)
+        let fechaActual = new Date();
+        let fechaActualFormateada = fechaActual.getFullYear() + '-' + (fechaActual.getMonth() + 1).toString().padStart(2, '0') + '-' + fechaActual.getDate().toString().padStart(2, '0') + ' ' + fechaActual.getHours().toString().padStart(2, '0') + ':' + fechaActual.getMinutes().toString().padStart(2, '0') + ':' + fechaActual.getSeconds().toString().padStart(2, '0');
+        formulario.append("fecha", fechaActualFormateada)
+        
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", "../back-end/incidencia.php")
+        xhr.addEventListener("load", (respuesta)=>{
+            document.getElementById("incidencia_contenido").innerHTML=respuesta.target.response;
+        })
+        xhr.send(formulario);
+    }
+
     function devolverPedido(e){
         e.preventDefault();
         console.log(this.id)
