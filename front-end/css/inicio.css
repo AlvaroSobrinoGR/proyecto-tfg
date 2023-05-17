@@ -37,7 +37,7 @@ body{
     display: none;
 }
 
-#factura img{
+#factura img, #devolucion_contenido img{
     width: 5em;
     height: 5em;
 }

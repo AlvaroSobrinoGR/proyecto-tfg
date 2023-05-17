@@ -276,6 +276,8 @@ function funciones (){
                     pintarFactura(pedido)
                 }else if(this.id.includes("link_habrir_incidencia")){
                     habrirIncidencia(pedido)
+                }else if(this.id.includes("link_devolver_pedido")){
+                    devolverPedido(pedido)
                 }
             }
         });
@@ -308,6 +310,12 @@ function funciones (){
         e.preventDefault()
         document.getElementById("formulario_usuario").style.display = "block";
         document.getElementById("incidencia").style.display = "none";
+    })
+
+    document.getElementById("atras3").addEventListener("click", (e) => {
+        e.preventDefault()
+        document.getElementById("formulario_usuario").style.display = "block";
+        document.getElementById("devolucion").style.display = "none";
     })
     
     function habrirIncidencia(pedido){
@@ -354,9 +362,141 @@ function funciones (){
         xhr.send(formulario);
     }
 
-    function devolverPedido(e){
-        e.preventDefault();
-        console.log(this.id)
+    function devolverPedido(pedido){
+        let formulario = new FormData();
+        formulario.append("id_pedido", pedido);
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", "../back-end/usuario_devolucion_datos.php");
+        xhr.addEventListener("load", (resultado) => {
+            let json = JSON.parse(resultado.target.response)
+            document.getElementById("formulario_usuario").style.display = "none";
+            document.getElementById("devolucion").style.display = "block";
+            pintarDevolucion(json)
+        });
+        xhr.send(formulario);
     }
-    
+
+    function  pintarDevolucion(json){
+        console.log(json)
+        let tabla = document.createElement("table")
+        tabla.setAttribute("id", "tabla_devoluciones")
+        let tr = document.createElement("tr")
+        let th = document.createElement("th")
+        th.innerHTML = "Id compra: <span id=\"id_compra_devolucion\">"+json[0]["id_compra"]+"</span>"
+        tr.appendChild(th)
+        tabla.appendChild(tr)
+        tr = document.createElement("tr")
+        th1 = document.createElement("th")
+        tr.appendChild(th1)//check
+        let th2 = document.createElement("th")
+        tr.appendChild(th2)//foto
+        let th3 = document.createElement("th")
+        th3.innerText = "Producto"
+        tr.appendChild(th3)//nombre
+        let th4 = document.createElement("th")
+        th4.innerText = "Cantidad"
+        tr.appendChild(th4)//cantidad
+        tabla.appendChild(tr)
+        for (let i = 1; i < json.length; i++) {
+            let tr2 = document.createElement("tr")
+            tr2.setAttribute("id", "fila_devoluciones;"+i)
+            let td = document.createElement("td")
+            //check
+            let check = document.createElement("input")
+            check.setAttribute("type", "checkbox")
+            check.setAttribute("name", "checkbox_devolucones")
+            check.setAttribute("id", "checkbox_dev;"+i)
+            check.setAttribute("value", i+";"+json[i]["id_producto"])
+            td.appendChild(check)
+            tr2.appendChild(td)
+            //imagen
+            td = document.createElement("td")
+            let img = document.createElement("img")
+            img.setAttribute("src", "img_productos/"+json[i]["id_producto"]+".jpg")
+            td.appendChild(img)
+            tr2.appendChild(td)
+            //nombre
+            td = document.createElement("td")
+            td.innerText = json[i]["nombre"];
+            tr2.appendChild(td)
+            //input
+            td = document.createElement("td")
+            let input = document.createElement("input")
+            input.setAttribute("type", "number")
+            input.setAttribute("min", "0")
+            input.setAttribute("max", json[i]["cantidad"])
+            input.setAttribute("value", "0")
+            input.setAttribute("id", "cantidad_fila;"+i)
+            input.setAttribute("disabled", true)
+            td.appendChild(input)
+            tr2.appendChild(td)
+            tabla.appendChild(tr2)
+        }
+        tr = document.createElement("tr")
+        let td = document.createElement("td")
+        td.setAttribute("colspan", 4)
+        let input = document.createElement("input")
+        input.setAttribute("type", "button")
+        input.setAttribute("id", "devolver_boton")
+        input.setAttribute("value", "Devolver Productos")
+        td.appendChild(input)
+        tr.appendChild(td)
+        tabla.appendChild(tr)
+        document.getElementById("devolucion_contenido").innerHTML = ""
+        document.getElementById("devolucion_contenido").appendChild(tabla)
+
+        //existir
+        for (let i = 0; i< json.length-1; i++) {
+            document.getElementsByName("checkbox_devolucones")[i].addEventListener("input", activarFilaDevolucion)
+        }
+        document.getElementById("devolver_boton").addEventListener("click", devolverProductos)
+    }
+
+    //check validar el que ese producto se pueda devolver y elegir cantidad
+    function activarFilaDevolucion(){
+        let checkeds = document.getElementsByName("checkbox_devolucones")
+        for(let i = 0; i< checkeds.length; i++){
+            if(checkeds[i].checked){
+                document.getElementById("cantidad_fila;"+checkeds[i].id.split(";")[1]).disabled = false;
+            }else{
+                document.getElementById("cantidad_fila;"+checkeds[i].id.split(";")[1]).disabled = true;
+            }
+        }
+        
+    }
+    //si al menos un checkbox esta activo y tiene almenos un producto para devolver se podra devolver
+    function devolverProductos(){
+        let productos_cantidades = ";"
+        let checkeds = document.getElementsByName("checkbox_devolucones")
+        for(let i = 0; i< checkeds.length; i++){
+            if(checkeds[i].checked){
+                if(document.getElementById("cantidad_fila;"+checkeds[i].id.split(";")[1]).value>0){
+                    productos_cantidades+=checkeds[i].value.split(";")[1]+"-"+document.getElementById("cantidad_fila;"+checkeds[i].id.split(";")[1]).value+";"
+                }
+            }
+        }
+        let formulario = new FormData();
+        let email = "";
+        if (localStorage.getItem("usuario")) {
+            email =  localStorage.getItem("usuario")
+        } else if (sessionStorage.getItem("usuario")){
+            email =  sessionStorage.getItem("usuario")
+        }
+        formulario.append("email", email);
+        formulario.append("pedido", document.getElementById("id_compra_devolucion").innerText);
+        formulario.append("productos_cantidades", productos_cantidades)       
+        
+        
+        console.log('email', email)
+        console.log('pedido', document.getElementById("id_compra_devolucion").innerText)
+        console.log('productos_cantidades', productos_cantidades)
+        let xhr = new XMLHttpRequest();
+        xhr.open("POST", "../back-end/");
+        xhr.addEventListener("load", (resultado) => {
+            if(resultado.target.response.length>0){
+                alert(resultado.target.response)
+            }
+        });
+        xhr.send(formulario);
+    }
 }
