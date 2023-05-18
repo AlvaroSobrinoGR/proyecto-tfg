@@ -54,7 +54,7 @@ try{
         $precio_total += $precio_total_prodcuto-($precio_total_prodcuto*$porcentaje_descuento/100);
     }
   
-    $consulta = "SELECT * FROM codigo_descuento WHERE id_cupon = '$id_cupon'";
+    $consulta = "SELECT * FROM codigo_descuento WHERE BINARY id_cupon = '$id_cupon'";
     $resultado = $conexion->query($consulta);
 
     if($resultado->num_rows > 0) {

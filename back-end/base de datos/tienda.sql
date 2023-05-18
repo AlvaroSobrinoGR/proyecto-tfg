@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 16-05-2023 a las 14:58:14
+-- Tiempo de generación: 18-05-2023 a las 14:52:41
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -84,19 +84,9 @@ INSERT INTO `compra` (`id_compra`, `id_usuario`, `id_datos_comprador`, `tiempo_l
 (56, 32, 10, '2023-05-13 11:16:57', '2023-05-13T09:16:55Z', '4MC293798C0591215', 'EU2AG9GA88P58', 'sb-pipgx25897233@personal.example.com', 'John Doe', 37.99, NULL, 37.99, 21.00, 45.97),
 (57, 32, 10, '2023-05-13 11:46:19', '2023-05-13T09:46:18Z', '62U992206F1251242', 'EU2AG9GA88P58', 'sb-pipgx25897233@personal.example.com', 'John Doe', 37.99, NULL, 37.99, 21.00, 45.97),
 (58, 32, 10, '2023-05-15 12:25:35', '2023-05-15T10:25:35Z', '9XJ43326N5920240J', 'EU2AG9GA88P58', 'sb-pipgx25897233@personal.example.com', 'John Doe', 20.00, 'PEPE', 16.00, 21.00, 19.36),
-(59, 32, 10, '2023-05-15 12:59:58', '2023-05-15T10:59:58Z', '4CU50453RF436650P', 'EU2AG9GA88P58', 'sb-pipgx25897233@personal.example.com', 'John Doe', 55.98, 'PEPE', 44.79, 21.00, 54.19),
+(59, 32, 10, '2023-05-15 12:59:58', '2023-05-15T10:59:58Z', '4CU50453RF436650P', 'EU2AG9GA88P58', 'sb-pipgx25897233@personal.example.com', 'John Doe', 35.98, 'PEPE', 28.78, 21.00, 34.83),
 (60, 32, 10, '2023-05-15 13:46:26', '2023-05-15T11:46:26Z', '1DS83417LB690912R', 'EU2AG9GA88P58', 'sb-pipgx25897233@personal.example.com', 'John Doe', 73.97, 'PEPE', 59.18, 21.00, 71.61),
-(61, 32, 10, '2023-05-15 13:47:02', '2023-05-15T11:47:03Z', '37N89950MM7803846', 'EU2AG9GA88P58', 'sb-pipgx25897233@personal.example.com', 'John Doe', 73.97, 'PEPE', 59.18, 21.00, 71.61),
-(62, 32, 10, '2023-05-15 14:01:48', '2023-05-15T12:01:48Z', '9XW26638BD5832645', 'EU2AG9GA88P58', 'sb-pipgx25897233@personal.example.com', 'John Doe', 51.98, NULL, 51.98, 21.00, 62.90),
-(63, 32, 10, '2023-05-15 14:03:54', '2023-05-15T12:03:54Z', '96A58901M2037824P', 'EU2AG9GA88P58', 'sb-pipgx25897233@personal.example.com', 'John Doe', 51.98, NULL, 51.98, 21.00, 62.90),
-(64, 32, 10, '2023-05-15 14:04:47', '2023-05-15T12:04:47Z', '2US63122RJ132591X', 'EU2AG9GA88P58', 'sb-pipgx25897233@personal.example.com', 'John Doe', 51.98, NULL, 51.98, 21.00, 62.90),
-(65, 32, 10, '2023-05-15 14:07:15', '2023-05-15T12:07:15Z', '2RW13697E2928012U', 'EU2AG9GA88P58', 'sb-pipgx25897233@personal.example.com', 'John Doe', 51.98, NULL, 51.98, 21.00, 62.90),
-(66, 32, 10, '2023-05-15 14:10:02', '2023-05-15T12:10:02Z', '5PE339014U634401X', 'EU2AG9GA88P58', 'sb-pipgx25897233@personal.example.com', 'John Doe', 51.98, NULL, 51.98, 21.00, 62.90),
-(67, 32, 10, '2023-05-15 14:11:13', '2023-05-15T12:11:13Z', '7HU7232966508281N', 'EU2AG9GA88P58', 'sb-pipgx25897233@personal.example.com', 'John Doe', 51.98, NULL, 51.98, 21.00, 62.90),
-(68, 32, 10, '2023-05-15 14:13:01', '2023-05-15T12:13:01Z', '8N3367192A760783W', 'EU2AG9GA88P58', 'sb-pipgx25897233@personal.example.com', 'John Doe', 51.98, NULL, 51.98, 21.00, 62.90),
-(69, 32, 10, '2023-05-15 14:14:01', '2023-05-15T12:14:01Z', '5EW71460C4783044A', 'EU2AG9GA88P58', 'sb-pipgx25897233@personal.example.com', 'John Doe', 51.98, NULL, 51.98, 21.00, 62.90),
-(70, 32, 10, '2023-05-15 14:15:04', '2023-05-15T12:15:04Z', '2LT34168A0933873T', 'EU2AG9GA88P58', 'sb-pipgx25897233@personal.example.com', 'John Doe', 17.99, NULL, 17.99, 21.00, 21.77),
-(71, 32, 10, '2023-05-15 16:45:14', '2023-05-15T14:45:14Z', '68756006FH982181X', 'EU2AG9GA88P58', 'sb-pipgx25897233@personal.example.com', 'John Doe', 17.99, NULL, 17.99, 21.00, 21.77);
+(61, 32, 10, '2023-05-15 13:47:02', '2023-05-15T11:47:03Z', '37N89950MM7803846', 'EU2AG9GA88P58', 'sb-pipgx25897233@personal.example.com', 'John Doe', 73.97, 'PEPE', 59.18, 21.00, 71.61);
 
 -- --------------------------------------------------------
 
@@ -125,30 +115,11 @@ INSERT INTO `compra_productos` (`id_compra`, `id_producto`, `cantidad`, `precio_
 (57, 1, 1, 20.00, 20.00, 0.00, 20.00),
 (57, 2, 1, 19.99, 19.99, 10.00, 17.99),
 (58, 1, 1, 20.00, 20.00, 0.00, 20.00),
-(59, 1, 1, 20.00, 20.00, 0.00, 20.00),
 (59, 2, 2, 19.99, 39.98, 10.00, 35.98),
 (60, 1, 1, 20.00, 20.00, 0.00, 20.00),
 (60, 2, 3, 19.99, 59.97, 10.00, 53.97),
 (61, 1, 1, 20.00, 20.00, 0.00, 20.00),
-(61, 2, 3, 19.99, 59.97, 10.00, 53.97),
-(62, 1, 1, 20.00, 20.00, 0.00, 20.00),
-(62, 3, 2, 19.99, 39.98, 20.00, 31.98),
-(63, 1, 1, 20.00, 20.00, 0.00, 20.00),
-(63, 3, 2, 19.99, 39.98, 20.00, 31.98),
-(64, 1, 1, 20.00, 20.00, 0.00, 20.00),
-(64, 3, 2, 19.99, 39.98, 20.00, 31.98),
-(65, 1, 1, 20.00, 20.00, 0.00, 20.00),
-(65, 3, 2, 19.99, 39.98, 20.00, 31.98),
-(66, 1, 1, 20.00, 20.00, 0.00, 20.00),
-(66, 3, 2, 19.99, 39.98, 20.00, 31.98),
-(67, 1, 1, 20.00, 20.00, 0.00, 20.00),
-(67, 3, 2, 19.99, 39.98, 20.00, 31.98),
-(68, 1, 1, 20.00, 20.00, 0.00, 20.00),
-(68, 3, 2, 19.99, 39.98, 20.00, 31.98),
-(69, 1, 1, 20.00, 20.00, 0.00, 20.00),
-(69, 3, 2, 19.99, 39.98, 20.00, 31.98),
-(70, 2, 1, 19.99, 19.99, 10.00, 17.99),
-(71, 2, 1, 19.99, 19.99, 10.00, 17.99);
+(61, 2, 3, 19.99, 59.97, 10.00, 53.97);
 
 -- --------------------------------------------------------
 
@@ -252,9 +223,6 @@ CREATE TABLE `incidencias` (
 --
 
 INSERT INTO `incidencias` (`id_incidencia`, `id_empleado`, `id_compra`, `asunto`, `consulta`, `estado`, `fecha`) VALUES
-(3, NULL, 71, 'asdasdd', 'asdasd', 'espera', '2023-05-16 14:42:10'),
-(4, NULL, 68, 'tete', 'tete', 'espera', '2023-05-16 14:46:17'),
-(5, NULL, 71, 'asdasd', 'asdasd', 'espera', '2023-05-16 14:48:47'),
 (6, NULL, 55, 'hola', 'teete', 'espera', '2023-05-16 14:57:08');
 
 -- --------------------------------------------------------
@@ -280,7 +248,7 @@ CREATE TABLE `productos` (
 INSERT INTO `productos` (`id_producto`, `nombre`, `descripcion`, `tipo`, `stock`, `precio`, `activo`) VALUES
 (0, 'telefono1', 'El teléfono es un dispositivo electrónico de comunicación, compacto y portátil, que permite hacer llamadas, enviar mensajes de texto, navegar por internet, tomar fotos, ver videos y mucho más. Con una pantalla táctil de alta resolución, cámara integrada, conectividad inalámbrica y potentes capacidades de procesamiento, el teléfono es una herramienta multifuncional que combina comunicación, entretenimiento y productividad en un solo dispositivo. Diseñado con elegancia y estilo, el teléfono se ha convertido en una parte esencial de la vida cotidiana, facilitando la comunicación y el acceso a la información en cualquier momento y lugar.', 'tecología', 0, 30.00, 1),
 (1, 'camiseta1', 'Esta camiseta está confeccionada en suave algodón de alta calidad, con un diseño gráfico llamativo en tonos vibrantes que resalta su estilo moderno y urbano. Con corte clásico y ajuste regular, es cómoda y perfecta para llevar en cualquier ocasión. Su versatilidad te permite combinarla con pantalones, shorts o faldas, para crear diferentes looks y expresar tu personalidad. Además, su durabilidad garantiza que podrás disfrutar de ella por mucho tiempo. Una prenda imprescindible en cualquier guardarropa.', 'ropa', -1, 20.00, 1),
-(2, 'telefono3', 'El teléfono es un dispositivo electrónico de comunicación, compacto y portátil, que permite hacer llamadas, enviar mensajes de texto, navegar por internet, tomar fotos, ver videos y mucho más. Con una pantalla táctil de alta resolución, cámara integrada, conectividad inalámbrica y potentes capacidades de procesamiento, el teléfono es una herramienta multifuncional que combina comunicación, entretenimiento y productividad en un solo dispositivo. Diseñado con elegancia y estilo, el teléfono se ha convertido en una parte esencial de la vida cotidiana, facilitando la comunicación y el acceso a la información en cualquier momento y lugar.', 'tecología', 5, 19.99, 1),
+(2, 'telefono3', 'El teléfono es un dispositivo electrónico de comunicación, compacto y portátil, que permite hacer llamadas, enviar mensajes de texto, navegar por internet, tomar fotos, ver videos y mucho más. Con una pantalla táctil de alta resolución, cámara integrada, conectividad inalámbrica y potentes capacidades de procesamiento, el teléfono es una herramienta multifuncional que combina comunicación, entretenimiento y productividad en un solo dispositivo. Diseñado con elegancia y estilo, el teléfono se ha convertido en una parte esencial de la vida cotidiana, facilitando la comunicación y el acceso a la información en cualquier momento y lugar.', 'tecología', 4, 19.99, 1),
 (3, 'camiseta2', 'Esta camiseta está confeccionada en suave algodón de alta calidad, con un diseño gráfico llamativo en tonos vibrantes que resalta su estilo moderno y urbano. Con corte clásico y ajuste regular, es cómoda y perfecta para llevar en cualquier ocasión. Su versatilidad te permite combinarla con pantalones, shorts o faldas, para crear diferentes looks y expresar tu personalidad. Además, su durabilidad garantiza que podrás disfrutar de ella por mucho tiempo. Una prenda imprescindible en cualquier guardarropa.', 'ropa', -9, 19.99, 1),
 (4, 'telefono5', 'El teléfono es un dispositivo electrónico de comunicación, compacto y portátil, que permite hacer llamadas, enviar mensajes de texto, navegar por internet, tomar fotos, ver videos y mucho más. Con una pantalla táctil de alta resolución, cámara integrada, conectividad inalámbrica y potentes capacidades de procesamiento, el teléfono es una herramienta multifuncional que combina comunicación, entretenimiento y productividad en un solo dispositivo. Diseñado con elegancia y estilo, el teléfono se ha convertido en una parte esencial de la vida cotidiana, facilitando la comunicación y el acceso a la información en cualquier momento y lugar.', 'tecología', 3, 14.45, 0),
 (5, 'accesorio1', 'Este accesorio es el complemento perfecto para cualquier atuendo. Confeccionado con materiales de alta calidad, su diseño elegante y sofisticado lo hace ideal para lucir en ocasiones especiales. Su practicidad y funcionalidad lo hacen perfecto para el día a día, mientras que su estilo atemporal lo hace una inversión duradera en tu guardarropa. Con detalles cuidadosamente elaborados, este accesorio resaltará tu estilo y personalidad. Además, su versatilidad te permite combinarlo con diferentes prendas y estilos para crear looks únicos y destacar en cualquier situación.', 'accesorio', 4, 30.45, 1);
@@ -408,7 +376,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `compra`
 --
 ALTER TABLE `compra`
-  MODIFY `id_compra` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=72;
+  MODIFY `id_compra` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
 
 --
 -- AUTO_INCREMENT de la tabla `consultas`

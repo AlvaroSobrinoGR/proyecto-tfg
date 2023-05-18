@@ -377,7 +377,6 @@ function funciones (){
     }
 
     function  pintarDevolucion(json){
-        console.log(json)
         let tabla = document.createElement("table")
         tabla.setAttribute("id", "tabla_devoluciones")
         let tr = document.createElement("tr")
@@ -483,17 +482,18 @@ function funciones (){
             email =  sessionStorage.getItem("usuario")
         }
         formulario.append("email", email);
-        formulario.append("pedido", document.getElementById("id_compra_devolucion").innerText);
+        formulario.append("id_pedido_devolver", document.getElementById("id_compra_devolucion").innerText);
         formulario.append("productos_cantidades", productos_cantidades)       
         
         
-        console.log('email', email)
-        console.log('pedido', document.getElementById("id_compra_devolucion").innerText)
-        console.log('productos_cantidades', productos_cantidades)
         let xhr = new XMLHttpRequest();
-        xhr.open("POST", "../back-end/");
+        xhr.open("POST", "../back-end/usuario_devoluciones.php");
         xhr.addEventListener("load", (resultado) => {
-            if(resultado.target.response.length>0){
+            
+            if(resultado.target.response.includes("devoluciohn realizada")){
+                alert("Devoluciohn realizada, le hemos mandado un email con la factura actualizada")
+                location.reload(true);
+            }else{
                 alert(resultado.target.response)
             }
         });
