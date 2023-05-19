@@ -1,9 +1,10 @@
 <?php
 require_once 'envio_de_correos.php';
 
+if(isset($_POST["email"])){
     $email = $_POST["email"];
 
-  $conexion = new mysqli("localhost", "root", "", "tienda");
+    $conexion = new mysqli("localhost", "root", "", "tienda");
 
   $consulta = "SELECT * FROM usuarios WHERE email = '$email'";
   $resultado = $conexion->query($consulta);
@@ -43,4 +44,9 @@ require_once 'envio_de_correos.php';
   }
 
   $conexion->close();
+}else{
+    echo "Falta el email";
+}
+
+  
 ?>

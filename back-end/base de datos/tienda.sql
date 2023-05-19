@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 18-05-2023 a las 14:52:41
+-- Tiempo de generación: 19-05-2023 a las 19:47:24
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -145,7 +145,9 @@ INSERT INTO `consultas` (`id_consulta`, `id_usuario`, `id_empleado`, `asunto`, `
 (16, 32, NULL, 'hola', 'tete', 'espera', '2023-05-12 15:04:58'),
 (17, 32, NULL, 'pepe', 'pepe', 'espera', '2023-05-16 14:44:31'),
 (18, 32, NULL, 'pepe', 'pepe', 'espera', '2023-05-16 14:45:50'),
-(19, 32, NULL, 'asdasd', 'asads', 'espera', '2023-05-16 14:48:21');
+(19, 32, NULL, 'asdasd', 'asads', 'espera', '2023-05-16 14:48:21'),
+(20, 32, NULL, 'prueba1', 'pepepepepe', 'espera', '2023-05-19 14:03:52'),
+(21, 32, NULL, 'prueba1', 'pepepepepe', 'espera', '2023-05-19 14:03:53');
 
 -- --------------------------------------------------------
 
@@ -169,7 +171,8 @@ INSERT INTO `datos_usuario` (`id_datos`, `nombre_apellido`, `direccion`, `telefo
 (7, 'pepe', 'sonia', 0),
 (8, 'pepe', 'sonia', 123),
 (9, 'pepe', 'asd', 123),
-(10, 'pepe', 'asd', 1234);
+(10, 'pepe', 'asd', 1234),
+(11, 'pepe', 'tete', 1234);
 
 -- --------------------------------------------------------
 
@@ -248,7 +251,7 @@ CREATE TABLE `productos` (
 INSERT INTO `productos` (`id_producto`, `nombre`, `descripcion`, `tipo`, `stock`, `precio`, `activo`) VALUES
 (0, 'telefono1', 'El teléfono es un dispositivo electrónico de comunicación, compacto y portátil, que permite hacer llamadas, enviar mensajes de texto, navegar por internet, tomar fotos, ver videos y mucho más. Con una pantalla táctil de alta resolución, cámara integrada, conectividad inalámbrica y potentes capacidades de procesamiento, el teléfono es una herramienta multifuncional que combina comunicación, entretenimiento y productividad en un solo dispositivo. Diseñado con elegancia y estilo, el teléfono se ha convertido en una parte esencial de la vida cotidiana, facilitando la comunicación y el acceso a la información en cualquier momento y lugar.', 'tecología', 0, 30.00, 1),
 (1, 'camiseta1', 'Esta camiseta está confeccionada en suave algodón de alta calidad, con un diseño gráfico llamativo en tonos vibrantes que resalta su estilo moderno y urbano. Con corte clásico y ajuste regular, es cómoda y perfecta para llevar en cualquier ocasión. Su versatilidad te permite combinarla con pantalones, shorts o faldas, para crear diferentes looks y expresar tu personalidad. Además, su durabilidad garantiza que podrás disfrutar de ella por mucho tiempo. Una prenda imprescindible en cualquier guardarropa.', 'ropa', -1, 20.00, 1),
-(2, 'telefono3', 'El teléfono es un dispositivo electrónico de comunicación, compacto y portátil, que permite hacer llamadas, enviar mensajes de texto, navegar por internet, tomar fotos, ver videos y mucho más. Con una pantalla táctil de alta resolución, cámara integrada, conectividad inalámbrica y potentes capacidades de procesamiento, el teléfono es una herramienta multifuncional que combina comunicación, entretenimiento y productividad en un solo dispositivo. Diseñado con elegancia y estilo, el teléfono se ha convertido en una parte esencial de la vida cotidiana, facilitando la comunicación y el acceso a la información en cualquier momento y lugar.', 'tecología', 4, 19.99, 1),
+(2, 'telefono3', 'El teléfono es un dispositivo electrónico de comunicación, compacto y portátil, que permite hacer llamadas, enviar mensajes de texto, navegar por internet, tomar fotos, ver videos y mucho más. Con una pantalla táctil de alta resolución, cámara integrada, conectividad inalámbrica y potentes capacidades de procesamiento, el teléfono es una herramienta multifuncional que combina comunicación, entretenimiento y productividad en un solo dispositivo. Diseñado con elegancia y estilo, el teléfono se ha convertido en una parte esencial de la vida cotidiana, facilitando la comunicación y el acceso a la información en cualquier momento y lugar.', 'tecología', 3, 19.99, 1),
 (3, 'camiseta2', 'Esta camiseta está confeccionada en suave algodón de alta calidad, con un diseño gráfico llamativo en tonos vibrantes que resalta su estilo moderno y urbano. Con corte clásico y ajuste regular, es cómoda y perfecta para llevar en cualquier ocasión. Su versatilidad te permite combinarla con pantalones, shorts o faldas, para crear diferentes looks y expresar tu personalidad. Además, su durabilidad garantiza que podrás disfrutar de ella por mucho tiempo. Una prenda imprescindible en cualquier guardarropa.', 'ropa', -9, 19.99, 1),
 (4, 'telefono5', 'El teléfono es un dispositivo electrónico de comunicación, compacto y portátil, que permite hacer llamadas, enviar mensajes de texto, navegar por internet, tomar fotos, ver videos y mucho más. Con una pantalla táctil de alta resolución, cámara integrada, conectividad inalámbrica y potentes capacidades de procesamiento, el teléfono es una herramienta multifuncional que combina comunicación, entretenimiento y productividad en un solo dispositivo. Diseñado con elegancia y estilo, el teléfono se ha convertido en una parte esencial de la vida cotidiana, facilitando la comunicación y el acceso a la información en cualquier momento y lugar.', 'tecología', 3, 14.45, 0),
 (5, 'accesorio1', 'Este accesorio es el complemento perfecto para cualquier atuendo. Confeccionado con materiales de alta calidad, su diseño elegante y sofisticado lo hace ideal para lucir en ocasiones especiales. Su practicidad y funcionalidad lo hacen perfecto para el día a día, mientras que su estilo atemporal lo hace una inversión duradera en tu guardarropa. Con detalles cuidadosamente elaborados, este accesorio resaltará tu estilo y personalidad. Además, su versatilidad te permite combinarlo con diferentes prendas y estilos para crear looks únicos y destacar en cualquier situación.', 'accesorio', 4, 30.45, 1);
@@ -274,7 +277,8 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id_usuario`, `email`, `contrasenia`, `id_datos`, `validada`, `codigo`, `novedades`) VALUES
-(32, 'estudiosalvaroestudios@gmail.com', 'pepe2', 10, 1, '0', 0);
+(32, 'estudiosalvaroestudios@gmail.com', '$2y$10$kDNAkFXEJU3xnF25X896d.bODi9KQDilFwET3KkK7FvnFBH3FkfkC', 11, 1, '0', 0),
+(40, 'gradoalvarogrado@gmail.com', '$2y$10$6MlL52p0wUgn6u2QtoCvg.5mSUvVY4XGkiqUUALFb8ejMTPw4jWom', NULL, 1, '0', 0);
 
 --
 -- Índices para tablas volcadas
@@ -376,19 +380,19 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `compra`
 --
 ALTER TABLE `compra`
-  MODIFY `id_compra` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=73;
+  MODIFY `id_compra` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=74;
 
 --
 -- AUTO_INCREMENT de la tabla `consultas`
 --
 ALTER TABLE `consultas`
-  MODIFY `id_consulta` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=20;
+  MODIFY `id_consulta` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=22;
 
 --
 -- AUTO_INCREMENT de la tabla `datos_usuario`
 --
 ALTER TABLE `datos_usuario`
-  MODIFY `id_datos` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=11;
+  MODIFY `id_datos` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=12;
 
 --
 -- AUTO_INCREMENT de la tabla `descuentos`
@@ -406,7 +410,7 @@ ALTER TABLE `empleados`
 -- AUTO_INCREMENT de la tabla `incidencias`
 --
 ALTER TABLE `incidencias`
-  MODIFY `id_incidencia` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_incidencia` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`
@@ -418,7 +422,7 @@ ALTER TABLE `productos`
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=33;
+  MODIFY `id_usuario` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- Restricciones para tablas volcadas

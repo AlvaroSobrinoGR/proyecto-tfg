@@ -99,7 +99,7 @@ function funciones(){
             }
 
             document.getElementById("cuerpo").appendChild(div)
-            if (localStorage.getItem("usuario") || sessionStorage.getItem("usuario")) {
+            if (saber_si_hay_usuario()) {
                 if(json[index]["stock"]==0){
                     document.getElementById("avisar_producto;"+json[index]["id_producto"]).addEventListener("click", avisarProducto);
                 }else{
@@ -144,12 +144,12 @@ function funciones(){
     //comprar
 
     function comprarProducto(){
-        if(sessionStorage.getItem("carrito")){
-            if(!sessionStorage.getItem("carrito").includes(";"+this.id.split(";")[1]+";")){
-                sessionStorage.setItem("carrito", sessionStorage.getItem("carrito")+this.id.split(";")[1]+";")
+        if(sessionStorage.getItem("carrito_tienda_minimalista")){
+            if(!sessionStorage.getItem("carrito_tienda_minimalista").includes(";"+this.id.split(";")[1]+";")){
+                sessionStorage.setItem("carrito_tienda_minimalista", sessionStorage.getItem("carrito_tienda_minimalista")+this.id.split(";")[1]+";")
             }
         }else{
-            sessionStorage.setItem("carrito", ";"+this.id.split(";")[1]+";")
+            sessionStorage.setItem("carrito_tienda_minimalista", ";"+this.id.split(";")[1]+";")
         }
         
     }

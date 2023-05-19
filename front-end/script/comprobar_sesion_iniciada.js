@@ -1,4 +1,6 @@
 window.addEventListener("load", funciones)
+
+
 function funciones() {
     //comprobamos si habia una sesion iniciada o no.
     let sesionIniciada = false;
@@ -6,15 +8,12 @@ function funciones() {
     function saberEstadoSesion(){
         return sesionIniciada;
     }
-    
-    if (localStorage.getItem("usuario")) {
-        //comprobar que el email esta bien
-        conexion(localStorage.getItem("usuario"))
-        //si el email no es valido borrar el localstorage y llamar a la funcion ocultar_contenido()
-    } else if (sessionStorage.getItem("usuario")){
-        conexion(sessionStorage.getItem("usuario"))
+
+    //comprobar que el email esta bien
+    if (saber_si_hay_usuario()) {    
+        conexion(obtener_usuario())
     } else {
-        
+        //si el email no es valido borrar el localstorage y llamar a la funcion ocultar_contenido()
         ocultar_contenido()
     }  
 
@@ -56,10 +55,8 @@ function funciones() {
             let resultado = respuesta.target.response;
             if(!resultado.includes("La cuenta si existe")){
                 ocultar_contenido()
-                if (localStorage.getItem("usuario")) {
-                    localStorage.removeItem("usuario")
-                } else if (sessionStorage.getItem("usuario")){
-                    sessionStorage.removeItem("usuario")
+                if (saber_si_hay_usuario()) {
+                    eliminar_usuario()
                 }
                 window.location.href = "inicio.html"
             }else{

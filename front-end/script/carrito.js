@@ -1,13 +1,14 @@
 window.addEventListener("load", funciones)
 
+
 function funciones() {
 
     //cesta1
     let numeroProductos = 1;
     //carrito
-    if(sessionStorage.getItem("carrito")){
+    if(sessionStorage.getItem("carrito_tienda_minimalista")){
         document.getElementById("siguiente1").style.display = "block";
-       pedirProductos(sessionStorage.getItem("carrito"))
+       pedirProductos(sessionStorage.getItem("carrito_tienda_minimalista"))
     }
 
 
@@ -144,14 +145,14 @@ function funciones() {
         document.getElementById("fila_producto;"+fila).remove()
         //alimnamos de sesion carrrito
         let producto = this.id.split(";")[2]
-        let carrito = sessionStorage.getItem("carrito").split(";");
+        let carrito = sessionStorage.getItem("carrito_tienda_minimalista").split(";");
         carrito = carrito.slice(1,carrito.length-1)
         if(carrito.length==1){
-            sessionStorage.removeItem("carrito")
+            sessionStorage.removeItem("carrito_tienda_minimalista")
             document.getElementById("siguiente1").style.display = "none";
         }else{
             numeros = carrito.filter(numero => numero !== producto);
-            sessionStorage.setItem("carrito", ";"+numeros.join(";")+";")
+            sessionStorage.setItem("carrito_tienda_minimalista", ";"+numeros.join(";")+";")
         }
         calculos()
     }
@@ -242,14 +243,8 @@ function funciones() {
     //mostrar datos usuario
     function conexionCargar() {
         let formulario = new FormData();
-        let email = "";
-        if (localStorage.getItem("usuario")) {
-            email =  localStorage.getItem("usuario")
-        } else if (sessionStorage.getItem("usuario")){
-            email =  sessionStorage.getItem("usuario")
-        }
         formulario.append("tipo", "cargar");
-        formulario.append("email", email);
+        formulario.append("email", obtener_usuario());
  
         let xhr = new XMLHttpRequest();
         xhr.open("POST", "../back-end/configuracion_usuario.php");
@@ -282,15 +277,8 @@ function funciones() {
     function conexionGuardar(e) {
     e.preventDefault()
     let formulario = new FormData();
-    let email = "";
-
-    if (localStorage.getItem("usuario")) {
-        email =  localStorage.getItem("usuario")
-    } else if (sessionStorage.getItem("usuario")){
-        email =  sessionStorage.getItem("usuario")
-    }
     formulario.append("tipo", "configuracionCarrito");
-    formulario.append("email", email);
+    formulario.append("email", obtener_usuario());
     formulario.append("nombre", document.getElementById("nombre").value);
     formulario.append("direccion", document.getElementById("direccion").value);
     formulario.append("telefono", document.getElementById("telefono").value);

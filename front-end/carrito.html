@@ -18,6 +18,8 @@
         }
     </style>
 
+    <script src="script/funciones_comunes.js"></script>
+
     <script src="script/comprobar_sesion_iniciada.js"></script>
 
     <script src="script/ir_a_formulario_inicio_registro_usuario.js"></script>
@@ -174,13 +176,7 @@
                     onApprove: function(data, actions ){
                         actions.order.capture().then(function(detalles){
                             let formulario = new FormData();
-                            let email = "";
-                            if (localStorage.getItem("usuario")) {
-                                email =  localStorage.getItem("usuario")
-                            } else if (sessionStorage.getItem("usuario")){
-                                email =  sessionStorage.getItem("usuario")
-                            }
-                            formulario.append("email", email);
+                            formulario.append("email", obtener_usuario());
                             //tiempo_locar_se_realizo_compra
                             let fechaActual = new Date();
                             formulario.append("fechaActual", fechaActual.getFullYear() + '-' + (fechaActual.getMonth() + 1).toString().padStart(2, '0') + '-' + fechaActual.getDate().toString().padStart(2, '0') + ' ' + fechaActual.getHours().toString().padStart(2, '0') + ':' + fechaActual.getMinutes().toString().padStart(2, '0') + ':' + fechaActual.getSeconds().toString().padStart(2, '0'));

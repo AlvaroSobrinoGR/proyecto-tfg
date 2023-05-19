@@ -6,21 +6,15 @@ function funciones (){
 
     function conexionCargar() {
         let formulario = new FormData();
-        let email = "";
-        if (localStorage.getItem("usuario")) {
-            email =  localStorage.getItem("usuario")
-        } else if (sessionStorage.getItem("usuario")){
-            email =  sessionStorage.getItem("usuario")
-        }
         formulario.append("tipo", "cargar");
-        formulario.append("email", email);
+        formulario.append("email", obtener_usuario());
  
         let xhr = new XMLHttpRequest();
         xhr.open("POST", "../back-end/configuracion_usuario.php");
         xhr.addEventListener("load", (resultado) => {
             let respuesta = resultado.target.response
             //pintar datos
-            document.getElementById("email").innerHTML = email;
+            document.getElementById("email").innerHTML = obtener_usuario();
             let json = JSON.parse(respuesta)
     
             document.getElementById("nombre").value = json[0]["nombre"]
@@ -40,23 +34,16 @@ function funciones (){
 
     function conexion() {
     let formulario = new FormData();
-    let email = "";
-
-    if (localStorage.getItem("usuario")) {
-        email =  localStorage.getItem("usuario")
-    } else if (sessionStorage.getItem("usuario")){
-        email =  sessionStorage.getItem("usuario")
-    }
 
     if(this.id.includes("cambiarContraseña")){
         
         formulario.append("tipo", "contraseñia");
-        formulario.append("email", email);
+        formulario.append("email", obtener_usuario());
 
     }else if(this.id.includes("guardarCambios")){
 
         formulario.append("tipo", "configuracion");
-        formulario.append("email", email);
+        formulario.append("email", obtener_usuario());
         formulario.append("nombre", document.getElementById("nombre").value);
         formulario.append("direccion", document.getElementById("direccion").value);
         formulario.append("telefono", document.getElementById("telefono").value);
@@ -82,10 +69,8 @@ function funciones (){
     document.getElementById("cerrar_sesion").addEventListener("click", cerrarSesion)
     function cerrarSesion (e){
         e.preventDefault()
-        if (localStorage.getItem("usuario")) {
-            localStorage.removeItem("usuario")
-        } else if (sessionStorage.getItem("usuario")){
-            sessionStorage.removeItem("usuario")
+        if (saber_si_hay_usuario()) {
+            eliminar_usuario()
         }
         window.location.href = "inicio.html"
     }
@@ -97,14 +82,8 @@ function funciones (){
         if(document.getElementById("lista_consultas").innerHTML.length>0){
             document.getElementById("lista_consultas").innerHTML=""
         }else{
-            let email
-            if (localStorage.getItem("usuario")) {
-                email = localStorage.getItem("usuario")
-            } else if (sessionStorage.getItem("usuario")){
-                email = sessionStorage.getItem("usuario")
-            }
             let formulario = new FormData();
-            formulario.append("email", email);
+            formulario.append("email", obtener_usuario());
      
             let xhr = new XMLHttpRequest();
             xhr.open("POST", "../back-end/usuario_consultas.php");
@@ -143,14 +122,8 @@ function funciones (){
         if(document.getElementById("lista_incidencias").innerHTML.length>0){
             document.getElementById("lista_incidencias").innerHTML=""
         }else{
-            let email
-            if (localStorage.getItem("usuario")) {
-                email = localStorage.getItem("usuario")
-            } else if (sessionStorage.getItem("usuario")){
-                email = sessionStorage.getItem("usuario")
-            }
             let formulario = new FormData();
-            formulario.append("email", email);
+            formulario.append("email", obtener_usuario());
      
             let xhr = new XMLHttpRequest();
             xhr.open("POST", "../back-end/usuario_incidencias.php");
@@ -190,13 +163,7 @@ function funciones (){
             document.getElementById("lista_pedidos").innerHTML=""
         }else{
             let formulario = new FormData();
-            let email
-            if (localStorage.getItem("usuario")) {
-                email = localStorage.getItem("usuario")
-            } else if (sessionStorage.getItem("usuario")){
-                email = sessionStorage.getItem("usuario")
-            }
-            formulario.append("email", email);
+            formulario.append("email", obtener_usuario());
      
             let xhr = new XMLHttpRequest();
             xhr.open("POST", "../back-end/usuario_pedidos.php");
@@ -254,14 +221,8 @@ function funciones (){
     function detallesPedido(e){
         e.preventDefault();
         let formulario = new FormData();
-        let email = "";
-        if (localStorage.getItem("usuario")) {
-            email =  localStorage.getItem("usuario")
-        } else if (sessionStorage.getItem("usuario")){
-            email =  sessionStorage.getItem("usuario")
-        }
         formulario.append("tipo", "cargar");
-        formulario.append("email", email);
+        formulario.append("email", obtener_usuario());
 
         //recogemos el numero pedido
         let pedido = document.getElementById("id_compra;"+this.id.split(";")[1]).innerText;
@@ -340,13 +301,7 @@ function funciones (){
     document.getElementById("enviar_incidencia").addEventListener("click", enviarIncidencia)
     function enviarIncidencia(){
         let formulario = new FormData();
-        let email = "";
-        if (localStorage.getItem("usuario")) {
-            email =  localStorage.getItem("usuario")
-        } else if (sessionStorage.getItem("usuario")){
-            email =  sessionStorage.getItem("usuario")
-        }
-        formulario.append("email", email)
+        formulario.append("email", obtener_usuario())
         formulario.append("id_pedido", document.getElementById("indicencia_id_pedido").value)
         formulario.append("asunto", document.getElementById("indicencia_asunto").value)
         formulario.append("consulta", document.getElementById("indicencia_consulta").value)
@@ -475,13 +430,7 @@ function funciones (){
             }
         }
         let formulario = new FormData();
-        let email = "";
-        if (localStorage.getItem("usuario")) {
-            email =  localStorage.getItem("usuario")
-        } else if (sessionStorage.getItem("usuario")){
-            email =  sessionStorage.getItem("usuario")
-        }
-        formulario.append("email", email);
+        formulario.append("email", obtener_usuario());
         formulario.append("id_pedido_devolver", document.getElementById("id_compra_devolucion").innerText);
         formulario.append("productos_cantidades", productos_cantidades)       
         
