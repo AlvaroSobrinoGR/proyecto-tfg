@@ -4,7 +4,7 @@ function funciones(){
 
     let queryParams = new URLSearchParams(window.location.search);
     if(queryParams.get('hash')==null || queryParams.get('email')==null){
-        window.location.href = "inicio.html"
+        window.location.href = "../index.html"
     }
 
     document.getElementById("cambiar_contraseñia").addEventListener("click", cambiar)
@@ -35,7 +35,7 @@ function funciones(){
             xhr.addEventListener("load", (respuesta)=>{
                 if(respuesta.target.response.includes("exito")){
                     alert("La contraseñia se ha cambiado")
-                    window.location.href = "inicio.html"
+                    window.location.href = "../index.html"
                 }else{
                     document.getElementById("errorServidor").innerHTML =respuesta.target.response
                 }

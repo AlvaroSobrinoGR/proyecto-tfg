@@ -2,8 +2,9 @@
 
 require_once 'envio_de_correos.php';
 require_once 'pintar_factura_pedidos.php';
+require_once 'conexion_base_datos.php';
 
-$conexion = new mysqli("localhost", "root", "", "tienda");
+$conexion = conexionBaseDatos();
 
 // recoger datos del usuario
 $email = $_POST['email'];

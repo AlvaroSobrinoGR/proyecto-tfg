@@ -1,5 +1,6 @@
 <?php
 
+require_once 'conexion_base_datos.php';
 
 if(isset($_POST["id_pedido"])){
     $pedido = $_POST["id_pedido"];
@@ -7,7 +8,7 @@ if(isset($_POST["id_pedido"])){
 }
 
 function pintarFactureaPedidos($pedido, $tipo){
-    $conexion = new mysqli("localhost", "root", "", "tienda");
+    $conexion = conexionBaseDatos();
 
     $tabla = "";
 

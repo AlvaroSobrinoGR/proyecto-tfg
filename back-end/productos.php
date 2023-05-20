@@ -1,7 +1,8 @@
 <?php
 
+require_once 'conexion_base_datos.php';
 
-$conexion = new mysqli("localhost", "root", "", "tienda");
+$conexion = conexionBaseDatos();
 
 $tipo = $_POST["tipo"];
 $ordenArray = "";
@@ -110,7 +111,18 @@ if($tipo=="tipos"){
         });
     }
 
-    echo json_encode($datos);
+    $json = "[";
+
+    foreach ($datos as $item) {
+        $json .= "{";
+        foreach ($item as $key => $value) {
+            $json .= "\"".$key."\" : \"".$value."\",";
+        }
+        $json = substr($json, 0, strlen($json)-1);
+        $json .= "},";
+    }
+    $json = substr($json, 0, strlen($json)-1);
+    echo $json.="]";
 
     /* imprimir json
     $json = "[";

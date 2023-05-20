@@ -1,10 +1,11 @@
 <?php
 require_once 'envio_de_correos.php';
+require_once 'conexion_base_datos.php';
 
 if(isset($_POST["email"])){
     $email = $_POST["email"];
 
-    $conexion = new mysqli("localhost", "root", "", "tienda");
+    $conexion = conexionBaseDatos();
 
   $consulta = "SELECT * FROM usuarios WHERE email = '$email'";
   $resultado = $conexion->query($consulta);
@@ -18,8 +19,12 @@ if(isset($_POST["email"])){
   
     if ($conexion->query($consulta) == TRUE) {
         try {
-            $resultado = enviarCorreo($email, "Recuperar cuenta", "En este enlace podras cambiar tu contraseñia y recuperar tu cuenta http://localhost/proyecto%20tfg/front-end/cambiar_contraseña.html?email=$email&hash=$codgioConfirmacion");
-  
+            if(strpos($conexion->host_info,"localhost")){
+                $resultado = enviarCorreo($email, "Recuperar cuenta", "En este enlace podras cambiar tu contraseñia y recuperar tu cuenta http://localhost/proyecto%20tfg/front-end/cambiar_contraseña.html?email=$email&hash=$codgioConfirmacion");
+            }else{
+                $resultado = enviarCorreo($email, "Recuperar cuenta", "En este enlace podras cambiar tu contraseñia y recuperar tu cuenta http://simplyminimal.epizy.com/front-end/cambiar_contraseña.html?email=$email&hash=$codgioConfirmacion");
+            }
+            
         } catch (Throwable $t) {
             echo "Ha ocurrido un error: " . $t->getMessage();
         }

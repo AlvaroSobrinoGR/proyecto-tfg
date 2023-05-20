@@ -1,8 +1,10 @@
 <?php
 
+require_once 'conexion_base_datos.php';
+
 $email = $_POST['email'];
 
-$conexion = new mysqli("localhost", "root", "", "tienda");
+$conexion = conexionBaseDatos();
 
 $consulta = "SELECT * FROM usuarios WHERE email = '$email'";
 $resultado = $conexion->query($consulta);

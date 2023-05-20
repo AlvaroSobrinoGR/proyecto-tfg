@@ -1,7 +1,8 @@
 <?php
 require_once 'envio_de_correos.php'; 
+require_once 'conexion_base_datos.php';
 
-$conexion = new mysqli("localhost", "root", "", "tienda");
+$conexion = conexionBaseDatos();
 
 $email = $_POST['email'];
 $asunto = $_POST['asunto'];

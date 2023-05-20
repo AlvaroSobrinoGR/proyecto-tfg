@@ -1,6 +1,6 @@
 <?php
-
-$conexion = new mysqli("localhost", "root", "", "tienda");
+require_once 'conexion_base_datos.php';
+$conexion = conexionBaseDatos();
 try {
     $precio_total = 0;
     $id_cupon = $_POST["codigo_descuento"];

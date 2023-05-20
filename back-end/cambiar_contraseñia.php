@@ -1,12 +1,12 @@
 <?php
-
+require_once 'conexion_base_datos.php';
 if (isset($_POST["email"]) && isset($_POST["codigo"]) && isset($_POST["contrasenia"]) && isset($_POST["contraseniaConfirmar"])) {
     $email = $_POST["email"];
     $codigo = $_POST["codigo"];
     $contrasenia = $_POST["contrasenia"];
     $contraseniaConfirmar = $_POST["contraseniaConfirmar"];
     
-    $conexion = new mysqli("localhost", "root", "", "tienda");
+    $conexion = conexionBaseDatos();
 
     if (preg_match('/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/', $contrasenia) && $contrasenia === $contraseniaConfirmar) {
         $conexion->autocommit(false);

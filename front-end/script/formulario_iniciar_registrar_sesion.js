@@ -43,7 +43,7 @@ function funciones (){
             let resultado = respuesta.target.response;
             if(resultado=="exito"){
                 alert("Se te ha enviado un email para cambiar la contraseñia")
-                window.location.href = "inicio.html"
+                window.location.href = "../index.html"
             }else{
                 document.getElementById("respuesta_servidor").innerHTML = resultado;
             }
@@ -91,7 +91,7 @@ function funciones (){
                             sessionStorage.setItem("usuario_tienda_minimalista", resultado.split(";")[1])
                         }
                         //le llevo al inicio
-                        window.location.href = "inicio.html"
+                        window.location.href = "../index.html"
                     }else{
                         document.getElementById("respuesta_servidor").innerHTML=resultado;
                     }
@@ -100,7 +100,7 @@ function funciones (){
                         //localStorage.setItem("usuario", resultado.split(";")[1])
                         //le llevo al inicio
                         alert("Se te ha enviado un email para confirmar la cuenta")
-                        window.location.href = "inicio.html"
+                        window.location.href = "../index.html"
                     }else{
                         document.getElementById("respuesta_servidor").innerHTML=resultado;
                     }

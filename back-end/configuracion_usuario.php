@@ -1,9 +1,10 @@
 <?php
 require_once 'envio_de_correos.php';
+require_once 'conexion_base_datos.php';
 // Recoger datos del formulario
 $tipo = $_POST['tipo'];
 
-$conexion = new mysqli("localhost", "root", "", "tienda");
+$conexion = conexionBaseDatos();
 
 if($tipo === "cargar"){ //cargar los datos
   $email = $_POST['email'];
@@ -136,8 +137,12 @@ if($tipo === "cargar"){ //cargar los datos
 
   if ($conexion->query($consulta) == TRUE) {
 
+    if(strpos($conexion->host_info,"localhost")){
       $resultado = enviarCorreo($email, "Cambiar contraseñia", "En este enlace podras cambiar tu contraseñia http://localhost/proyecto%20tfg/front-end/cambiar_contraseña.html?email=$email&hash=$codgioConfirmacion");
-
+    }else{
+      $resultado = enviarCorreo($email, "Cambiar contraseñia", "En este enlace podras cambiar tu contraseñia http://simplyminimal.epizy.com/front-end/cambiar_contraseña.html?email=$email&hash=$codgioConfirmacion");
+    }
+      
       if($resultado=="enviado"){
           echo "exito";
       }else{

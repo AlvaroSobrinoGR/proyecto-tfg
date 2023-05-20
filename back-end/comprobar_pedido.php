@@ -1,7 +1,8 @@
 <?php
 
+require_once 'conexion_base_datos.php';
 
-$conexion = new mysqli("localhost", "root", "", "tienda");
+$conexion = conexionBaseDatos();
 
 $email = $_POST['email'];
 $id_pedido = $_POST["id_pedido"];

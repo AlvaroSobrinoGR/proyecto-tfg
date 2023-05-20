@@ -1,6 +1,7 @@
 <?php
 
 require_once 'envio_de_correos.php'; // es el documento donde esta el envio de emails
+require_once 'conexion_base_datos.php';
 
 
 
@@ -42,7 +43,7 @@ function todoCorrecto($tipo){
     if($tipo=="creacion"){
         $novedades = $_POST["novedades"];
     }
-    $conexion = new mysqli("localhost", "root", "", "tienda");
+    $conexion = conexionBaseDatos();
     if ($tipo == "inicio") {
     
         $consulta = "SELECT * FROM usuarios WHERE email = '$email'";
@@ -106,9 +107,12 @@ function crear($conexion, $email, $contrasenia, $novedades){
     if ($conexion->query($consulta) == TRUE) {
         try {
             $ultimo_id = mysqli_insert_id($conexion);
-
-            $resultado = enviarCorreo($email, "Confirmar creacion de cuenta", "esta es la confirmacion de la creacion de la cuenta http://localhost/proyecto%20tfg/front-end/inicio.html?email=$email&hash=$codgioConfirmacion");
-    
+            if(strpos($conexion->host_info,"localhost")){
+              $resultado = enviarCorreo($email, "Confirmar creacion de cuenta", "esta es la confirmacion de la creacion de la cuenta http://localhost/proyecto%20tfg/front-end/inicio.html?email=$email&hash=$codgioConfirmacion");
+             }else{
+              $resultado = enviarCorreo($email, "Confirmar creacion de cuenta", "esta es la confirmacion de la creacion de la cuenta http://simplyminimal.epizy.com/front-end/inicio.html?email=$email&hash=$codgioConfirmacion");
+            }
+            
           } catch (Throwable $t) {
             echo "Ha ocurrido un error: " . $t->getMessage();
           }

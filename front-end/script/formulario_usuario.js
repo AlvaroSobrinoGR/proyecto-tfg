@@ -72,7 +72,7 @@ function funciones (){
         if (saber_si_hay_usuario()) {
             eliminar_usuario()
         }
-        window.location.href = "inicio.html"
+        window.location.href = "../index.html"
     }
 
     //consultas

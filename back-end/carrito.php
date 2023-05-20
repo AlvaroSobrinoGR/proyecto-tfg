@@ -1,11 +1,11 @@
 <?php
-    
+    require_once 'conexion_base_datos.php';
     $carrito = $_POST["carrito"];
     $productos = explode(";", $carrito);
     $productos = array_slice($productos, 1, -1);
 
 
-    $conexion = new mysqli("localhost", "root", "", "tienda");
+    $conexion = conexionBaseDatos();
 
     $consulta = "SELECT *  FROM productos WHERE ";
     for ($i=0; $i < count($productos); $i++) {
