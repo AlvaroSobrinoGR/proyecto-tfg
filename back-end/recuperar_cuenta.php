@@ -22,7 +22,7 @@ if(isset($_POST["email"])){
             if(strpos($conexion->host_info,"localhost") !== false){
                 $resultado = enviarCorreo($email, "Recuperar cuenta", "En este enlace podras cambiar tu contraseñia y recuperar tu cuenta http://localhost/proyecto%20tfg/front-end/cambiar_contraseña.html?email=$email&hash=$codgioConfirmacion");
             }else{
-                $resultado = enviarCorreo($email, "Recuperar cuenta", "En este enlace podras cambiar tu contraseñia y recuperar tu cuenta http://simplyminimal.epizy.com/front-end/cambiar_contraseña.html?email=$email&hash=$codgioConfirmacion");
+                $resultado = enviarCorreo($email, "Recuperar cuenta", "En este enlace podras cambiar tu contraseñia y recuperar tu cuenta http://simplyminimal.epizy.com?email=$email&hash=$codgioConfirmacion");
             }
             
         } catch (Throwable $t) {

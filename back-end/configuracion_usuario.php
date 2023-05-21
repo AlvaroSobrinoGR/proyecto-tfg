@@ -174,7 +174,7 @@ if(isset($_POST['tipo']) && isset($_POST['email'])){
       if(strpos($conexion->host_info,"localhost") !== false){
         $resultado = enviarCorreo($email, "Cambiar su clave de acceso", "En este enlace podras cambiar tu contraseña http://localhost/proyecto%20tfg/front-end/cambiar_contraseña.html?email=$email&hash=$codgioConfirmacion");
       }else{
-        $resultado = enviarCorreo($email, "Cambiar su clave de acceso", "En este enlace podras cambiar tu contraseña http://simplyminimal.epizy.com/front-end/cambiar_contraseña.html?email=$email&hash=$codgioConfirmacion");
+        $resultado = enviarCorreo($email, "Cambiar su clave de acceso", "En este enlace podras cambiar tu contraseña http://simplyminimal.epizy.com?email=$email&hash=$codgioConfirmacion");
       }
         
         if($resultado=="enviado"){

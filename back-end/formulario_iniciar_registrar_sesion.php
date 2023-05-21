@@ -110,7 +110,7 @@ function crear($conexion, $email, $contrasenia, $novedades){
             if(strpos($conexion->host_info,"localhost") !== false){
               $resultado = enviarCorreo($email, "Confirmar creacion de cuenta", "esta es la confirmacion de la creacion de la cuenta http://localhost/proyecto%20tfg/front-end/inicio.html?email=$email&hash=$codgioConfirmacion");
              }else{
-              $resultado = enviarCorreo($email, "Confirmar creacion de cuenta", "esta es la confirmacion de la creacion de la cuenta http://simplyminimal.epizy.com/front-end/inicio.html?email=$email&hash=$codgioConfirmacion");
+              $resultado = enviarCorreo($email, "Confirmar creacion de cuenta", "esta es la confirmacion de la creacion de la cuenta http://simplyminimal.epizy.com?email=$email&hash=$codgioConfirmacion");
             }
             
           } catch (Throwable $t) {
