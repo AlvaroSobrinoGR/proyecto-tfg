@@ -18,10 +18,14 @@ function funciones() {
         let xhr = new XMLHttpRequest();
         xhr.open("POST", "../back-end/carrito.php");
         xhr.addEventListener("load", (respuesta) => {//recojo el json que pinto en php
-            let json = JSON.parse(respuesta.target.response)
-            numeroProductos = json.length;
-            pintarProductos(json)
-            calculos()
+            if(respuesta.target.response.includes("Algo ha fallado. Inténtelo de nuevo más tarde.")){
+                alert(respuesta.target.response)
+            }else{ 
+                let json = JSON.parse(respuesta.target.response)
+                numeroProductos = json.length;
+                pintarProductos(json)
+                calculos()
+            }
         });
         xhr.send(formulario);
 
@@ -203,16 +207,21 @@ function funciones() {
         let xhr = new XMLHttpRequest();
         xhr.open("POST", "../back-end/carrito_codigo.php");
         xhr.addEventListener("load", (respuesta) => {//recojo el json que pinto en php
-            let resultado = respuesta.target.response;
-            if(resultado!="el codigo esta desabilitado" && resultado!="el codigo no existe"){
-                document.getElementById("porcentajeCupon").innerHTML = "-"+resultado+"%"
-                document.getElementById("errorCupon").innerHTML = ""
-            }else{
-                document.getElementById("porcentajeCupon").innerHTML = ""
-                document.getElementById("errorCupon").innerHTML = resultado
-                document.getElementById("errorCupon").style.color = "red"
-            }
+            if(respuesta.target.response.includes("Algo ha fallado. Inténtelo de nuevo más tarde.")){
+                alert(respuesta.target.response)
+            }else{ 
+                let resultado = respuesta.target.response;
+                if(resultado!="el codigo esta desabilitado" && resultado!="el codigo no existe"){
+                    document.getElementById("porcentajeCupon").innerHTML = "-"+resultado+"%"
+                    document.getElementById("errorCupon").innerHTML = ""
+                }else{
+                    document.getElementById("porcentajeCupon").innerHTML = ""
+                    document.getElementById("errorCupon").innerHTML = resultado
+                    document.getElementById("errorCupon").style.color = "red"
+                }
             calculos()
+            }
+            
         });
         xhr.send(formulario);
     }
@@ -249,12 +258,17 @@ function funciones() {
         let xhr = new XMLHttpRequest();
         xhr.open("POST", "../back-end/configuracion_usuario.php");
         xhr.addEventListener("load", (resultado) => {
-            let respuesta = resultado.target.response
-            let json = JSON.parse(respuesta)
-            document.getElementById("nombre").value = json[0]["nombre"]
-            document.getElementById("direccion").value = json[0]["direccion"]
-            document.getElementById("telefono").value = json[0]["telefono"]
-            comprobacion()
+            if(resultado.target.response.includes("Algo ha fallado. Inténtelo de nuevo más tarde.")){
+                alert(resultado.target.response)
+            }else{
+                
+                let respuesta = resultado.target.response
+                let json = JSON.parse(respuesta)
+                document.getElementById("nombre").value = json[0]["nombre"]
+                document.getElementById("direccion").value = json[0]["direccion"]
+                document.getElementById("telefono").value = json[0]["telefono"]
+                comprobacion()
+            }
         });
         xhr.send(formulario);
     }
@@ -264,7 +278,30 @@ function funciones() {
     document.getElementById("telefono").addEventListener("input", comprobacion)
 
     function comprobacion(){ //ahi que implementar patrones
-        if(document.getElementById("nombre").value.length>0 && document.getElementById("direccion").value.length>0 && document.getElementById("telefono").value.length>0){
+        let exito = true;
+        let patronNombreApellido = /^[A-ZÁÉÍÓÚÑ][a-zA-ZÁÉÍÓÚÑ]*(?:\s+[A-ZÁÉÍÓÚÑ][a-zA-ZÁÉÍÓÚÑ]*){1,}$/;
+        let patronTelefono = /^\d{8}$/;
+        let nombre = document.getElementById("nombre").value.trim();
+        let telefono = document.getElementById("telefono").value.trim();
+        if(!patronNombreApellido.test(nombre)){
+            exito = false;
+            document.getElementById("error_nombre").innerText = "Debes introducir almenos un nombre y un apellido como minimo, y deben empezar por mayuscula";
+        }else{
+            document.getElementById("error_nombre").innerText = "";
+        }
+        if(!patronTelefono.test(telefono)){
+            exito = false;
+            document.getElementById("error_telefono").innerText = "El telefono solo puede tener numeros y deben ser 8";
+        }else{
+            document.getElementById("error_telefono").innerText = "";
+        }
+        if(document.getElementById("direccion").value.length==0){
+            exito = false;
+            document.getElementById("error_direccion").innerText = "Debes introducir una direccion";
+        }else{
+            document.getElementById("error_direccion").innerText = "";
+        }
+        if(exito){
             document.getElementById("siguiente2").style.display = "block";
             document.getElementById("siguiente2").addEventListener("click", conexionGuardar)
         }else{
@@ -287,10 +324,15 @@ function funciones() {
     let xhr = new XMLHttpRequest();
     xhr.open("POST", "../back-end/configuracion_usuario.php");
     xhr.addEventListener("load", (resultado) => {
-        let respuesta = resultado.target.response
-
-        console.log(respuesta)
-
+        if(resultado.target.response.includes("Algo ha fallado. Inténtelo de nuevo más tarde.")){
+            alert(resultado.target.response)
+        }else{
+            let respuesta = resultado.target.response
+            if(!respuesta.includes("los datos se han actualizado") && !respuesta.includes("los datos ya existian")){
+                alert(respuesta)
+                window.location.href = "carrito.html"
+            }
+        }
     });
     xhr.send(formulario);
     }
@@ -312,30 +354,34 @@ function funciones() {
         let xhr = new XMLHttpRequest();
         xhr.open("POST", "../back-end/compraStock.php");
         xhr.addEventListener("load", (resultado) => {
-            if(resultado.target.response.length>0){
-                if(tipo=="siguiente2"){
-                    document.getElementById("cesta2").style.display="none"
-                    document.getElementById("cesta1").style.display="block"
-                }
+            if(resultado.target.response.includes("Algo ha fallado. Inténtelo de nuevo más tarde.")){
                 alert(resultado.target.response)
-                if(resultado.target.response.includes("agotado")){
-                    document.getElementById("cestaCompra").getElementsByTagName("tbody")[0].innerHTML=""
-                    document.getElementById("cestaCompra").getElementsByTagName("tbody")[0].innerHTML='<tr id="cabecera">' +
-                    '<td>Cantidad</td>' +
-                    '<td>Producto</td>' +
-                    '<td>Precio unitario</td>' +
-                    '<td>Precio Total</td>' +
-                    '<td></td>' +
-                '</tr>'
-                    pedirProductos(sessionStorage.getItem("carrito"))
+            }else{
+                if(resultado.target.response.length>0){
+                    if(tipo=="siguiente2"){
+                        document.getElementById("cesta2").style.display="none"
+                        document.getElementById("cesta1").style.display="block"
+                    }
+                    alert(resultado.target.response)
+                    if(resultado.target.response.includes("agotado")){
+                        document.getElementById("cestaCompra").getElementsByTagName("tbody")[0].innerHTML=""
+                        document.getElementById("cestaCompra").getElementsByTagName("tbody")[0].innerHTML='<tr id="cabecera">' +
+                        '<td>Cantidad</td>' +
+                        '<td>Producto</td>' +
+                        '<td>Precio unitario</td>' +
+                        '<td>Precio Total</td>' +
+                        '<td></td>' +
+                    '</tr>'
+                        pedirProductos(sessionStorage.getItem("carrito"))
+                    }
+                }else if(tipo=="siguiente1"){
+                    document.getElementById("cesta1").style.display="none"
+                    document.getElementById("cesta2").style.display="block"
+                    conexionCargar()
+                }else if (tipo=="siguiente2"){
+                    document.getElementById("cesta2").style.display="none"
+                    document.getElementById("cesta3").style.display="block"
                 }
-            }else if(tipo=="siguiente1"){
-                document.getElementById("cesta1").style.display="none"
-                document.getElementById("cesta2").style.display="block"
-                conexionCargar()
-            }else if (tipo=="siguiente2"){
-                document.getElementById("cesta2").style.display="none"
-                document.getElementById("cesta3").style.display="block"
             }
         });
         xhr.send(formulario);

@@ -5,53 +5,58 @@ require_once 'conexion_base_datos.php';
 //try {
         
     $conexion = conexionBaseDatos();
+    if(isset($_POST['email']) && isset($_POST['id_pedido']) && isset($_POST['asunto']) && isset($_POST['consulta']) && isset($_POST['fecha'])){
+        $email = $_POST['email'];
+        $id_pedido = (int)$_POST['id_pedido'];
+        $asunto = $_POST['asunto'];
+        $consulta = $_POST['consulta'];
+        $fecha = $_POST['fecha'];
 
-    $email = $_POST['email'];
-    $id_pedido = (int)$_POST['id_pedido'];
-    $asunto = $_POST['asunto'];
-    $consulta = $_POST['consulta'];
-    $fecha = $_POST['fecha'];
+        $sql = "SELECT id_usuario FROM usuarios WHERE email = '$email'";
 
-    $sql = "SELECT id_usuario FROM usuarios WHERE email = '$email'";
+        $resultado = $conexion->query($sql);
 
-    $resultado = $conexion->query($sql);
+        $id_usuario = $resultado-> fetch_assoc()["id_usuario"];
 
-    $id_usuario = $resultado-> fetch_assoc()["id_usuario"];
+        $sql = "SELECT * FROM compra WHERE id_usuario = '$id_usuario' AND id_compra = '$id_pedido'";
 
-    $sql = "SELECT * FROM compra WHERE id_usuario = '$id_usuario' AND id_compra = '$id_pedido'";
-
-    $resultado = $conexion->query($sql);
-    if($resultado->num_rows > 0){
-        $estado = "espera";
-    
-        $sql = "INSERT INTO incidencias (id_compra, asunto, consulta, estado, fecha) VALUES ('$id_pedido', '$asunto', '$consulta', '$estado', '$fecha')";
-        /*
-        espera: aun no ha sido atendida
-        trabajando: se esta trabajando en ella
-        finalizada: consulta cerrada
-        */
-        if ($conexion->query($sql) == TRUE) {
-        try {
-            $ultimo_id = mysqli_insert_id($conexion);
+        $resultado = $conexion->query($sql);
+        if($resultado->num_rows > 0){
+            $estado = "espera";
         
-            $resultado = enviarCorreo($email, "$asunto, incidencia: $ultimo_id" , "Codigo de la incidencia: $ultimo_id <br>fecha: $fecha <br>estado: espera.<br> Le responderemos su incidencia por este email.<br>incidencia: $consulta");
-        } catch (Throwable $t) {
-            echo "Ha ocurrido un error: " . $t->getMessage();
-        }
-        
-        if($resultado=="enviado"){
-            echo "exito;$email";
+            $sql = "INSERT INTO incidencias (id_compra, asunto, consulta, estado, fecha) VALUES ('$id_pedido', '$asunto', '$consulta', '$estado', '$fecha')";
+            /*
+            espera: aun no ha sido atendida
+            trabajando: se esta trabajando en ella
+            finalizada: consulta cerrada
+            */
+            if ($conexion->query($sql) == TRUE) {
+            try {
+                $ultimo_id = mysqli_insert_id($conexion);
+            
+                $resultado = enviarCorreo($email, "$asunto, incidencia: $ultimo_id" , "Codigo de la incidencia: $ultimo_id <br>fecha: $fecha <br>estado: espera.<br> Le responderemos su incidencia por este email.<br>incidencia: $consulta");
+            } catch (Throwable $t) {
+                echo "Ha ocurrido un error: " . $t->getMessage();
+            }
+            
+            if($resultado=="enviado"){
+                echo "Se a creado la incidencia. Tambien se le envio un email donde se le ira contactando.";
+            }else{
+                $sql = "DELETE FROM incidencias WHERE id_incidencia = '$ultimo_id'";
+                $conexion->query($sql);
+                echo "el email no se ha enviado";
+            }
+            } else {
+            echo "Error al crear la incidencia: ";
+            }
         }else{
-            $sql = "DELETE FROM incidencias WHERE id_incidencia = '$ultimo_id'";
-            $conexion->query($sql);
-            echo "el email no se ha enviado";
-        }
-        } else {
-        echo "Error al crear la incidencia: ";
+            echo "Error: el id de compra o el usario esta mal";
         }
     }else{
-        echo "Error: el id de compra o el usario esta mal";
+        echo "Algo ha fallado. Inténtelo de nuevo más tarde.";
     }
+
+    
 /*} catch (\Throwable $th) {
     echo "Ha surgido alguna clase error en el servidor".$th->getMessage();;
 }*/

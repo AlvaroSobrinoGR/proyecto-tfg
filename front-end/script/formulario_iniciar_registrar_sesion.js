@@ -37,6 +37,7 @@ function funciones (){
     function conexion_recuperacion(){
         let formulario = new FormData();
         formulario.append("email", document.getElementById("email_recuperacion").value)
+        document.getElementById("enviar_recuperacion").disabled = true;
         let xhr = new XMLHttpRequest();
         xhr.open("POST", "../back-end/recuperar_cuenta.php")
         xhr.addEventListener("load", (respuesta)=>{
@@ -47,7 +48,7 @@ function funciones (){
             }else{
                 document.getElementById("respuesta_servidor").innerHTML = resultado;
             }
-            
+            document.getElementById("enviar_recuperacion").disabled = false;
         })
         xhr.send(formulario);
     }
@@ -62,6 +63,7 @@ function funciones (){
             formulario.append("tipo", "inicio")
             formulario.append("email", document.getElementById("email").value)
             formulario.append("contrasenia", document.getElementById("password").value)
+            document.getElementById("boton_iniciar_sesion").disabled = true;
         }else{
             formulario.append("tipo", "creacion")
             if(verificarContraseñas() && verificarEmail()){
@@ -73,6 +75,7 @@ function funciones (){
                 }else{
                     formulario.append("novedades", 0)
                 }
+                document.getElementById("boton_registrarse").disabled = true;
             }else{
                 comunicar_error()
                 estado = false
@@ -95,6 +98,7 @@ function funciones (){
                     }else{
                         document.getElementById("respuesta_servidor").innerHTML=resultado;
                     }
+                    document.getElementById("boton_iniciar_sesion").disabled = false;
                 }else{
                     if(resultado.includes("exito")){
                         //localStorage.setItem("usuario", resultado.split(";")[1])
@@ -104,6 +108,7 @@ function funciones (){
                     }else{
                         document.getElementById("respuesta_servidor").innerHTML=resultado;
                     }
+                    document.getElementById("boton_registrarse").disabled = false;
                 }
             })
             xhr.send(formulario);
@@ -136,7 +141,7 @@ function funciones (){
         var password = document.getElementById("register-password").value;
         var confirmPassword = document.getElementById("confirm-password").value;
       
-        var regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/;
+        var regex = /^(?=.*[A-Za-zÁÉÍÓÚÑáéíóúñ])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-zÁÉÍÓÚÑáéíóúñ\d@$!%*#?&]{6,}$/;
         /*
             ^ indica el inicio de la cadena.
             (?=.*[A-Za-z]) busca al menos un carácter alfabético en minúscula o mayúscula.
@@ -179,7 +184,7 @@ function funciones (){
         var password = document.getElementById("register-password").value;
         var confirmPassword = document.getElementById("confirm-password").value;
 
-        var regex = /^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/;
+        var regex = /^(?=.*[A-Za-zÁÉÍÓÚÑáéíóúñ])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-zÁÉÍÓÚÑáéíóúñ\d@$!%*#?&]{6,}$/;
       
         if (email.length == 0) {
             document.getElementById("error1").textContent = "No hay contenido";

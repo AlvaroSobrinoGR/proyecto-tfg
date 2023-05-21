@@ -34,7 +34,7 @@ if (isset($_POST["email"]) && isset($_POST["codigo"]) && isset($_POST["contrasen
 
     $conexion->close();
 } else {
-    echo "Falta uno o más campos en el formulario.";
+    echo "Algo ha fallado. Inténtelo de nuevo más tarde.";
 }
     
 

@@ -5,6 +5,8 @@ require_once 'conexion_base_datos.php';
 if(isset($_POST["id_pedido"])){
     $pedido = $_POST["id_pedido"];
     pintarFactureaPedidos($pedido, "usuario");
+}else{
+    echo "Algo ha fallado. Inténtelo de nuevo más tarde.";
 }
 
 function pintarFactureaPedidos($pedido, $tipo){

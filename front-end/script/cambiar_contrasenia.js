@@ -29,16 +29,22 @@ function funciones(){
             formulario.append("contrasenia", contrasenia)
             formulario.append("contraseniaConfirmar", contraseniaConfirmar)
 
-
+            document.getElementById("cambiar_contraseñia").disabled = true;
             let xhr = new XMLHttpRequest();
             xhr.open("POST", "../back-end/cambiar_contraseñia.php")
             xhr.addEventListener("load", (respuesta)=>{
-                if(respuesta.target.response.includes("exito")){
-                    alert("La contraseñia se ha cambiado")
-                    window.location.href = "../index.html"
+                if(respuesta.target.response.includes("Algo ha fallado. Inténtelo de nuevo más tarde.")){
+                    alert(respuesta.target.response)
                 }else{
-                    document.getElementById("errorServidor").innerHTML =respuesta.target.response
+                    if(respuesta.target.response.includes("exito")){
+                        alert("La contraseñia se ha cambiado")
+                        window.location.href = "../index.html"
+                    }else{
+                        document.getElementById("errorServidor").innerHTML =respuesta.target.response
+                    }
+                    document.getElementById("cambiar_contraseñia").disabled = false;
                 }
+                
             })
             xhr.send(formulario);
         }else{

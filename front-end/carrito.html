@@ -103,11 +103,11 @@
         </div>
         <div id="contenido2">
 
-            <label for="nombre">Nombre:</label>     <input type="text" id="nombre" name="nombre">       <br>
+            <label for="nombre">Nombre:</label>     <input type="text" id="nombre" name="nombre">       <span id="error_nombre" style="color: red;"></span> <br>
             
-            <label for="direccion">Dirección:</label>       <input type="text" id="direccion" name="direccion">     <br>
+            <label for="direccion">Dirección:</label>       <input type="text" id="direccion" name="direccion">     <span id="error_direccion" style="color: red;"></span><br>
 
-            <label for="telefono">Número de Teléfono:</label>       <input type="text" id="telefono" name="telefono">        <br>
+            <label for="telefono">Número de Teléfono:</label>       <input type="text" id="telefono" name="telefono">       <span id="error_telefono" style="color: red;"></span> <br>
 
         </div>
     </div>
@@ -212,6 +212,10 @@
                             xhr.addEventListener("load", (resultado) => {
                                 if(resultado.target.response.length>0){
                                     alert(resultado.target.response)
+                                }else{
+                                    alert("La compra se realizo con exito. Se le envio un email con la informacion")
+                                    sessionStorage.removeItem("carrito_tienda_minimalista")
+                                    window.location.href = "../index.html"
                                 }
                             });
                             xhr.send(formulario);

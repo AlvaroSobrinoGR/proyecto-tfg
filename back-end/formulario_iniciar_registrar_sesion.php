@@ -19,7 +19,7 @@ if (isset($_POST["tipo"]) && isset($_POST["email"]) && isset($_POST["contrasenia
         // Verificar patrón de email
         if (preg_match('/^[^\s@]+@[^\s@]+\.[^\s@]+$/', $email)) {
           // Verificar patrón de contraseñas y que sean iguales
-          if (preg_match('/^(?=.*[A-Za-z])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-z\d@$!%*#?&]{6,}$/', $contrasenia) && $contrasenia === $contraseniaConfirmacion) {
+          if (preg_match('/^(?=.*[A-Za-zÁÉÍÓÚÑáéíóúñ])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-zÁÉÍÓÚÑáéíóúñ\d@$!%*#?&]{6,}$/', $contrasenia) && $contrasenia === $contraseniaConfirmacion) {
             todoCorrecto("creacion");
           } else {
             echo "Las contraseñas no cumplen los requisitos o no son iguales Debe tener al menos 6 caracteres, un número, un carácter alfabético y un signo especial (@$!%*#?&).";
@@ -107,7 +107,7 @@ function crear($conexion, $email, $contrasenia, $novedades){
     if ($conexion->query($consulta) == TRUE) {
         try {
             $ultimo_id = mysqli_insert_id($conexion);
-            if(strpos($conexion->host_info,"localhost")){
+            if(strpos($conexion->host_info,"localhost") !== false){
               $resultado = enviarCorreo($email, "Confirmar creacion de cuenta", "esta es la confirmacion de la creacion de la cuenta http://localhost/proyecto%20tfg/front-end/inicio.html?email=$email&hash=$codgioConfirmacion");
              }else{
               $resultado = enviarCorreo($email, "Confirmar creacion de cuenta", "esta es la confirmacion de la creacion de la cuenta http://simplyminimal.epizy.com/front-end/inicio.html?email=$email&hash=$codgioConfirmacion");

@@ -10,12 +10,16 @@ function funciones(){
         let xhr = new XMLHttpRequest();
         xhr.open("POST", "../back-end/productos.php");
         xhr.addEventListener("load", (respuesta) => {
-            let json = JSON.parse(respuesta.target.response)
-            for (let index = 0; index < json.length; index++) {
-                let opcion = document.createElement("option");
-                opcion.setAttribute("id", json[index])
-                opcion.innerHTML = json[index]
-                document.getElementById("tipo").appendChild(opcion)
+            if(respuesta.target.response.includes("Algo ha fallado. Inténtelo de nuevo más tarde.")){
+                alert(respuesta.target.response);
+            }else{
+                let json = JSON.parse(respuesta.target.response)
+                for (let index = 0; index < json.length; index++) {
+                    let opcion = document.createElement("option");
+                    opcion.setAttribute("id", json[index])
+                    opcion.innerHTML = json[index]
+                    document.getElementById("tipo").appendChild(opcion)
+                }
             }
         });
         xhr.send(formulario);
@@ -30,8 +34,12 @@ function funciones(){
         formulario.append("tipo", "productos");
         xhr.open("POST", "../back-end/productos.php");
         xhr.addEventListener("load", (respuesta) => {//recojo el json que pinto en php
-            let json = JSON.parse(respuesta.target.response)
-            pintarProdcutos(json, numero_pagina);//paso  a la funcion que se encarga de piuntar la lista de productos el json y la pagina en la que se encunrta el suario
+            if(respuesta.target.response.includes("Algo ha fallado. Inténtelo de nuevo más tarde.")){
+                alert(respuesta.target.response);
+            }else{
+                let json = JSON.parse(respuesta.target.response)
+                pintarProdcutos(json, numero_pagina);//paso  a la funcion que se encarga de piuntar la lista de productos el json y la pagina en la que se encunrta el suario
+            }
         });
         xhr.send(formulario);
     }
@@ -157,7 +165,15 @@ function funciones(){
     //avisar
 
     function avisarProducto(){
-        console.log(this.id)
+        let xhr = new XMLHttpRequest();
+        let formulario = new FormData();
+        formulario.append("id_producto", this.id.split(";")[1]);
+        formulario.append("email", obtener_usuario());
+        xhr.open("POST", "../back-end/aviso.php");
+        xhr.addEventListener("load", (respuesta) => {
+            alert(respuesta.target.response);
+        });
+        xhr.send(formulario);
     }
 
     //cambiar el orden
@@ -183,8 +199,12 @@ function funciones(){
         formulario.append("forma", orden);
         xhr.open("POST", "../back-end/productos.php");
         xhr.addEventListener("load", (respuesta) => {//recojo el json que pinto en php
-            let json = JSON.parse(respuesta.target.response)
-            pintarProdcutos(json, numero_pagina);//paso  a la funcion que se encarga de piuntar la lista de productos el json y la pagina en la que se encunrta el suario
+            if(respuesta.target.response.includes("Algo ha fallado. Inténtelo de nuevo más tarde.")){
+                alert(respuesta.target.response);
+            }else{
+                let json = JSON.parse(respuesta.target.response)
+                pintarProdcutos(json, numero_pagina);//paso  a la funcion que se encarga de piuntar la lista de productos el json y la pagina en la que se encunrta el suario
+            }
         });
         xhr.send(formulario);
     }
