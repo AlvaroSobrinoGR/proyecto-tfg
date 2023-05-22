@@ -9,7 +9,7 @@
 
     <title>SimplyMinimal</title>
 
-    <link href="front-end/css/inicio.css" rel="stylesheet" type="text/css" />
+    <link href="front-end/css/diseño.css" rel="stylesheet" type="text/css"/>
 
     <script src="front-end/script/funciones_comunes.js"></script>
 
@@ -22,18 +22,24 @@
 
 
 </head>
-  <body>
+  <body class="contenedor elementos_fila limite_fila w100">
+
+    <div id="video-container">
+      <video autoplay muted loop>
+        <source src="front-end/css/fondo/background.mp4" type="video/mp4">
+      </video>
+    </div>
 
 
+  <!--<div id="gif-container"></div>-->
 
 
+    <div class="w100 contenedor elementos_fila limite_fila" id="cabecera">
 
-    <div class="cabecera" id="cabecera">
 
+      <div class="w100 p_abajo_1 contenedor texto_derecha" id="informacion_usuario">
 
-      <div class="informacion_usuario" id="informacion_usuario">
-
-        <input type="button" id="inicio_registro_sesion" name="inicio_registro" value="Registrarse">
+        <input class="none" type="button" id="inicio_registro_sesion" name="inicio_registro" value="Registrarse">
 
         <a href="front-end/carrito.html" id="seccion_carrito">carrito</a>
 
@@ -43,7 +49,7 @@
 
 
 
-      <div class="links">
+      <div class="w100 p_arriba_1 p_abajo_1 contenedor elementos_fila elementos_space-evenly ">
 
         <a href="index.html">inicio</a>
 
@@ -59,16 +65,34 @@
 
 
 
-    <div class="cuerpo">
+    <div class="w100 p_arriba_2 p_abajo_2 contenedor elementos_centrados">
 
-      <h1>inicio</h1>
+      <div class="w30">
+        <h1 class="">¡Bienvenido a SimplyMinimal!</h1><br><br>
+    
+        <p class="justificado entre_lineas">
+            En SimplyMinimal, nuestra misión es ofrecerte una selección cuidadosamente curada de productos minimalistas que te ayuden a simplificar tu vida y a apreciar la belleza de la simplicidad en cada detalle. Nos enorgullece presentarte  artículos elegantes y funcionales que se adaptan a tu estilo de vida minimalista.<br><br><br>
+    
+            Nuestro objetivo es brindarte productos que sean tanto estéticamente atractivos como altamente prácticos. Desde artículos para el hogar hasta accesorios personales, cada producto en nuestra tienda ha sido seleccionado pensando en la calidad, la durabilidad y el diseño minimalista.<br><br><br>
+          
+            En SimplyMinimal, valoramos la calidad sobre la cantidad. Nos esforzamos por ofrecerte productos que estén diseñados con materiales de primera calidad y que sean respetuosos con el medio ambiente. Creemos en la durabilidad de nuestros productos, evitando el consumo excesivo y fomentando un enfoque más consciente y sostenible.<br><br><br>
+          
+            Ya sea que estés buscando artículos para embellecer tu hogar, accesorios elegantes para llevar contigo o regalos únicos para alguien especial, en SimplyMinimal encontrarás una amplia gama de opciones que se adaptan a tu estilo minimalista. Nuestro objetivo es simplificar tu proceso de compra al ofrecerte productos de alta calidad que reflejen tu estilo de vida minimalista.<br><br><br>
+          
+            Descubre la belleza en la simplicidad con SimplyMinimal. Explora nuestra colección y encuentra ese artículo especial que te acompañará en tu día a día, brindándote una sensación de calma y armonía en un mundo cada vez más complejo.<br><br><br>
+          
+            En SimplyMinimal, creemos que menos es más y que la elegancia reside en la simplicidad. Únete a nosotros en nuestro viaje hacia un estilo de vida minimalista y descubre la alegría de vivir con menos y apreciar cada momento con los productos perfectos de SimplyMinimal.<br><br><br>
+          
+            Sinceros agradecimientos por visitar nuestro sitio.<br><br><br>
+        </p>
+      </div>
 
     </div>
 
 
 
 
-    <div class="pie">
+    <div class="w100 pie p_arriba_1">
 
       <h1>pie de pagina</h1>
 

@@ -10,32 +10,7 @@
 
     <title>SimplyMinimal</title>
 
-    <link href="css/inicio.css" rel="stylesheet" type="text/css">
-
-
-    <style>
-        .cuerpo{
-            width: 50%;
-            display: flex;
-            flex-direction: column;
-        }
-        .cuerpo div{
-            border: 1px solid black;
-        }
-        .cuerpo div img{
-            width: 15em;
-            height: 15em;
-        }
-        .opciones{
-            width: 100%;
-            display: flex;
-            flex-direction: row;
-        }
-        .opciones section{
-            width: 15em;
-            height: 15em;
-        }
-    </style>
+    <link href="css/diseño.css" rel="stylesheet" type="text/css" />
 
     <script src="script/funciones_comunes.js"></script>
 
@@ -49,17 +24,25 @@
 
 
 </head>
-<body>
+<body class="contenedor elementos_fila limite_fila w100">
+
+    
+    <div id="video-container">
+        <video autoplay muted loop>
+          <source src="css/fondo/background.mp4" type="video/mp4">
+        </video>
+    </div>
+    
+
+    <!--<div id="gif-container"></div>-->
 
 
 
+    <div class="w100 contenedor elementos_fila limite_fila" id="cabecera">
 
+        <div class="w100 p_abajo_1 contenedor texto_derecha" id="informacion_usuario">
 
-    <div class="cabecera" id="cabecera">
-
-        <div class="informacion_usuario" id="informacion_usuario">
-
-          <input type="button" id="inicio_registro_sesion" name="inicio_registro" value="Registrarse">
+          <input class="none" type="button" id="inicio_registro_sesion" name="inicio_registro" value="Registrarse">
 
           <a href="carrito.html" id="seccion_carrito">carrito</a>
 
@@ -70,7 +53,7 @@
 
         
 
-        <div class="links">
+        <div class="w100 p_arriba_1 p_abajo_1 contenedor elementos_fila elementos_space-evenly ">
 
           <a href="../index.html">inicio</a>
 
@@ -83,20 +66,23 @@
     </div>
 
 
-    <div class="opciones" id="opciones">
-        <select id="tipo">
+    <div class="opciones w100 contenedor elementos_fila elementos_space-evenly" id="opciones">
+        <select id="tipo" class="t15x15">
             <option selected id="todos"> Todos los productos</option>
         </select>
-        <select id="ordenacion">
+        <select id="ordenacion" class="t15x15">
             <option selected id="sinOrden">Sin orden</option>
             <option id="sinOrden">Precio Ascendente</option>
             <option id="sinOrden">Precio Descendente</option>
             <!--meter una opcion por relevancia, una nueva columna, que se va incrementando con cada compra-->
         </select>
     </div>
-    <div class="cuerpo" id="cuerpo">
-        <h1>productos</h1>
 
+    <div class="w100 p_arriba_2 p_abajo_2 contenedor elementos_centrados">
+        <div class="lista w30 contenedor elementos_columna" id="cuerpo">
+            <h1>productos</h1>
+
+        </div>
     </div>
 
 
