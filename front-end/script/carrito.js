@@ -323,13 +323,13 @@ function funciones() {
 
     let xhr = new XMLHttpRequest();
     xhr.open("POST", "../back-end/configuracion_usuario.php");
-    xhr.addEventListener("load", (resultado) => {
-        if(resultado.target.response.includes("Algo ha fallado. Inténtelo de nuevo más tarde.")){
-            alert(resultado.target.response)
+    xhr.addEventListener("load", (respuesta) => {
+        if(respuesta.target.response.includes("Algo ha fallado. Inténtelo de nuevo más tarde.")){
+            alert(respuesta.target.response)
         }else{
-            let respuesta = resultado.target.response
-            if(!respuesta.includes("los datos se han actualizado") && !respuesta.includes("los datos ya existian")){
-                alert(respuesta)
+            let resultado = respuesta.target.response
+            if(!resultado.includes("los datos se han actualizado") && !resultado.includes("los datos ya existian")){
+                alert(resultado)
                 window.location.href = "carrito.html"
             }
         }

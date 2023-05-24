@@ -9,7 +9,7 @@
 
     <title>SimplyMinimal</title>
 
-    <link href="css/inicio.css" rel="stylesheet" type="text/css">
+    <link href="css/diseño.css" rel="stylesheet" type="text/css" />
 
     <script src="script/funciones_comunes.js"></script>
 
@@ -24,17 +24,16 @@
 
 
 </head>
-<body>
+<body class="contenedor elementos_columna  w100">
 
 
 
 
+    <div class="w100 contenedor elementos_fila limite_fila" id="cabecera">
 
-    <div class="cabecera" id="cabecera">
+        <div class="w100 p_abajo_1 contenedor texto_derecha" id="informacion_usuario">
 
-        <div class="informacion_usuario" id="informacion_usuario">
-
-          <input type="button" id="inicio_registro_sesion" name="inicio_registro" value="Registrarse">
+          <input class="none" type="button" id="inicio_registro_sesion" name="inicio_registro" value="Registrarse">
 
           <a href="carrito.html" id="seccion_carrito">carrito</a>
 
@@ -43,11 +42,12 @@
         </div>
 
 
+        
 
-        <div class="links">
+        <div class="w100 p_arriba_1 p_abajo_1 contenedor elementos_fila elementos_space-evenly texto_large">
 
           <a href="../index.html">inicio</a>
-          
+
           <a href="productos.html">productos</a>
 
           <a href="contacto.html">contacto</a>
@@ -58,33 +58,31 @@
 
 
 
-    <div class="cuerpo">
+    <div class="contenedor elementos_centrados texto_large">
 
-        <div id="sesion_no_iniciada">
+        <div class="none texto_centrado m_arriba_4" id="sesion_no_iniciada">
 
-            <h1>debes iniciar sesion en el inicio para poder enviar una consulta</h1>
+            <h1>Debes iniciar sesion para poder enviar una consulta</h1>
 
         </div>
 
 
-        <form id="formulario_contacto" class="formulario_contacto">
+        <div id="formulario_contacto" class="texto_large m_arriba_4">
 
-            <label>Asunto</label>        <input type="text" id="asunto">      <br><!--cambiar por asunto-->
+            <label>Asunto:</label> <br>        <input class="input_40x2 texto_large" type="text" id="asunto" maxlength="255">     <br> <br><!--cambiar por asunto-->
 
-            <label>Consulta</label>     <textarea id="consulta" maxlength="255"></textarea>     <br>
+            <label>Consulta:</label> <br>     <textarea class="input_40x10 texto_large resize" id="consulta" maxlength="255"></textarea>     <br><br>
 
-            <input type="button" id="enviar_comentario" value="enviar">
+            <input type="button" id="enviar_comentario" value="Enviar">
             
-        </form>
+        </div>
 
     </div>
 
 
 
-    <div class="pie">
-
+    <div class="w100 pie p_arriba_1">
         <h1>pie de pagina</h1>
-
     </div>
 
 

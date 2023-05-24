@@ -67,6 +67,7 @@ function funciones (){
         }else{
             formulario.append("tipo", "creacion")
             if(verificarContraseñas() && verificarEmail()){
+                comunicar_error()
                 formulario.append("email", document.getElementById("register-email").value)
                 formulario.append("contrasenia", document.getElementById("register-password").value)
                 formulario.append("contraseniaConfirmacion", document.getElementById("confirm-password").value)
@@ -122,17 +123,23 @@ function funciones (){
     document.getElementById("mostrarContrasenia3").addEventListener("click", verContrasenia)
     function verContrasenia(e) {
         let passwordInput = "";
+        let imagen = "";
         if(this.id=="mostrarContrasenia1"){
             passwordInput = document.getElementById("password")
+            imagen = document.getElementById("mostrarContrasenia1")
         }else if(this.id=="mostrarContrasenia2"){
             passwordInput = document.getElementById("register-password")
+            imagen = document.getElementById("mostrarContrasenia2")
         }else{
             passwordInput = document.getElementById("confirm-password")
+            imagen = document.getElementById("mostrarContrasenia3")
         }
         if (passwordInput.type === "password") {
             passwordInput.type = "text";
+            imagen.setAttribute("src", "css/contraseña/visible.png")
         } else {
             passwordInput.type = "password";
+            imagen.setAttribute("src", "css/contraseña/oculto.png")
         }
     }
 

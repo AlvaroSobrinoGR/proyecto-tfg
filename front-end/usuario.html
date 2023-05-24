@@ -9,7 +9,7 @@
 
     <title>SimplyMinimal</title>
 
-    <link href="css/inicio.css" rel="stylesheet" type="text/css">
+    <link href="css/diseño.css" rel="stylesheet" type="text/css" />
 
     <script src="script/funciones_comunes.js"></script>
 
@@ -23,17 +23,16 @@
 
 
 </head>
-<body>
+<body class="contenedor elementos_columna  w100">
 
 
 
 
+    <div class="w100 contenedor elementos_fila limite_fila" id="cabecera">
 
-    <div class="cabecera" id="cabecera">
+        <div class="w100 p_abajo_1 contenedor texto_derecha" id="informacion_usuario">
 
-        <div class="informacion_usuario" id="informacion_usuario">
-
-          <input type="button" id="inicio_registro_sesion" name="inicio_registro" value="Registrarse">
+          <input class="none" type="button" id="inicio_registro_sesion" name="inicio_registro" value="Registrarse">
 
           <a href="carrito.html" id="seccion_carrito">carrito</a>
 
@@ -42,9 +41,9 @@
         </div>
 
 
+        
 
-
-        <div class="links">
+        <div class="w100 p_arriba_1 p_abajo_1 contenedor elementos_fila elementos_space-evenly texto_large ">
 
           <a href="../index.html">inicio</a>
 
@@ -59,61 +58,78 @@
 
 
 
-    <div class="cuerpo" id="cuerpo">
+    <div class="contenedor elementos_centrados texto_large texto_izquierda" id="cuerpo">
 
 
-        <div id="formulario_usuario">
+        <div class="w50 mw50 contenedor elementos_columna" id="formulario_usuario">
 
-            <a href="" id="cerrar_sesion">Cerrar sesion</a>     <br>
-
-            <label for="email">Email:</label>       <span id="email">email</span>   <br>
-
-            <label for="nombre">Nombre y apellidos:</label>     <input type="text" id="nombre" name="nombre">      <span id="error_nombre" style="color: red;"></span>  <br>
             
-            <label for="direccion">Dirección:</label>       <input type="text" id="direccion" name="direccion">     <br>
+            <div class="elemento_cetrado w60">
+                <a class="azul" href="" id="cerrar_sesion">Cerrar sesion</a>     <br><br>
 
-            <label for="telefono">Número de Teléfono:</label>       <input type="number" id="telefono" name="telefono">       <span id="error_telefono" style="color: red;"></span>  <br>
+                <label for="email">Email:</label> <br>      <span id="email">email</span>   <br><br>
 
-            <label for="novedades">Novedades: </label>       <input type="checkbox" id="novedades" name="novedades">        <br>
+                <label for="nombre">Nombre y apellidos:</label><br>
 
-            <label for="contrasena">Contraseña:</label>     <input type="button" id="cambiarContraseña" value="Cambiar Contraseña">     <span id="respuesta_contraeña" style="color: red;"></span>     <br>
+                <div class="w20">
+                <span id="error_nombre" style="color: red;"></span>
+                </div>
 
-            <input type="button" id="guardarCambios" value="Guardar Cambios">   <br>
+                <input class="input_20x2  texto_large" type="text" id="nombre" name="nombre">     <br><br>
+                
+                <label for="direccion">Dirección:</label><br>       <input class="input_20x2  texto_large" type="text" id="direccion" name="direccion">     <br><br>
 
-            <a href="" id="pedidos">Pedidos</a>
-            <div id="lista_pedidos"></div><!--una tabla que ese genere con los datos de los pedidos que ha hecho el usuario-->
+                <label for="telefono">Número de Teléfono:</label> <br> 
 
-            <a href="" id="consultas">Consultas</a>
-            <div id="lista_consultas"></div> <!--una tabla que ese genere con las consultas del usuario y su estado-->
+                <div class="w20">
+                <span id="error_telefono" style="color: red;"></span> 
+                </div>
 
-            <a href="" id="incidencias">Incidencias</a>
-            <div id="lista_incidencias"></div> <!--una tabla que ese genere con las incidencias del usuario y su estado-->
+                <input class="input_20x2  texto_large" type="number" id="telefono" name="telefono">  <br><br>
 
+                <div class="contenedor elementos_centrados_v p_abajo_1">
+                <label for="novedades">Novedades: </label>       <input class="input_2x2 m_izquierda_0-5" type="checkbox" id="novedades" name="novedades">        <br><br>
+                </div>
+
+                <input type="button" id="guardarCambios" value="Guardar Cambios">   <br><br>
+
+                <label for="contrasena">Contraseña:</label>     <input class="input_20x2  texto_large" type="button" id="cambiarContraseña" value="Cambiar Contraseña">     <span id="respuesta_contraeña" style="color: red;"></span>     <br><br>
+            </div>
+
+            <a class="azul" href="" id="pedidos">Pedidos</a>
+            <div class="tabla tabla_resumen" id="lista_pedidos"></div><!--una tabla que ese genere con los datos de los pedidos que ha hecho el usuario-->
+
+            <a class="azul" href="" id="consultas">Consultas</a>
+            <div class="tabla tabla_resumen" id="lista_consultas"></div> <!--una tabla que ese genere con las consultas del usuario y su estado-->
+
+            <a class="azul" href="" id="incidencias">Incidencias</a>
+            <div class="tabla tabla_resumen" id="lista_incidencias"></div> <!--una tabla que ese genere con las incidencias del usuario y su estado-->
+        
         </div>
 
-        <div id="factura" style="display: none;">
-            <a href="" id="atras1">Atras</a>
+        <div class="tamaño_fotos5x5 none factura" id="factura" >
+            <a  class="azul m_arriba_2 texto_large" href="" id="atras1">Atras</a>
             <div id="factura_contenido">
             </div>
         </div>
 
-        <div id="incidencia" style="display: none;">
-            <a href="" id="atras2">Atras</a>
-            <div id="incidencia_contenido">
+        <div  class="contenedor elementos_centrados minimo_pantalla texto_large none m_arriba_4" class="none" id="incidencia" >
+            <a class="azul" href="" id="atras2">Atras</a>
+            <div class="formulario_contacto"  id="incidencia_contenido">
                 
-                <label>ID pedido:</label>      <input type="text" id="indicencia_id_pedido" readonly><br>
+                <label>ID pedido:</label>      <input class="input_5x2 texto_large" type="text" id="indicencia_id_pedido" readonly><br>
 
-                <label>Asunto</label>        <input type="text" id="indicencia_asunto">      <br><!--cambiar por asunto-->
+                <label>Asunto</label>  <br>       <input class="input_40x2 texto_large" type="text" id="indicencia_asunto" maxlength="255">      <br><!--cambiar por asunto-->
 
-                <label>Consulta</label>     <textarea id="indicencia_consulta" maxlength="255"></textarea>     <br>
+                <label>Consulta</label>  <br>    <textarea class="input_40x10 texto_large resize" id="indicencia_consulta" maxlength="255"></textarea>     <br>
 
                 <input type="button" id="enviar_incidencia" value="enviar">
             </div>
             
         </div>
 
-        <div id="devolucion" style="display: none;">
-            <a href="" id="atras3">Atras</a>
+        <div class="tamaño_fotos5x5 none " id="devolucion" >
+            <a class="azul m_arriba_2 texto_large" href="" id="atras3">Atras</a>
             <div id="devolucion_contenido">
             </div>
         </div>
@@ -124,10 +140,8 @@
 
 
 
-    <div class="pie">
-
+    <div class="w100 pie p_arriba_1">
         <h1>pie de pagina</h1>
-
     </div>
 
 

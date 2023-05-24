@@ -131,6 +131,8 @@ if(isset($_POST['tipo']) && isset($_POST['email'])){
         if ($resultado->num_rows > 0) {
             // Los datos ya están registrados, obtener el ID
             $id_datos = "ya existe";
+            $row = $resultado->fetch_assoc();
+            $id_datos = $row['id_datos'];
         } else {
             // Los datos no están registrados, insertar nueva fila
             $consulta = "INSERT INTO datos_usuario (nombre_apellido, direccion, telefono) VALUES ('$nombre', '$direccion', '$telefono')";
@@ -152,6 +154,9 @@ if(isset($_POST['tipo']) && isset($_POST['email'])){
         }else{
           echo "los datos ya existian";
         }
+
+        $consulta = "UPDATE usuarios SET id_datos='$id_datos' WHERE email = '$email'";
+
       }else{
         echo "Tiene que estas correcto tanto el nombre, como la direccion y el telefono.\n Nombre: Debes introducir almenos un nombre y un apellido como minimo, y deben empezar por mayuscula\n Direccion: escribir alguina direccion\nTelefono: El telefono solo puede tener numeros y deben ser 8";
       
@@ -172,9 +177,9 @@ if(isset($_POST['tipo']) && isset($_POST['email'])){
     if ($conexion->query($consulta) == TRUE) {
 
       if(strpos($conexion->host_info,"localhost") !== false){
-        $resultado = enviarCorreo($email, "Cambiar su clave de acceso", "En este enlace podras cambiar tu contraseña http://localhost/proyecto%20tfg/index.html?email=$email&hash=$codgioConfirmacion");
+        $resultado = enviarCorreo($email, "Cambiar su clave de acceso", "En este enlace podras cambiar tu contraseña http://localhost/proyecto%20tfg/front-end/cambiar_contraseña.html?email=$email&hash=$codgioConfirmacion");
       }else{
-        $resultado = enviarCorreo($email, "Cambiar su clave de acceso", "En este enlace podras cambiar tu contraseña http://simplyminimal.epizy.com?email=$email&hash=$codgioConfirmacion");
+        $resultado = enviarCorreo($email, "Cambiar su clave de acceso", "En este enlace podras cambiar tu contraseña http://simplyminimal.epizy.com/front-end/cambiar_contraseña.html?email=$email&hash=$codgioConfirmacion");
       }
         
         if($resultado=="enviado"){

@@ -50,7 +50,7 @@ function funciones(){
         
         console.log(json)
         document.getElementById("cuerpo").innerHTML=""; //limpio siempre primero donde estan los productos, para que no se solapen las paginas
-        let cantidad_producto = 4 //cantidad de productos por paginas
+        let cantidad_producto = 3 //cantidad de productos por paginas
         for (let index = ((numero_pagina*cantidad_producto)-cantidad_producto); index < json.length && index < (numero_pagina*cantidad_producto); index++) {
         //el for funciona de la sigueinte forma:
             //el index empezara en la pagina que toca, multiplicado por cantidad_producto, que es el numero de elementos que quiero que haya por apgina, menos el mismo.
@@ -64,22 +64,22 @@ function funciones(){
 
             let div = document.createElement("div")
             let img = document.createElement("img")
-            let h4 = document.createElement("h4")
+            let h4 = document.createElement("h3")
             let p = document.createElement("p")
-            let precio = document.createElement("p")
+            let precio = document.createElement("h3")
             let comprar = document.createElement("input")
             let avisar = document.createElement("input")
 
             if(json[index]["stock"]==0){
                 avisar.setAttribute("type", "button")
                 avisar.setAttribute("id", "avisar_producto;"+json[index]["id_producto"])
-                avisar.setAttribute("value", "Avisar")
+                avisar.setAttribute("value", "Avisarme")
                 avisar.style.backgroundColor="yellow"
             }else{
                 comprar.style.backgroundColor="green"
                 comprar.setAttribute("type", "button")
                 comprar.setAttribute("id", "comprar_producto;"+json[index]["id_producto"])
-                comprar.setAttribute("value", "Comprar")
+                comprar.setAttribute("value", "Añadir a la cesta")
             }
 
             //creo los elementos que ire añadiendo al cuerpo donde iran los productos
@@ -90,12 +90,13 @@ function funciones(){
             p.innerHTML = json[index]["descripcion"];
 
             if(json[index]["descuento"]>0){
-                precio.innerHTML = "<del>"+json[index]["precio"]+"</del>"+" "+json[index]["descuento"]+"%"+" --> "+json[index]["precio_con_descuento"];
+                precio.innerHTML = "<del>"+Number(json[index]["precio"]).toLocaleString("es-ES",{minimumFractionDigits: 2, maximumFractionDigits:2})+"</del>&euro;"+" -"+json[index]["descuento"]+"%"+" &#8594; "+Number(json[index]["precio_con_descuento"]).toLocaleString("es-ES",{minimumFractionDigits: 2, maximumFractionDigits:2, style:"currency", currency:"EUR"});
             }else{
-                precio.innerHTML = json[index]["precio"];
+                precio.innerHTML = Number(json[index]["precio"]).toLocaleString("es-ES",{minimumFractionDigits: 2, maximumFractionDigits:2, style:"currency", currency:"EUR"});
             }
 
             div.setAttribute("id", "producto;"+json[index]["id_producto"])
+            div.setAttribute("class", "producto");
             div.appendChild(img);
             div.appendChild(h4);
             div.appendChild(p);
@@ -117,6 +118,9 @@ function funciones(){
         }
         //ahora hacemos los botondes de nuemero de pagina
         let div = document.createElement("div");
+        div.setAttribute("id", "paginado")
+        let h2 = document.createElement("h2");
+        //h2.innerText = "Paginas: "
         //los meteresmo en un div que ira al final de todos los productos
         for (let index = 1; index < Math.ceil((json.length)/cantidad_producto)+1; index++) {
         //el for funciona de la sigueinte forma:
@@ -127,10 +131,12 @@ function funciones(){
             a.setAttribute("href", "") //si no lo tiene no se puede pulsar como un link
             a.setAttribute("id", "pagina;"+index) //leva pagina, seguido del numero de pagina que es con el index, y el ";" es para poder recuperar estos dos datos separados con el split(";")
             a.innerHTML=index;
-            div.appendChild(a)
+            h2.appendChild(a);
+            div.appendChild(h2)
         }
         //añado este div con las paginas al cuerpo, al final de los productos
         document.getElementById("cuerpo").appendChild(div)
+        document.getElementById("pagina;"+numero_pagina).classList.add("pagina_actual")
         //existir
         //los links de paginas que hemos creado antes no existian, y nunca sabemos cuantas pueden ser, asique sus addEventListsener para que cambien los productos cuando se clickea deben crearse tras existir
         for (let index = 1; index < Math.ceil((json.length)/cantidad_producto)+1; index++) {

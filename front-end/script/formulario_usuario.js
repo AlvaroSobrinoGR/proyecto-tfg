@@ -11,11 +11,10 @@ function funciones (){
         
         let xhr = new XMLHttpRequest();
         xhr.open("POST", "../back-end/configuracion_usuario.php");
-        xhr.addEventListener("load", (resultado) => {
-            let respuesta = resultado.target.response
+        xhr.addEventListener("load", (respuesta) => {
             //pintar datos
             document.getElementById("email").innerHTML = obtener_usuario();
-            let json = JSON.parse(respuesta)
+            let json = JSON.parse(respuesta.target.response)
     
             document.getElementById("nombre").value = json[0]["nombre"]
             document.getElementById("direccion").value = json[0]["direccion"]
@@ -76,9 +75,8 @@ function funciones (){
     if(exito){
         let xhr = new XMLHttpRequest();
         xhr.open("POST", "../back-end/configuracion_usuario.php");
-        xhr.addEventListener("load", (resultado) => {
-            let respuesta = resultado.target.response
-            alert(respuesta)
+        xhr.addEventListener("load", (respuesta) => {
+            alert(respuesta.target.response)
             document.getElementById("cambiarContraseña").disabled = false;
             document.getElementById("guardarCambios").disabled = false;
             
@@ -113,28 +111,30 @@ function funciones (){
                 if(respuesta.target.response.includes("Algo ha fallado. Inténtelo de nuevo más tarde.")){
                     alert(respuesta.target.response)
                 }else{
-                    let json = JSON.parse(respuesta.target.response)
-                    //pintar datos
-                    tabla = document.createElement("table")
-                    tabla.innerHTML = '<tr><th>Id consulta</th><th>Asunto</th><th>Consulta</th><th>Estado</th><th>Fecha</th></tr>'
-                    propiedades = ["id_consulta", "asunto", "consulta", "estado", "fecha"]
-                    tabla.setAttribute("id", "tabla_consultas")
-        
-                    //lo que hago aquie es recorrer el arry al reves para pintar al principio de la tabla las consultas mas recientes
-                    for (let i = json.length-1; i >= 0; i--) {
-                        tr = document.createElement("tr")
-                        tr.setAttribute("id", "fila_consultas;"+(i-(json.length-1)))
-                        //para evitar un codigo mas largo tengo las keys de las posiciones en el array propiedades y asi voy sacandolas en cada fila
-                        for (let j = 0; j < Object.keys(json[i]).length; j++) {
-                            td = document.createElement("td")
-                            td.setAttribute("id", propiedades[j]+";"+((json.length-1)-i))
-                            td.innerHTML = json[i][propiedades[j]]
-                            tr.appendChild(td)
+                    if(respuesta.target.response.length>0){
+                        let json = JSON.parse(respuesta.target.response)
+                        //pintar datos
+                        tabla = document.createElement("table")
+                        tabla.innerHTML = '<tr><th>Id consulta</th><th>Asunto</th><th>Consulta</th><th>Estado</th><th>Fecha</th></tr>'
+                        propiedades = ["id_consulta", "asunto", "consulta", "estado", "fecha"]
+                        tabla.setAttribute("id", "tabla_consultas")
+            
+                        //lo que hago aquie es recorrer el arry al reves para pintar al principio de la tabla las consultas mas recientes
+                        for (let i = json.length-1; i >= 0; i--) {
+                            tr = document.createElement("tr")
+                            tr.setAttribute("id", "fila_consultas;"+(i-(json.length-1)))
+                            //para evitar un codigo mas largo tengo las keys de las posiciones en el array propiedades y asi voy sacandolas en cada fila
+                            for (let j = 0; j < Object.keys(json[i]).length; j++) {
+                                td = document.createElement("td")
+                                td.setAttribute("id", propiedades[j]+";"+((json.length-1)-i))
+                                td.innerHTML = json[i][propiedades[j]]
+                                tr.appendChild(td)
+                            }
+                            tabla.appendChild(tr)
                         }
-                        tabla.appendChild(tr)
+                        
+                        document.getElementById("lista_consultas").appendChild(tabla)
                     }
-                    
-                    document.getElementById("lista_consultas").appendChild(tabla)
                 }
             });
             xhr.send(formulario)
@@ -157,28 +157,30 @@ function funciones (){
                 if(respuesta.target.response.includes("Algo ha fallado. Inténtelo de nuevo más tarde.")){
                     alert(respuesta.target.response)
                 }else{
-                    let json = JSON.parse(respuesta.target.response)
-                    //pintar datos
-                    tabla = document.createElement("table")
-                    tabla.innerHTML = '<tr><th>Id incidencia</th><th>Id pedido</th><th>Asunto</th><th>Consulta</th><th>Estado</th><th>Fecha</th></tr>'
-                    propiedades = ["id_incidencia","id_compra", "asunto", "consulta", "estado", "fecha"]
-                    tabla.setAttribute("id", "tabla_consultas")
-        
-                    //lo que hago aquie es recorrer el arry al reves para pintar al principio de la tabla las consultas mas recientes
-                    for (let i = json.length-1; i >= 0; i--) {
-                        tr = document.createElement("tr")
-                        tr.setAttribute("id", "fila_consultas;"+(i-(json.length-1)))
-                        //para evitar un codigo mas largo tengo las keys de las posiciones en el array propiedades y asi voy sacandolas en cada fila
-                        for (let j = 0; j < Object.keys(json[i]).length; j++) {
-                            td = document.createElement("td")
-                            td.setAttribute("id", propiedades[j]+";"+((json.length-1)-i))
-                            td.innerHTML = json[i][propiedades[j]]
-                            tr.appendChild(td)
+                    if(respuesta.target.response.length > 0){
+                        let json = JSON.parse(respuesta.target.response)
+                        //pintar datos
+                        tabla = document.createElement("table")
+                        tabla.innerHTML = '<tr><th>Id incidencia</th><th>Id pedido</th><th>Asunto</th><th>Consulta</th><th>Estado</th><th>Fecha</th></tr>'
+                        propiedades = ["id_incidencia","id_compra", "asunto", "consulta", "estado", "fecha"]
+                        tabla.setAttribute("id", "tabla_consultas")
+            
+                        //lo que hago aquie es recorrer el arry al reves para pintar al principio de la tabla las consultas mas recientes
+                        for (let i = json.length-1; i >= 0; i--) {
+                            tr = document.createElement("tr")
+                            tr.setAttribute("id", "fila_consultas;"+(i-(json.length-1)))
+                            //para evitar un codigo mas largo tengo las keys de las posiciones en el array propiedades y asi voy sacandolas en cada fila
+                            for (let j = 0; j < Object.keys(json[i]).length; j++) {
+                                td = document.createElement("td")
+                                td.setAttribute("id", propiedades[j]+";"+((json.length-1)-i))
+                                td.innerHTML = json[i][propiedades[j]]
+                                tr.appendChild(td)
+                            }
+                            tabla.appendChild(tr)
                         }
-                        tabla.appendChild(tr)
+                        
+                         document.getElementById("lista_incidencias").appendChild(tabla)
                     }
-                    
-                     document.getElementById("lista_incidencias").appendChild(tabla)
                 }
                 
             });
@@ -202,49 +204,52 @@ function funciones (){
                 if(respuesta.target.response.includes("Algo ha fallado. Inténtelo de nuevo más tarde.")){
                     alert(respuesta.target.response)
                 }else{
-                    let json = JSON.parse(respuesta.target.response)
-                    //pintar datos
-                    let tabla = document.createElement("table")
-                    tabla.innerHTML = '<tr><th>Id pedido</th><th>Precio</th><th>Fecha</th><th colspan="3"></th></tr>'
-                    let propiedades = ["id_compra", "precio", "fecha"]
-                    let acciones = ["link_detalles", "link_habrir_incidencia", "link_devolver_pedido"]
-                    tabla.setAttribute("id", "tabla_pedidos")
-                    let eventos = [];
-    
-                    console.log(eventos.length)
-                    //lo que hago aquie es recorrer el arry al reves para pintar al principio de la tabla las consultas mas recientes
-                    for (let i = json.length-1; i >= 0; i--) {
-                        let tr = document.createElement("tr")
-                        tr.setAttribute("id", "fila_pedido;"+(i-(json.length-1)))
-                        //para evitar un codigo mas largo tengo las keys de las posiciones en el array propiedades y asi voy sacandolas en cada fila
-                        for (let j = 0; j < Object.keys(json[i]).length; j++) {
-                            let td = document.createElement("td")
-                            td.setAttribute("id", propiedades[j]+";"+((json.length-1)-i))
-                            td.innerHTML = json[i][propiedades[j]]
-                            tr.appendChild(td)
+                    if(respuesta.target.response.length>0){
+
+                        let json = JSON.parse(respuesta.target.response)
+                        //pintar datos
+                        let tabla = document.createElement("table")
+                        tabla.innerHTML = '<tr><th>Id pedido</th><th>Precio</th><th>Fecha</th><th colspan="3"></th></tr>'
+                        let propiedades = ["id_compra", "precio", "fecha"]
+                        let acciones = ["link_detalles", "link_habrir_incidencia", "link_devolver_pedido"]
+                        tabla.setAttribute("id", "tabla_pedidos")
+                        let eventos = [];
+        
+                        console.log(eventos.length)
+                        //lo que hago aquie es recorrer el arry al reves para pintar al principio de la tabla las consultas mas recientes
+                        for (let i = json.length-1; i >= 0; i--) {
+                            let tr = document.createElement("tr")
+                            tr.setAttribute("id", "fila_pedido;"+(i-(json.length-1)))
+                            //para evitar un codigo mas largo tengo las keys de las posiciones en el array propiedades y asi voy sacandolas en cada fila
+                            for (let j = 0; j < Object.keys(json[i]).length; j++) {
+                                let td = document.createElement("td")
+                                td.setAttribute("id", propiedades[j]+";"+((json.length-1)-i))
+                                td.innerHTML = json[i][propiedades[j]]
+                                tr.appendChild(td)
+                            }
+                            
+                            let contenido = ["Detalles", "Habrir incidencia", "Devolver pedido"]
+                            for (let j = 0; j < acciones.length; j++) {
+                                let td2 = document.createElement("td")
+                                td2.setAttribute("id", acciones[j]+";"+((json.length-1)-i))
+                                let a = document.createElement("a");
+                                a.setAttribute("href","")
+                                a.setAttribute("id", acciones[j]+";"+((json.length-1)-i))
+                                a.innerHTML = contenido[j];
+                                td2.appendChild(a)
+                                tr.appendChild(td2)
+                            }
+                            tabla.appendChild(tr)
                         }
+                        document.getElementById("lista_pedidos").appendChild(tabla)
                         
-                        let contenido = ["Detalles", "Habrir incidencia", "Devolver pedido"]
-                        for (let j = 0; j < acciones.length; j++) {
-                            let td2 = document.createElement("td")
-                            td2.setAttribute("id", acciones[j]+";"+((json.length-1)-i))
-                            let a = document.createElement("a");
-                            a.setAttribute("href","")
-                            a.setAttribute("id", acciones[j]+";"+((json.length-1)-i))
-                            a.innerHTML = contenido[j];
-                            td2.appendChild(a)
-                            tr.appendChild(td2)
-                        }
-                        tabla.appendChild(tr)
-                    }
-                    document.getElementById("lista_pedidos").appendChild(tabla)
-                    
-                    //existir
-                    for (let i= 0; i < json.length; i++) {
-                        for (let j = 0; j < acciones.length; j++) {
-                            document.getElementById("link_detalles;"+i).addEventListener("click", detallesPedido);
-                            document.getElementById("link_habrir_incidencia;"+i).addEventListener("click", detallesPedido);
-                            document.getElementById("link_devolver_pedido;"+i).addEventListener("click", detallesPedido);
+                        //existir
+                        for (let i= 0; i < json.length; i++) {
+                            for (let j = 0; j < acciones.length; j++) {
+                                document.getElementById("link_detalles;"+i).addEventListener("click", detallesPedido);
+                                document.getElementById("link_habrir_incidencia;"+i).addEventListener("click", detallesPedido);
+                                document.getElementById("link_devolver_pedido;"+i).addEventListener("click", detallesPedido);
+                            }
                         }
                     }
                 }
@@ -266,12 +271,11 @@ function funciones (){
  
         let xhr = new XMLHttpRequest();
         xhr.open("POST", "../back-end/comprobar_pedido.php");
-        xhr.addEventListener("load", (resultado) => {
+        xhr.addEventListener("load", (respuesta) => {
             if(respuesta.target.response.includes("Algo ha fallado. Inténtelo de nuevo más tarde.")){
                 alert(respuesta.target.response)
             }else{
-                let respuesta = resultado.target.response
-                if(respuesta.includes("bien")){
+                if(respuesta.target.response.includes("bien")){
                     if(this.id.includes("link_detalles")){
                         pintarFactura(pedido)
                     }else if(this.id.includes("link_habrir_incidencia")){
@@ -290,14 +294,13 @@ function funciones (){
         formulario.append("id_pedido", pedido);
         let xhr = new XMLHttpRequest();
         xhr.open("POST", "../back-end/pintar_factura_pedidos.php");
-        xhr.addEventListener("load", (resultado) => {
+        xhr.addEventListener("load", (respuesta) => {
             if(respuesta.target.response.includes("Algo ha fallado. Inténtelo de nuevo más tarde.")){
                 alert(respuesta.target.response)
             }else{
-                let respuesta = resultado.target.response
                 document.getElementById("formulario_usuario").style.display = "none";
                 document.getElementById("factura").style.display = "block";
-                document.getElementById("factura_contenido").innerHTML = respuesta
+                document.getElementById("factura_contenido").innerHTML = respuesta.target.response
             }
         });
         xhr.send(formulario);
@@ -328,11 +331,10 @@ function funciones (){
         formulario.append("id_pedido", pedido);
         let xhr = new XMLHttpRequest();
         xhr.open("POST", "../back-end/pintar_factura_pedidos.php");
-        xhr.addEventListener("load", (resultado) => {
+        xhr.addEventListener("load", (respuesta) => {
             if(respuesta.target.response.includes("Algo ha fallado. Inténtelo de nuevo más tarde.")){
                 alert(respuesta.target.response)
             }else{
-                let respuesta = resultado.target.response
                 document.getElementById("formulario_usuario").style.display = "none";
                 document.getElementById("incidencia").style.display = "block";
                 if(!document.getElementById("indicencia_id_pedido").value.includes(pedido)){
@@ -349,22 +351,29 @@ function funciones (){
     document.getElementById("enviar_incidencia").addEventListener("click", enviarIncidencia)
     function enviarIncidencia(){
         let formulario = new FormData();
-        formulario.append("email", obtener_usuario())
-        formulario.append("id_pedido", document.getElementById("indicencia_id_pedido").value)
-        formulario.append("asunto", document.getElementById("indicencia_asunto").value)
-        formulario.append("consulta", document.getElementById("indicencia_consulta").value)
-        document.getElementById("enviar_incidencia").disabled = true;
-        let fechaActual = new Date();
-        let fechaActualFormateada = fechaActual.getFullYear() + '-' + (fechaActual.getMonth() + 1).toString().padStart(2, '0') + '-' + fechaActual.getDate().toString().padStart(2, '0') + ' ' + fechaActual.getHours().toString().padStart(2, '0') + ':' + fechaActual.getMinutes().toString().padStart(2, '0') + ':' + fechaActual.getSeconds().toString().padStart(2, '0');
-        formulario.append("fecha", fechaActualFormateada)
-        
-        let xhr = new XMLHttpRequest();
-        xhr.open("POST", "../back-end/incidencia.php")
-        xhr.addEventListener("load", (respuesta)=>{
-            alert(respuesta.target.response)
-            document.getElementById("enviar_incidencia").disabled = false;
-        })
-        xhr.send(formulario);
+        let asunto = document.getElementById("indicencia_asunto").value
+        let consulta = document.getElementById("indicencia_consulta").value
+        if(asunto.length > 0 && consulta.length > 0){ 
+            formulario.append("email", obtener_usuario())
+            formulario.append("id_pedido", document.getElementById("indicencia_id_pedido").value)
+            formulario.append("asunto", asunto)
+            formulario.append("consulta", consulta)
+            document.getElementById("enviar_incidencia").disabled = true;
+            let fechaActual = new Date();
+            let fechaActualFormateada = fechaActual.getFullYear() + '-' + (fechaActual.getMonth() + 1).toString().padStart(2, '0') + '-' + fechaActual.getDate().toString().padStart(2, '0') + ' ' + fechaActual.getHours().toString().padStart(2, '0') + ':' + fechaActual.getMinutes().toString().padStart(2, '0') + ':' + fechaActual.getSeconds().toString().padStart(2, '0');
+            formulario.append("fecha", fechaActualFormateada)
+            
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST", "../back-end/incidencia.php")
+            xhr.addEventListener("load", (respuesta)=>{
+                alert(respuesta.target.response)
+                document.getElementById("enviar_incidencia").disabled = false;
+            })
+            xhr.send(formulario);
+        }else{
+            alert("Tanto el asunto como la consulta deben tener contenido.")
+        }
+       
     }
 
     function devolverPedido(pedido){
@@ -372,11 +381,11 @@ function funciones (){
         formulario.append("id_pedido", pedido);
         let xhr = new XMLHttpRequest();
         xhr.open("POST", "../back-end/usuario_devolucion_datos.php");
-        xhr.addEventListener("load", (resultado) => {
+        xhr.addEventListener("load", (respuesta) => {
             if(respuesta.target.response.includes("Algo ha fallado. Inténtelo de nuevo más tarde.")){
                 alert(respuesta.target.response)
             }else{
-                let json = JSON.parse(resultado.target.response)
+                let json = JSON.parse(respuesta.target.response)
                 document.getElementById("formulario_usuario").style.display = "none";
                 document.getElementById("devolucion").style.display = "block";
                 pintarDevolucion(json)
@@ -492,15 +501,15 @@ function funciones (){
         
         let xhr = new XMLHttpRequest();
         xhr.open("POST", "../back-end/usuario_devoluciones.php");
-        xhr.addEventListener("load", (resultado) => {
+        xhr.addEventListener("load", (respuesta) => {
             if(respuesta.target.response.includes("Algo ha fallado. Inténtelo de nuevo más tarde.")){
                 alert(respuesta.target.response)
             }else{
-                if(resultado.target.response.includes("devoluciohn realizada")){
+                if(respuesta.target.response.includes("devoluciohn realizada")){
                     alert("Devoluciohn realizada, le hemos mandado un email con la factura actualizada")
                     location.reload(true);
                 }else{
-                    alert(resultado.target.response)
+                    alert(respuesta.target.response)
                 }
                 document.getElementById("devolver_boton").disabled = false;
             }

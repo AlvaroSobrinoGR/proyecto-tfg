@@ -11,7 +11,7 @@
     <title>SimplyMinimal</title>
 
     <link href="css/diseño.css" rel="stylesheet" type="text/css" />
-
+    
     <script src="script/funciones_comunes.js"></script>
 
     <script src="script/productos.js"></script>
@@ -24,17 +24,8 @@
 
 
 </head>
-<body class="contenedor elementos_fila limite_fila w100">
+<body class="contenedor elementos_columna w100">
 
-    
-    <div id="video-container">
-        <video autoplay muted loop>
-          <source src="css/fondo/background.mp4" type="video/mp4">
-        </video>
-    </div>
-    
-
-    <!--<div id="gif-container"></div>-->
 
 
 
@@ -53,29 +44,31 @@
 
         
 
-        <div class="w100 p_arriba_1 p_abajo_1 contenedor elementos_fila elementos_space-evenly ">
+        <div class="w100 p_arriba_1 p_abajo_1 contenedor elementos_fila elementos_space-evenly texto_large ">
 
-          <a href="../index.html">inicio</a>
-
-          <a href="productos.html">productos</a>
-
-          <a href="contacto.html">contacto</a>
-
-        </div>
+            <a href="../index.html">inicio</a>
+  
+            <a href="productos.html">productos</a>
+  
+            <a href="contacto.html">contacto</a>
+  
+          </div>
 
     </div>
 
 
-    <div class="opciones w100 contenedor elementos_fila elementos_space-evenly" id="opciones">
-        <select id="tipo" class="t15x15">
-            <option selected id="todos"> Todos los productos</option>
-        </select>
-        <select id="ordenacion" class="t15x15">
-            <option selected id="sinOrden">Sin orden</option>
-            <option id="sinOrden">Precio Ascendente</option>
-            <option id="sinOrden">Precio Descendente</option>
-            <!--meter una opcion por relevancia, una nueva columna, que se va incrementando con cada compra-->
-        </select>
+    <div class="opciones w100 contenedor elementos_fila elementos_centrados" id="opciones">
+        <div class="w30 contenedor elementos_fila elementos_space-evenly" >
+            <select id="tipo" class="t15x15">
+                <option selected id="todos"> Todos los productos</option>
+            </select>
+            <select id="ordenacion" class="t15x15">
+                <option selected id="sinOrden">Sin orden</option>
+                <option id="sinOrden">Precio Ascendente</option>
+                <option id="sinOrden">Precio Descendente</option>
+                <!--meter una opcion por relevancia, una nueva columna, que se va incrementando con cada compra-->
+            </select>
+        </div>
     </div>
 
     <div class="w100 p_arriba_2 p_abajo_2 contenedor elementos_centrados">
@@ -87,7 +80,7 @@
 
 
 
-    <div class="pie">
+    <div class="w100 pie p_arriba_1">
 
         <h1>pie de pagina</h1>
 

@@ -21,21 +21,26 @@ if(isset($_POST['email'])){
     $consulta = "SELECT i.* FROM incidencias i JOIN compra c ON i.id_compra = c.id_compra WHERE c.id_usuario = '$id_usuario'";
     $resultado = $conexion->query($consulta);
 
+    if($resultado->num_rows > 0){
 
-    $json = "[";
+        $json = "[";
 
-    while ($fila = $resultado-> fetch_assoc()){
-        $json .= "{";
-        $json .= "\"id_incidencia\" : \"".$fila["id_incidencia"]."\",";
-        $json .= "\"id_compra\" : \"".$fila["id_compra"]."\",";
-        $json .= "\"asunto\" : \"".$fila["asunto"]."\",";
-        $json .= "\"consulta\" : \"".$fila["consulta"]."\",";
-        $json .= "\"estado\" : \"".$fila["estado"]."\",";//1 hay stock 0 no hay stock
-        $json .= "\"fecha\" : \"".$fila["fecha"]."\"";
-        $json .= "},";
+        while ($fila = $resultado-> fetch_assoc()){
+            $json .= "{";
+            $json .= "\"id_incidencia\" : \"".$fila["id_incidencia"]."\",";
+            $json .= "\"id_compra\" : \"".$fila["id_compra"]."\",";
+            $json .= "\"asunto\" : \"".addslashes($fila["asunto"])."\",";
+            $json .= "\"consulta\" : \"".addslashes($fila["consulta"])."\",";
+            $json .= "\"estado\" : \"".$fila["estado"]."\",";//1 hay stock 0 no hay stock
+            $json .= "\"fecha\" : \"".$fila["fecha"]."\"";
+            $json .= "},";
+        }
+        $json = substr($json, 0, strlen($json)-1);
+        echo $json."]";
+
+    }else{
+        echo "";
     }
-    $json = substr($json, 0, strlen($json)-1);
-    echo $json."]";
 }else{
     echo "Algo ha fallado. Inténtelo de nuevo más tarde.";
 }

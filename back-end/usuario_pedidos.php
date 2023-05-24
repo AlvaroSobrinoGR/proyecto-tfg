@@ -20,18 +20,22 @@ if(isset($_POST['email'])){
     $consulta = "SELECT *  FROM compra WHERE id_usuario = '$id_usuario'";
     $resultado = $conexion->query($consulta);
     
+    if($resultado->num_rows > 0){
+        $json = "[";
     
-    $json = "[";
-    
-    while ($fila = $resultado-> fetch_assoc()){
-        $json .= "{";
-        $json .= "\"id_compra\" : \"".$fila["id_compra"]."\",";
-        $json .= "\"precio\" : \"".$fila["total_final_con_iva"]."\",";
-        $json .= "\"fecha\" : \"".$fila["tiempo_local_compra"]."\"";
-        $json .= "},";
+        while ($fila = $resultado-> fetch_assoc()){
+            $json .= "{";
+            $json .= "\"id_compra\" : \"".$fila["id_compra"]."\",";
+            $json .= "\"precio\" : \"".$fila["total_final_con_iva"]."\",";
+            $json .= "\"fecha\" : \"".$fila["tiempo_local_compra"]."\"";
+            $json .= "},";
+        }
+        $json = substr($json, 0, strlen($json)-1);
+        echo $json."]";
+    }else{
+        echo "";
     }
-    $json = substr($json, 0, strlen($json)-1);
-    echo $json."]";
+    
 }else{
     echo "Algo ha fallado. Inténtelo de nuevo más tarde.";
 }
