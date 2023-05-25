@@ -104,12 +104,12 @@ function funciones() {
         
         }
         let contenidoFinal = `<tr id="pieSumaSinIva">
-                                <td colspan="3">Total sin iva:</td>
+                                <th colspan="3">Total sin iva:</th>
                                 <td id="sumaSinIva"></td>
                                 <td></td>
                             </tr>
                             <tr id="piecupon">
-                                <td colspan="2">Aplicar codigo descuento:</td>
+                                <th colspan="2">Aplicar codigo descuento:</th>
                                 <td id="tdcupon">
                                     <input type="text" id="codigoDescuento"><br>
                                     <span id="errorCupon"></span>
@@ -118,17 +118,17 @@ function funciones() {
                                 <td></td>
                             </tr>
                             <tr id="piecupon2">
-                                <td colspan="3">Tras codigo descuento:</td>
+                                <th colspan="3">Tras codigo descuento:</th>
                                 <td id="precioCupon"></td>
                                 <td ></td>
                             </tr>
                             <tr id="pieiva">
-                                <td colspan="3">IVA 21%:</td>
+                                <th colspan="3">IVA 21%:</th>
                                 <td id="iva"></td>
                                 <td></td>
                             </tr>
                             <tr id="pieTotalMasIva">
-                                <td colspan="3">Total con IVA:</td>
+                                <th colspan="3">Total con IVA:</th>
                                 <td id="totalMasIva"></td>
                                 <td></td>
                             </tr>`

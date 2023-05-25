@@ -112,15 +112,20 @@ function funciones(){
         document.getElementById("mostrarContrasenia2").addEventListener("click", verContrasenia)
         function verContrasenia(e) {
             let passwordInput = "";
+            let imagen = "";
             if(this.id=="mostrarContrasenia1"){
                 passwordInput = document.getElementById("register-password")
+                imagen = document.getElementById("mostrarContrasenia1")
             }else if(this.id=="mostrarContrasenia2"){
                 passwordInput = document.getElementById("confirm-password")
+                imagen = document.getElementById("mostrarContrasenia2")
             }
             if (passwordInput.type === "password") {
                 passwordInput.type = "text";
+                imagen.setAttribute("src", "css/contraseña/visible.png")
             } else {
                 passwordInput.type = "password";
+                imagen.setAttribute("src", "css/contraseña/oculto.png")
             }
         }
 

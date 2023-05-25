@@ -24,6 +24,9 @@ body{
 .elementos_space-evenly{
     justify-content: space-evenly;
 }
+.elementos_space-between{
+    justify-content: space-between;
+}
 .elementos_centrados{
     justify-content: center;
 }
@@ -33,6 +36,15 @@ body{
 .elemento_cetrado{
     align-self: center;
 }
+.elemento_derecha{
+    align-self: flex-end;
+}
+.elementos_derecha{
+    justify-content: end;
+}
+.elemento_izquierda{
+    align-self: flex-start;
+}
 .limite_fila{/*al llegar al final de la fila se iran llendo abajo*/
     flex-wrap: wrap;
 }
@@ -41,6 +53,9 @@ body{
 }
 .w50{
     width: 50%;
+}
+.w40{
+    width: 40%;
 }
 .w60{
     width: 60%;
@@ -153,6 +168,12 @@ input[type="reset"] {
 .texto_derecha{
     justify-content: right;
 }
+.texto_aling_derecha{
+    text-align: right;
+}
+.texto_aling_izquierda{
+    text-align: left;
+}
 .texto_izquierda{
     text-align: left;
 }
@@ -201,7 +222,7 @@ input[type="reset"] {
     padding: 0.5em;
     width: 100%;
     padding-bottom: 1em;
-    background-color: rgb(181, 181, 181);
+    background-color: #f1f1f1;
 }
 .lista div img{
     width: 15em;
@@ -249,6 +270,23 @@ input[type="reset"] {
     padding-left: 1em;
     padding-right: 0.5em;
 }
+.devolucion input[type="checkbox"]{
+    width: 2em;
+    height: 2em;
+}
+.devolucion input[type="number"]{
+    font-size: larger;
+    width: 3em;
+    height: 2em;
+}
+.devolucion table, .devolucion td, .devolucion th, .devolucion tr{
+    text-align: center;
+    border-collapse: collapse;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    padding-left: 1em;
+    padding-right: 0.5em;
+}
 /*registro inicio sesion*/
 .centrado {
     display: flex;
@@ -260,11 +298,28 @@ input[type="reset"] {
     height: 100%;
     margin: 0;
   }
-.mostrar_contra{
-    font-size: 0;
-    padding: 0;
-    width: 40px;
-    content: "&#128065;";
+
+/*carrito*/
+.lista_prodcutos table, .lista_prodcutos td, .lista_prodcutos tr{
+    text-align: center;
+    border-collapse: collapse;
+    padding-top: 1em;
+    padding-bottom: 1em;
+    padding-left: 0.5em;
+    padding-right: 0.5em;
+}
+.lista_prodcutos th{
+    text-align: end;
+}
+.lista_prodcutos input[type="text"]{
+    font-size: larger;
+    width: 10em;
+    height: 2em;
+}
+.lista_prodcutos input[type="number"]{
+    font-size: larger;
+    width: 3em;
+    height: 2em;
 }
 /*video*/
 #video-container {
