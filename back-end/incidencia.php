@@ -36,7 +36,7 @@ require_once 'conexion_base_datos.php';
                 try {
                     $ultimo_id = mysqli_insert_id($conexion);
                 
-                    $resultado = enviarCorreo($email, "$asunto, incidencia: $ultimo_id" , "Codigo de la incidencia: $ultimo_id <br>fecha: $fecha <br>estado: espera.<br> Le responderemos su incidencia por este email.<br>incidencia: $consulta");
+                    $resultado = enviarCorreo($email, "$asunto. Id incidencia: $ultimo_id" , "Codigo de la incidencia: $ultimo_id <br>fecha: $fecha <br>estado: espera.<br> Le responderemos su incidencia por este email.<br>incidencia: $consulta");
                 } catch (Throwable $t) {
                     echo "Ha ocurrido un error: " . $t->getMessage();
                 }

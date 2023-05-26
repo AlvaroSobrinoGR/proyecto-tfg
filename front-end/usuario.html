@@ -13,58 +13,63 @@
 
     <script src="script/funciones_comunes.js"></script>
 
+    <script src="script/numero_productos_carrito.js"></script>
+
     <script src="script/comprobar_sesion_iniciada.js"></script>
 
     <script src="script/formulario_usuario.js"></script>
 
     <script src="script/ir_a_formulario_inicio_registro_usuario.js"></script>
 
+    
+
 
 
 
 </head>
-<body class="contenedor elementos_columna  w100">
+<body class="contenedor elementos_columna w100">
+
+    <div class="contenedor elementos_columna w100 p_0-5">
 
 
+        <div class="w100 contenedor elementos_fila limite_fila" id="cabecera">
 
+            <div class="w100 p_abajo_1 contenedor texto_derecha" id="informacion_usuario">
 
-    <div class="w100 contenedor elementos_fila limite_fila" id="cabecera">
+            <input class="none" type="button" id="inicio_registro_sesion" name="inicio_registro" value="Registrarse">
 
-        <div class="w100 p_abajo_1 contenedor texto_derecha" id="informacion_usuario">
+            <a class="quitar_estilo_link" href="carrito.html" id="seccion_carrito">
+                <img src="css/iconos/carrito.png">
+                <span class="texto_xxlarge" id="numeroProductosCarrito"></span>
+            </a>
+    
+            <a href="usuario.html" id="seccion_usuario">
+                <img src="css/iconos/usuario.png">
+            </a>
 
-          <input class="none" type="button" id="inicio_registro_sesion" name="inicio_registro" value="Registrarse">
+            </div>
 
-          <a href="carrito.html" id="seccion_carrito">carrito</a>
-
-          <a href="usuario.html" id="seccion_usuario">usuario</a>
-
-        </div>
-
-
-        
-
-        <div class="w100 p_arriba_1 p_abajo_1 contenedor elementos_fila elementos_space-evenly texto_large ">
-
-          <a href="../index.html">inicio</a>
-
-          <a href="productos.html">productos</a>
-
-          <a href="contacto.html">contacto</a>
-
-        </div>
-
-    </div>
-
-
-
-
-    <div class="contenedor elementos_centrados texto_large texto_izquierda" id="cuerpo">
-
-
-        <div class="w50 contenedor elementos_columna" id="formulario_usuario">
 
             
-            <div class="elemento_cetrado">
+
+            <div class="w100 p_arriba_1 p_abajo_1 contenedor elementos_fila elementos_space-evenly texto_large ">
+
+            <a href="../index.html">inicio</a>
+
+            <a href="productos.html">productos</a>
+
+            <a href="contacto.html">contacto</a>
+
+            </div>
+
+        </div>
+
+
+
+
+        <div class="w100 contenedor elementos_columna elementos_centrados texto_large" id="cuerpo">
+
+            <div class="auto elemento_cetrado" id="formulario_usuario1">
                 <a class="azul" href="" id="cerrar_sesion">Cerrar sesion</a>     <br><br>
 
                 <label for="email">Email:</label> <br>      <span id="email">email</span>   <br><br>
@@ -96,52 +101,62 @@
                 <label for="contrasena">Contraseña:</label>     <input type="button" id="cambiarContraseña" value="Cambiar Contraseña">     <span id="respuesta_contraeña" style="color: red;"></span>     <br><br>
             </div>
 
-            <a class="azul" href="" id="pedidos">Pedidos</a>
-            <div class="tabla tabla_resumen" id="lista_pedidos"></div><!--una tabla que ese genere con los datos de los pedidos que ha hecho el usuario-->
+            <div class="w50 elemento_cetrado" id="formulario_usuario2">
 
-            <a class="azul" href="" id="consultas">Consultas</a>
-            <div class="tabla tabla_resumen" id="lista_consultas"></div> <!--una tabla que ese genere con las consultas del usuario y su estado-->
+                <a class="azul" href="" id="pedidos">Pedidos</a>
+                <div class="tabla tabla_resumen" id="lista_pedidos"></div><!--una tabla que ese genere con los datos de los pedidos que ha hecho el usuario-->
 
-            <a class="azul" href="" id="incidencias">Incidencias</a>
-            <div class="tabla tabla_resumen" id="lista_incidencias"></div> <!--una tabla que ese genere con las incidencias del usuario y su estado-->
-        
-        </div>
+                <a class="azul" href="" id="consultas">Consultas</a>
+                <div class="tabla tabla_resumen" id="lista_consultas"></div> <!--una tabla que ese genere con las consultas del usuario y su estado-->
 
-        <div class="tamaño_fotos5x5 none factura" id="factura" >
-            <a  class="azul m_arriba_2 texto_large" href="" id="atras1">Atras</a>
-            <div id="factura_contenido">
-            </div>
-        </div>
-
-        <div  class="contenedor elementos_centrados minimo_pantalla texto_large none m_arriba_4" class="none" id="incidencia" >
-            <a class="azul" href="" id="atras2">Atras</a>
-            <div class="formulario_contacto"  id="incidencia_contenido">
-                
-                <label>ID pedido:</label>      <input class="input_5x2 texto_large" type="text" id="indicencia_id_pedido" readonly><br>
-
-                <label>Asunto</label>  <br>       <input class="input_40x2 texto_large" type="text" id="indicencia_asunto" maxlength="255">      <br><!--cambiar por asunto-->
-
-                <label>Consulta</label>  <br>    <textarea class="input_40x10 texto_large resize" id="indicencia_consulta" maxlength="255"></textarea>     <br>
-
-                <input type="button" id="enviar_incidencia" value="enviar">
-            </div>
+                <a class="azul" href="" id="incidencias">Incidencias</a>
+                <div class="tabla tabla_resumen" id="lista_incidencias"></div> <!--una tabla que ese genere con las incidencias del usuario y su estado-->
             
-        </div>
-
-        <div class="devolucion tamaño_fotos5x5 none texto_large m_arriba_4" id="devolucion" >
-            <a class="azul" href="" id="atras3">Atras</a>
-            <div id="devolucion_contenido">
             </div>
+
+            <div class="auto elemento_cetrado tamaño_fotos5x5 factura none" id="factura" >
+                <a  class="azul m_arriba_2 texto_large" href="" id="atras1">Atras</a>
+                <div id="factura_contenido">
+                </div>
+            </div>
+
+            <div  class="auto elemento_cetrado contenedor elementos_centrados minimo_pantalla texto_large m_arriba_4 none" class="none" id="incidencia" >
+                <a class="azul" href="" id="atras2">Atras</a>
+                <div class="formulario_contacto"  id="incidencia_contenido">
+                    
+                    <label>ID pedido:</label>      <input class="input_5x2 texto_large" type="text" id="indicencia_id_pedido" readonly><br>
+
+                    <label>Asunto</label>  <br>       <input class="input_40x2 texto_large" type="text" id="indicencia_asunto" maxlength="255">      <br><!--cambiar por asunto-->
+
+                    <label>Consulta</label>  <br>    <textarea class="input_40x10 texto_large resize" id="indicencia_consulta" maxlength="255"></textarea>     <br>
+
+                    <input type="button" id="enviar_incidencia" value="enviar">
+                </div>
+                
+            </div>
+
+            <div class="auto elemento_cetrado devolucion tamaño_fotos5x5 texto_large m_arriba_4 none" id="devolucion" >
+                <a class="azul" href="" id="atras3">Atras</a>
+                <div id="devolucion_contenido">
+                </div>
+            </div>
+
+
         </div>
-
-
     </div>
 
 
 
+    <div class="w100 pie contenedor elementos_fila elementos_centrados elementos_centrados_v">
 
-    <div class="w100 pie p_arriba_1">
-        <h1>pie de pagina</h1>
+        <a class="m_derecha_1" href="https://twitter.com/">
+          <img src="css/iconos/twitter.png">
+        </a>
+        
+        <a class="m_izquierda_1" href="https://www.instagram.com/">
+          <img src="css/iconos/instagram.png">
+        </a>
+        
     </div>
 
 

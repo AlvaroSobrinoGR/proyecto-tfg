@@ -10,8 +10,10 @@
     <title>SimplyMinimal</title>
 
     <link href="front-end/css/diseño.css" rel="stylesheet" type="text/css"/>
-
+    
     <script src="front-end/script/funciones_comunes.js"></script>
+
+    <script src="front-end/script/numero_productos_carrito.js"></script>
 
     <script src="front-end/script/codigo_verificacion_cuenta.js"></script>
     
@@ -19,21 +21,25 @@
     
     <script src="front-end/script/ir_a_formulario_inicio_registro_usuario.js"></script>
 
+   
+
 
 
 </head>
 <body class="contenedor elementos_columna w100">
+  
+  <div class="contenedor elementos_columna w100 p_0-5">
+      
+      <!--
+      <div id="video-container">
+        <video autoplay muted loop>
+          <source src="front-end/css/fondo/background.mp4" type="video/mp4">
+        </video>
+      </div>
+      -->
 
-    <!--
-    <div id="video-container">
-      <video autoplay muted loop>
-        <source src="front-end/css/fondo/background.mp4" type="video/mp4">
-      </video>
-    </div>
-    -->
 
-
-  <!--<div id="gif-container"></div>-->
+    <!--<div id="gif-container"></div>-->
 
 
     <div class="w100 contenedor elementos_fila limite_fila" id="cabecera">
@@ -41,11 +47,16 @@
 
       <div class="w100 p_abajo_1 contenedor texto_derecha" id="informacion_usuario">
 
-        <input class="none" type="button" id="inicio_registro_sesion" name="inicio_registro" value="Registrarse">
+        <input type="button" id="inicio_registro_sesion" name="inicio_registro" value="Registrarse">
 
-        <a href="front-end/carrito.html" id="seccion_carrito">carrito</a>
+        <a class="quitar_estilo_link none" href="front-end/carrito.html" id="seccion_carrito">
+          <img src="front-end/css/iconos/carrito.png">
+          <span class="texto_xxlarge" id="numeroProductosCarrito"></span>
+        </a>
 
-        <a href="front-end/usuario.html" id="seccion_usuario">usuario</a>
+        <a class="none" href="front-end/usuario.html" id="seccion_usuario">
+          <img src="front-end/css/iconos/usuario.png">
+        </a>
 
       </div>
 
@@ -91,18 +102,22 @@
 
     </div>
 
+  
+  </div>
 
 
 
-    <div class="w100 pie p_arriba_1">
+    <div class="w100 pie p_arriba_1 contenedor elementos_fila elementos_centrados elementos_centrados_v">
 
-      <h1>pie de pagina</h1>
+      <a class="m_derecha_1" href="https://twitter.com/">
+        <img src="front-end/css/iconos/twitter.png">
+      </a>
+      
+      <a class="m_izquierda_1" href="https://www.instagram.com/">
+        <img src="front-end/css/iconos/instagram.png">
+      </a>
 
     </div>
-
-
-
-
 
   </body>
 </html>

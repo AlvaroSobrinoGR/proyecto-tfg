@@ -23,3 +23,22 @@ function eliminar_usuario(){
         return  sessionStorage.removeItem("usuario_tienda_minimalista")
     }
 }
+
+function pintarNumeroProductos(){
+    if(sessionStorage.getItem("carrito_tienda_minimalista")){
+        let productos = sessionStorage.getItem("carrito_tienda_minimalista").split(";")
+        productos = productos.slice(1, -1);
+        document.getElementById("numeroProductosCarrito").innerText = productos.length;
+    }else{
+        document.getElementById("numeroProductosCarrito").innerText = ""
+    }
+}
+function numeroProductosCarrito(){
+    if(sessionStorage.getItem("carrito_tienda_minimalista")){
+        let productos = sessionStorage.getItem("carrito_tienda_minimalista").split(";")
+        productos = productos.slice(1, -1);
+        return productos.length;
+    }else{
+        return 0;
+    }
+}

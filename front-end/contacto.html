@@ -13,76 +13,93 @@
 
     <script src="script/funciones_comunes.js"></script>
 
+    <script src="script/numero_productos_carrito.js"></script>
+
     <script src="script/formulario_contacto.js"></script>
 
     <script src="script/comprobar_sesion_iniciada.js"></script>
 
     <script src="script/ir_a_formulario_inicio_registro_usuario.js"></script>
 
+    
+
 
 
 
 
 </head>
-<body class="contenedor elementos_columna  w100">
+<body class="contenedor elementos_columna w100">
+
+    <div class="contenedor elementos_columna w100 p_0-5">
 
 
+        <div class="w100 contenedor elementos_fila limite_fila" id="cabecera">
+
+            <div class="w100 p_abajo_1 contenedor texto_derecha" id="informacion_usuario">
+
+            <input type="button" id="inicio_registro_sesion" name="inicio_registro" value="Registrarse">
+
+            <a class="quitar_estilo_link none" href="carrito.html" id="seccion_carrito">
+                <img src="css/iconos/carrito.png">
+                <span class="texto_xxlarge" id="numeroProductosCarrito"></span>
+            </a>
+    
+            <a class="none" href="usuario.html" id="seccion_usuario">
+                <img src="css/iconos/usuario.png">
+            </a>
+
+            </div>
 
 
-    <div class="w100 contenedor elementos_fila limite_fila" id="cabecera">
-
-        <div class="w100 p_abajo_1 contenedor texto_derecha" id="informacion_usuario">
-
-          <input class="none" type="button" id="inicio_registro_sesion" name="inicio_registro" value="Registrarse">
-
-          <a href="carrito.html" id="seccion_carrito">carrito</a>
-
-          <a href="usuario.html" id="seccion_usuario">usuario</a>
-
-        </div>
-
-
-        
-
-        <div class="w100 p_arriba_1 p_abajo_1 contenedor elementos_fila elementos_space-evenly texto_large">
-
-          <a href="../index.html">inicio</a>
-
-          <a href="productos.html">productos</a>
-
-          <a href="contacto.html">contacto</a>
-
-        </div>
-
-    </div>
-
-
-
-    <div class="contenedor elementos_centrados texto_large">
-
-        <div class="none texto_centrado m_arriba_4" id="sesion_no_iniciada">
-
-            <h1>Debes iniciar sesion para poder enviar una consulta</h1>
-
-        </div>
-
-
-        <div id="formulario_contacto" class="texto_large m_arriba_4">
-
-            <label>Asunto:</label> <br>        <input class="input_40x2 texto_large" type="text" id="asunto" maxlength="255">     <br> <br><!--cambiar por asunto-->
-
-            <label>Consulta:</label> <br>     <textarea class="input_40x10 texto_large resize" id="consulta" maxlength="255"></textarea>     <br><br>
-
-            <input type="button" id="enviar_comentario" value="Enviar">
             
+
+            <div class="w100 p_arriba_1 p_abajo_1 contenedor elementos_fila elementos_space-evenly texto_large">
+
+            <a href="../index.html">inicio</a>
+
+            <a href="productos.html">productos</a>
+
+            <a href="contacto.html">contacto</a>
+
+            </div>
+
         </div>
 
+
+
+        <div class="contenedor elementos_centrados texto_large">
+
+            <div class="texto_centrado m_arriba_4" id="sesion_no_iniciada">
+
+                <h1>Debes iniciar sesion para poder enviar una consulta</h1>
+
+            </div>
+
+
+            <div id="formulario_contacto" class="texto_large m_arriba_4 none">
+
+                <label>Asunto:</label> <br>        <input class="input_40x2 texto_large" type="text" id="asunto" maxlength="255">     <br> <br><!--cambiar por asunto-->
+
+                <label>Consulta:</label> <br>     <textarea class="input_40x10 texto_large resize" id="consulta" maxlength="255"></textarea>     <br><br>
+
+                <input type="button" id="enviar_comentario" value="Enviar">
+                
+            </div>
+
+        </div>
     </div>
 
 
+    <div class="w100 pie p_arriba_1 contenedor elementos_fila elementos_centrados elementos_centrados_v">
 
-    <div class="w100 pie p_arriba_1">
-        <h1>pie de pagina</h1>
+        <a class="m_derecha_1" href="https://twitter.com/">
+          <img src="css/iconos/twitter.png">
+        </a>
+        
+        <a class="m_izquierda_1" href="https://www.instagram.com/">
+          <img src="css/iconos/instagram.png">
+        </a>
+        
     </div>
 
 

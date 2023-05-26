@@ -13,235 +13,251 @@
 
     <script src="script/funciones_comunes.js"></script>
 
+    <script src="script/numero_productos_carrito.js"></script>
+
     <script src="script/comprobar_sesion_iniciada.js"></script>
 
     <script src="script/ir_a_formulario_inicio_registro_usuario.js"></script>
 
     <script src="script/carrito.js"></script>
 
+    
+
 
 </head>
 <body class="contenedor elementos_columna w100">
 
+    <div class="contenedor elementos_columna w100 p_0-5">
 
 
+        <div class="w100 contenedor elementos_fila limite_fila" id="cabecera">
 
-    <div class="w100 contenedor elementos_fila limite_fila" id="cabecera">
+            <div class="w100 p_abajo_1 contenedor texto_derecha" id="informacion_usuario">
 
-        <div class="w100 p_abajo_1 contenedor texto_derecha" id="informacion_usuario">
+            <input class="none" type="button" id="inicio_registro_sesion" name="inicio_registro" value="Registrarse">
 
-          <input class="none" type="button" id="inicio_registro_sesion" name="inicio_registro" value="Registrarse">
-
-          <a href="carrito.html" id="seccion_carrito">carrito</a>
-
-          <a href="usuario.html" id="seccion_usuario">usuario</a>
-
-        </div>
-
-
-        
-
-        <div class="w100 p_arriba_1 p_abajo_1 contenedor elementos_fila elementos_space-evenly texto_large ">
-
-            <a href="../index.html">inicio</a>
-  
-            <a href="productos.html">productos</a>
-  
-            <a href="contacto.html">contacto</a>
-  
-        </div>
-
-    </div>
-
-    <div class="w100 contenedor elementos_columna elementos_centrados">
-
-        <div class="w50 elemento_cetrado m_arriba_2 texto_large" id="cesta1">
-            <div class="texto_aling_derecha" id="movimiento1">
+            <a class="quitar_estilo_link" href="carrito.html" id="seccion_carrito">
+                <img src="css/iconos/carrito.png">
+                <span class="texto_xxlarge" id="numeroProductosCarrito"></span>
+            </a>
     
-                <a class="azul " href="" id="siguiente1" style="display: none;">Siguiente pagina</a>
-                <!--Solo estara activo despues de haber pasado una vez a la siguiente pagina-->
-    
+            <a href="usuario.html" id="seccion_usuario">
+                <img src="css/iconos/usuario.png">
+            </a>
+
             </div>
-    
-    
-            <div class="lista_prodcutos m_arriba_2 contenedor elementos_fila elementos_centrados" id="contenido1">
-    
-                <table id="cestaCompra">
-                    <tr id="cabecera">
-                        <td>Cantidad</td>
-                        <td>Producto</td>
-                        <td>Precio unitario</td>
-                        <td>Precio Total</td>
-                        <td></td>
-                    </tr>
-    
-    
-                    <!--contenido-->
-    
-                    
-                </table>
-    
-    
-            </div>
-        </div>
-    
-        <div class="w40 elemento_cetrado m_arriba_2 texto_large none" id="cesta2">
-            <div class="contenedor elementos_fila elementos_space-between" id="movimiento2">
-    
-                <a class="azul" href="" id="atras1" >Pagina anterior</a>
-    
-                <a class="azul " href="" id="siguiente2" style="display: none;">Siguiente pagina</a>
-                <!--Solo estara activo despues de haber pasado una vez a la siguiente pagina-->
-                
-            </div>
-            <div class="m_arriba_2 contenedor elementos_fila elementos_centrados texto_large" id="contenido2">
-                <div class="w60">
-                    <label for="nombre">Nombre:</label> <br>
-                    <span id="error_nombre" style="color: red;"></span>
-                    <input class="input_20x2  texto_large" type="text" id="nombre" name="nombre">   <br>
+
+
             
-                    <label for="direccion">Dirección:</label><br>
-                    <span id="error_direccion" style="color: red;"></span>  
-                    <input  class="input_20x2  texto_large"type="text" id="direccion" name="direccion">  <br>
 
-                    <label for="telefono">Número de Teléfono:</label><br>
-                    <span id="error_telefono" style="color: red;"></span>
-                    <input class="input_20x2  texto_large" type="text" id="telefono" name="telefono">  <br>
+            <div class="w100 p_arriba_1 p_abajo_1 contenedor elementos_fila elementos_space-evenly texto_large ">
 
+                <a href="../index.html">inicio</a>
+    
+                <a href="productos.html">productos</a>
+    
+                <a href="contacto.html">contacto</a>
+    
+            </div>
+
+        </div>
+
+        <div class="w100 contenedor elementos_columna elementos_centrados">
+
+            <div class="w50 elemento_cetrado m_arriba_2 texto_large" id="cesta1">
+                <div class="texto_aling_derecha" id="movimiento1">
+        
+                    <a class="azul " href="" id="siguiente1" style="display: none;">Siguiente pagina</a>
+                    <!--Solo estara activo despues de haber pasado una vez a la siguiente pagina-->
+        
+                </div>
+        
+        
+                <div class="lista_prodcutos m_arriba_2 contenedor elementos_fila elementos_centrados" id="contenido1">
+        
+                    <table id="cestaCompra">
+                        <tr id="cabecera">
+                            <td>Cantidad</td>
+                            <td>Producto</td>
+                            <td>Precio unitario</td>
+                            <td>Precio Total</td>
+                            <td></td>
+                        </tr>
+        
+        
+                        <!--contenido-->
+        
+                        
+                    </table>
+        
+        
                 </div>
             </div>
-        </div>
-    
-        <div class="w40 elemento_cetrado m_arriba_2 texto_large none" id="cesta3">
-            <div class="texto_aling_izquierda" id="movimiento3">
-    
-                <a class="azul" href="" id="atras2">Pagina anterior</a>
-                <!--Solo estara activo despues de haber pasado una vez a la siguiente pagina-->
-    
-            </div>
-            
-            <div class="m_arriba_2" id="contenido3">
-                <div id="paypal-button-container"></div>  
-            
-                <script src="https://www.paypal.com/sdk/js?client-id=Ab-pjiPTvH0T_SFtqwnt_eNHo7RLQON6T6u01aWjkqrFOpdg32yMloGaDU7UnQ4OX2nZ8TvaKUzs6w_Q&currency=EUR"></script>
-                
-                <script>
-                    //ESTO PERMITE QUE SEA EL SERVIDOR CON LOS MINIMOS DATOS CRITICOS NECESARIOS PONER EL PRECIO EN EL PAGO
-                    function calcularPrecio(callback){
-                    let formulario = new FormData();
-                    let productos_cantidades = ";"
-                    let tr = document.getElementById("cestaCompra").getElementsByTagName("tbody")[0].getElementsByTagName("tr");
-                    let cantidad_productos = tr.length-5
-                    for (let index = 1; index < cantidad_productos+1; index++) {
-                        let numero_producto = tr[index].getElementsByTagName("td")[0].id.split(";")[1]
-                        productos_cantidades+=numero_producto+"-";
-                        if(document.getElementById("unidades;"+numero_producto)!=null){
-                        productos_cantidades+= document.getElementById("unidades;"+numero_producto).value+";"
-                        }
-                    }
-                    formulario.append("productos_cantidades", productos_cantidades)
-                    formulario.append("codigo_descuento", document.getElementById("codigoDescuento").value)
-                    let xhr = new XMLHttpRequest();
-                    xhr.open("POST", "../back-end/calcular_precio_carrito.php");
-                    xhr.addEventListener("load", function(resultado) {
-                        if(resultado.target.response.includes("ha surgido")){
-                        callback(NaN); // Si hay un error, llama a la devolución de llamada con NaN
-                        } else {
-                        callback(parseFloat(resultado.target.response)); // Llama a la devolución de llamada con el precio procesado
-                        }
-                    });
-                    xhr.send(formulario);
-                    }
-    
-                    paypal.Buttons({
-    
-                        createOrder: function(data, actions){
-                        return new Promise(function(resolve, reject) {
-                            calcularPrecio(function(precio) {
-                            if (isNaN(precio)) {
-                                reject(new Error('El precio no es válido'));
-                            } else {
-                                resolve(actions.order.create({
-                                purchase_units: [{
-                                    amount: {
-                                    value: parseFloat(precio).toFixed(2)
-                                    }
-                                }]
-                                }));
-                            }
-                            });
-                        });
-                        },
-    
-                        onApprove: function(data, actions ){
-                            actions.order.capture().then(function(detalles){
-                                let formulario = new FormData();
-                                formulario.append("email", obtener_usuario());
-                                //tiempo_locar_se_realizo_compra
-                                let fechaActual = new Date();
-                                formulario.append("fechaActual", fechaActual.getFullYear() + '-' + (fechaActual.getMonth() + 1).toString().padStart(2, '0') + '-' + fechaActual.getDate().toString().padStart(2, '0') + ' ' + fechaActual.getHours().toString().padStart(2, '0') + ':' + fechaActual.getMinutes().toString().padStart(2, '0') + ':' + fechaActual.getSeconds().toString().padStart(2, '0'));
-                                //zulu_time_comrpa
-                                formulario.append("zulu_time_compra",detalles.update_time);
-                                //id_orden_compra
-                                formulario.append("id_orden_compra", detalles.id);
-                                //id_pagador
-                                formulario.append("id_pagador", detalles.payer.payer_id);
-                                //email_pagador
-                                formulario.append("email_pagador", detalles.payer.email_address);
-                                //nombre_apellido_pagador
-                                formulario.append("nombre_apellido_pagador",detalles.payer.name["given_name"]+" "+detalles.payer.name["surname"]);
-                                //importe_total_email
-                                formulario.append("importe_total_paypal", detalles.purchase_units[0]["amount"]["value"])
-    
-                                //productos_cantidades
-                                let productos_cantidades = ";"
-                                let tr = document.getElementById("cestaCompra").getElementsByTagName("tbody")[0].getElementsByTagName("tr");
-                                let cantidad_productos = tr.length-5
-                                for (let index = 1; index < cantidad_productos+1; index++) {
-                                    let numero_producto = tr[index].getElementsByTagName("td")[0].id.split(";")[1]
-                                    productos_cantidades+=numero_producto+"-";
-                                    if(document.getElementById("unidades;"+numero_producto)!=null){
-                                        productos_cantidades+= document.getElementById("unidades;"+numero_producto).value+";"
-                                    }
-                                }
-                                formulario.append("productos_cantidades", productos_cantidades)
-                                formulario.append("codigo_descuento", document.getElementById("codigoDescuento").value)
+        
+            <div class="w40 elemento_cetrado m_arriba_2 texto_large none" id="cesta2">
+                <div class="contenedor elementos_fila elementos_space-between" id="movimiento2">
+        
+                    <a class="azul" href="" id="atras1" >Pagina anterior</a>
+        
+                    <a class="azul " href="" id="siguiente2" style="display: none;">Siguiente pagina</a>
+                    <!--Solo estara activo despues de haber pasado una vez a la siguiente pagina-->
                     
-                                let xhr = new XMLHttpRequest();
-                                xhr.open("POST", "../back-end/compra.php");
-                                xhr.addEventListener("load", (respuesta) => {
-                                    if(respuesta.target.response.length>0 && !respuesta.target.response.includes("fallado en la factura")){
-                                        alert(respuesta.target.response)
-                                    }else{
-                                        alert("La compra se realizo con exito. Se le envio un email con la informacion")
-                                        sessionStorage.removeItem("carrito_tienda_minimalista")
-                                    }
-                                    window.location.href = "../index.html"
-                                });
-                                xhr.send(formulario);
-                            })
-                        },
-    
-    
-                        onCancel: function (data){//esto se lanza cuando el usuario cancela el pago
-                            alert("pago cancelado")
-                        }
-                        
-                    }).render('#paypal-button-container')
-                </script>
+                </div>
+                <div class="m_arriba_2 contenedor elementos_fila elementos_centrados texto_large" id="contenido2">
+                    <div class="w60">
+                        <label for="nombre">Nombre:</label> <br>
+                        <span id="error_nombre" style="color: red;"></span>
+                        <input class="input_20x2  texto_large" type="text" id="nombre" name="nombre">   <br>
+                
+                        <label for="direccion">Dirección:</label><br>
+                        <span id="error_direccion" style="color: red;"></span>  
+                        <input  class="input_20x2  texto_large"type="text" id="direccion" name="direccion">  <br>
+
+                        <label for="telefono">Número de Teléfono:</label><br>
+                        <span id="error_telefono" style="color: red;"></span>
+                        <input class="input_20x2  texto_large" type="text" id="telefono" name="telefono">  <br>
+
+                    </div>
+                </div>
             </div>
+        
+            <div class="w40 elemento_cetrado m_arriba_2 texto_large none" id="cesta3">
+                <div class="texto_aling_izquierda" id="movimiento3">
+        
+                    <a class="azul" href="" id="atras2">Pagina anterior</a>
+                    <!--Solo estara activo despues de haber pasado una vez a la siguiente pagina-->
+        
+                </div>
+                
+                <div class="m_arriba_2" id="contenido3">
+                    <div id="paypal-button-container"></div>  
+                
+                    <script src="https://www.paypal.com/sdk/js?client-id=Ab-pjiPTvH0T_SFtqwnt_eNHo7RLQON6T6u01aWjkqrFOpdg32yMloGaDU7UnQ4OX2nZ8TvaKUzs6w_Q&currency=EUR"></script>
+                    
+                    <script>
+                        //ESTO PERMITE QUE SEA EL SERVIDOR CON LOS MINIMOS DATOS CRITICOS NECESARIOS PONER EL PRECIO EN EL PAGO
+                        function calcularPrecio(callback){
+                        let formulario = new FormData();
+                        let productos_cantidades = ";"
+                        let tr = document.getElementById("cestaCompra").getElementsByTagName("tbody")[0].getElementsByTagName("tr");
+                        let cantidad_productos = tr.length-5
+                        for (let index = 1; index < cantidad_productos+1; index++) {
+                            let numero_producto = tr[index].getElementsByTagName("td")[0].id.split(";")[1]
+                            productos_cantidades+=numero_producto+"-";
+                            if(document.getElementById("unidades;"+numero_producto)!=null){
+                            productos_cantidades+= document.getElementById("unidades;"+numero_producto).value+";"
+                            }
+                        }
+                        formulario.append("productos_cantidades", productos_cantidades)
+                        formulario.append("codigo_descuento", document.getElementById("codigoDescuento").value)
+                        let xhr = new XMLHttpRequest();
+                        xhr.open("POST", "../back-end/calcular_precio_carrito.php");
+                        xhr.addEventListener("load", function(resultado) {
+                            if(resultado.target.response.includes("ha surgido")){
+                            callback(NaN); // Si hay un error, llama a la devolución de llamada con NaN
+                            } else {
+                            callback(parseFloat(resultado.target.response)); // Llama a la devolución de llamada con el precio procesado
+                            }
+                        });
+                        xhr.send(formulario);
+                        }
+        
+                        paypal.Buttons({
+        
+                            createOrder: function(data, actions){
+                            return new Promise(function(resolve, reject) {
+                                calcularPrecio(function(precio) {
+                                if (isNaN(precio)) {
+                                    reject(new Error('El precio no es válido'));
+                                } else {
+                                    resolve(actions.order.create({
+                                    purchase_units: [{
+                                        amount: {
+                                        value: parseFloat(precio).toFixed(2)
+                                        }
+                                    }]
+                                    }));
+                                }
+                                });
+                            });
+                            },
+        
+                            onApprove: function(data, actions ){
+                                actions.order.capture().then(function(detalles){
+                                    let formulario = new FormData();
+                                    formulario.append("email", obtener_usuario());
+                                    //tiempo_locar_se_realizo_compra
+                                    let fechaActual = new Date();
+                                    formulario.append("fechaActual", fechaActual.getFullYear() + '-' + (fechaActual.getMonth() + 1).toString().padStart(2, '0') + '-' + fechaActual.getDate().toString().padStart(2, '0') + ' ' + fechaActual.getHours().toString().padStart(2, '0') + ':' + fechaActual.getMinutes().toString().padStart(2, '0') + ':' + fechaActual.getSeconds().toString().padStart(2, '0'));
+                                    //zulu_time_comrpa
+                                    formulario.append("zulu_time_compra",detalles.update_time);
+                                    //id_orden_compra
+                                    formulario.append("id_orden_compra", detalles.id);
+                                    //id_pagador
+                                    formulario.append("id_pagador", detalles.payer.payer_id);
+                                    //email_pagador
+                                    formulario.append("email_pagador", detalles.payer.email_address);
+                                    //nombre_apellido_pagador
+                                    formulario.append("nombre_apellido_pagador",detalles.payer.name["given_name"]+" "+detalles.payer.name["surname"]);
+                                    //importe_total_email
+                                    formulario.append("importe_total_paypal", detalles.purchase_units[0]["amount"]["value"])
+        
+                                    //productos_cantidades
+                                    let productos_cantidades = ";"
+                                    let tr = document.getElementById("cestaCompra").getElementsByTagName("tbody")[0].getElementsByTagName("tr");
+                                    let cantidad_productos = tr.length-5
+                                    for (let index = 1; index < cantidad_productos+1; index++) {
+                                        let numero_producto = tr[index].getElementsByTagName("td")[0].id.split(";")[1]
+                                        productos_cantidades+=numero_producto+"-";
+                                        if(document.getElementById("unidades;"+numero_producto)!=null){
+                                            productos_cantidades+= document.getElementById("unidades;"+numero_producto).value+";"
+                                        }
+                                    }
+                                    formulario.append("productos_cantidades", productos_cantidades)
+                                    formulario.append("codigo_descuento", document.getElementById("codigoDescuento").value)
+                        
+                                    let xhr = new XMLHttpRequest();
+                                    xhr.open("POST", "../back-end/compra.php");
+                                    xhr.addEventListener("load", (respuesta) => {
+                                        if(respuesta.target.response.length>0 && !respuesta.target.response.includes("fallado en la factura")){
+                                            alert(respuesta.target.response)
+                                        }else{
+                                            alert("La compra se realizo con exito. Se le envio un email con la informacion")
+                                            sessionStorage.removeItem("carrito_tienda_minimalista")
+                                        }
+                                        window.location.href = "../index.html"
+                                    });
+                                    xhr.send(formulario);
+                                })
+                            },
+        
+        
+                            onCancel: function (data){//esto se lanza cuando el usuario cancela el pago
+                                alert("pago cancelado")
+                            }
+                            
+                        }).render('#paypal-button-container')
+                    </script>
+                </div>
+            </div>
+
+
+
         </div>
 
 
+    </div>  
 
-    </div>
+    <div class="w100 pie p_arriba_1 contenedor elementos_fila elementos_centrados elementos_centrados_v">
 
-
-
-    <div class="w100 pie p_arriba_1">
-
-        <h1>pie de pagina</h1>
-
+        <a class="m_derecha_1" href="https://twitter.com/">
+          <img src="css/iconos/twitter.png">
+        </a>
+        
+        <a class="m_izquierda_1" href="https://www.instagram.com/">
+          <img src="css/iconos/instagram.png">
+        </a>
+        
     </div>
 
 

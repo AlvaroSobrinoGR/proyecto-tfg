@@ -162,9 +162,9 @@ if(isset($_POST["email"]) && isset($_POST["id_pedido_devolver"]) && isset($_POST
                     echo "devoluciohn realizada ";
                     try {
                         if($eliminadaFactura){
-                            enviarCorreo($email, "Devolucion realizada, factura eliminada", "Debido a que la factura de la compra con id ".$id_compra." se ha quedado sin productos y han sido todos devueltos se ha liminado. En los proximos dias se le devovlera todo el deinero y se parasara a recoger los productos a devolver");
+                            enviarCorreo($email, "Devolucion realizada, factura eliminada. Id compra: ".$id_compra, "Debido a que la factura de la compra con id ".$id_compra." se ha quedado sin productos y han sido todos devueltos se ha liminado. En los proximos dias se le devovlera todo el deinero y se parasara a recoger los productos a devolver");
                         }else{
-                            enviarCorreo($email, "Devolucion realizada, factura actualizada", "Su factura a sido actualziada, en los proximos dias se le devolvera el dinero de la devolucion y se pasara a recoger los productos a devolver.<br>".pintarFactureaPedidos($id_compra, "Compra"));
+                            enviarCorreo($email, "Devolucion realizada, factura actualizada. Id compra: ".$id_compra, "Su factura a sido actualziada, en los proximos dias se le devolvera el dinero de la devolucion y se pasara a recoger los productos a devolver.<br>".pintarFactureaPedidos($id_compra, "Compra"));
                         }
                         
                     } catch (\Throwable $th) {

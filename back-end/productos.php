@@ -97,7 +97,7 @@ if(isset($_POST["tipo"])){
                 $datos[] = array(
                     "id_producto" => $fila["id_producto"],
                     "nombre" => $fila["nombre"],
-                    "descripcion" => $fila["descripcion"],
+                    "descripcion" => addslashes($fila["descripcion"]),
                     "stock" => ($fila["stock"] > 0 ? "1" : "0"),
                     "precio" => $fila["precio"],
                     "descuento" => $descuento,

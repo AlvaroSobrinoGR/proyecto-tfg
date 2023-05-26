@@ -5,10 +5,15 @@ function funciones() {
 
     //cesta1
     let numeroProductos = 1;
-    //carrito
+    //carrit
+    if(numeroProductosCarrito()==0){
+        document.getElementById("contenido1").innerText = "No tienes productos que comprar"
+    }
+
     if(sessionStorage.getItem("carrito_tienda_minimalista")){
         document.getElementById("siguiente1").style.display = "block";
        pedirProductos(sessionStorage.getItem("carrito_tienda_minimalista"))
+        
     }
 
 
@@ -158,7 +163,11 @@ function funciones() {
             numeros = carrito.filter(numero => numero !== producto);
             sessionStorage.setItem("carrito_tienda_minimalista", ";"+numeros.join(";")+";")
         }
+        pintarNumeroProductos()
         calculos()
+        if(numeroProductosCarrito()==0){
+            document.getElementById("contenido1").innerText = "No tienes productos que comprar"
+        }
     }
 
     function precioUnidad(){

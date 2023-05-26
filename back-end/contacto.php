@@ -32,7 +32,7 @@ if(isset($_POST['email']) && isset($_POST['asunto']) && isset($_POST['consulta']
       try {
         $ultimo_id = mysqli_insert_id($conexion);
     
-        $resultado = enviarCorreo($email, "$asunto, consulta: $ultimo_id" , "Codigo de la consulta: $ultimo_id <br>fecha: $fecha <br>estado: espera.<br> Le responderemos su consulta por este email.<br>consulta: $consulta");
+        $resultado = enviarCorreo($email, "$asunto. Id consulta: $ultimo_id" , "Codigo de la consulta: $ultimo_id <br>fecha: $fecha <br>estado: espera.<br> Le responderemos su consulta por este email.<br>consulta: $consulta");
       } catch (Throwable $t) {
         echo "Ha ocurrido un error: " . $t->getMessage();
       }

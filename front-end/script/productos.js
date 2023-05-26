@@ -67,6 +67,8 @@ function funciones(){
             let h4 = document.createElement("h3")
             let p = document.createElement("p")
             let precio = document.createElement("h3")
+            let pagina = document.createElement("a")
+            let divpagina = document.createElement("div")
             let comprar = document.createElement("input")
             let avisar = document.createElement("input")
 
@@ -88,6 +90,9 @@ function funciones(){
             //las imagenes de los productos tienen como nombre el mismo id_producto quye tiene el producto en la base de datos
             h4.innerHTML = json[index]["nombre"];
             p.innerHTML = json[index]["descripcion"];
+            pagina.innerText = "Saber más"
+            pagina.setAttribute("href", "paginas_productos/paginaProducto"+json[index]["id_producto"]+"/paginaProducto"+json[index]["id_producto"]+".html?id_producto="+json[index]["id_producto"])
+            divpagina.appendChild(pagina)
 
             if(json[index]["descuento"]>0){
                 precio.innerHTML = "<del>"+Number(json[index]["precio"]).toLocaleString("es-ES",{minimumFractionDigits: 2, maximumFractionDigits:2})+"</del>&euro;"+" -"+json[index]["descuento"]+"%"+" &#8594; "+Number(json[index]["precio_con_descuento"]).toLocaleString("es-ES",{minimumFractionDigits: 2, maximumFractionDigits:2, style:"currency", currency:"EUR"});
@@ -100,6 +105,7 @@ function funciones(){
             div.appendChild(img);
             div.appendChild(h4);
             div.appendChild(p);
+            div.appendChild(divpagina);
             div.appendChild(precio);
             if(json[index]["stock"]==0){
                 div.appendChild(avisar);
@@ -165,7 +171,7 @@ function funciones(){
         }else{
             sessionStorage.setItem("carrito_tienda_minimalista", ";"+this.id.split(";")[1]+";")
         }
-        
+        pintarNumeroProductos()
     }
 
     //avisar

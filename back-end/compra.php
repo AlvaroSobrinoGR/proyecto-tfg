@@ -171,7 +171,7 @@ if(!$error){
       $email_pagador = $fila['email_pagador'];
       $nombre_apellido_pagador = $fila['nombre_apellido_pagador'];
       $importe_total = $fila['total_final_con_iva'];
-      enviarCorreo($email, "Compra realizada",pintarFactureaPedidos($id_compra, "Compra"));
+      enviarCorreo($email, "Compra realizada. Id compra: ".$id_compra,pintarFactureaPedidos($id_compra, "Compra"));
     }else{
       $conexion->rollback(); //devuelve la base de datos al estaod anterior a las operacions
       ERROR($_POST['email']);

@@ -298,7 +298,8 @@ function funciones (){
             if(respuesta.target.response.includes("Algo ha fallado. Inténtelo de nuevo más tarde.")){
                 alert(respuesta.target.response)
             }else{
-                document.getElementById("formulario_usuario").style.display = "none";
+                document.getElementById("formulario_usuario1").style.display = "none";
+                document.getElementById("formulario_usuario2").style.display = "none";
                 document.getElementById("factura").style.display = "block";
                 document.getElementById("factura_contenido").innerHTML = respuesta.target.response
             }
@@ -309,20 +310,23 @@ function funciones (){
 
     document.getElementById("atras1").addEventListener("click", (e) => {
         e.preventDefault()
-        document.getElementById("formulario_usuario").style.display = "block";
+        document.getElementById("formulario_usuario1").style.display = "block";
+        document.getElementById("formulario_usuario2").style.display = "block";
         document.getElementById("factura").style.display = "none";
         document.getElementById("factura_contenido").innerHTML = ""
     })
 
     document.getElementById("atras2").addEventListener("click", (e) => {
         e.preventDefault()
-        document.getElementById("formulario_usuario").style.display = "block";
+        document.getElementById("formulario_usuario1").style.display = "block";
+        document.getElementById("formulario_usuario2").style.display = "block";
         document.getElementById("incidencia").style.display = "none";
     })
 
     document.getElementById("atras3").addEventListener("click", (e) => {
         e.preventDefault()
-        document.getElementById("formulario_usuario").style.display = "block";
+        document.getElementById("formulario_usuario1").style.display = "block";
+        document.getElementById("formulario_usuario2").style.display = "block";
         document.getElementById("devolucion").style.display = "none";
     })
     
@@ -335,7 +339,8 @@ function funciones (){
             if(respuesta.target.response.includes("Algo ha fallado. Inténtelo de nuevo más tarde.")){
                 alert(respuesta.target.response)
             }else{
-                document.getElementById("formulario_usuario").style.display = "none";
+                document.getElementById("formulario_usuario1").style.display = "none";
+                document.getElementById("formulario_usuario2").style.display = "none";
                 document.getElementById("incidencia").style.display = "block";
                 if(!document.getElementById("indicencia_id_pedido").value.includes(pedido)){
 
@@ -386,7 +391,8 @@ function funciones (){
                 alert(respuesta.target.response)
             }else{
                 let json = JSON.parse(respuesta.target.response)
-                document.getElementById("formulario_usuario").style.display = "none";
+                document.getElementById("formulario_usuario1").style.display = "none";
+                document.getElementById("formulario_usuario2").style.display = "none";
                 document.getElementById("devolucion").style.display = "block";
                 pintarDevolucion(json)
             }

@@ -14,11 +14,15 @@
     
     <script src="script/funciones_comunes.js"></script>
 
+    <script src="script/numero_productos_carrito.js"></script>
+
     <script src="script/productos.js"></script>
 
     <script src="script/comprobar_sesion_iniciada.js"></script>
 
     <script src="script/ir_a_formulario_inicio_registro_usuario.js"></script>
+
+    
 
 
 
@@ -26,64 +30,76 @@
 </head>
 <body class="contenedor elementos_columna w100">
 
+    <div class="contenedor elementos_columna w100 p_0-5">
 
 
+        <div class="w100 contenedor elementos_fila limite_fila" id="cabecera">
 
-    <div class="w100 contenedor elementos_fila limite_fila" id="cabecera">
+            <div class="w100 p_abajo_1 contenedor texto_derecha" id="informacion_usuario">
 
-        <div class="w100 p_abajo_1 contenedor texto_derecha" id="informacion_usuario">
+            <input type="button" id="inicio_registro_sesion" name="inicio_registro" value="Registrarse">
 
-          <input class="none" type="button" id="inicio_registro_sesion" name="inicio_registro" value="Registrarse">
+            <a class="quitar_estilo_link none" href="carrito.html" id="seccion_carrito">
+                <img src="css/iconos/carrito.png">
+                <span class="texto_xxlarge" id="numeroProductosCarrito"></span>
+            </a>
+    
+            <a class="none" href="usuario.html" id="seccion_usuario">
+                <img src="css/iconos/usuario.png">
+            </a>
 
-          <a href="carrito.html" id="seccion_carrito">carrito</a>
+            </div>
 
-          <a href="usuario.html" id="seccion_usuario">usuario</a>
+
+            
+
+            <div class="w100 p_arriba_1 p_abajo_1 contenedor elementos_fila elementos_space-evenly texto_large ">
+
+                <a href="../index.html">inicio</a>
+    
+                <a href="productos.html">productos</a>
+    
+                <a href="contacto.html">contacto</a>
+    
+            </div>
 
         </div>
 
 
+        <div class="opciones w100 contenedor elementos_fila elementos_centrados" id="opciones">
+            <div class="w30 contenedor elementos_fila elementos_space-evenly" >
+                <select id="tipo" class="t15x15">
+                    <option selected id="todos"> Todos los productos</option>
+                </select>
+                <select id="ordenacion" class="t15x15">
+                    <option selected id="sinOrden">Sin orden</option>
+                    <option id="sinOrden">Precio Ascendente</option>
+                    <option id="sinOrden">Precio Descendente</option>
+                    <!--meter una opcion por relevancia, una nueva columna, que se va incrementando con cada compra-->
+                </select>
+            </div>
+        </div>
+
+        <div class="w100 p_arriba_2 p_abajo_2 contenedor elementos_centrados">
+            <div class="lista w30 contenedor elementos_columna" id="cuerpo">
+                <h1>algo ha salido mal</h1>
+
+            </div>
+        </div>
+    </div>
+
+
+
+    <div class="w100 pie p_arriba_1 contenedor elementos_fila elementos_centrados elementos_centrados_v">
+
+        <a class="m_derecha_1" href="https://twitter.com/">
+          <img src="css/iconos/twitter.png">
+        </a>
         
-
-        <div class="w100 p_arriba_1 p_abajo_1 contenedor elementos_fila elementos_space-evenly texto_large ">
-
-            <a href="../index.html">inicio</a>
-  
-            <a href="productos.html">productos</a>
-  
-            <a href="contacto.html">contacto</a>
-  
-          </div>
-
-    </div>
-
-
-    <div class="opciones w100 contenedor elementos_fila elementos_centrados" id="opciones">
-        <div class="w30 contenedor elementos_fila elementos_space-evenly" >
-            <select id="tipo" class="t15x15">
-                <option selected id="todos"> Todos los productos</option>
-            </select>
-            <select id="ordenacion" class="t15x15">
-                <option selected id="sinOrden">Sin orden</option>
-                <option id="sinOrden">Precio Ascendente</option>
-                <option id="sinOrden">Precio Descendente</option>
-                <!--meter una opcion por relevancia, una nueva columna, que se va incrementando con cada compra-->
-            </select>
-        </div>
-    </div>
-
-    <div class="w100 p_arriba_2 p_abajo_2 contenedor elementos_centrados">
-        <div class="lista w30 contenedor elementos_columna" id="cuerpo">
-            <h1>productos</h1>
-
-        </div>
-    </div>
-
-
-
-    <div class="w100 pie p_arriba_1">
-
-        <h1>pie de pagina</h1>
-
+        <a class="m_izquierda_1" href="https://www.instagram.com/">
+          <img src="css/iconos/instagram.png">
+        </a>
+        
     </div>
 
 
