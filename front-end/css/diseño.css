@@ -45,6 +45,9 @@ body{
 .elemento_izquierda{
     align-self: flex-start;
 }
+.elementos_izquierda{
+    justify-content: left;
+}
 .limite_fila{/*al llegar al final de la fila se iran llendo abajo*/
     flex-wrap: wrap;
 }
@@ -65,6 +68,9 @@ body{
 }
 .w30{
     width: 30%;
+}
+.w80{
+    width: 80%;
 }
 .auto{
     width: fit-content;

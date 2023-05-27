@@ -159,6 +159,7 @@ function funciones(){
 
         cambiarLista(this.id.split(";")[1])
         //hacemos esta funcion para que el this.id funcione, y asi poder recoger de su id que numero de pagina lanzo el evento para asi decirle a conexionProductos() el numero de pagina que to0ca
+        window.scrollTo(0, 0);
     }
 
     //comprar
