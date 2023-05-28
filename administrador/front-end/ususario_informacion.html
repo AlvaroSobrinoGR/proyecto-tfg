@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+
+    <title>SimplyMinimal</title>
+
+    <link href="css/diseño.css" rel="stylesheet" type="text/css" />
+
+    <script src="script/funciones_comunes.js"></script>
+    
+    <script src="script/comprobar_sesion_iniciada.js"></script>
+
+    <script src="script/formulario_usuario.js"></script>
+
+
+</head>
+<body class="contenedor elementos_columna w100">
+
+        <div class="w100 contenedor elementos_columna elementos_centrados texto_large" id="cuerpo">
+
+            <div class="auto elemento_cetrado" id="formulario_usuario1">
+                <a class="azul" href="" id="cerrar_sesion">Cerrar sesion</a>     <br><br>
+
+                <label for="email">Email:</label> <br>      <span id="email">email</span>   <br><br>
+
+                <label for="nombre">Nombre y apellidos:</label><br>
+
+                <div class="w20">
+                <span id="error_nombre" style="color: red;"></span>
+                </div>
+
+                <input class="input_20x2  texto_large" type="text" id="nombre" name="nombre">     <br><br>
+                
+                <label for="direccion">Dirección:</label><br>       <input class="input_20x2  texto_large" type="text" id="direccion" name="direccion">     <br><br>
+
+                <label for="telefono">Número de Teléfono:</label> <br> 
+
+                <div class="w20">
+                <span id="error_telefono" style="color: red;"></span> 
+                </div>
+
+                <input class="input_20x2  texto_large" type="number" id="telefono" name="telefono">  <br><br>
+
+                <div class="contenedor elementos_centrados_v p_abajo_1">
+                <label for="novedades">Novedades: </label>       <input class="input_2x2 m_izquierda_0-5" type="checkbox" id="novedades" name="novedades">        <br><br>
+                </div>
+
+                <input type="button" id="guardarCambios" value="Guardar Cambios">   <br><br>
+
+                <label for="contrasena">Contraseña:</label>     <input type="button" id="cambiarContraseña" value="Cambiar Contraseña">     <span id="respuesta_contraeña" style="color: red;"></span>     <br><br>
+            </div>
+
+            <div class="w50 elemento_cetrado" id="formulario_usuario2">
+
+                <a class="azul" href="" id="pedidos">Pedidos</a>
+                <div class="tabla tabla_resumen" id="lista_pedidos"></div><!--una tabla que ese genere con los datos de los pedidos que ha hecho el usuario-->
+
+                <a class="azul" href="" id="consultas">Consultas</a>
+                <div class="tabla tabla_resumen" id="lista_consultas"></div> <!--una tabla que ese genere con las consultas del usuario y su estado-->
+
+                <a class="azul" href="" id="incidencias">Incidencias</a>
+                <div class="tabla tabla_resumen" id="lista_incidencias"></div> <!--una tabla que ese genere con las incidencias del usuario y su estado-->
+            
+            </div>
+
+            <div class="auto elemento_cetrado tamaño_fotos5x5 factura none" id="factura" >
+                <a  class="azul m_arriba_2 texto_large" href="" id="atras1">Atras</a>
+                <div id="factura_contenido">
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+
+
+</body>
+</html>

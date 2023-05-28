@@ -102,6 +102,7 @@ function funciones() {
             let a = document.createElement("a")
             a.setAttribute("id", "liminarProducto;"+i+";"+productos[i]["id_producto"])
             a.setAttribute("href", "")
+            a.classList.add("azul")
             a.innerText = "eliminar"
             td.appendChild(a);
             tr.appendChild(td);

@@ -2,6 +2,7 @@ window.addEventListener("load", funciones)
 
 
 function funciones() {
+    
     //comprobamos si habia una sesion iniciada o no.
     let sesionIniciada = false;
 
@@ -10,17 +11,19 @@ function funciones() {
     }
 
     //comprobar que el email esta bien
-    if (saber_si_hay_usuario()) {  
+    if (saber_si_hay_usuario()) { 
         conexion(obtener_usuario())
     }else{
         desplazar()
+        
     }
     function desplazar(){
+        let archivo_actual = window.location.pathname;
         if(archivo_actual.includes("usuario.html")){
-            window.location.href = "../index.html"
+            window.location.href = "index.html"
         }
         if(archivo_actual.includes("carrito.html")){
-            window.location.href = "../index.html"
+            window.location.href = "index.html"
         }
     }
     function desocultar_contenido(){//si la sesion no esta iniciada o esta mal
@@ -77,7 +80,6 @@ function funciones() {
                 }else if(window.location.pathname.includes("paginaProducto")){
                     window.location.href = "../../../index.html"
                 }
-                
             }else{
                 desocultar_contenido()
                 sesionIniciada = true;

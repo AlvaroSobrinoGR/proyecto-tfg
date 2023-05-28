@@ -88,18 +88,23 @@ function funciones (){
             xhr.addEventListener("load", (respuesta)=>{
                 let resultado = respuesta.target.response;
                 if(this.id.includes("boton_iniciar_sesion")){
-                    if(resultado.includes("La cuenta es correcta")){
-                        if(document.getElementsByName("guardar_sesion")[0].checked){
-                            localStorage.setItem("usuario_tienda_minimalista", resultado.split(";")[1])
-                        }else{
-                            sessionStorage.setItem("usuario_tienda_minimalista", resultado.split(";")[1])
-                        }
-                        //le llevo al inicio
-                        window.location.href = "../index.html"
+                    if(resultado.includes(".html")){
+                        sessionStorage.setItem("usuario_tienda_minimalista", resultado.split(";")[1])
+                        window.location.href = resultado.split(";")[0];
                     }else{
-                        document.getElementById("respuesta_servidor").innerHTML=resultado;
+                        if(resultado.includes("La cuenta es correcta")){
+                            if(document.getElementsByName("guardar_sesion")[0].checked){
+                                localStorage.setItem("usuario_tienda_minimalista", resultado.split(";")[1])
+                            }else{
+                                sessionStorage.setItem("usuario_tienda_minimalista", resultado.split(";")[1])
+                            }
+                            //le llevo al inicio
+                            window.location.href = "../index.html"
+                        }else{
+                            document.getElementById("respuesta_servidor").innerHTML=resultado;
+                        }
+                        document.getElementById("boton_iniciar_sesion").disabled = false;
                     }
-                    document.getElementById("boton_iniciar_sesion").disabled = false;
                 }else{
                     if(resultado.includes("exito")){
                         //localStorage.setItem("usuario", resultado.split(";")[1])

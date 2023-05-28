@@ -20,7 +20,11 @@ if (isset($_POST["tipo"]) && isset($_POST["email"]) && isset($_POST["contrasenia
         if (preg_match('/^[^\s@]+@[^\s@]+\.[^\s@]+$/', $email)) {
           // Verificar patrón de contraseñas y que sean iguales
           if (preg_match('/^(?=.*[A-Za-zÁÉÍÓÚÑáéíóúñ])(?=.*\d)(?=.*[@$!%*#?&])[A-Za-zÁÉÍÓÚÑáéíóúñ\d@$!%*#?&]{6,}$/', $contrasenia) && $contrasenia === $contraseniaConfirmacion) {
-            todoCorrecto("creacion");
+            if (strpos(strtoupper($email), "SIMPLYMINIMAL") !== false) {
+              echo "No se puede crear una cuenta con este email al tener datos de la empresa.";
+            } else {
+              todoCorrecto("creacion");
+            }
           } else {
             echo "Las contraseñas no cumplen los requisitos o no son iguales Debe tener al menos 6 caracteres, un número, un carácter alfabético y un signo especial (@$!%*#?&).";
           }
@@ -61,11 +65,26 @@ function todoCorrecto($tipo){
             }
     
         } else {
-        
+
+          $consulta = "SELECT * FROM empleados WHERE email = '$email'";
+          $resultado = $conexion->query($consulta);
+          $fila = $resultado->fetch_assoc();
+          if ($resultado->num_rows > 0 ) {
+            
+            if (password_verify($contrasenia, $fila["contraseña"])) {
+    
+                echo "../administrador/front-end/inicio.html;".$email;
+            } else {
+            
+                echo "La contraseña está mal";
+            }
+          }else{
             echo "La cuenta no existe";
+          }
         }
     
     } elseif ($tipo == "creacion") {
+
        
         $consulta = "SELECT * FROM usuarios WHERE email = '$email'";
         $resultado = $conexion->query($consulta);
@@ -110,7 +129,7 @@ function crear($conexion, $email, $contrasenia, $novedades){
             if(strpos($conexion->host_info,"localhost") !== false){
               $resultado = enviarCorreo($email, "Confirmar creacion de cuenta", "esta es la confirmacion de la creacion de la cuenta http://localhost/proyecto%20tfg/index.html?email=$email&hash=$codgioConfirmacion");
              }else{
-              $resultado = enviarCorreo($email, "Confirmar creacion de cuenta", "esta es la confirmacion de la creacion de la cuenta http://simplyminimal.epizy.com?email=$email&hash=$codgioConfirmacion");
+              $resultado = enviarCorreo($email, "Confirmar creacion de cuenta", "esta es la confirmacion de la creacion de la cuenta http://simplyminimal.epizy.com/index.html?email=$email&hash=$codgioConfirmacion");
             }
             
           } catch (Throwable $t) {

@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SimplyMinimal Administración</title>
+
+    <script src="script/funciones_comunes.js"></script>
+    
+    <script src="script/comprobar_sesion_iniciada.js"></script>
+
+    <script src="script/pintar_usuarios.js"></script>
+</head>
+<body>
+    <a href="inicio.html">Atás</a><br>
+   
+    <label>Buscar por:</label>
+    <select id="tipoBusqueda">
+        <option value="0">Nada</option>
+        <option value="id_usuario">id_usuario</option>
+        <option value="email">email</option>
+        <option value="id_datos">id_datos</option>
+        <option value="nombre_apellido">nombre_apellido</option>
+        <option value="direccion">direccion</option>
+        <option value="telefono">telefono</option>
+        <option value="validada">validada</option>
+    </select>
+    <label>Dato ha buscar:</label>
+    <input type="text" id="contenidoBusqueda">
+    <label>Ordenar:</label>
+    <select id="orden">
+        <option value="0">Nada</option>
+        <option value="id_usuario">id_usuario</option>
+        <option value="email">email</option>
+        <option value="id_datos">id_datos</option>
+        <option value="nombre_apellido">nombre_apellido</option>
+        <option value="direccion">direccion</option>
+        <option value="telefono">telefono</option>
+        <option value="validada">validada</option>
+    </select>
+
+
+    <table id="datos">
+    </table>
+</body>
+</html>
