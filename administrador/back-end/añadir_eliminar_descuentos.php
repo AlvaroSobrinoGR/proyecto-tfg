@@ -3,11 +3,12 @@ require_once 'conexion_base_datos.php';
 
 $conexion = conexionBaseDatos();
 
-if (isset($_POST['id_producto']) && isset($_POST['porcentaje']) && isset($_POST['tipo'])) {
-    $idProducto = $_POST['id_producto'];
-    $porcentaje = $_POST['porcentaje'];
+
+    
     $tipo = $_POST['tipo'];
     if($tipo=="añadir"){
+        $idProducto = $_POST['id_producto'];
+        $porcentaje = $_POST['porcentaje'];
 
         // Verificar si existe el producto en la tabla productos
         $consultaProducto = "SELECT * FROM productos WHERE id_producto = '$idProducto'";
@@ -32,11 +33,26 @@ if (isset($_POST['id_producto']) && isset($_POST['porcentaje']) && isset($_POST[
         } else {
             echo "El producto no existe.";
         }
+    }else{
+        $id_descuento = $_POST["id_descuento"];
+
+        // Verificar si existe el descuento en la tabla
+        $consulta = "SELECT * FROM descuentos WHERE id_descuento = '$id_descuento'";
+        $resultado = $conexion->query($consulta);
+
+        if ($resultado->num_rows > 0) {
+        // Eliminar la fila del descuento
+        $eliminar = "DELETE FROM descuentos WHERE id_descuento = '$id_descuento'";
+        if ($conexion->query($eliminar) === TRUE) {
+            echo "Se ha eliminado el descuento con ID: " . $id_descuento;
+        } else {
+            echo "Error al eliminar el descuento: " . $conexion->error;
+        }
+        } else {
+        echo "No existe el descuento con ID: " . $id_descuento;
+        }
     }
 
-} else {
-    echo "Datos de entrada incorrectos.";
-}
 
 $conexion->close();
 

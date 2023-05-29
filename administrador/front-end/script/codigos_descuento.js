@@ -3,10 +3,9 @@ window.addEventListener("load", funciones)
 function funciones(){
 
     let xhr = new XMLHttpRequest();
-    xhr.open("POST", "../back-end/obtener_descuentos.php");
+    xhr.open("POST", "../back-end/obtener_codigos_descuento.php");
     xhr.addEventListener("load", (respuesta) => {
         
-        console.log(respuesta)
         if(respuesta.target.response.length > 0){
             pintar(JSON.parse(respuesta.target.response))
         }else{
@@ -18,8 +17,8 @@ function funciones(){
     function pintar(json){
         let tabla = document.getElementById("datos")
         tabla.innerHTML = "";
-        tabla.innerHTML += '<tr><th>id descuento</th><th>porcentaje</th><th>id producto</th></tr>'
-        let propiedades = ["id_descuento", "porcentaje", "id_producto"]
+        tabla.innerHTML += '<tr><th>codigo descuento</th><th>porcentaje</th><th>estado</th></tr>'
+        let propiedades = ["id_cupon", "porcentaje", "estado"]
         let descuentos = [];
             
         //lo que hago aquie es recorrer el arry al reves para pintar al principio de la tabla las consultas mas recientes
@@ -35,9 +34,9 @@ function funciones(){
             }
             let td = document.createElement("td")
             let a = document.createElement("a")
-            a.setAttribute("id", "eliminar;"+json[i]["id_descuento"])
+            a.setAttribute("id", "eliminar;"+json[i]["id_cupon"])
             a.setAttribute("href", "")
-            descuentos[i] = json[i]["id_descuento"];
+            descuentos[i] = json[i]["id_cupon"];
             a.innerHTML = "eliminar"
             a.style.color = "blue"
             td.appendChild(a)
@@ -58,7 +57,7 @@ function funciones(){
         formulario.append("contenido_busqueda", document.getElementById("contenidoBusqueda").value);
         formulario.append("orden", document.getElementById("orden").value);
         formulario.append("tipo_orden", document.getElementById("tipo_orden").value);
-        xhr.open("POST", "../back-end/busqueda_descuentos.php");
+        xhr.open("POST", "../back-end/busqueda_codigos_descuento.php");
         xhr.addEventListener("load", (respuesta) => {
             if(!respuesta.target.response.includes("No hay resultados")){
                 pintar(JSON.parse(respuesta.target.response))
@@ -73,16 +72,18 @@ function funciones(){
 
     function añadirDescuento(){
 
-        let id_producto = evaluarIdProducto(parseFloat(document.getElementById("idprodcutoañadir").value))
+        let codigo = document.getElementById("codigoañadir").value
         let porcentaje = evaluarDescuento(parseFloat(document.getElementById("porcentajeañadir").value))
+        let estado = evaluarEstado(parseInt(document.getElementById("estadoañadir").value))
 
-        if(id_producto!=false && porcentaje!=false){
+        if(estado!=false && porcentaje!=false){
             let xhr = new XMLHttpRequest();
             let formulario = new FormData();
             formulario.append("tipo", "añadir");
-            formulario.append("id_producto", id_producto);
+            formulario.append("codigo", codigo);
             formulario.append("porcentaje", porcentaje);
-            xhr.open("POST", "../back-end/añadir_eliminar_descuentos.php");
+            formulario.append("estado", estado);
+            xhr.open("POST", "../back-end/añadir_eliminar_codigos_descuento.php");
             xhr.addEventListener("load", (respuesta) => {
                 alert(respuesta.target.response)
             });
@@ -90,7 +91,37 @@ function funciones(){
         }
     }
 
-    
+    document.getElementById("modificarDescuento").addEventListener("click", modificarDescuento)
+
+    function modificarDescuento(){
+
+        let codigo = document.getElementById("codigomodificar").value
+        let estado = evaluarEstado(parseFloat(document.getElementById("estadomodificar").value))
+        if(estado!=false && codigo.length > 0){
+            let xhr = new XMLHttpRequest();
+            let formulario = new FormData();
+            formulario.append("tipo", "modificar");
+            formulario.append("codigo", codigo);
+            formulario.append("estado", estado);
+            xhr.open("POST", "../back-end/añadir_eliminar_codigos_descuento.php");
+            xhr.addEventListener("load", (respuesta) => {
+                alert(respuesta.target.response)
+            });
+            xhr.send(formulario);
+        }
+    }
+
+    function evaluarEstado(variable) {
+        if (variable === 1 || variable === 0) {
+            if(variable === 0){
+                return "Z";
+            }
+          return variable;
+        } else {
+            alert('El valor del estad o solo puede ser 1 (activo) 0 (desactivado)');
+          return false;
+        }
+      }
 
     function evaluarDescuento(valor) {
         // Verificar si el valor es numérico, positivo y no mayor a 100
@@ -117,14 +148,7 @@ function funciones(){
         }
       }
 
-      function evaluarIdProducto(valor) {
-        if (typeof valor === 'number' && Number.isInteger(valor) && valor >= 0) {
-            return valor;
-        } else {
-          alert('El id del producto no es numérico, no es entero o es negativo.');
-          return false;
-        }
-      }
+
 
       function eliminarDescuento(e){
         e.preventDefault();
@@ -134,8 +158,8 @@ function funciones(){
           let xhr = new XMLHttpRequest();
           let formulario = new FormData();
           formulario.append("tipo", "eliminar");
-          formulario.append("id_descuento", this.id.split(";")[1]);
-          xhr.open("POST", "../back-end/añadir_eliminar_descuentos.php");
+          formulario.append("codigo", this.id.split(";")[1]);
+          xhr.open("POST", "../back-end/añadir_eliminar_codigos_descuento.php");
           xhr.addEventListener("load", (respuesta) => {
             alert(respuesta.target.response);
           });

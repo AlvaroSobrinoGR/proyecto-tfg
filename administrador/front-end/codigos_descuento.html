@@ -10,25 +10,25 @@
     
     <script src="script/comprobar_sesion_iniciada.js"></script>-->
 
-    <script src="script/descuentos.js"></script>
+    <script src="script/codigos_descuento.js"></script>
 </head>
 <body>
     <a href="inicio.html">Atás</a><br>
     <label>Buscar por:</label>
     <select id="tipoBusqueda">
         <option value="">Nada</option>
-        <option value="id_descuento">id_descuento</option>
+        <option value="id_cupon">id_cupon</option>
         <option value="porcentaje">porcentaje</option>
-        <option value="id_producto">id_producto</option>
+        <option value="estado">estado</option>
     </select>
     <label>Dato ha buscar:</label>
     <input type="text" id="contenidoBusqueda">
     <label>Ordenar por:</label>
     <select id="orden">
         <option value="">Nada</option>
-        <option value="id_descuento">id_descuento</option>
+        <option value="id_cupon">id_cupon</option>
         <option value="porcentaje">porcentaje</option>
-        <option value="id_producto">id_producto</option>
+        <option value="estado">estado</option>
     </select>
     <select id="tipo_orden">
         <option value="ASC" selected>ascendente</option>
@@ -36,8 +36,13 @@
     </select>
     <input type="button" id="aplicar" value="Aplicar"><br><br>
     <span>Añadir descuento:</span><br>
-    <label>ID producto:</label><input type="number" id="idprodcutoañadir"><br>
-    <label>porcentaje:</label><input type="number" id="porcentajeañadir"><input type="button" id="añadirDescuento" value="Añadir Descuento"><br><br>
+    <label>Codigo Descuento:</label><input type="text" id="codigoañadir"><br>
+    <label>porcentaje:</label><input type="number" id="porcentajeañadir"><br>
+    <label>estado:</label><input type="number" id="estadoañadir"><input type="button" id="añadirDescuento" value="Añadir Descuento"><br><br>
+
+    <span>Modificar estadod:</span><br>
+    <label>Codigo Descuento:</label><input type="text" id="codigomodificar"><br>
+    <label>estado:</label><input type="number" id="estadomodificar"><input type="button" id="modificarDescuento" value="Modificar Descuento"><br><br>
 
     <table id="datos">
     </table>
