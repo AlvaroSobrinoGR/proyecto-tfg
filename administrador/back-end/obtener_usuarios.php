@@ -3,7 +3,7 @@
 require_once 'conexion_base_datos.php';
 
 $conexion = conexionBaseDatos();
-
+    
     $consulta = "SELECT * FROM usuarios";
     $resultado = $conexion->query($consulta);
     

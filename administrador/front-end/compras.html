@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SimplyMinimal Administración</title>
+
+    <!--<script src="script/funciones_comunes.js"></script>
+    
+    <script src="script/comprobar_sesion_iniciada.js"></script>-->
+
+    <script src="script/pintar_compras.js"></script>
+</head>
+<body>
+    <a href="inicio.html">Atás</a><br>
+   
+    <label>Buscar por:</label>
+    <select id="tipoBusqueda">
+        <option value="">Nada</option>
+        <option value="id_compra">id_compra</option>
+        <option value="id_usuario">id_usuario</option>
+        <option value="id_datos_comprador">id_datos_comprador</option>
+        <option value="tiempo_local_compra">tiempo_local_compra</option>
+        <option value="zulu_time_compra">zulu_time_compra</option>
+        <option value="id_orden_compra">id_orden_compra</option>
+        <option value="id_pagador">id_pagador</option>
+        <option value="email_pagador">id_pagador</option>
+        <option value="nombre_apellido_pagador">id_pagador</option>
+        <option value="precio_total">precio_total</option>
+        <option value="id_cupon">id_cupon</option>
+        <option value="total_tras_codigo">total_tras_codigo</option>
+        <option value="porcentaje_iva">porcentaje_iva</option>
+        <option value="total_final_con_iva">total_final_con_iva</option>
+
+        <option value="id_producto">id_producto</option>
+        <option value="cantidad">cantidad</option>
+        <option value="precio_unidad">precio_unidad</option>
+        <option value="precio_total_prodcutos">precio_total_prodcutos</option>
+        <option value="porcentaje_descuento">porcentaje_descuento</option>
+        <option value="total_tras_desceunto">total_tras_desceunto</option>
+    </select>
+    <label>Dato ha buscar:</label>
+    <input type="text" id="contenidoBusqueda">
+    <label>Ordenar por:</label>
+    <select id="orden">
+        <option value="">Nada</option>
+        <option value="id_compra">id_compra</option>
+        <option value="id_usuario">id_usuario</option>
+        <option value="id_datos_comprador">id_datos_comprador</option>
+        <option value="tiempo_local_compra">tiempo_local_compra</option>
+        <option value="zulu_time_compra">zulu_time_compra</option>
+        <option value="id_orden_compra">id_orden_compra</option>
+        <option value="id_pagador">id_pagador</option>
+        <option value="email_pagador">id_pagador</option>
+        <option value="nombre_apellido_pagador">id_pagador</option>
+        <option value="precio_total">precio_total</option>
+        <option value="id_cupon">id_cupon</option>
+        <option value="total_tras_codigo">total_tras_codigo</option>
+        <option value="porcentaje_iva">porcentaje_iva</option>
+        <option value="total_final_con_iva">total_final_con_iva</option>
+    </select>
+    <select id="tipo_orden">
+        <option value="ASC" selected>ascendente</option>
+        <option value="DESC">descendente</option>
+    </select>
+    <input type="button" id="aplicar" value="Aplicar">
+
+    <table id="datos">
+    </table>
+</body>
+</html>

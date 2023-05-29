@@ -2,9 +2,9 @@ window.addEventListener("load", funciones)
 
 function funciones(){
     document.getElementById("informacionUsuario").addEventListener("click",cambio)
-    document.getElementById("consultas").addEventListener("click",cambio)
-    document.getElementById("incidencias").addEventListener("click",cambio)
-    document.getElementById("productos").addEventListener("click",cambio)
+    document.getElementById("compras").addEventListener("click",cambio)
+    document.getElementById("datosusuario").addEventListener("click",cambio)
+    document.getElementById("descuentos").addEventListener("click",cambio)
 
     function cambio(){
         let nombre = this.id;
@@ -12,14 +12,14 @@ function funciones(){
             case "informacionUsuario":
                 window.location.href = "usuario.html"
                 break;
-            case "consultas":
-                
+            case "compras":
+                window.location.href = "compras.html"
                 break;
-            case "incidencias":
-                
+            case "datosusuario":
+                window.location.href = "datos_usuario.html"
                 break;
-            case "productos":
-                
+            case "descuentos":
+                window.location.href = "descuentos.html"
                 break;
         }
 

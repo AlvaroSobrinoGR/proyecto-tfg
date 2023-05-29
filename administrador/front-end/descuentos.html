@@ -10,40 +10,35 @@
     
     <script src="script/comprobar_sesion_iniciada.js"></script>-->
 
-    <script src="script/pintar_usuarios.js"></script>
+    <script src="script/descuentos.js"></script>
 </head>
 <body>
     <a href="inicio.html">Atás</a><br>
-   
     <label>Buscar por:</label>
     <select id="tipoBusqueda">
         <option value="">Nada</option>
-        <option value="id_usuario">id_usuario</option>
-        <option value="email">email</option>
-        <option value="id_datos">id_datos</option>
-        <option value="nombre_apellido">nombre_apellido</option>
-        <option value="direccion">direccion</option>
-        <option value="telefono">telefono</option>
-        <option value="validada">validada</option>
+        <option value="id_descuento">id_descuento</option>
+        <option value="porcentaje">porcentaje</option>
+        <option value="id_producto">id_producto</option>
     </select>
     <label>Dato ha buscar:</label>
     <input type="text" id="contenidoBusqueda">
     <label>Ordenar por:</label>
     <select id="orden">
         <option value="">Nada</option>
-        <option value="id_usuario">id_usuario</option>
-        <option value="email">email</option>
-        <option value="id_datos">id_datos</option>
-        <option value="nombre_apellido">nombre_apellido</option>
-        <option value="direccion">direccion</option>
-        <option value="telefono">telefono</option>
-        <option value="validada">validada</option>
+        <option value="id_descuento">id_descuento</option>
+        <option value="porcentaje">porcentaje</option>
+        <option value="id_producto">id_producto</option>
     </select>
     <select id="tipo_orden">
         <option value="ASC" selected>ascendente</option>
         <option value="DESC">descendente</option>
     </select>
-    <input type="button" id="aplicar" value="Aplicar">
+    <input type="button" id="aplicar" value="Aplicar"><br><br>
+    <span>Añadir descuento:</span><br>
+    <label>ID producto:</label><input type="number" id="idprodcutoañadir"><br>
+    <span>añadir desceutno</span>
+    <label>porcentaje:</label><input type="number" id="porcentajeañadir"><input type="button" id="añadirDescuento" value="Añadir Descuento"><br><br>
 
     <table id="datos">
     </table>

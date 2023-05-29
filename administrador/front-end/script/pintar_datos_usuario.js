@@ -3,7 +3,7 @@ window.addEventListener("load", funciones)
 function funciones(){
 
     let xhr = new XMLHttpRequest();
-    xhr.open("POST", "../back-end/obtener_usuarios.php");
+    xhr.open("POST", "../back-end/obtener_datos_usuario.php");
     xhr.addEventListener("load", (respuesta) => {
         
         console.log(respuesta)
@@ -18,8 +18,8 @@ function funciones(){
     function pintar(json){
         let tabla = document.getElementById("datos")
         tabla.innerHTML = "";
-        tabla.innerHTML += '<tr><th>Id usuario</th><th>email</th><th>id_datos</th><th>nombre_apellido</th><th>direccion</th><th>telefono</th><th>validada</th></tr>'
-        let propiedades = ["id_usuario", "email", "id_datos", "nombre_apellido", "direccion", "telefono", "validada"]
+        tabla.innerHTML += '<tr><th>id datos</th><th>nombre_apellido</th><th>direccion</th><th>telefono</th></tr>'
+        let propiedades = ["id_datos", "nombre_apellido", "direccion", "telefono"]
             
         //lo que hago aquie es recorrer el arry al reves para pintar al principio de la tabla las consultas mas recientes
         for (let i = 0 ; i < json.length; i++) {
@@ -45,7 +45,7 @@ function funciones(){
         formulario.append("contenido_busqueda", document.getElementById("contenidoBusqueda").value);
         formulario.append("orden", document.getElementById("orden").value);
         formulario.append("tipo_orden", document.getElementById("tipo_orden").value);
-        xhr.open("POST", "../back-end/busqueda_usuario.php");
+        xhr.open("POST", "../back-end/busqueda_datos_usuario.php");
         xhr.addEventListener("load", (respuesta) => {
             if(!respuesta.target.response.includes("No hay resultados")){
                 pintar(JSON.parse(respuesta.target.response))
