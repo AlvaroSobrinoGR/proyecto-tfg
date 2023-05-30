@@ -7,7 +7,9 @@ function funciones(){
     document.getElementById("descuentos").addEventListener("click",cambio)
     document.getElementById("codigosDescuento").addEventListener("click",cambio)
     document.getElementById("productos").addEventListener("click",cambio)
-
+    document.getElementById("consultas").addEventListener("click",cambio)
+    document.getElementById("incidencias").addEventListener("click",cambio)
+    
     function cambio(){
         let nombre = this.id;
         switch (nombre) {
@@ -29,6 +31,12 @@ function funciones(){
             case "productos":
                 window.location.href = "productos.html"
                 break;
+            case "consultas":
+                window.location.href = "consultas.html"
+                break;
+            case "incidencias":
+                    window.location.href = "incidencias.html"
+                    break;
         }
 
     }

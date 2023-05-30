@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SimplyMinimal Administración</title>
+
+    <script src="script/funciones_comunes.js"></script>
+    
+    <script src="script/comprobar_sesion_iniciada.js"></script>
+
+    <script src="script/obtener_id_empleado.js"></script>
+
+    <script src="script/incidencias.js"></script>
+</head>
+<body>
+    
+    <a href="inicio.html">Atás</a><br>
+    <p>Id empleado: <span id="IDEmpleado"></span></p>
+    <label>Buscar por:</label>
+    <select id="tipoBusqueda">
+        <option value="">Nada</option>
+        <option value="id_incidencia">id_incidencia</option>
+        <option value="id_empleado">id_empleado</option>
+        <option value="id_compra">id_compra</option>
+        <option value="asunto">asunto</option>
+        <option value="consulta">consulta</option>
+        <option value="estado">estado</option>
+        <option value="fecha">fecha</option>
+    </select>
+    <label>Dato ha buscar:</label>
+    <input type="text" id="contenidoBusqueda">
+    <label>Ordenar por:</label>
+    <select id="orden">
+        <option value="">Nada</option>
+        <option value="id_incidencia">id_incidencia</option>
+        <option value="id_empleado">id_empleado</option>
+        <option value="id_compra">id_compra</option>
+        <option value="asunto">asunto</option>
+        <option value="consulta">consulta</option>
+        <option value="estado">estado</option>
+        <option value="fecha">fecha</option>
+    </select>
+    <select id="tipo_orden">
+        <option value="ASC" selected>ascendente</option>
+        <option value="DESC">descendente</option>
+    </select>
+    <input type="button" id="aplicar" value="Aplicar"><br><br>
+    <span>Hacerse cargo:</span><br>
+    <label>ID incidencia:</label><input type="number" id="idincidenciacargo">
+    <input type="button" id="cargoIncidencia" value="Hacerse cargo de la incidencia"><br><br>
+    <span>Modificar estado incidencia:</span><br>
+    <label>ID incidencia:</label><input type="number" id="idcincidenciamodificar"><br>
+    <label>Estado:</label>    
+    <select id="estadoIncidencia">
+        <option value="">Nada</option>
+        <option value="espera">espera</option>
+        <option value="trabajando">trabajando</option>
+        <option value="finalizada">finalizada</option>
+    </select><input type="button" id="modifiaIncidencia" value="Modificar incidencia"><br><br>
+
+    <table id="datos">
+    </table>
+</body>
+</html>
