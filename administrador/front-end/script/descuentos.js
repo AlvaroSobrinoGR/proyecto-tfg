@@ -82,7 +82,7 @@ function funciones(){
             formulario.append("tipo", "añadir");
             formulario.append("id_producto", id_producto);
             formulario.append("porcentaje", porcentaje);
-            xhr.open("POST", "../back-end/añadir_eliminar_descuentos.php");
+            xhr.open("POST", "../back-end/operaciones_descuentos.php");
             xhr.addEventListener("load", (respuesta) => {
                 alert(respuesta.target.response)
             });
@@ -135,7 +135,7 @@ function funciones(){
           let formulario = new FormData();
           formulario.append("tipo", "eliminar");
           formulario.append("id_descuento", this.id.split(";")[1]);
-          xhr.open("POST", "../back-end/añadir_eliminar_descuentos.php");
+          xhr.open("POST", "../back-end/operaciones_descuentos.php");
           xhr.addEventListener("load", (respuesta) => {
             alert(respuesta.target.response);
           });
@@ -143,6 +143,25 @@ function funciones(){
         } else {
           // Acción a realizar si el cliente cancela
           console.log("Eliminación cancelada por el cliente.");
+        }
+    }
+
+    document.getElementById("avisarDescuento").addEventListener("click", avisarDescuento)
+
+    function avisarDescuento(){
+
+        if(document.getElementById("iddescuentoaviso").value.length>0){
+            let xhr = new XMLHttpRequest();
+            let formulario = new FormData();
+            formulario.append("tipo", "avisar");
+            formulario.append("id_descuento", document.getElementById("iddescuentoaviso").value);
+            xhr.open("POST", "../back-end/operaciones_descuentos.php");
+            xhr.addEventListener("load", (respuesta) => {
+                alert(respuesta.target.response)
+            });
+            xhr.send(formulario);
+        }else{
+          alert("Debes introducir un id de descuento")
         }
     }
 

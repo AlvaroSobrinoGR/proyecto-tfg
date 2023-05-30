@@ -83,7 +83,7 @@ function funciones(){
             formulario.append("codigo", codigo);
             formulario.append("porcentaje", porcentaje);
             formulario.append("estado", estado);
-            xhr.open("POST", "../back-end/añadir_eliminar_codigos_descuento.php");
+            xhr.open("POST", "../back-end/operaciones_codigos_descuento.php");
             xhr.addEventListener("load", (respuesta) => {
                 alert(respuesta.target.response)
             });
@@ -103,7 +103,7 @@ function funciones(){
             formulario.append("tipo", "modificar");
             formulario.append("codigo", codigo);
             formulario.append("estado", estado);
-            xhr.open("POST", "../back-end/añadir_eliminar_codigos_descuento.php");
+            xhr.open("POST", "../back-end/operaciones_codigos_descuento.php");
             xhr.addEventListener("load", (respuesta) => {
                 alert(respuesta.target.response)
             });
@@ -159,7 +159,7 @@ function funciones(){
           let formulario = new FormData();
           formulario.append("tipo", "eliminar");
           formulario.append("codigo", this.id.split(";")[1]);
-          xhr.open("POST", "../back-end/añadir_eliminar_codigos_descuento.php");
+          xhr.open("POST", "../back-end/operaciones_codigos_descuento.php");
           xhr.addEventListener("load", (respuesta) => {
             alert(respuesta.target.response);
           });
@@ -167,6 +167,25 @@ function funciones(){
         } else {
           // Acción a realizar si el cliente cancela
           console.log("Eliminación cancelada por el cliente.");
+        }
+    }
+
+    document.getElementById("avisarDescuento").addEventListener("click", avisarDescuento)
+
+    function avisarDescuento(){
+
+        if(document.getElementById("iddescuentoaviso").value.length>0){
+            let xhr = new XMLHttpRequest();
+            let formulario = new FormData();
+            formulario.append("tipo", "avisar");
+            formulario.append("id_cupon", document.getElementById("iddescuentoaviso").value);
+            xhr.open("POST", "../back-end/operaciones_codigos_descuento.php");
+            xhr.addEventListener("load", (respuesta) => {
+                alert(respuesta.target.response)
+            });
+            xhr.send(formulario);
+        }else{
+          alert("Debes introducir un id de descuento")
         }
     }
 

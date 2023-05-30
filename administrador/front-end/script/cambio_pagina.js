@@ -6,6 +6,7 @@ function funciones(){
     document.getElementById("datosusuario").addEventListener("click",cambio)
     document.getElementById("descuentos").addEventListener("click",cambio)
     document.getElementById("codigosDescuento").addEventListener("click",cambio)
+    document.getElementById("productos").addEventListener("click",cambio)
 
     function cambio(){
         let nombre = this.id;
@@ -24,6 +25,9 @@ function funciones(){
                 break;
             case "codigosDescuento":
                 window.location.href = "codigos_descuento.html"
+                break;
+            case "productos":
+                window.location.href = "productos.html"
                 break;
         }
 

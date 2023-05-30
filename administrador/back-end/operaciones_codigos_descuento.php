@@ -1,5 +1,6 @@
 <?php
 require_once 'conexion_base_datos.php';
+require_once 'envio_de_correos.php'; 
 
 $conexion = conexionBaseDatos();
 
@@ -47,7 +48,7 @@ $conexion = conexionBaseDatos();
         } else {
         echo "No existe el descuento con codigo: " . $codigo;
         }
-    }else{
+    }else if($tipo=="modificar"){
         
         $codigo = $_POST["codigo"];
         $estado = $_POST["estado"];
@@ -71,6 +72,42 @@ $conexion = conexionBaseDatos();
         } else {
             echo "No existe el código: " . $codigo;
         }
+    }else{
+        $id_cupon = $_POST["id_cupon"];
+        $consulta = "SELECT porcentaje, estado FROM codigo_descuento WHERE id_cupon = '$id_cupon'";
+        $resultado = $conexion->query($consulta);
+
+        if ($resultado->num_rows > 0) {
+            // El descuento existe, obtener los datos asociados
+            $fila = $resultado->fetch_assoc();
+            $porcentaje = $fila["porcentaje"];
+            $estado = $fila["estado"];
+
+                    if ($estado == 1) {
+
+                        $consulta = "SELECT email FROM usuarios WHERE novedades = 1";
+                        $resultado = $conexion->query($consulta);
+            
+                        if ($resultado->num_rows > 0) {
+                            $asunto = "Codigo de descuento para tus proximas compras";
+                            $mensaje = "<p>Con el codigo ".$id_cupon." prodras recibir un descuento del ".$porcentaje."% en tu proxima compra.</p>";
+                            while ($fila = $resultado->fetch_assoc()) {
+
+                                enviarCorreo($fila["email"], $asunto, $mensaje);
+                            }
+                            echo "Se han enviado los emails";
+                        } else {
+                            echo "No hay usuarios que quieran recivir novedades.";
+                        }
+            
+                    } else {
+                        echo "El codigo al que está desactivado";
+                    }
+          
+        } else {
+                echo "El codigo descuento no existe.";
+        }
+           
     }
 
 
