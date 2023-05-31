@@ -231,6 +231,28 @@ input[type="reset"] {
     text-decoration: none;
 }
 /*productos*/
+.producto .comprar_boton, .producto .comprar_boton_bloqueado,#accionPaginaProducto  .comprar_boton, #accionPaginaProducto  .comprar_boton_bloqueado{
+    background-color: rgb(70, 183, 70);
+    border: 1px solid black;
+}
+.producto .comprar_boton:hover, #accionPaginaProducto .comprar_boton:hover{
+    margin-bottom: -2px;
+    border: 2px solid black;
+}
+.producto .comprar_boton:active, #accionPaginaProducto .comprar_boton:hover{
+    background-color: rgb(88, 209, 88);
+}
+.producto .avisar_boton, .producto .avisar_boton_bloqueado,#accionPaginaProducto  .avisar_boton, #accionPaginaProducto  .avisar_boton_bloqueado{
+    background-color: rgb(245, 245, 0);
+    border: 1px solid black;
+}
+.producto .avisar_boton:hover, #accionPaginaProducto  .avisar_boton:hover{
+    margin-bottom: -2px;
+    border: 2px solid black;
+}
+.producto .avisar_boton:active{
+    background-color: rgb(255, 255, 30);
+}
 .producto{
     padding-top: 2em;
     padding-bottom: 2em;

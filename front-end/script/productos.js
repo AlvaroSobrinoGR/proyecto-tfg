@@ -76,12 +76,26 @@ function funciones(){
                 avisar.setAttribute("type", "button")
                 avisar.setAttribute("id", "avisar_producto;"+json[index]["id_producto"])
                 avisar.setAttribute("value", "Avisarme")
-                avisar.style.backgroundColor="yellow"
+                
+                if(!saber_si_hay_usuario()){
+                    avisar.setAttribute("title", "Debes iniciar sesion para poder avisarte cuando este producto vuelva a estar disponible")
+                    avisar.setAttribute("class", "avisar_boton_bloqueado");
+                }else{
+                    avisar.setAttribute("title", "Te avisaremos por email cuando este producto vuelva a estar disponible")
+                    avisar.setAttribute("class", "avisar_boton");
+                }
             }else{
-                comprar.style.backgroundColor="green"
                 comprar.setAttribute("type", "button")
                 comprar.setAttribute("id", "comprar_producto;"+json[index]["id_producto"])
                 comprar.setAttribute("value", "Añadir a la cesta")
+                
+                if(!saber_si_hay_usuario()){
+                    comprar.setAttribute("title", "Debes iniciar sesion para poder añadir este producto a tu carro")
+                    comprar.setAttribute("class", "comprar_boton_bloqueado");
+                }else{
+                    comprar.setAttribute("title", "Añadir este producto al carro")
+                    comprar.setAttribute("class", "comprar_boton");
+                }
             }
 
             //creo los elementos que ire añadiendo al cuerpo donde iran los productos
@@ -93,7 +107,7 @@ function funciones(){
             pagina.innerText = "Saber más"
             pagina.setAttribute("href", "paginas_productos/paginaProducto"+json[index]["id_producto"]+"/paginaProducto"+json[index]["id_producto"]+".html?id_producto="+json[index]["id_producto"])
             divpagina.appendChild(pagina)
-
+            
             if(json[index]["descuento"]>0){
                 precio.innerHTML = "<del>"+Number(json[index]["precio"]).toLocaleString("es-ES",{minimumFractionDigits: 2, maximumFractionDigits:2})+"</del>&euro;"+" -"+json[index]["descuento"]+"%"+" &#8594; "+Number(json[index]["precio_con_descuento"]).toLocaleString("es-ES",{minimumFractionDigits: 2, maximumFractionDigits:2, style:"currency", currency:"EUR"});
             }else{

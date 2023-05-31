@@ -13,6 +13,9 @@ $conexion = conexionBaseDatos();
         if($stock=="Z"){
             $stock = 0;
         }
+        if($id_producto=="Z"){
+            $id_producto = 0;
+        }
         
         // Verificar si el producto existe
         $consulta = "SELECT * FROM productos WHERE id_producto = '$id_producto'";
@@ -72,6 +75,9 @@ $conexion = conexionBaseDatos();
         if($activo=="Z"){
             $activo = 0;
         }
+        if($id_producto=="Z"){
+            $id_producto = 0;
+        }
 
         // Verificar si el producto existe
         $consulta = "SELECT id_producto FROM productos WHERE id_producto = '$id_producto'";
@@ -91,6 +97,9 @@ $conexion = conexionBaseDatos();
 
     }else{
         $id_producto = $_POST['id_producto'];
+        if($id_producto=="Z"){
+            $id_producto = 0;
+        }
 
         // Verificar si el producto existe en la tabla "productos"
         $consulta = "SELECT id_producto,nombre, descripcion, stock, activo FROM productos WHERE id_producto = $id_producto";

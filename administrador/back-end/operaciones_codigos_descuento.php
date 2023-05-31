@@ -90,7 +90,14 @@ $conexion = conexionBaseDatos();
             
                         if ($resultado->num_rows > 0) {
                             $asunto = "Codigo de descuento para tus proximas compras";
-                            $mensaje = "<p>Con el codigo ".$id_cupon." prodras recibir un descuento del ".$porcentaje."% en tu proxima compra.</p>";
+                            $mensaje = "<p>Con el codigo ".$id_cupon." prodras recibir un descuento del ".$porcentaje."% en tu proxima compra.<br><br>Enlace a la tienda: ";
+
+                            if(strpos($conexion->host_info,"localhost") !== false){
+                                $mensaje .= "http://localhost/proyecto%20tfg/</p>";
+                            }else{
+                                $mensaje .= "http://simplyminimal.epizy.com/</p>"; 
+                            }
+
                             while ($fila = $resultado->fetch_assoc()) {
 
                                 enviarCorreo($fila["email"], $asunto, $mensaje);

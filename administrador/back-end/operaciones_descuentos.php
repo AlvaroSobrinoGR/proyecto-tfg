@@ -85,11 +85,19 @@ $conexion = conexionBaseDatos();
                         if ($resultado->num_rows > 0) {
                             $asunto = "El producto ".$nombre." ha recivido un ".$porcentaje."% de descuento";
                             $mensaje = "<p>El producto ".$nombre." ha recivido un ".$porcentaje."% de descuento.<br><br><del>" . number_format($precio, 2, ",", ".") . "</del>&euro; -" . $porcentaje . "% &#8594; " . number_format(($precio-($precio*$porcentaje/100)), 2, ",", ".") . "&euro; <br><br>
-                            Descripcion del producto: ".$descripcion."</p>";
+                            Descripcion del producto: ".$descripcion."<br><br>Enlace: ";
+
+                            if(strpos($conexion->host_info,"localhost") !== false){
+                                $mensaje .= "http://localhost/proyecto%20tfg/front-end/paginas_productos/paginaProducto".$id_producto."/paginaProducto".$id_producto.".html?id_producto=".$id_producto."</p>";
+                            }else{
+                                $mensaje .= "http://simplyminimal.epizy.com/front-end/paginas_productos/paginaProducto".$id_producto."/paginaProducto".$id_producto.".html?id_producto=".$id_producto."</p>"; 
+                            }
+
                             while ($fila = $resultado->fetch_assoc()) {
 
                                 enviarCorreo($fila["email"], $asunto, $mensaje);
                             }
+                            
                             echo "Se han enviado los emails";
                         } else {
                             echo "No hay usuarios que quieran recivir novedades.";

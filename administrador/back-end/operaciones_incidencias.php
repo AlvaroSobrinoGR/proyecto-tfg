@@ -9,6 +9,12 @@ $conexion = conexionBaseDatos();
     if($tipo=="cargoIncidencia"){
         $id_empleado = $_POST['id_empleado'];
         $id_incidencia = $_POST['id_incidencia'];
+        if($id_empleado =="Z"){
+            $id_empleado= 0;
+        }
+        if($id_incidencia =="Z"){
+            $id_incidencia= 0;
+        }
 
         $consulta = "SELECT * FROM empleados WHERE id_empleado = '$id_empleado'";
         $resultado = $conexion->query($consulta);
@@ -44,6 +50,13 @@ $conexion = conexionBaseDatos();
         $id_empleado = $_POST['id_empleado'];
         $id_incidencia = $_POST['id_incidencia'];
         $estado = $_POST['estado'];
+
+        if($id_empleado =="Z"){
+            $id_empleado= 0;
+        }
+        if($id_incidencia =="Z"){
+            $id_incidencia= 0;
+        }
 
         $consulta = "SELECT * FROM empleados WHERE id_empleado = $id_empleado";
         $resultado = $conexion->query($consulta);

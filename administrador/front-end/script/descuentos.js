@@ -94,7 +94,7 @@ function funciones(){
 
     function evaluarDescuento(valor) {
         // Verificar si el valor es numérico, positivo y no mayor a 100
-        if (typeof valor === 'number' && valor >= 0 && valor <= 100) {
+        if (typeof valor === 'number' && valor > 0 && valor <= 100) {
           // Verificar si el valor es entero
           if (Number.isInteger(valor)) {
             return valor.toFixed(2); // Añadir ".00" a los valores enteros
@@ -119,6 +119,9 @@ function funciones(){
 
       function evaluarIdProducto(valor) {
         if (typeof valor === 'number' && Number.isInteger(valor) && valor >= 0) {
+          if( valor== 0){
+            return "Z"
+          }
             return valor;
         } else {
           alert('El id del producto no es numérico, no es entero o es negativo.');

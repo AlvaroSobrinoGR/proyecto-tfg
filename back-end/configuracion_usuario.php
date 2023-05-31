@@ -62,9 +62,9 @@ if(isset($_POST['tipo']) && isset($_POST['email'])){
           $exito = false;
           echo "Nombre: Debes introducir almenos un nombre y un apellido como minimo, y deben empezar por mayuscula";
         }
-        if(!preg_match('/^\d{8}$/', $telefono) && strlen($telefono)>0){
+        if(!preg_match('/^\d{9}$/', $telefono) && strlen($telefono)>0){
           $exito = false;
-          echo "Telefono: El telefono solo puede tener numeros y deben ser 8";
+          echo "Telefono: El telefono solo puede tener numeros y deben ser 9";
         }
         if($exito){
               
@@ -121,7 +121,7 @@ if(isset($_POST['tipo']) && isset($_POST['email'])){
       $direccion = $_POST['direccion'];
       $telefono = trim($_POST['telefono']);
 
-      if(strlen($direccion)>0 && preg_match('/^[A-ZÁÉÍÓÚÑ][a-zA-ZÁÉÍÓÚÑ]*(?:\s+[A-ZÁÉÍÓÚÑ][a-zA-ZÁÉÍÓÚÑ]*){1,}$/', $nombre) && preg_match('/^\d{8}$/', $telefono)){
+      if(strlen($direccion)>0 && preg_match('/^[A-ZÁÉÍÓÚÑ][a-zA-ZÁÉÍÓÚÑ]*(?:\s+[A-ZÁÉÍÓÚÑ][a-zA-ZÁÉÍÓÚÑ]*){1,}$/', $nombre) && preg_match('/^\d{9}$/', $telefono)){
 
         //primero ver los datos en datos_usuario
         $id_datos = "ya existe";
@@ -158,7 +158,7 @@ if(isset($_POST['tipo']) && isset($_POST['email'])){
         $consulta = "UPDATE usuarios SET id_datos='$id_datos' WHERE email = '$email'";
 
       }else{
-        echo "Tiene que estas correcto tanto el nombre, como la direccion y el telefono.\n Nombre: Debes introducir almenos un nombre y un apellido como minimo, y deben empezar por mayuscula\n Direccion: escribir alguina direccion\nTelefono: El telefono solo puede tener numeros y deben ser 8";
+        echo "Tiene que estas correcto tanto el nombre, como la direccion y el telefono.\n Nombre: Debes introducir almenos un nombre y un apellido como minimo, y deben empezar por mayuscula\n Direccion: escribir alguina direccion\nTelefono: El telefono solo puede tener numeros y deben ser 9";
       
       }
       }else{

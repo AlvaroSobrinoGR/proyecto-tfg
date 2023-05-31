@@ -78,9 +78,9 @@ function funciones() {
             td.setAttribute("id", "precio;"+productos[i]["id_producto"])
 
             if(productos[i]["descuento"]>0){
-                td.innerHTML = "<del>"+productos[i]["precio"]+"</del>"+" "+productos[i]["descuento"]+"%"+" --> "+productos[i]["precio_con_descuento"];
+                td.innerHTML = "<del>"+Number(productos[i]["precio"]).toLocaleString("en-US",{minimumFractionDigits: 2, maximumFractionDigits:2})+"</del>&euro;"+" -"+productos[i]["descuento"]+"%"+" &#8594; "+Number(productos[i]["precio_con_descuento"]).toLocaleString("en-US",{minimumFractionDigits: 2, maximumFractionDigits:2, style:"currency", currency:"EUR"});
             }else{
-                td.innerHTML = productos[i]["precio"]
+                td.innerHTML = productos[i]["precio"]+"&euro;"
             }
             
 
@@ -90,9 +90,9 @@ function funciones() {
             td.setAttribute("id", "precioTotal;"+productos[i]["id_producto"])
 
             if(productos[i]["descuento"]>0){
-                td.innerHTML = productos[i]["precio_con_descuento"];
+                td.innerHTML = productos[i]["precio_con_descuento"]+"&euro;";
             }else{
-                td.innerHTML = productos[i]["precio"]
+                td.innerHTML = productos[i]["precio"]+"&euro;"
             }
 
             tr.appendChild(td);
@@ -176,10 +176,15 @@ function funciones() {
         let unidades = document.getElementById(this.id).value
         let precioUnitario = document.getElementById("precio;"+idproducto).innerText; 
         if(precioUnitario.length>6){
-            precioUnitario = precioUnitario.split('-->');
-            precioUnitario = parseFloat(precioUnitario[1].trim());
+            precioUnitario = precioUnitario.split('→');
+            precioUnitario = precioUnitario[1].split('€');
+            precioUnitario =precioUnitario[1].trim();
+
+            
         }
+        
         precioUnitario = parseFloat(precioUnitario)
+        
         document.getElementById("precioTotal;"+idproducto).innerText = (unidades*precioUnitario).toFixed(2)
         calculos()
     }
@@ -191,24 +196,24 @@ function funciones() {
                 precioTotal += parseFloat(document.getElementById("fila_producto;"+i).getElementsByTagName("td")[3].innerText)
             }
         }
-        document.getElementById("sumaSinIva").innerHTML=precioTotal.toFixed(2)
+        document.getElementById("sumaSinIva").innerHTML=precioTotal.toFixed(2)+"&euro;"
         
 
         if(document.getElementById("porcentajeCupon").innerText.length>0){
             let contenido = document.getElementById("porcentajeCupon").innerText;
             contenido = contenido.substring(1,contenido.length-2);
             if(!isNaN(parseFloat(contenido).toFixed(2))){
-                document.getElementById("precioCupon").innerHTML=(precioTotal.toFixed(2)-(precioTotal.toFixed(2)*parseFloat(contenido)/100)).toFixed(2);
+                document.getElementById("precioCupon").innerHTML=(precioTotal.toFixed(2)-(precioTotal.toFixed(2)*parseFloat(contenido)/100)).toFixed(2)+"&euro;";
                 precioTotal = (precioTotal.toFixed(2)-(precioTotal.toFixed(2)*parseFloat(contenido)/100)).toFixed(2);
             }else{
-                document.getElementById("precioCupon").innerHTML=precioTotal.toFixed(2)
+                document.getElementById("precioCupon").innerHTML=precioTotal.toFixed(2)+"&euro;"
             }
         }else{
-            document.getElementById("precioCupon").innerHTML=precioTotal.toFixed(2)
+            document.getElementById("precioCupon").innerHTML=precioTotal.toFixed(2)+"&euro;"
         }
 
-        document.getElementById("iva").innerHTML=(precioTotal*21/100).toFixed(2)
-        document.getElementById("totalMasIva").innerHTML=parseFloat((parseFloat(precioTotal*21/100))+parseFloat(precioTotal)).toFixed(2)
+        document.getElementById("iva").innerHTML=(precioTotal*21/100).toFixed(2)+"%"
+        document.getElementById("totalMasIva").innerHTML=parseFloat((parseFloat(precioTotal*21/100))+parseFloat(precioTotal)).toFixed(2)+"&euro;"
     }
 
     function ponerCodigoDescuento(){
@@ -290,7 +295,7 @@ function funciones() {
     function comprobacion(){ //ahi que implementar patrones
         let exito = true;
         let patronNombreApellido = /^[A-ZÁÉÍÓÚÑ][a-zA-ZÁÉÍÓÚÑ]*(?:\s+[A-ZÁÉÍÓÚÑ][a-zA-ZÁÉÍÓÚÑ]*){1,}$/;
-        let patronTelefono = /^\d{8}$/;
+        let patronTelefono = /^\d{9}$/;
         let nombre = document.getElementById("nombre").value.trim();
         let telefono = document.getElementById("telefono").value.trim();
         if(!patronNombreApellido.test(nombre)){
@@ -301,7 +306,7 @@ function funciones() {
         }
         if(!patronTelefono.test(telefono)){
             exito = false;
-            document.getElementById("error_telefono").innerText = "El telefono solo puede tener numeros y deben ser 8";
+            document.getElementById("error_telefono").innerText = "El telefono solo puede tener numeros y deben ser 9";
         }else{
             document.getElementById("error_telefono").innerText = "";
         }
@@ -372,17 +377,12 @@ function funciones() {
                         document.getElementById("cesta2").style.display="none"
                         document.getElementById("cesta1").style.display="block"
                     }
-                    alert(resultado.target.response)
+                    
                     if(resultado.target.response.includes("agotado")){
-                        document.getElementById("cestaCompra").getElementsByTagName("tbody")[0].innerHTML=""
-                        document.getElementById("cestaCompra").getElementsByTagName("tbody")[0].innerHTML='<tr id="cabecera">' +
-                        '<td>Cantidad</td>' +
-                        '<td>Producto</td>' +
-                        '<td>Precio unitario</td>' +
-                        '<td>Precio Total</td>' +
-                        '<td></td>' +
-                    '</tr>'
-                        pedirProductos(sessionStorage.getItem("carrito"))
+                        alert(resultado.target.response+". Elimine el producto de la cesta")
+                        location.reload()
+                    }else{
+                        alert(resultado.target.response)
                     }
                 }else if(tipo=="siguiente1"){
                     document.getElementById("cesta1").style.display="none"

@@ -42,7 +42,7 @@ function funciones (){
 
     }else if(this.id.includes("guardarCambios")){
         let patronNombreApellido = /^[A-ZÁÉÍÓÚÑ][a-zA-ZÁÉÍÓÚÑ]*(?:\s+[A-ZÁÉÍÓÚÑ][a-zA-ZÁÉÍÓÚÑ]*){1,}$/;
-        let patronTelefono = /^\d{8}$/;
+        let patronTelefono = /^\d{9}$/;
         let nombre = document.getElementById("nombre").value.trim();
         let telefono = document.getElementById("telefono").value.trim();
         if(!patronNombreApellido.test(nombre) && nombre.length>0){
@@ -53,7 +53,7 @@ function funciones (){
         }
         if(!patronTelefono.test(telefono) && telefono.length>0){
             exito = false;
-            document.getElementById("error_telefono").innerText = "El telefono solo puede tener numeros y deben ser 8";
+            document.getElementById("error_telefono").innerText = "El telefono solo puede tener numeros y deben ser 9";
         }else{
             document.getElementById("error_telefono").innerText = "";
         }
@@ -128,6 +128,9 @@ function funciones (){
                                 td = document.createElement("td")
                                 td.setAttribute("id", propiedades[j]+";"+((json.length-1)-i))
                                 td.innerHTML = json[i][propiedades[j]]
+                                if(propiedades[j].includes("estado")){
+                                    td.setAttribute("title", "Espera: tu consulta aun no ha sido atendia\nTrabajando: estan tratando tu consulta\nFinalizada: tu consulta esta resuelta")
+                                }
                                 tr.appendChild(td)
                             }
                             tabla.appendChild(tr)
@@ -174,6 +177,9 @@ function funciones (){
                                 td = document.createElement("td")
                                 td.setAttribute("id", propiedades[j]+";"+((json.length-1)-i))
                                 td.innerHTML = json[i][propiedades[j]]
+                                if(propiedades[j].includes("estado")){
+                                    td.setAttribute("title", "Espera: tu consulta aun no ha sido atendia\nTrabajando: estan tratando tu consulta\nFinalizada: tu consulta esta resuelta")
+                                }
                                 tr.appendChild(td)
                             }
                             tabla.appendChild(tr)

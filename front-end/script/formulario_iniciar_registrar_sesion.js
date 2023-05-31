@@ -13,19 +13,22 @@ function funciones (){
     function cambiar_formulaio(e){ //para cambiar el formulaio de inicio de sesion y de registro
         e.preventDefault()
         if(this.id.includes("iniciar")){
+            document.getElementById("respuesta_servidor").innerText = ""
             inicio_sesion.style.display="block"
             resgistrarse.style.display="none"
             recuperar_cuenta.style.display="none"
-            
         }else if(this.id.includes("registrarse")){
+            document.getElementById("respuesta_servidor").innerText = ""
             inicio_sesion.style.display="none"
             resgistrarse.style.display="block"
             recuperar_cuenta.style.display="none"
         }else if(this.id.includes("olvido")){
+            document.getElementById("respuesta_servidor").innerText = ""
             recuperar_cuenta.style.display="block"
             inicio_sesion.style.display="none"
             resgistrarse.style.display="none"
         }else{
+            document.getElementById("respuesta_servidor").innerText = ""
             inicio_sesion.style.display="block"
             resgistrarse.style.display="none"
             recuperar_cuenta.style.display="none"

@@ -20,10 +20,10 @@ function funciones() {
     function desplazar(){
         let archivo_actual = window.location.pathname;
         if(archivo_actual.includes("usuario.html")){
-            window.location.href = "index.html"
+            window.location.href = "../index.html"
         }
         if(archivo_actual.includes("carrito.html")){
-            window.location.href = "index.html"
+            window.location.href = "../index.html"
         }
     }
     function desocultar_contenido(){//si la sesion no esta iniciada o esta mal
@@ -47,6 +47,11 @@ function funciones() {
             document.getElementById("inicio_registro_sesion").style.display="none";
         }
         if(archivo_actual.includes("paginaProducto")){
+            document.getElementById("seccion_usuario").style.display="block";
+            document.getElementById("seccion_carrito").style.display="block";
+            document.getElementById("inicio_registro_sesion").style.display="none";
+        }
+        if(archivo_actual.includes("usuario")){
             document.getElementById("seccion_usuario").style.display="block";
             document.getElementById("seccion_carrito").style.display="block";
             document.getElementById("inicio_registro_sesion").style.display="none";

@@ -64,6 +64,12 @@ function funciones(){
         let id_consulta = parseInt(document.getElementById("idconsultacargo").value)
 
         if(id_consulta >= 0 && id_empleado >= 0){
+            if(id_empleado ==0){
+                id_empleado= "Z";
+            }
+            if(id_consulta ==0){
+                id_consulta= "Z";
+            }
             let xhr = new XMLHttpRequest();
             let formulario = new FormData();
             formulario.append("tipo", "cargoConsulta");

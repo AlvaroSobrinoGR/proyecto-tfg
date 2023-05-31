@@ -18,8 +18,8 @@ function funciones(){
     function pintar(json){
         let tabla = document.getElementById("datos")
         tabla.innerHTML = "";
-        tabla.innerHTML += '<tr><th>Id usuario</th><th>email</th><th>id_datos</th><th>nombre_apellido</th><th>direccion</th><th>telefono</th><th>validada</th></tr>'
-        let propiedades = ["id_usuario", "email", "id_datos", "nombre_apellido", "direccion", "telefono", "validada"]
+        tabla.innerHTML += '<tr><th>Id usuario</th><th>email</th><th>id_datos</th><th>nombre_apellido</th><th>direccion</th><th>telefono</th><th>novedades</th><th>validada</th></tr>'
+        let propiedades = ["id_usuario", "email", "id_datos", "nombre_apellido", "direccion", "telefono","novedades", "validada"]
             
         //lo que hago aquie es recorrer el arry al reves para pintar al principio de la tabla las consultas mas recientes
         for (let i = 0 ; i < json.length; i++) {

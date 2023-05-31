@@ -30,7 +30,7 @@ function enviarCorreo($email, $asunto, $mensaje){
 
 
         //Recipients
-        $mail->setFrom('paginatiendapruebas@outlook.es', 'tienda'); //Add a recipient
+        $mail->setFrom('paginatiendapruebas@outlook.es', 'SimplyMinimal'); //Add a recipient
         $mail->addAddress($email);               //Name is optional
         $mail->addAddress('paginatiendapruebas@outlook.es');
 

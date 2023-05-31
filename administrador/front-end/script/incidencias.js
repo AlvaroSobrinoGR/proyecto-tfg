@@ -62,8 +62,15 @@ function funciones(){
 
         let id_empleado = parseInt(document.getElementById("IDEmpleado").innerText)
         let id_incidencia = parseInt(document.getElementById("idincidenciacargo").value)
+        
 
         if(id_incidencia >= 0 && id_empleado >= 0){
+            if(id_empleado ==0){
+                id_empleado= "Z";
+            }
+            if(id_incidencia ==0){
+                id_incidencia= "Z";
+            }
             let xhr = new XMLHttpRequest();
             let formulario = new FormData();
             formulario.append("tipo", "cargoIncidencia");
@@ -88,6 +95,12 @@ function funciones(){
         let estado = valorarEstado(document.getElementById("estadoIncidencia").value)
 
         if(id_incidencia >= 0 && id_empleado >= 0 && estado!=false){
+            if(id_empleado ==0){
+                id_empleado= "Z";
+            }
+            if(id_incidencia ==0){
+                id_incidencia= "Z";
+            }
             let xhr = new XMLHttpRequest();
             let formulario = new FormData();
             formulario.append("tipo", "modifiaIncidencia");

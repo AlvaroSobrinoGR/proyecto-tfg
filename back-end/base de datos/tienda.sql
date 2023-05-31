@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 27-05-2023 a las 15:51:35
+-- Tiempo de generación: 31-05-2023 a las 12:17:51
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -32,13 +32,6 @@ CREATE TABLE `avissos_disponibilidad` (
   `id_producto` int(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
 
---
--- Volcado de datos para la tabla `avissos_disponibilidad`
---
-
-INSERT INTO `avissos_disponibilidad` (`id_usuario`, `id_producto`) VALUES
-(47, 0);
-
 -- --------------------------------------------------------
 
 --
@@ -57,7 +50,8 @@ CREATE TABLE `codigo_descuento` (
 
 INSERT INTO `codigo_descuento` (`id_cupon`, `porcentaje`, `estado`) VALUES
 ('PEPE', 20.00, 1),
-('SONIA', 10.00, 0);
+('SONIA', 10.78, 1),
+('TETE', 15.00, 0);
 
 -- --------------------------------------------------------
 
@@ -88,7 +82,10 @@ CREATE TABLE `compra` (
 
 INSERT INTO `compra` (`id_compra`, `id_usuario`, `id_datos_comprador`, `tiempo_local_compra`, `zulu_time_compra`, `id_orden_compra`, `id_pagador`, `email_pagador`, `nombre_apellido_pagador`, `precio_total`, `id_cupon`, `total_tras_codigo`, `porcentaje_iva`, `total_final_con_iva`) VALUES
 (87, 47, 22, '2023-05-23 12:25:36', '2023-05-23T10:25:34Z', '9PR6929880771171R', 'EU2AG9GA88P58', 'sb-pipgx25897233@personal.example.com', 'John Doe', 31.98, NULL, 31.98, 21.00, 38.70),
-(88, 47, 20, '2023-05-25 14:44:56', '2023-05-25T12:44:55Z', '4DU81844UA1966301', 'EU2AG9GA88P58', 'sb-pipgx25897233@personal.example.com', 'John Doe', 46.44, NULL, 46.44, 21.00, 56.19);
+(88, 47, 20, '2023-05-25 14:44:56', '2023-05-25T12:44:55Z', '4DU81844UA1966301', 'EU2AG9GA88P58', 'sb-pipgx25897233@personal.example.com', 'John Doe', 46.44, NULL, 46.44, 21.00, 56.19),
+(89, 47, 20, '2023-05-31 12:03:18', '2023-05-31T10:03:17Z', '72547413X41469507', 'EU2AG9GA88P58', 'sb-pipgx25897233@personal.example.com', 'John Doe', 32.98, NULL, 32.98, 21.00, 39.91),
+(90, 47, 20, '2023-05-31 12:05:23', '2023-05-31T10:05:22Z', '4MD36808EN241710S', 'EU2AG9GA88P58', 'sb-pipgx25897233@personal.example.com', 'John Doe', 14.99, NULL, 14.99, 21.00, 18.14),
+(91, 47, 20, '2023-05-31 12:07:39', '2023-05-31T10:07:38Z', '5UD57983VV312481B', 'EU2AG9GA88P58', 'sb-pipgx25897233@personal.example.com', 'John Doe', 14.99, NULL, 14.99, 21.00, 18.14);
 
 -- --------------------------------------------------------
 
@@ -113,7 +110,11 @@ CREATE TABLE `compra_productos` (
 INSERT INTO `compra_productos` (`id_compra`, `id_producto`, `cantidad`, `precio_unidad`, `precio_total`, `porcentaje_descuento`, `total_tras_descuento`) VALUES
 (87, 3, 2, 19.99, 39.98, 20.00, 31.98),
 (88, 3, 1, 19.99, 19.99, 20.00, 15.99),
-(88, 5, 1, 30.45, 30.45, 0.00, 30.45);
+(88, 5, 1, 30.45, 30.45, 0.00, 30.45),
+(89, 0, 1, 14.99, 14.99, 0.00, 14.99),
+(89, 2, 1, 19.99, 19.99, 10.00, 17.99),
+(90, 0, 1, 14.99, 14.99, 0.00, 14.99),
+(91, 0, 1, 14.99, 14.99, 0.00, 14.99);
 
 -- --------------------------------------------------------
 
@@ -136,8 +137,8 @@ CREATE TABLE `consultas` (
 --
 
 INSERT INTO `consultas` (`id_consulta`, `id_usuario`, `id_empleado`, `asunto`, `consulta`, `estado`, `fecha`) VALUES
-(29, 47, NULL, 'dasdas', 'asddad', 'espera', '2023-05-23 12:24:48'),
-(30, 47, NULL, 'pepasddddddddddddddddddddddddddddddddddasddddddddddddddddddddddddddddddddddasddddddddddddddddddddddddddddddddddasddddddddddddddddddddddddddddddddddasddddddddddddddddddddddddddddddddddasddddddddddddddddddddddddddddddddddasdddddddddddddddddddddddddddddddddd', 'asddddddddddddddddddddddddddddddddddasddddddddddddddddddddddddddddddddddasddddddddddddddddddddddddddddddddddasddddddddddddddddddddddddddddddddddasddddddddddddddddddddddddddddddddddasddddddddddddddddddddddddddddddddddasddddddddddddddddddddddddddddddddddasd', 'espera', '2023-05-24 14:57:59'),
+(29, 47, 2, 'dasdas', 'asddad', 'finalizada', '2023-05-23 12:24:48'),
+(30, 47, 2, 'pepasddddddddddddddddddddddddddddddddddasddddddddddddddddddddddddddddddddddasddddddddddddddddddddddddddddddddddasddddddddddddddddddddddddddddddddddasddddddddddddddddddddddddddddddddddasddddddddddddddddddddddddddddddddddasdddddddddddddddddddddddddddddddddd', 'asddddddddddddddddddddddddddddddddddasddddddddddddddddddddddddddddddddddasddddddddddddddddddddddddddddddddddasddddddddddddddddddddddddddddddddddasddddddddddddddddddddddddddddddddddasddddddddddddddddddddddddddddddddddasddddddddddddddddddddddddddddddddddasd', 'trabajando', '2023-05-24 14:57:59'),
 (31, 47, NULL, 'maxlength=\"255\"maxlength=\"255\"maxlength=\"255\"maxlength=\"255\"maxlength=\"255\"maxlength=\"255\"maxlength=\"255\"maxlength=\"255\"maxlength=\"255\"maxlength=\"255\"maxlength=\"255\"maxlength=\"255\"maxlength=\"255\"maxlength=\"255\"maxlength=\"255\"maxlength=\"255\"maxlength=\"255\"', 'maxlength=\"255\"', 'espera', '2023-05-24 17:30:25'),
 (32, 47, NULL, 'asdas', 'asdas', 'espera', '2023-05-24 17:31:09'),
 (33, 47, NULL, 'asdasd', 'asdasd', 'espera', '2023-05-24 17:32:45'),
@@ -167,7 +168,9 @@ INSERT INTO `datos_usuario` (`id_datos`, `nombre_apellido`, `direccion`, `telefo
 (19, 'Álvaro Sobrino', 'asd', 0),
 (20, 'Álvaro Sobrino', 'asd', 12345678),
 (21, 'Álvaro Sobrino', 'asd', 87654321),
-(22, 'Álvaro Sobrino', 'asd', 23456789);
+(22, 'Álvaro Sobrino', 'asd', 23456789),
+(23, 'Álvaro Sobrino', 'asd', 123456789),
+(24, 'Álvaro Sobrino', 'asd', 987654321);
 
 -- --------------------------------------------------------
 
@@ -186,8 +189,8 @@ CREATE TABLE `descuentos` (
 --
 
 INSERT INTO `descuentos` (`id_descuento`, `porcentaje`, `id_producto`) VALUES
-(3, 20.00, 3),
-(4, 10.00, 2);
+(4, 10.00, 2),
+(5, 15.00, 5);
 
 -- --------------------------------------------------------
 
@@ -197,8 +200,17 @@ INSERT INTO `descuentos` (`id_descuento`, `porcentaje`, `id_producto`) VALUES
 
 CREATE TABLE `empleados` (
   `id_empleado` int(255) NOT NULL,
-  `nombre_apellidos` varchar(255) NOT NULL
+  `nombre_apellidos` varchar(255) NOT NULL,
+  `email` varchar(255) NOT NULL,
+  `contraseña` varchar(255) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4 COLLATE=utf8mb4_general_ci;
+
+--
+-- Volcado de datos para la tabla `empleados`
+--
+
+INSERT INTO `empleados` (`id_empleado`, `nombre_apellidos`, `email`, `contraseña`) VALUES
+(2, 'Pepe Soleres', 'Pepe.Soleres@SimplyMinimal.com', '$2y$10$vEIPnX/79q1aKHp4HCCWCutZopbXT3sRhA/2YytGVKTSalEdFV9P.');
 
 -- --------------------------------------------------------
 
@@ -221,7 +233,7 @@ CREATE TABLE `incidencias` (
 --
 
 INSERT INTO `incidencias` (`id_incidencia`, `id_empleado`, `id_compra`, `asunto`, `consulta`, `estado`, `fecha`) VALUES
-(11, NULL, 87, 'affsdfs', 'sdfsdf', 'espera', '2023-05-23 12:25:49'),
+(11, 2, 87, 'affsdfs', 'sdfsdf', 'finalizada', '2023-05-23 12:25:49'),
 (12, NULL, 87, 'asdasddadas', 'asdasdas', 'espera', '2023-05-24 18:31:31'),
 (13, NULL, 87, '', '', 'espera', '2023-05-24 18:38:38');
 
@@ -246,12 +258,12 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`id_producto`, `nombre`, `descripcion`, `tipo`, `stock`, `precio`, `activo`) VALUES
-(0, 'Funda de teléfono', 'Funda de Cintura para Teléfono Celular, Bolsa de Cintura para Hombre, Diseñada para Celulares de hasta 6.9\", Riñonera con Clip Vertical, Mosquetón y Bolsillo para Tarjetas, Ideal para Deportes, Camping y Viajes.', 'accesorios', 0, 14.99, 1),
+(0, 'Funda de teléfono', 'Funda de Cintura para Teléfono Celular, Bolsa de Cintura para Hombre, Diseñada para Celulares de hasta 6.9\", Riñonera con Clip Vertical, Mosquetón y Bolsillo para Tarjetas, Ideal para Deportes, Camping y Viajes.', 'accesorios', 9, 14.99, 1),
 (1, 'MP02 Phone', 'Nueva Generación del Teléfono Móvil Minimalista, MP02 Phone. Conectividad 4G LTE, Enfoque en Seguridad Digital, Pantalla de 2 pulgadas, Batería de 1,280 mAh, Compatibilidad Multibanda, Nano-SIM y Lengua Española - Color Negro.', 'tecnología', 20, 329.00, 1),
-(2, 'Reloj AC02', 'Reloj AC02 es un elegante reloj de mesa con función de alarma. Cuenta con un diseño analógico y está equipado con un preciso movimiento de cuarzo japonés. Su estructura de aluminio y cristal de vidrio brindan durabilidad y estilo. Diseñado por Jasper Morrison y fabricado en Japón, este reloj en color negro añade un toque sofisticado a cualquier espacio.', 'tecnología', 20, 19.99, 1),
-(3, 'Silla Sky', 'Comodidad y versatilidad en un diseño elegante. Adaptable a cualquier espacio, tanto interior como exterior. Diseño solo en color crema.', 'muebles', 20, 31.45, 1),
+(2, 'Reloj AC02', 'Reloj AC02 es un elegante reloj de mesa con función de alarma. Cuenta con un diseño analógico y está equipado con un preciso movimiento de cuarzo japonés. Su estructura de aluminio y cristal de vidrio brindan durabilidad y estilo. Diseñado por Jasper Morrison y fabricado en Japón, este reloj en color negro añade un toque sofisticado a cualquier espacio.', 'tecnología', 19, 19.99, 1),
+(3, 'Silla Sky', 'Comodidad y versatilidad en un diseño elegante. Adaptable a cualquier espacio, tanto interior como exterior. Diseño solo en color crema.', 'muebles', 0, 31.45, 1),
 (4, 'Cargador UC01', 'El Cargador UC01 es un elegante Hub USB diseñado con 3 puertos y alimentación externa, que ofrece una solución eficiente para conectar y cargar varios dispositivos. Este cargador rápido, fabricado en Italia, destaca por su diseño sofisticado en color negro.', 'tecnología', 20, 29.99, 1),
-(5, 'accesorio1', 'Este accesorio es el complemento perfecto para cualquier atuendo. Confeccionado con materiales de alta calidad, su diseño elegante y sofisticado lo hace ideal para lucir en ocasiones especiales. Su practicidad y funcionalidad lo hacen perfecto para el día a día, mientras que su estilo atemporal lo hace una inversión duradera en tu guardarropa. Con detalles cuidadosamente elaborados, este accesorio resaltará tu estilo y personalidad. Además, su versatilidad te permite combinarlo con diferentes prendas y estilos para crear looks únicos y destacar en cualquier situación.', 'accesorios', 20, 30.45, 0);
+(5, 'accesorio1', 'Este accesorio es el complemento perfecto para cualquier atuendo. Confeccionado con materiales de alta calidad, su diseño elegante y sofisticado lo hace ideal para lucir en ocasiones especiales. Su practicidad y funcionalidad lo hacen perfecto para el día a día, mientras que su estilo atemporal lo hace una inversión duradera en tu guardarropa. Con detalles cuidadosamente elaborados, este accesorio resaltará tu estilo y personalidad. Además, su versatilidad te permite combinarlo con diferentes prendas y estilos para crear looks únicos y destacar en cualquier situación.', 'accesorios', 12, 30.45, 0);
 
 -- --------------------------------------------------------
 
@@ -275,7 +287,7 @@ CREATE TABLE `usuarios` (
 
 INSERT INTO `usuarios` (`id_usuario`, `email`, `contrasenia`, `id_datos`, `validada`, `codigo`, `novedades`) VALUES
 (46, 'gradoalvarogrado@gmail.com', '$2y$10$XTYc6Fv6dQ7VX4EZU9s8ieYqj8AWa3DZhusP9wGfJQUAETqggJ7Mi', NULL, 1, '646c82741b188', 0),
-(47, 'estudiosalvaroestudios@gmail.com', '$2y$10$Rbou0J.z3JBgF7uovbHcc.XSUPgsoq5FveS9xNYGWUDYNdwWOEqea', 20, 1, '0', 0);
+(47, 'estudiosalvaroestudios@gmail.com', '$2y$10$Rbou0J.z3JBgF7uovbHcc.XSUPgsoq5FveS9xNYGWUDYNdwWOEqea', 24, 1, '0', 1);
 
 --
 -- Índices para tablas volcadas
@@ -377,7 +389,7 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `compra`
 --
 ALTER TABLE `compra`
-  MODIFY `id_compra` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=89;
+  MODIFY `id_compra` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
 
 --
 -- AUTO_INCREMENT de la tabla `consultas`
@@ -389,19 +401,19 @@ ALTER TABLE `consultas`
 -- AUTO_INCREMENT de la tabla `datos_usuario`
 --
 ALTER TABLE `datos_usuario`
-  MODIFY `id_datos` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=23;
+  MODIFY `id_datos` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
 
 --
 -- AUTO_INCREMENT de la tabla `descuentos`
 --
 ALTER TABLE `descuentos`
-  MODIFY `id_descuento` int(155) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=5;
+  MODIFY `id_descuento` int(155) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
 
 --
 -- AUTO_INCREMENT de la tabla `empleados`
 --
 ALTER TABLE `empleados`
-  MODIFY `id_empleado` int(255) NOT NULL AUTO_INCREMENT;
+  MODIFY `id_empleado` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=3;
 
 --
 -- AUTO_INCREMENT de la tabla `incidencias`

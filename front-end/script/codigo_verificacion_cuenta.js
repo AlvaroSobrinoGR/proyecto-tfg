@@ -25,7 +25,7 @@ function funciones(){
         let xhr = new XMLHttpRequest();
         xhr.open("POST", php)
         xhr.addEventListener("load", (respuesta)=>{
-           //console.log(respuesta.target.response);
+           alert(respuesta.target.response);
         })
 
         xhr.send(formulario);

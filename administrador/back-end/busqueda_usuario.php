@@ -10,7 +10,7 @@ $conexion = conexionBaseDatos();
     $tipo_orden = $_POST["tipo_orden"];
 
     $consulta = "SELECT u.id_usuario, u.email, u.validada,COALESCE(u.id_datos, '') AS id_datos, COALESCE(du.nombre_apellido, '') AS nombre_apellido,
-                COALESCE(du.direccion, '') AS direccion, COALESCE(du.telefono, '') AS telefono
+                COALESCE(du.direccion, '') AS direccion, COALESCE(du.telefono, '') AS telefono, u.novedades
                 FROM usuarios u
                 LEFT JOIN datos_usuario du ON u.id_datos = du.id_datos";
 
@@ -18,7 +18,7 @@ $conexion = conexionBaseDatos();
         if($buscar_por=="id_datos" || $buscar_por=="nombre_apellido" || $buscar_por=="direccion" || $buscar_por=="telefono"){
             $consulta.=" WHERE du.".$buscar_por." = '$contenido_busqueda'";
         }else{
-            $consulta.=" WHERE ".$buscar_por." = '$contenido_busqueda'";
+            $consulta.=" WHERE u.".$buscar_por." = '$contenido_busqueda'";
         }
         
     }
@@ -41,6 +41,7 @@ $conexion = conexionBaseDatos();
             $json .= "\"nombre_apellido\" : \"".$fila["nombre_apellido"]."\",";
             $json .= "\"direccion\" : \"".$fila["direccion"]."\",";
             $json .= "\"telefono\" : \"".$fila["telefono"]."\",";
+            $json .= "\"novedades\" : \"".$fila["novedades"]."\",";
             $json .= "\"validada\" : \"".$fila["validada"]."\"";
             $json .= "},";
         }

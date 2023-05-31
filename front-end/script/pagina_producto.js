@@ -19,12 +19,23 @@ function funciones(){
                 let json = JSON.parse(respuesta.target.response)
                 if(json[0]["stock"]==1){//comprar
                     let comprar = document.createElement("input")
-                    comprar.style.backgroundColor="green"
                     comprar.setAttribute("type", "button")
                     comprar.setAttribute("id", "comprar_producto;"+id_producto)
                     comprar.setAttribute("value", "Añadir a la cesta")
+
+                    if(!saber_si_hay_usuario()){
+                        comprar.setAttribute("title", "Debes iniciar sesion para poder añadir este producto a tu carro")
+                        comprar.setAttribute("class", "comprar_boton_bloqueado");
+                    }else{
+                        comprar.setAttribute("title", "Añadir este producto al carro")
+                        comprar.setAttribute("class", "comprar_boton");
+                    }
+
                     document.getElementById("accionPaginaProducto").appendChild(comprar)
-                    document.getElementById("comprar_producto;"+id_producto).addEventListener("click", comprarProducto);
+                    if(saber_si_hay_usuario()){
+                        document.getElementById("comprar_producto;"+id_producto).addEventListener("click", comprarProducto);
+                    }
+                    
                     
                     if(json[0]["descuento"]>0){
                         document.getElementById("nomrePrecioProducto").innerHTML = "<del>"+Number(json[0]["precio"]).toLocaleString("es-ES",{minimumFractionDigits: 2, maximumFractionDigits:2})+"</del>&euro;"+" -"+json[0]["descuento"]+"%"+" &#8594; "+Number(json[0]["precio_con_descuento"]).toLocaleString("es-ES",{minimumFractionDigits: 2, maximumFractionDigits:2, style:"currency", currency:"EUR"});
@@ -36,9 +47,20 @@ function funciones(){
                     avisar.setAttribute("type", "button")
                     avisar.setAttribute("id", "avisar_producto;"+id_producto)
                     avisar.setAttribute("value", "Avisarme")
-                    avisar.style.backgroundColor="yellow"
+
+                    if(!saber_si_hay_usuario()){
+                        avisar.setAttribute("title", "Debes iniciar sesion para poder avisarte cuando este producto vuelva a estar disponible")
+                        avisar.setAttribute("class", "avisar_boton_bloqueado");
+                    }else{
+                        avisar.setAttribute("title", "Te avisaremos por email cuando este producto vuelva a estar disponible")
+                        avisar.setAttribute("class", "avisar_boton");
+                    }
+
                     document.getElementById("accionPaginaProducto").appendChild(avisar)
-                    document.getElementById("avisar_producto;"+id_producto).addEventListener("click", avisarProducto);
+                    if(saber_si_hay_usuario()){
+                        document.getElementById("avisar_producto;"+id_producto).addEventListener("click", avisarProducto);
+                    }
+                    
     
                     if(json[0]["descuento"]>0){
                         document.getElementById("nomrePrecioProducto").innerHTML  = "<del>"+Number(json[0]["precio"]).toLocaleString("es-ES",{minimumFractionDigits: 2, maximumFractionDigits:2})+"</del>&euro;"+" -"+json[0]["descuento"]+"%"+" &#8594; "+Number(json[0]["precio_con_descuento"]).toLocaleString("es-ES",{minimumFractionDigits: 2, maximumFractionDigits:2, style:"currency", currency:"EUR"});

@@ -10,6 +10,13 @@ $conexion = conexionBaseDatos();
         $id_empleado = $_POST['id_empleado'];
         $id_consulta = $_POST['id_consulta'];
 
+        if($id_empleado =="Z"){
+            $id_empleado= 0;
+        }
+        if($id_consulta =="Z"){
+            $id_consulta= 0;
+        }
+
         $consulta = "SELECT * FROM empleados WHERE id_empleado = '$id_empleado'";
         $resultado = $conexion->query($consulta);
 
@@ -44,6 +51,13 @@ $conexion = conexionBaseDatos();
         $id_empleado = $_POST['id_empleado'];
         $id_consulta = $_POST['id_consulta'];
         $estado = $_POST['estado'];
+
+        if($id_empleado =="Z"){
+            $id_empleado= 0;
+        }
+        if($id_consulta =="Z"){
+            $id_consulta= 0;
+        }
 
         $consulta = "SELECT * FROM empleados WHERE id_empleado = $id_empleado";
         $resultado = $conexion->query($consulta);

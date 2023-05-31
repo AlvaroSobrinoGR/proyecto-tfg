@@ -60,6 +60,9 @@ function funciones(){
     function modificarStock(){
 
         let id_producto = document.getElementById("idprodcutomodificar").value
+        if(id_producto ==0){
+            id_producto = "Z";
+        }
         let stock = evaluarStock(parseFloat(document.getElementById("stockmodificar").value))
         if(stock!=false && id_producto.length > 0){
             let xhr = new XMLHttpRequest();
@@ -77,19 +80,6 @@ function funciones(){
         }
     }
 
-    function evaluarStock(numero) {
-        // Verificar si el número es un entero y es mayor que 0
-        if (Number.isInteger(numero) && numero >=0) {
-            if(numero ==0){
-                return "Z";
-            }
-            return numero;
-        } else {
-            alert("el dtock debe ser un numero positivo entero mayor o igual a 0")
-          return false;
-          
-        }
-      }
 
     function evaluarStock(numero) {
         // Verificar si el número es un entero y es mayor que 0
@@ -124,6 +114,9 @@ function funciones(){
     function modificarEstado(){
 
         let id_producto = document.getElementById("idprodcutoestado").value
+        if(id_producto ==0){
+            id_producto = "Z";
+        }
         let activo = evaluarEstado(parseFloat(document.getElementById("estadomodificar").value))
         if(activo!=false && id_producto.length > 0){
             let xhr = new XMLHttpRequest();
@@ -158,6 +151,9 @@ function funciones(){
       function avisarProducto(){
 
         let id_producto = document.getElementById("iddescuentoaviso").value
+        if(id_producto ==0){
+            id_producto = "Z";
+        }
         if(id_producto.length > 0){
             let xhr = new XMLHttpRequest();
             let formulario = new FormData();

@@ -32,7 +32,7 @@ $conexion = conexionBaseDatos();
                 $json .= "\"telefono\" : \"\",";
             }
 
-
+            $json .= "\"novedades\" : \"".$fila["novedades"]."\",";
             $json .= "\"validada\" : \"".$fila["validada"]."\"";
             $json .= "},";
         }

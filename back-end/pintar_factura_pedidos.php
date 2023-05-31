@@ -52,7 +52,7 @@ function pintarFactureaPedidos($pedido, $tipo){
             <tr>
                 <td colspan="2">'.$filaDatos["nombre_apellido"].'</td>
                 <td>'.$filaPedido["nombre_apellido_pagador"].'</td>
-                <td colspan="2"><b>Precio total: </b>'.$filaPedido["precio_total"].'</td>
+                <td colspan="2"><b>Total sin iva: </b>'.$filaPedido["precio_total"].'&euro;</td>
             </tr>
             <tr>
                 <td colspan="2">'.$filaDatos["telefono"].'</td>
@@ -73,15 +73,15 @@ function pintarFactureaPedidos($pedido, $tipo){
             <tr>
                 <td colspan="2">'.$filaDatos["direccion"].'</td>
                 <td></td>
-                <td colspan="2"><b>Tras codigo deceunto:</b> '.$filaPedido["total_tras_codigo"].'</td>
+                <td colspan="2"><b>Tras codigo deceunto:</b> '.$filaPedido["total_tras_codigo"].'&euro;</td>
             </tr>
             <tr>
                 <td colspan="3"></td>
-                <td colspan="2"><b>Porcentaje de iva:</b>'.$filaPedido["porcentaje_iva"].'%</td>
+                <td colspan="2"><b>IVA:</b>'.$filaPedido["porcentaje_iva"].'%</td>
             </tr>
             <tr>
                 <td colspan="3"></td>
-                <td colspan="2"><b>Total final: </b>'.$filaPedido["total_final_con_iva"].'</td>
+                <td colspan="2"><b>Total con iva: </b>'.$filaPedido["total_final_con_iva"].'&euro;</td>
             </tr>
             <tr  class="facutra_centrado">
                 <th colspan="5">Prodcutos</th>
@@ -98,7 +98,7 @@ function pintarFactureaPedidos($pedido, $tipo){
                     <th colspan="2">Nombre</th>
                     <th>Catidad</th>
                     <th>Precio Individual</th>
-                    <th>Precio Final Total</th>
+                    <th>Total Productos</th>
                     </tr>';
                 }else{
                     $tabla .= '<tr class="facutra_centrado">
@@ -106,7 +106,7 @@ function pintarFactureaPedidos($pedido, $tipo){
                     <th>Nombre</th>
                     <th>Catidad</th>
                     <th>Precio Individual</th>
-                    <th>Precio Final Total</th>
+                    <th>Total Productos</th>
                     </tr>';
                 
                 }
@@ -149,13 +149,13 @@ function pintarFactureaPedidos($pedido, $tipo){
                 $tabla .= '<td>'.$filaProductos["cantidad"].'</td>';
 
                     if($filaProductos["porcentaje_descuento"]>0){
-                        $tabla .='<td><del>'.$filaProductos["precio_unidad"].'</del>'.$filaProductos["porcentaje_descuento"].'%-->'.number_format((double)$filaProductos["precio_unidad"]-((double)$filaProductos["precio_unidad"]*(double)$filaProductos["porcentaje_descuento"]/100),2).'</td>';
+                        $tabla .='<td><del>'.$filaProductos["precio_unidad"].'</del>&euro;'.$filaProductos["porcentaje_descuento"].'%-->'.number_format((double)$filaProductos["precio_unidad"]-((double)$filaProductos["precio_unidad"]*(double)$filaProductos["porcentaje_descuento"]/100),2).'&euro;</td>';
                     }else{
-                        $tabla .='<td>'.$filaProductos["precio_unidad"].'</td>';
+                        $tabla .='<td>'.$filaProductos["precio_unidad"].'&euro;</td>';
                     }
                     
                 
-                    $tabla .='<td>'.$filaProductos["total_tras_descuento"].'</td>
+                    $tabla .='<td>'.$filaProductos["total_tras_descuento"].'&euro;</td>
                 </tr>';
             }
             $tabla .='</table>';
