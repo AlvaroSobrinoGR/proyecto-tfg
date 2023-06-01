@@ -178,7 +178,7 @@ function funciones (){
                                 td.setAttribute("id", propiedades[j]+";"+((json.length-1)-i))
                                 td.innerHTML = json[i][propiedades[j]]
                                 if(propiedades[j].includes("estado")){
-                                    td.setAttribute("title", "Espera: tu consulta aun no ha sido atendia\nTrabajando: estan tratando tu consulta\nFinalizada: tu consulta esta resuelta")
+                                    td.setAttribute("title", "Espera: tu consulta aún no ha sido atendida\nTrabajando: se está tratando tu consulta\nFinalizada: tu consulta ha sido resuelta")
                                 }
                                 tr.appendChild(td)
                             }
@@ -234,7 +234,7 @@ function funciones (){
                                 tr.appendChild(td)
                             }
                             
-                            let contenido = ["Detalles", "Habrir incidencia", "Devolver pedido"]
+                            let contenido = ["Detalles", "Abrir incidencia", "Devolver pedido"]
                             for (let j = 0; j < acciones.length; j++) {
                                 let td2 = document.createElement("td")
                                 td2.setAttribute("id", acciones[j]+";"+((json.length-1)-i))
@@ -518,7 +518,7 @@ function funciones (){
                 alert(respuesta.target.response)
             }else{
                 if(respuesta.target.response.includes("devoluciohn realizada")){
-                    alert("Devoluciohn realizada, le hemos mandado un email con la factura actualizada")
+                    alert("Devolución realizada, le hemos mandado un email con la factura actualizada")
                     location.reload(true);
                 }else{
                     alert(respuesta.target.response)

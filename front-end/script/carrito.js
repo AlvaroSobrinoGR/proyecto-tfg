@@ -78,7 +78,7 @@ function funciones() {
             td.setAttribute("id", "precio;"+productos[i]["id_producto"])
 
             if(productos[i]["descuento"]>0){
-                td.innerHTML = "<del>"+Number(productos[i]["precio"]).toLocaleString("en-US",{minimumFractionDigits: 2, maximumFractionDigits:2})+"</del>&euro;"+" -"+productos[i]["descuento"]+"%"+" &#8594; "+Number(productos[i]["precio_con_descuento"]).toLocaleString("en-US",{minimumFractionDigits: 2, maximumFractionDigits:2, style:"currency", currency:"EUR"});
+                td.innerHTML = "<del>"+Number(productos[i]["precio"]).toLocaleString("en-US",{minimumFractionDigits: 2, maximumFractionDigits:2})+"</del>&euro;"+" -"+productos[i]["descuento"]+"% "+Number(productos[i]["precio_con_descuento"]).toLocaleString("en-US",{minimumFractionDigits: 2, maximumFractionDigits:2})+"&euro;";
             }else{
                 td.innerHTML = productos[i]["precio"]+"&euro;"
             }
@@ -110,12 +110,12 @@ function funciones() {
         
         }
         let contenidoFinal = `<tr id="pieSumaSinIva">
-                                <th colspan="3">Total sin iva:</th>
+                                <th colspan="3">Total sin IVA:</th>
                                 <td id="sumaSinIva"></td>
                                 <td></td>
                             </tr>
                             <tr id="piecupon">
-                                <th colspan="2">Aplicar codigo descuento:</th>
+                                <th colspan="2">Aplicar código descuento:</th>
                                 <td id="tdcupon">
                                     <input type="text" id="codigoDescuento"><br>
                                     <span id="errorCupon"></span>
@@ -124,7 +124,7 @@ function funciones() {
                                 <td></td>
                             </tr>
                             <tr id="piecupon2">
-                                <th colspan="3">Tras codigo descuento:</th>
+                                <th colspan="3">Tras código descuento:</th>
                                 <td id="precioCupon"></td>
                                 <td ></td>
                             </tr>
@@ -175,17 +175,19 @@ function funciones() {
         let idproducto = this.id.split(";")[1]
         let unidades = document.getElementById(this.id).value
         let precioUnitario = document.getElementById("precio;"+idproducto).innerText; 
-        if(precioUnitario.length>6){
+        if(precioUnitario.includes('-')){
             precioUnitario = precioUnitario.split('→');
+            precioUnitario = precioUnitario[0].split('%');
             precioUnitario = precioUnitario[1].split('€');
-            precioUnitario =precioUnitario[1].trim();
-
+            precioUnitario =precioUnitario[0].trim();
             
+        }else{
+            precioUnitario = parseFloat(precioUnitario.split('€')[0])
         }
         
-        precioUnitario = parseFloat(precioUnitario)
         
-        document.getElementById("precioTotal;"+idproducto).innerText = (unidades*precioUnitario).toFixed(2)
+        
+        document.getElementById("precioTotal;"+idproducto).innerHTML = (unidades*precioUnitario).toFixed(2)+"&euro;"
         calculos()
     }
 
@@ -212,7 +214,7 @@ function funciones() {
             document.getElementById("precioCupon").innerHTML=precioTotal.toFixed(2)+"&euro;"
         }
 
-        document.getElementById("iva").innerHTML=(precioTotal*21/100).toFixed(2)+"%"
+        document.getElementById("iva").innerHTML=(precioTotal*21/100).toFixed(2)+"&euro;"
         document.getElementById("totalMasIva").innerHTML=parseFloat((parseFloat(precioTotal*21/100))+parseFloat(precioTotal)).toFixed(2)+"&euro;"
     }
 
@@ -300,19 +302,19 @@ function funciones() {
         let telefono = document.getElementById("telefono").value.trim();
         if(!patronNombreApellido.test(nombre)){
             exito = false;
-            document.getElementById("error_nombre").innerText = "Debes introducir almenos un nombre y un apellido como minimo, y deben empezar por mayuscula";
+            document.getElementById("error_nombre").innerText = "Debes introducir al menos un nombre y un apellido, y deben empezar con mayúscula";
         }else{
             document.getElementById("error_nombre").innerText = "";
         }
         if(!patronTelefono.test(telefono)){
             exito = false;
-            document.getElementById("error_telefono").innerText = "El telefono solo puede tener numeros y deben ser 9";
+            document.getElementById("error_telefono").innerText = "El teléfono deben tener 9 dígitos";
         }else{
             document.getElementById("error_telefono").innerText = "";
         }
         if(document.getElementById("direccion").value.length==0){
             exito = false;
-            document.getElementById("error_direccion").innerText = "Debes introducir una direccion";
+            document.getElementById("error_direccion").innerText = "Debes introducir una dirección";
         }else{
             document.getElementById("error_direccion").innerText = "";
         }

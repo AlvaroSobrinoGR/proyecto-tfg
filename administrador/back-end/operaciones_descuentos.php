@@ -83,8 +83,8 @@ $conexion = conexionBaseDatos();
                         
             
                         if ($resultado->num_rows > 0) {
-                            $asunto = "El producto ".$nombre." ha recivido un ".$porcentaje."% de descuento";
-                            $mensaje = "<p>El producto ".$nombre." ha recivido un ".$porcentaje."% de descuento.<br><br><del>" . number_format($precio, 2, ",", ".") . "</del>&euro; -" . $porcentaje . "% &#8594; " . number_format(($precio-($precio*$porcentaje/100)), 2, ",", ".") . "&euro; <br><br>
+                            $asunto = "El producto ".$nombre." ha recibido un ".$porcentaje."% de descuento";
+                            $mensaje = "<p>El producto ".$nombre." ha recibido un ".$porcentaje."% de descuento.<br><br><del>" . number_format($precio, 2, ",", ".") . "</del>&euro; -" . $porcentaje . "% &#8594; " . number_format(($precio-($precio*$porcentaje/100)), 2, ",", ".") . "&euro; <br><br>
                             Descripcion del producto: ".$descripcion."<br><br>Enlace: ";
 
                             if(strpos($conexion->host_info,"localhost") !== false){
@@ -117,5 +117,3 @@ $conexion = conexionBaseDatos();
 
 
 $conexion->close();
-
-?>

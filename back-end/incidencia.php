@@ -36,13 +36,13 @@ require_once 'conexion_base_datos.php';
                 try {
                     $ultimo_id = mysqli_insert_id($conexion);
                 
-                    $resultado = enviarCorreo($email, "$asunto. Id incidencia: $ultimo_id" , "Codigo de la incidencia: $ultimo_id <br>fecha: $fecha <br>estado: espera.<br> Le responderemos su incidencia por este email.<br>incidencia: $consulta");
+                    $resultado = enviarCorreo($email, "$asunto. Id incidencia: $ultimo_id" , "Codigo de la incidencia: $ultimo_id <br><br>Fecha: $fecha <br><br>Estado: espera.<br><br> Le responderemos su incidencia por este email.<br><br>Incidencia: $consulta");
                 } catch (Throwable $t) {
                     echo "Ha ocurrido un error: " . $t->getMessage();
                 }
                 
                 if($resultado=="enviado"){
-                    echo "Se a creado la incidencia. Tambien se le envio un email donde se le ira contactando.";
+                    echo "La incidencia ha sido creada. Recibirá un email con los detalles.";
                 }else{
                     $sql = "DELETE FROM incidencias WHERE id_incidencia = '$ultimo_id'";
                     $conexion->query($sql);

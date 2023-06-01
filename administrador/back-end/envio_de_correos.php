@@ -28,7 +28,7 @@ function enviarCorreo($email, $asunto, $mensaje){
             el smtp que utiliza
         */
 
-
+        $mail->CharSet = 'UTF-8';
         //Recipients
         $mail->setFrom('paginatiendapruebas@outlook.es', 'SimplyMinimal'); //Add a recipient
         $mail->addAddress($email);               //Name is optional

@@ -41,11 +41,11 @@ function pintarFactureaPedidos($pedido, $tipo){
 
             <table>
             <tr>
-                <td><b>Id compra: </b>'.$filaPedido["id_compra"].'</td>
+                <td><b>ID compra: </b>'.$filaPedido["id_compra"].'</td>
                 <td colspan="4"><b>Fecha compra: </b>'.$filaPedido["tiempo_local_compra"].'</td>
             </tr>
             <tr>
-                <th colspan="2">Direccion de envio</th>
+                <th colspan="2">Dirección de envio</th>
                 <th>Datos del pagador</th>
                 <th colspan="2">Resumen compra</th>
             </tr>
@@ -64,27 +64,27 @@ function pintarFactureaPedidos($pedido, $tipo){
 
             if($resultadoCupon->num_rows > 0){
                 $filaCupon = $resultadoCupon-> fetch_assoc();
-                $tabla .= '<td colspan="2"><b>Codigo Descuento: </b>'.$filaPedido["id_cupon"].'->'.$filaCupon["porcentaje"].'%</td>';
+                $tabla .= '<td colspan="2"><b>Código Descuento: </b>'.$filaPedido["id_cupon"].'->'.$filaCupon["porcentaje"].'%</td>';
             }else{
-                $tabla .= '<td colspan="2"><b>Codigo Descuento:</b> </td>';
+                $tabla .= '<td colspan="2"><b>Código Descuento:</b> </td>';
             }
 
             $tabla .= '</tr>
             <tr>
                 <td colspan="2">'.$filaDatos["direccion"].'</td>
                 <td></td>
-                <td colspan="2"><b>Tras codigo deceunto:</b> '.$filaPedido["total_tras_codigo"].'&euro;</td>
+                <td colspan="2"><b>Tras código descuento:</b> '.$filaPedido["total_tras_codigo"].'&euro;</td>
             </tr>
             <tr>
                 <td colspan="3"></td>
-                <td colspan="2"><b>IVA:</b>'.$filaPedido["porcentaje_iva"].'%</td>
+                <td colspan="2"><b>iva:</b>'.$filaPedido["porcentaje_iva"].'%</td>
             </tr>
             <tr>
                 <td colspan="3"></td>
                 <td colspan="2"><b>Total con iva: </b>'.$filaPedido["total_final_con_iva"].'&euro;</td>
             </tr>
             <tr  class="facutra_centrado">
-                <th colspan="5">Prodcutos</th>
+                <th colspan="5">Productos</th>
             </tr>';
 
 
@@ -96,7 +96,7 @@ function pintarFactureaPedidos($pedido, $tipo){
                 if($tipo=="Compra"){
                     $tabla .= '<tr class="facutra_centrado">
                     <th colspan="2">Nombre</th>
-                    <th>Catidad</th>
+                    <th>Cantidad</th>
                     <th>Precio Individual</th>
                     <th>Total Productos</th>
                     </tr>';
@@ -104,7 +104,7 @@ function pintarFactureaPedidos($pedido, $tipo){
                     $tabla .= '<tr class="facutra_centrado">
                     <td></td>
                     <th>Nombre</th>
-                    <th>Catidad</th>
+                    <th>Cantidad</th>
                     <th>Precio Individual</th>
                     <th>Total Productos</th>
                     </tr>';

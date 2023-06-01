@@ -118,7 +118,7 @@ if(isset($_POST["email"]) && isset($_POST["id_pedido_devolver"]) && isset($_POST
                                     $resultado = $conexion->query($consulta);
                                 } else {
                                     $conexion->rollback();
-                                    echo "No se pudo hacer la devolucion: " . $nombre;
+                                    echo "No se pudo hacer la devolución: " . $nombre;
                                     $error = true;
                                     break;
                                 }
@@ -127,7 +127,7 @@ if(isset($_POST["email"]) && isset($_POST["id_pedido_devolver"]) && isset($_POST
                             $consulta = "SELECT * FROM productos WHERE id_producto = '$temporal[0]'";
                             $resultado = $conexion->query($consulta);
                             $nombre = $resultado->fetch_assoc()["nombre"];
-                            echo "Estas intentando devolver mas productos de los que tienes en el producto: " . $nombre;
+                            echo "Estas intentando devolver más productos de los que tienes comprados: " . $nombre;
                             $error = true;
                             break;
                         }
@@ -162,9 +162,9 @@ if(isset($_POST["email"]) && isset($_POST["id_pedido_devolver"]) && isset($_POST
                     echo "devoluciohn realizada ";
                     try {
                         if($eliminadaFactura){
-                            enviarCorreo($email, "Devolucion realizada, factura eliminada. Id compra: ".$id_compra, "Debido a que la factura de la compra con id ".$id_compra." se ha quedado sin productos y han sido todos devueltos se ha liminado. En los proximos dias se le devovlera todo el deinero y se parasara a recoger los productos a devolver");
+                            enviarCorreo($email, "Devolución realizada, factura eliminada. ID compra: ".$id_compra, "Debido a que la factura de la compra con ID ".$id_compra." se ha quedado sin productos y han sido todos devueltos se ha eliminado. En los próximos días se le devolerá todo el dinero y se pasará a recoger los productos a devolver");
                         }else{
-                            enviarCorreo($email, "Devolucion realizada, factura actualizada. Id compra: ".$id_compra, "Su factura a sido actualziada, en los proximos dias se le devolvera el dinero de la devolucion y se pasara a recoger los productos a devolver.<br>".pintarFactureaPedidos($id_compra, "Compra"));
+                            enviarCorreo($email, "Devolución realizada, factura actualizada. ID compra: ".$id_compra, "Su factura a sido actualziada, en los proximos dias se le devolvera el dinero de la devolucion y se pasara a recoger los productos a devolver.<br>".pintarFactureaPedidos($id_compra, "Compra"));
                         }
                         
                     } catch (\Throwable $th) {
