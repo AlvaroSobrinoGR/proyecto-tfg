@@ -5,7 +5,7 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
-
+    <link rel="icon" type="image/png" href="css/logo/logo.png">
 
     <title>SimplyMinimal</title>
 
@@ -140,9 +140,7 @@
                 <div class="m_arriba_2" id="contenido3">
                     <div id="paypal-button-container"></div>  
 
-                    <script>//bloqueo
-                        document.getElementById('bloquePagina').style.display = "block";
-                    </script>
+
                 
                     <script src="https://www.paypal.com/sdk/js?client-id=Ab-pjiPTvH0T_SFtqwnt_eNHo7RLQON6T6u01aWjkqrFOpdg32yMloGaDU7UnQ4OX2nZ8TvaKUzs6w_Q&currency=EUR"></script>
                     
@@ -169,7 +167,7 @@
                             if(resultado.target.response.includes("ha surgido")){
                             callback(NaN); // Si hay un error, llama a la devolución de llamada con NaN
                             } else {
-                            callback(parseFloat(resultado.target.response)); // Llama a la devolución de llamada con el precio procesado
+                                callback(parseFloat(resultado.target.response)); // Llama a la devolución de llamada con el precio procesado
                             }
                         });
                         xhr.send(formulario);
@@ -182,7 +180,7 @@
                                 if (isNaN(precio)) {
                                     reject(new Error('El precio no es válido'));
                                 } else {
-                                    document.getElementById('bloquePagina').style.display = "block";
+                                    
                                     resolve(actions.order.create({
                                     purchase_units: [{
                                         amount: {
@@ -196,7 +194,9 @@
                             },
         
                             onApprove: function(data, actions ){
+                                
                                 actions.order.capture().then(function(detalles){
+                                    document.getElementById('bloquePagina').style.display = "block";
                                     let formulario = new FormData();
                                     formulario.append("email", obtener_usuario());
                                     //tiempo_locar_se_realizo_compra
@@ -247,7 +247,8 @@
         
         
                             onCancel: function (data){//esto se lanza cuando el usuario cancela el pago
-                                alert("pago cancelado")
+                                alert("Pago cancelado")
+                                document.getElementById('bloquePagina').style.display = "none";
                             }
                             
                         }).render('#paypal-button-container')

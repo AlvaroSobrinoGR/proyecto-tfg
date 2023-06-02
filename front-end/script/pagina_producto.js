@@ -72,7 +72,9 @@ function funciones(){
         });
         xhr.send(formulario);      
     }else{
+        document.getElementsByTagName("body")[0].innerHTML = ""
         alert("Algo ha fallado. Inténte entrar a la pagina más tarde.")
+        window.location.href = "../../../index.html"
     }
 
     function comprarProducto(){

@@ -32,7 +32,7 @@ function funciones (){
 
 
     function conexion() {
-    bloquearBloqueo()
+    
     let formulario = new FormData();
     let exito = true;
         if(this.id.includes("cambiarContraseña")){
@@ -52,6 +52,7 @@ function funciones (){
             }else{
                 document.getElementById("error_nombre").innerText = "";
             }
+            
             if(!patronTelefono.test(telefono) && telefono.length>0){
                 exito = false;
                 document.getElementById("error_telefono").innerText = "El telefono solo puede tener numeros y deben ser 9";
@@ -74,6 +75,7 @@ function funciones (){
 
         }
         if(exito){
+            bloquearBloqueo()
             let xhr = new XMLHttpRequest();
             xhr.open("POST", "../back-end/configuracion_usuario.php");
             xhr.addEventListener("load", (respuesta) => {
@@ -85,7 +87,6 @@ function funciones (){
             });
             xhr.send(formulario);
         }
-    
     }
 
     //cerrar sesion
