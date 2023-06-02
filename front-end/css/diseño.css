@@ -11,6 +11,25 @@
 body{
     min-height: 100vh;
 }
+#bloquePagina{
+    width: 100%;
+    height: 100vh;
+    background-color: #9b9b9bc4;;
+    position: absolute;
+    z-index: 100;
+}
+.centrar_espera{
+    margin-top: 40vh;
+}
+#bloquePagina #gif-container{
+    width: 7em;
+    height: 7em;
+    background: url(espera/espera.gif) center center;
+    background-size:cover;
+    background-position: center;
+    background-repeat: no-repeat;
+}
+
 .contenedor{
     display: flex;
 }
@@ -106,6 +125,9 @@ body{
 }
 .m_arriba_6{
     margin-top: 6em;
+}
+.m_arriba_8{
+    margin-top: 8em;
 }
 .m_arriba_4{
     margin-top: 4em;
@@ -386,7 +408,10 @@ input[type="reset"] {
     width: 3em;
     height: 2em;
 }
-/*video*/
+#cesta3{
+    z-index: 99;
+}
+/*video*//*
 #video-container {
     position: fixed;
     top: 0;
@@ -402,7 +427,7 @@ input[type="reset"] {
     height: 100%;
     object-fit: cover;
   }
-/*gif*/
+/*gif*//*
   #gif-container {
     position: fixed;
     top: 0;
@@ -425,3 +450,4 @@ input[type="reset"] {
     height: 100%;
   }
 
+*/

@@ -27,6 +27,13 @@
 </head>
 <body class="contenedor elementos_columna w100">
 
+    <div class="none" id="bloquePagina">
+        <div class="contenedor elementos_columna centrar_espera">
+          <h1 class="elemento_cetrado">Esperando respuesta del servidor</h1>
+          <div class="elemento_cetrado" id="gif-container"></div>
+        </div>
+      </div>
+
     <div class="contenedor elementos_columna w100 p_0-5">
 
 
@@ -132,10 +139,15 @@
                 
                 <div class="m_arriba_2" id="contenido3">
                     <div id="paypal-button-container"></div>  
+
+                    <script>//bloqueo
+                        document.getElementById('bloquePagina').style.display = "block";
+                    </script>
                 
                     <script src="https://www.paypal.com/sdk/js?client-id=Ab-pjiPTvH0T_SFtqwnt_eNHo7RLQON6T6u01aWjkqrFOpdg32yMloGaDU7UnQ4OX2nZ8TvaKUzs6w_Q&currency=EUR"></script>
                     
                     <script>
+                        
                         //ESTO PERMITE QUE SEA EL SERVIDOR CON LOS MINIMOS DATOS CRITICOS NECESARIOS PONER EL PRECIO EN EL PAGO
                         function calcularPrecio(callback){
                         let formulario = new FormData();
@@ -164,13 +176,13 @@
                         }
         
                         paypal.Buttons({
-        
                             createOrder: function(data, actions){
                             return new Promise(function(resolve, reject) {
                                 calcularPrecio(function(precio) {
                                 if (isNaN(precio)) {
                                     reject(new Error('El precio no es válido'));
                                 } else {
+                                    document.getElementById('bloquePagina').style.display = "block";
                                     resolve(actions.order.create({
                                     purchase_units: [{
                                         amount: {
@@ -226,6 +238,7 @@
                                             alert("La compra se realizo con exito. Se le envio un email con la informacion")
                                             sessionStorage.removeItem("carrito_tienda_minimalista")
                                         }
+                                        document.getElementById('bloquePagina').style.display = "none";
                                         window.location.href = "../index.html"
                                     });
                                     xhr.send(formulario);

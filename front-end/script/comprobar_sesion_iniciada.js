@@ -56,6 +56,11 @@ function funciones() {
             document.getElementById("seccion_carrito").style.display="block";
             document.getElementById("inicio_registro_sesion").style.display="none";
         }
+        if(archivo_actual.includes("carrito")){
+            document.getElementById("seccion_usuario").style.display="block";
+            document.getElementById("seccion_carrito").style.display="block";
+            document.getElementById("inicio_registro_sesion").style.display="none";
+        }
         
     }
 

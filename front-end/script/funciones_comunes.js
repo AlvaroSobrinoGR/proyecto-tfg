@@ -42,3 +42,22 @@ function numeroProductosCarrito(){
         return 0;
     }
 }
+
+/*bloqueo pantalla */
+
+function desbloquearBloqueo(){
+    document.getElementById('bloquePagina').style.display = "none";
+}
+function bloquearBloqueo(){
+    document.getElementById('bloquePagina').style.display = "block";
+}
+
+function resizeDiv() {
+    var windowHeight = window.innerHeight;
+    var documentHeight = document.documentElement.scrollHeight;
+    var height = Math.max(windowHeight, documentHeight);
+    document.getElementById('bloquePagina').style.height = height + 'px';
+  }
+  
+  window.addEventListener('resize', resizeDiv);
+  document.addEventListener('DOMContentLoaded', resizeDiv);

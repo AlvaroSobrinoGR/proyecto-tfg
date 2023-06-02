@@ -38,6 +38,7 @@ function funciones (){
     //recuperar contrasenia
     document.getElementById("enviar_recuperacion").addEventListener("click", conexion_recuperacion)
     function conexion_recuperacion(){
+        bloquearBloqueo()
         let formulario = new FormData();
         formulario.append("email", document.getElementById("email_recuperacion").value)
         document.getElementById("enviar_recuperacion").disabled = true;
@@ -52,6 +53,7 @@ function funciones (){
                 document.getElementById("respuesta_servidor").innerHTML = resultado;
             }
             document.getElementById("enviar_recuperacion").disabled = false;
+            desbloquearBloqueo()
         })
         xhr.send(formulario);
     }
@@ -60,6 +62,7 @@ function funciones (){
     document.getElementById("boton_iniciar_sesion").addEventListener("click", conexion)
     document.getElementById("boton_registrarse").addEventListener("click", conexion)
     function conexion(){
+        
         let formulario = new FormData();
         let estado = true;
         if(this.id=="boton_iniciar_sesion"){
@@ -86,6 +89,7 @@ function funciones (){
             }
         }
         if(estado){
+            bloquearBloqueo()
             let xhr = new XMLHttpRequest();
             xhr.open("POST", "../back-end/formulario_iniciar_registrar_sesion.php")
             xhr.addEventListener("load", (respuesta)=>{
@@ -119,9 +123,11 @@ function funciones (){
                     }
                     document.getElementById("boton_registrarse").disabled = false;
                 }
+                desbloquearBloqueo()
             })
             xhr.send(formulario);
         }
+        
     }
 
     //mostrar contrasenia

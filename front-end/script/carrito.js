@@ -2,12 +2,13 @@ window.addEventListener("load", funciones)
 
 
 function funciones() {
-
+    
     //cesta1
     let numeroProductos = 1;
     //carrit
     if(numeroProductosCarrito()==0){
         document.getElementById("contenido1").innerText = "No tienes productos que comprar"
+        desbloquearBloqueo()
     }
 
     if(sessionStorage.getItem("carrito_tienda_minimalista")){
@@ -31,6 +32,7 @@ function funciones() {
                 pintarProductos(json)
                 calculos()
             }
+            desbloquearBloqueo()
         });
         xhr.send(formulario);
 
@@ -250,6 +252,7 @@ function funciones() {
     document.getElementById("atras2").addEventListener("click", moverse)
 
     function moverse(e){
+        bloquearBloqueo()
         e.preventDefault()
         if(this.id=="siguiente1"){
             comprobarStock("siguiente1")
@@ -262,7 +265,7 @@ function funciones() {
             document.getElementById("cesta2").style.display="block"
             document.getElementById("cesta3").style.display="none"
         }
-        
+        desbloquearBloqueo()
     }
 
 //datos del usuario

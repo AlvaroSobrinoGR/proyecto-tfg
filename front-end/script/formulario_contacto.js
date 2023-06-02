@@ -3,9 +3,10 @@ window.addEventListener("load", funciones)
 function funciones(){
     document.getElementById("enviar_comentario").addEventListener("click", conexion)
     function conexion(){
+        bloquearBloqueo()
         let formulario = new FormData();
         let asunto = document.getElementById("asunto").value
-        let consulta = document.getElementById("asunto").value
+        let consulta = document.getElementById("consulta").value
         if(asunto.length > 0 && consulta.length > 0){
             formulario.append("asunto", asunto)
             formulario.append("consulta", consulta)
@@ -19,10 +20,12 @@ function funciones(){
             xhr.addEventListener("load", (respuesta)=>{
                 alert(respuesta.target.response)
                 document.getElementById("enviar_comentario").disabled = false
+                desbloquearBloqueo()
             })
             xhr.send(formulario);
         }else{
             alert("Tanto el asunto como la consulta deben tener contenido.")
+            desbloquearBloqueo()
         }
         
     }

@@ -22,6 +22,7 @@ function funciones(){
     
 
     function conexion(email, codigo, contrasenia, contraseniaConfirmar){
+        bloquearBloqueo()
         if(verificarContraseñas()){
             let formulario = new FormData();
             formulario.append("email", email)
@@ -44,11 +45,12 @@ function funciones(){
                     }
                     document.getElementById("cambiar_contraseñia").disabled = false;
                 }
-                
+                desbloquearBloqueo()
             })
             xhr.send(formulario);
         }else{
             comunicar_error()
+            desbloquearBloqueo()
         }
         
 

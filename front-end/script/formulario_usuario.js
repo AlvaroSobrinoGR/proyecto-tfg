@@ -32,57 +32,60 @@ function funciones (){
 
 
     function conexion() {
+    bloquearBloqueo()
     let formulario = new FormData();
     let exito = true;
-    if(this.id.includes("cambiarContraseña")){
-        
-        formulario.append("tipo", "contraseñia");
-        formulario.append("email", obtener_usuario());
-        document.getElementById("cambiarContraseña").disabled = true;
+        if(this.id.includes("cambiarContraseña")){
+            
+            formulario.append("tipo", "contraseñia");
+            formulario.append("email", obtener_usuario());
+            document.getElementById("cambiarContraseña").disabled = true;
 
-    }else if(this.id.includes("guardarCambios")){
-        let patronNombreApellido = /^[A-ZÁÉÍÓÚÑ][a-zA-ZÁÉÍÓÚÑ]*(?:\s+[A-ZÁÉÍÓÚÑ][a-zA-ZÁÉÍÓÚÑ]*){1,}$/;
-        let patronTelefono = /^\d{9}$/;
-        let nombre = document.getElementById("nombre").value.trim();
-        let telefono = document.getElementById("telefono").value.trim();
-        if(!patronNombreApellido.test(nombre) && nombre.length>0){
-            exito = false;
-            document.getElementById("error_nombre").innerText = "Debes introducir almenos un nombre y un apellido como minimo, y deben empezar por mayuscula";
-        }else{
-            document.getElementById("error_nombre").innerText = "";
-        }
-        if(!patronTelefono.test(telefono) && telefono.length>0){
-            exito = false;
-            document.getElementById("error_telefono").innerText = "El telefono solo puede tener numeros y deben ser 9";
-        }else{
-            document.getElementById("error_telefono").innerText = "";
+        }else if(this.id.includes("guardarCambios")){
+            let patronNombreApellido = /^[A-ZÁÉÍÓÚÑ][a-zA-ZÁÉÍÓÚÑ]*(?:\s+[A-ZÁÉÍÓÚÑ][a-zA-ZÁÉÍÓÚÑ]*){1,}$/;
+            let patronTelefono = /^\d{9}$/;
+            let nombre = document.getElementById("nombre").value.trim();
+            let telefono = document.getElementById("telefono").value.trim();
+            if(!patronNombreApellido.test(nombre) && nombre.length>0){
+                exito = false;
+                document.getElementById("error_nombre").innerText = "Debes introducir almenos un nombre y un apellido como minimo, y deben empezar por mayuscula";
+            }else{
+                document.getElementById("error_nombre").innerText = "";
+            }
+            if(!patronTelefono.test(telefono) && telefono.length>0){
+                exito = false;
+                document.getElementById("error_telefono").innerText = "El telefono solo puede tener numeros y deben ser 9";
+            }else{
+                document.getElementById("error_telefono").innerText = "";
+            }
+            if(exito){
+                formulario.append("tipo", "configuracion");
+                formulario.append("email", obtener_usuario());
+                formulario.append("nombre", nombre);
+
+                formulario.append("direccion", document.getElementById("direccion").value);
+                formulario.append("telefono", telefono);
+
+                formulario.append("novedades", document.getElementsByName("novedades")[0].checked?1:0);
+                document.getElementById("guardarCambios").disabled = true;
+            }
+            
+            
+
         }
         if(exito){
-            formulario.append("tipo", "configuracion");
-            formulario.append("email", obtener_usuario());
-            formulario.append("nombre", nombre);
-
-            formulario.append("direccion", document.getElementById("direccion").value);
-            formulario.append("telefono", telefono);
-
-            formulario.append("novedades", document.getElementsByName("novedades")[0].checked?1:0);
-            document.getElementById("guardarCambios").disabled = true;
+            let xhr = new XMLHttpRequest();
+            xhr.open("POST", "../back-end/configuracion_usuario.php");
+            xhr.addEventListener("load", (respuesta) => {
+                alert(respuesta.target.response)
+                document.getElementById("cambiarContraseña").disabled = false;
+                document.getElementById("guardarCambios").disabled = false;
+                desbloquearBloqueo()
+                
+            });
+            xhr.send(formulario);
         }
-        
-        
-
-    }
-    if(exito){
-        let xhr = new XMLHttpRequest();
-        xhr.open("POST", "../back-end/configuracion_usuario.php");
-        xhr.addEventListener("load", (respuesta) => {
-            alert(respuesta.target.response)
-            document.getElementById("cambiarContraseña").disabled = false;
-            document.getElementById("guardarCambios").disabled = false;
-            
-        });
-        xhr.send(formulario);
-    }
+    
     }
 
     //cerrar sesion
@@ -361,6 +364,7 @@ function funciones (){
 
     document.getElementById("enviar_incidencia").addEventListener("click", enviarIncidencia)
     function enviarIncidencia(){
+        bloquearBloqueo()
         let formulario = new FormData();
         let asunto = document.getElementById("indicencia_asunto").value
         let consulta = document.getElementById("indicencia_consulta").value
@@ -379,6 +383,7 @@ function funciones (){
             xhr.addEventListener("load", (respuesta)=>{
                 alert(respuesta.target.response)
                 document.getElementById("enviar_incidencia").disabled = false;
+                desbloquearBloqueo()
             })
             xhr.send(formulario);
         }else{
@@ -388,6 +393,7 @@ function funciones (){
     }
 
     function devolverPedido(pedido){
+        
         let formulario = new FormData();
         formulario.append("id_pedido", pedido);
         let xhr = new XMLHttpRequest();
@@ -400,7 +406,7 @@ function funciones (){
                 document.getElementById("formulario_usuario1").style.display = "none";
                 document.getElementById("formulario_usuario2").style.display = "none";
                 document.getElementById("devolucion").style.display = "block";
-                pintarDevolucion(json)
+                pintarDevolucion(json)   
             }
         });
         xhr.send(formulario);
@@ -495,6 +501,7 @@ function funciones (){
     }
     //si al menos un checkbox esta activo y tiene almenos un producto para devolver se podra devolver
     function devolverProductos(){
+        bloquearBloqueo()
         let productos_cantidades = ";"
         let checkeds = document.getElementsByName("checkbox_devolucones")
         document.getElementById("devolver_boton").disabled = true;
@@ -525,7 +532,7 @@ function funciones (){
                 }
                 document.getElementById("devolver_boton").disabled = false;
             }
-
+            desbloquearBloqueo()
             
         });
         xhr.send(formulario);
