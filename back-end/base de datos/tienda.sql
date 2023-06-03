@@ -3,7 +3,7 @@
 -- https://www.phpmyadmin.net/
 --
 -- Servidor: 127.0.0.1
--- Tiempo de generación: 31-05-2023 a las 12:17:51
+-- Tiempo de generación: 03-06-2023 a las 13:04:26
 -- Versión del servidor: 10.4.28-MariaDB
 -- Versión de PHP: 8.2.4
 
@@ -85,7 +85,9 @@ INSERT INTO `compra` (`id_compra`, `id_usuario`, `id_datos_comprador`, `tiempo_l
 (88, 47, 20, '2023-05-25 14:44:56', '2023-05-25T12:44:55Z', '4DU81844UA1966301', 'EU2AG9GA88P58', 'sb-pipgx25897233@personal.example.com', 'John Doe', 46.44, NULL, 46.44, 21.00, 56.19),
 (89, 47, 20, '2023-05-31 12:03:18', '2023-05-31T10:03:17Z', '72547413X41469507', 'EU2AG9GA88P58', 'sb-pipgx25897233@personal.example.com', 'John Doe', 32.98, NULL, 32.98, 21.00, 39.91),
 (90, 47, 20, '2023-05-31 12:05:23', '2023-05-31T10:05:22Z', '4MD36808EN241710S', 'EU2AG9GA88P58', 'sb-pipgx25897233@personal.example.com', 'John Doe', 14.99, NULL, 14.99, 21.00, 18.14),
-(91, 47, 20, '2023-05-31 12:07:39', '2023-05-31T10:07:38Z', '5UD57983VV312481B', 'EU2AG9GA88P58', 'sb-pipgx25897233@personal.example.com', 'John Doe', 14.99, NULL, 14.99, 21.00, 18.14);
+(91, 47, 20, '2023-05-31 12:07:39', '2023-05-31T10:07:38Z', '5UD57983VV312481B', 'EU2AG9GA88P58', 'sb-pipgx25897233@personal.example.com', 'John Doe', 14.99, NULL, 14.99, 21.00, 18.14),
+(98, 48, 40, '2023-06-02 19:07:34', '2023-06-02T17:07:34Z', '6X007824BN797720Y', 'EU2AG9GA88P58', 'sb-pipgx25897233@personal.example.com', 'John Doe', 329.00, NULL, 329.00, 21.00, 398.09),
+(99, 48, 40, '2023-06-02 19:08:39', '2023-06-02T17:08:38Z', '9TH13285X4252832U', '23W3SYNZMCGB4', 'gradoalvarogrado@gmail.com', 'asdasd asdasd', 329.00, NULL, 329.00, 21.00, 398.09);
 
 -- --------------------------------------------------------
 
@@ -114,7 +116,9 @@ INSERT INTO `compra_productos` (`id_compra`, `id_producto`, `cantidad`, `precio_
 (89, 0, 1, 14.99, 14.99, 0.00, 14.99),
 (89, 2, 1, 19.99, 19.99, 10.00, 17.99),
 (90, 0, 1, 14.99, 14.99, 0.00, 14.99),
-(91, 0, 1, 14.99, 14.99, 0.00, 14.99);
+(91, 0, 1, 14.99, 14.99, 0.00, 14.99),
+(98, 1, 1, 329.00, 329.00, 0.00, 329.00),
+(99, 1, 1, 329.00, 329.00, 0.00, 329.00);
 
 -- --------------------------------------------------------
 
@@ -145,7 +149,9 @@ INSERT INTO `consultas` (`id_consulta`, `id_usuario`, `id_empleado`, `asunto`, `
 (34, 47, NULL, 'maxlength=\"255\"maxlength=\"255\"', 'maxlength=\"255\"maxlength=\"255\"maxlength=\"255\"maxlength=\"255\"maxlength=\"255\"maxlength=\"255\"maxlength=\"255\"maxlength=\"255\"maxlength=\"255\"maxlength=\"255\"maxlength=\"255\"maxlength=\"255\"maxlength=\"255\"maxlength=\"255\"maxlength=\"255\"maxlength=\"255\"maxlength=\"255\"', 'espera', '2023-05-24 17:36:54'),
 (35, 47, NULL, 'maxlength=\"255\"', 'maxlength=\"255\"maxlength=\"255\"maxlength=\"255\"maxlength=\"255\"maxlength=\"255\"maxlength=\"255\"maxlength=\"255\"maxlength=\"255\"maxlength=\"255\"maxlength=\"255\"maxlength=\"255\"maxlength=\"255\"maxlength=\"255\"maxlength=\"255\"maxlength=\"255\"maxlength=\"255\"maxlength=\"255\"', 'espera', '2023-05-24 17:37:17'),
 (36, 47, NULL, 'maxlength=\"255\"', 'maxlength=\"255\"maxlength=\"255\"maxlength=\"255\"maxlength=\"255\"maxlength=\"255\"maxlength=\"255\"maxlength=\"255\"maxlength=\"255\"maxlength=\"255\"maxlength=\"255\"maxlength=\"255\"maxlength=\"255\"maxlength=\"255\"maxlength=\"255\"maxlength=\"255\"maxlength=\"255\"maxlength=\"255\"', 'espera', '2023-05-24 17:37:33'),
-(37, 47, NULL, '', '', 'espera', '2023-05-24 18:38:54');
+(37, 47, NULL, '', '', 'espera', '2023-05-24 18:38:54'),
+(43, 48, NULL, 'tete', 'teteete', 'espera', '2023-06-02 16:26:22'),
+(44, 48, NULL, 'tete', 'teteete', 'espera', '2023-06-02 16:26:36');
 
 -- --------------------------------------------------------
 
@@ -170,7 +176,23 @@ INSERT INTO `datos_usuario` (`id_datos`, `nombre_apellido`, `direccion`, `telefo
 (21, 'Álvaro Sobrino', 'asd', 87654321),
 (22, 'Álvaro Sobrino', 'asd', 23456789),
 (23, 'Álvaro Sobrino', 'asd', 123456789),
-(24, 'Álvaro Sobrino', 'asd', 987654321);
+(24, 'Álvaro Sobrino', 'asd', 987654321),
+(25, 'Álvaro Sobrino Fraile', 'asdasdsa', 987654321),
+(26, 'Álvaro Sobrino Fraile', 'ertert', 987654321),
+(27, 'Álvaro Sobrino Fraile', 'saasd', 987654321),
+(28, 'Álvaro Sobrino Fraile', 'asdads', 987654321),
+(29, 'Álvaro Sobrino Fraile', 'asd', 987654321),
+(30, 'Álvaro Sobrino Fraile', 'pepe', 987654321),
+(31, 'Álvaro Sobrino Fraile', 'asfds', 987654321),
+(32, 'Álvaro Sobrino Fraile', 'dasd', 987654321),
+(33, 'Álvaro Sobrino Fraile', 'ASDASDASD', 987654321),
+(34, 'Álvaro Sobrino Fraile', 'asdas', 987654321),
+(35, 'Álvaro Sobrino Fraile', 'gdfhfg', 987654321),
+(36, 'Álvaro Sobrino Fraile', 'dgdf', 987654321),
+(37, 'Álvaro Sobrino Fraile', 'pepepe', 987654321),
+(38, 'Álvaro Sobrino', '', 0),
+(39, 'Álvaro Sobrino', '', 123456789),
+(40, 'Álvaro Sobrino', 'dasdasd', 123456789);
 
 -- --------------------------------------------------------
 
@@ -190,7 +212,8 @@ CREATE TABLE `descuentos` (
 
 INSERT INTO `descuentos` (`id_descuento`, `porcentaje`, `id_producto`) VALUES
 (4, 10.00, 2),
-(5, 15.00, 5);
+(5, 15.00, 5),
+(7, 12.00, 0);
 
 -- --------------------------------------------------------
 
@@ -258,12 +281,13 @@ CREATE TABLE `productos` (
 --
 
 INSERT INTO `productos` (`id_producto`, `nombre`, `descripcion`, `tipo`, `stock`, `precio`, `activo`) VALUES
-(0, 'Funda de teléfono', 'Funda de Cintura para Teléfono Celular, Bolsa de Cintura para Hombre, Diseñada para Celulares de hasta 6.9\", Riñonera con Clip Vertical, Mosquetón y Bolsillo para Tarjetas, Ideal para Deportes, Camping y Viajes.', 'accesorios', 9, 14.99, 1),
-(1, 'MP02 Phone', 'Nueva Generación del Teléfono Móvil Minimalista, MP02 Phone. Conectividad 4G LTE, Enfoque en Seguridad Digital, Pantalla de 2 pulgadas, Batería de 1,280 mAh, Compatibilidad Multibanda, Nano-SIM y Lengua Española - Color Negro.', 'tecnología', 20, 329.00, 1),
-(2, 'Reloj AC02', 'Reloj AC02 es un elegante reloj de mesa con función de alarma. Cuenta con un diseño analógico y está equipado con un preciso movimiento de cuarzo japonés. Su estructura de aluminio y cristal de vidrio brindan durabilidad y estilo. Diseñado por Jasper Morrison y fabricado en Japón, este reloj en color negro añade un toque sofisticado a cualquier espacio.', 'tecnología', 19, 19.99, 1),
+(0, 'Funda de teléfono', 'Funda de Cintura para Teléfono Celular, Bolsa de Cintura para Hombre, Diseñada para Celulares de hasta 6.9\", Riñonera con Clip Vertical, Mosquetón y Bolsillo para Tarjetas, Ideal para Deportes, Camping y Viajes.', 'accesorios', 4, 14.99, 1),
+(1, 'MP02 Phone', 'Nueva Generación del Teléfono Móvil Minimalista, MP02 Phone. Conectividad 4G LTE, Enfoque en Seguridad Digital, Pantalla de 2 pulgadas, Batería de 1,280 mAh, Compatibilidad Multibanda, Nano-SIM y Lengua Española - Color Negro.', 'tecnología', 16, 329.00, 1),
+(2, 'Reloj AC02', 'Reloj AC02 es un elegante reloj de mesa con función de alarma. Cuenta con un diseño analógico y está equipado con un preciso movimiento de cuarzo japonés. Su estructura de aluminio y cristal de vidrio brindan durabilidad y estilo. Diseñado por Jasper Morrison y fabricado en Japón, este reloj en color negro añade un toque sofisticado a cualquier espacio.', 'tecnología', 20, 19.99, 1),
 (3, 'Silla Sky', 'Comodidad y versatilidad en un diseño elegante. Adaptable a cualquier espacio, tanto interior como exterior. Diseño solo en color crema.', 'muebles', 0, 31.45, 1),
 (4, 'Cargador UC01', 'El Cargador UC01 es un elegante Hub USB diseñado con 3 puertos y alimentación externa, que ofrece una solución eficiente para conectar y cargar varios dispositivos. Este cargador rápido, fabricado en Italia, destaca por su diseño sofisticado en color negro.', 'tecnología', 20, 29.99, 1),
-(5, 'accesorio1', 'Este accesorio es el complemento perfecto para cualquier atuendo. Confeccionado con materiales de alta calidad, su diseño elegante y sofisticado lo hace ideal para lucir en ocasiones especiales. Su practicidad y funcionalidad lo hacen perfecto para el día a día, mientras que su estilo atemporal lo hace una inversión duradera en tu guardarropa. Con detalles cuidadosamente elaborados, este accesorio resaltará tu estilo y personalidad. Además, su versatilidad te permite combinarlo con diferentes prendas y estilos para crear looks únicos y destacar en cualquier situación.', 'accesorios', 12, 30.45, 0);
+(5, 'Cartera Slim Sleeve', 'La cartera Slim Sleeve, una opción elegante y funcional. Fabricada con cuero de alta calidad, esta cartera delgada tipo bifold cuenta con un bolsillo delantero y capacidad para 4 a 12 tarjetas. También incluye un compartimento para billetes doblados. Es la combinación perfecta de estilo y practicidad en un accesorio compacto.', 'accesorios', 12, 79.00, 1),
+(6, 'Armonía', 'Juego de 3 jarrones de cerámica blanca, simples y decorativos. Perfectos para la decoración del hogar, estos jarrones mate son ideales tanto para hierba de pampas como para flores. Añaden estilo a estantes, mesas de café y sala de estar, creando una armonía visual.', 'decoración', 12, 29.99, 1);
 
 -- --------------------------------------------------------
 
@@ -286,8 +310,8 @@ CREATE TABLE `usuarios` (
 --
 
 INSERT INTO `usuarios` (`id_usuario`, `email`, `contrasenia`, `id_datos`, `validada`, `codigo`, `novedades`) VALUES
-(46, 'gradoalvarogrado@gmail.com', '$2y$10$XTYc6Fv6dQ7VX4EZU9s8ieYqj8AWa3DZhusP9wGfJQUAETqggJ7Mi', NULL, 1, '646c82741b188', 0),
-(47, 'estudiosalvaroestudios@gmail.com', '$2y$10$Rbou0J.z3JBgF7uovbHcc.XSUPgsoq5FveS9xNYGWUDYNdwWOEqea', 24, 1, '0', 1);
+(47, 'estudiosalvaroestudios@gmail.com', '$2y$10$Rbou0J.z3JBgF7uovbHcc.XSUPgsoq5FveS9xNYGWUDYNdwWOEqea', 24, 1, '0', 1),
+(48, 'gradoalvarogrado@gmail.com', '$2y$10$JO/oxXu66C6.QlgM/UcENuNS4rDXfViS3w.2YC8ABeaB6DJYUN5Ca', 40, 1, '0', 1);
 
 --
 -- Índices para tablas volcadas
@@ -389,25 +413,25 @@ ALTER TABLE `usuarios`
 -- AUTO_INCREMENT de la tabla `compra`
 --
 ALTER TABLE `compra`
-  MODIFY `id_compra` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=92;
+  MODIFY `id_compra` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=100;
 
 --
 -- AUTO_INCREMENT de la tabla `consultas`
 --
 ALTER TABLE `consultas`
-  MODIFY `id_consulta` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=38;
+  MODIFY `id_consulta` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=45;
 
 --
 -- AUTO_INCREMENT de la tabla `datos_usuario`
 --
 ALTER TABLE `datos_usuario`
-  MODIFY `id_datos` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=25;
+  MODIFY `id_datos` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=41;
 
 --
 -- AUTO_INCREMENT de la tabla `descuentos`
 --
 ALTER TABLE `descuentos`
-  MODIFY `id_descuento` int(155) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=7;
+  MODIFY `id_descuento` int(155) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `empleados`
@@ -419,19 +443,19 @@ ALTER TABLE `empleados`
 -- AUTO_INCREMENT de la tabla `incidencias`
 --
 ALTER TABLE `incidencias`
-  MODIFY `id_incidencia` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=14;
+  MODIFY `id_incidencia` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=17;
 
 --
 -- AUTO_INCREMENT de la tabla `productos`
 --
 ALTER TABLE `productos`
-  MODIFY `id_producto` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=6;
+  MODIFY `id_producto` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=8;
 
 --
 -- AUTO_INCREMENT de la tabla `usuarios`
 --
 ALTER TABLE `usuarios`
-  MODIFY `id_usuario` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=48;
+  MODIFY `id_usuario` int(255) NOT NULL AUTO_INCREMENT, AUTO_INCREMENT=49;
 
 --
 -- Restricciones para tablas volcadas

@@ -1,0 +1,113 @@
+*{
+    margin: 0%;
+    padding: 0%;
+    box-sizing: border-box;
+}
+body{
+    min-height: 100vh;
+}
+.botones_inicio input[type="button"]{
+    width: 20em;
+    height: 3em;
+    font-size: large;
+}
+
+.botones_apartados input[type="button"]{
+    min-width: 10em;
+    height: 2em;
+    font-size: large;
+}
+.botones_apartados input[type="text"],
+.botones_apartados input[type="number"]{
+    width: 25em;
+    height: 2em;
+    font-size: large;
+}
+.botones_apartados select{
+    width: 10em;
+    height: 2em;
+    font-size: large;
+}
+.separacion_2_m{
+ margin: 2em;
+}
+
+
+
+
+.contenedor{
+    display: flex;
+}
+.elementos_fila{
+    flex-direction: row;
+}
+.elementos_columna{
+    flex-direction: column;
+}
+
+.elementos_centrados{
+    justify-content: center;
+}
+.elementos_centrados_v{
+    align-items: center;
+}
+.elemento_izquierda{
+    align-self: flex-start;
+}
+
+
+.texto_aling_izquierda{
+    text-align: left;
+}
+.texto_large{
+    font-size: larger;
+}
+.texto_xxlarge{
+    font-size: xx-large;
+}
+.tabla{
+    max-width: 100%;
+    overflow-x: auto;
+}
+
+.tabla table {
+    table-layout: fixed;
+    width: 100%;
+}
+.tabla td {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+.tabla th {
+    word-wrap: break-word;
+    overflow-wrap: break-word;
+}
+
+.tabla  table, .tabla td, .tabla th, .tabla tr{
+    font-size: medium;
+    border: 1px solid black;
+    text-align: center;
+    border-collapse: collapse;
+    padding-top: 1em;
+    padding-bottom: 1em;
+}
+
+.fila_color   tr:nth-child(even) {
+    background-color: #cfcfcf; /* Color para las filas pares */
+}
+  
+.fila_color  tr:nth-child(odd) {
+    background-color: #e9e9e9; /* Color para las filas impares */
+}
+
+.color_fila1 {
+    background-color: #cfcfcf; /* Color para las filas pares */
+}
+  
+.color_fila2 {
+    background-color: #e9e9e9; /* Color para las filas impares */
+}
+
+.fondo_amarillo{
+    background-color: rgb(255, 255, 85);
+}

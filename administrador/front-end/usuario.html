@@ -4,7 +4,10 @@
     <meta charset="UTF-8">
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    
     <title>SimplyMinimal Administración</title>
+
+    <link href="css/administrador_diseño.css" rel="stylesheet" type="text/css" />
 
     <script src="script/funciones_comunes.js"></script>
     
@@ -12,9 +15,12 @@
 
     <script src="script/pintar_usuarios.js"></script>
 </head>
-<body>
-    <a href="inicio.html">Atás</a><br>
-   
+<body class="contenedor elementos_columna elementos_centrados_v texto_large  botones_apartados">
+    <div class="texto_xxlarge">
+    <a href="inicio.html">Atás</a>
+    </div>
+
+    <div class="separacion_2_m">
     <label>Buscar por:</label>
     <select id="tipoBusqueda">
         <option value="">Nada</option>
@@ -46,8 +52,12 @@
         <option value="DESC">descendente</option>
     </select>
     <input type="button" id="aplicar" value="Aplicar">
+    </div>
 
-    <table id="datos">
+
+    <div class="tabla  fila_color">
+    <table  id="datos">
     </table>
+    </div>
 </body>
 </html>

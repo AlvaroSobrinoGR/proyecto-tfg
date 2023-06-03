@@ -6,49 +6,67 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SimplyMinimal Administración</title>
 
+    <link href="css/administrador_diseño.css" rel="stylesheet" type="text/css" />
+
     <script src="script/funciones_comunes.js"></script>
     
     <script src="script/comprobar_sesion_iniciada.js"></script>
 
     <script src="script/codigos_descuento.js"></script>
 </head>
-<body>
-    <a href="inicio.html">Atás</a><br>
-    <label>Buscar por:</label>
-    <select id="tipoBusqueda">
-        <option value="">Nada</option>
-        <option value="id_cupon">id_cupon</option>
-        <option value="porcentaje">porcentaje</option>
-        <option value="estado">estado</option>
-    </select>
-    <label>Dato a buscar:</label>
-    <input type="text" id="contenidoBusqueda">
-    <label>Ordenar por:</label>
-    <select id="orden">
-        <option value="">Nada</option>
-        <option value="id_cupon">id_cupon</option>
-        <option value="porcentaje">porcentaje</option>
-        <option value="estado">estado</option>
-    </select>
-    <select id="tipo_orden">
-        <option value="ASC" selected>ascendente</option>
-        <option value="DESC">descendente</option>
-    </select>
-    <input type="button" id="aplicar" value="Aplicar"><br><br>
-    <span>Añadir descuento:</span><br>
-    <label>Codigo Descuento:</label><input type="text" id="codigoañadir"><br>
-    <label>porcentaje:</label><input type="number" id="porcentajeañadir"><br>
-    <label>estado:</label><input type="number" id="estadoañadir"><input type="button" id="añadirDescuento" value="Añadir Descuento"><br><br>
+<body class="contenedor elementos_columna elementos_centrados_v texto_large  botones_apartados">
 
-    <span>Modificar estado:</span><br>
-    <label>Codigo Descuento:</label><input type="text" id="codigomodificar"><br>
-    <label>estado:</label><input type="number" id="estadomodificar"><input type="button" id="modificarDescuento" value="Modificar Descuento"><br><br>
+    <div class="texto_xxlarge">
+        <a href="inicio.html">Atás</a>
+    </div>
 
+    <div class="contenedor elementos_columna elementos_centrados_v separacion_2_m">
+        <div>
+            <label>Buscar por:</label>
+            <select id="tipoBusqueda">
+                <option value="">Nada</option>
+                <option value="id_cupon">id_cupon</option>
+                <option value="porcentaje">porcentaje</option>
+                <option value="estado">estado</option>
+            </select>
+            <label>Dato a buscar:</label>
+            <input type="text" id="contenidoBusqueda">
+            <label>Ordenar por:</label>
+            <select id="orden">
+                <option value="">Nada</option>
+                <option value="id_cupon">id_cupon</option>
+                <option value="porcentaje">porcentaje</option>
+                <option value="estado">estado</option>
+            </select>
+            <select id="tipo_orden">
+                <option value="ASC" selected>ascendente</option>
+                <option value="DESC">descendente</option>
+            </select>
+            <input type="button" id="aplicar" value="Aplicar">
+        </div>
 
-    <span>Avisar a usuarios de novedades:</span><br>
-    <label>ID desceunto:</label><input type="text" id="iddescuentoaviso"><input type="button" id="avisarDescuento" value="Avisar de  Descuento"><br><br>
-
+        <div class="contenedor elementos_fila ">
+            <div class="separacion_2_m">
+                <span>Añadir descuento:</span><br>
+                <label>Codigo Descuento:</label><br><input type="text" id="codigoañadir"><br>
+                <label>Porcentaje:</label><br><input type="number" id="porcentajeañadir"><br>
+                <label>Estado:</label><br><input type="number" id="estadoañadir"><input type="button" id="añadirDescuento" value="Añadir Descuento"><br><br>
+            </div>
+            <div class="separacion_2_m">
+                <span>Modificar estado:</span><br>
+                <label>Codigo Descuento:</label><input type="text" id="codigomodificar"><br>
+                <label>Estado:</label><br><input type="number" id="estadomodificar"><input type="button" id="modificarDescuento" value="Modificar Descuento"><br><br>
+            </div>
+     
+            <div class="separacion_2_m">
+                <span>Avisar a usuarios de novedades:</span><br>
+                <label>ID desceunto:</label><br><input type="text" id="iddescuentoaviso"><input type="button" id="avisarDescuento" value="Avisar de  Descuento"><br><br>
+            </div>
+        </div>
+    </div>
+    <div class="tabla  fila_color">
     <table id="datos">
     </table>
+</div>
 </body>
 </html>

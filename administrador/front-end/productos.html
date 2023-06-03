@@ -6,56 +6,74 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>SimplyMinimal Administración</title>
 
+    <link href="css/administrador_diseño.css" rel="stylesheet" type="text/css" />
+
     <script src="script/funciones_comunes.js"></script>
     
     <script src="script/comprobar_sesion_iniciada.js"></script>
 
     <script src="script/prodcutos.js"></script>
 </head>
-<body>
-    <a href="inicio.html">Atás</a><br>
-    <label>Buscar por:</label>
-    <select id="tipoBusqueda">
-        <option value="">Nada</option>
-        <option value="id_producto">id_producto</option>
-        <option value="nombre">nombre</option>
-        <option value="descripcion">descripcion</option>
-        <option value="tipo">tipo</option>
-        <option value="stock">stock</option>
-        <option value="precio">precio</option>
-        <option value="activo">estado</option>
-    </select>
-    <label>Dato a buscar:</label>
-    <input type="text" id="contenidoBusqueda">
-    <label>Ordenar por:</label>
-    <select id="orden">
-        <option value="">Nada</option>
-        <option value="id_producto">id_producto</option>
-        <option value="nombre">nombre</option>
-        <option value="descripcion">descripcion</option>
-        <option value="tipo">tipo</option>
-        <option value="stock">stock</option>
-        <option value="precio">precio</option>
-        <option value="activo">estado</option>
-    </select>
-    <select id="tipo_orden">
-        <option value="ASC" selected>ascendente</option>
-        <option value="DESC">descendente</option>
-    </select>
-    <input type="button" id="aplicar" value="Aplicar"><br><br>
-    <span>modificar stock:</span><br>
-    <label>ID producto:</label><input type="number" id="idprodcutomodificar"><br>
-    <label>Stock:</label><input type="number" id="stockmodificar"><input type="button" id="modificarStock" value="Modificar Stock"><br><br>
-    
-    <span>modificar estado:</span><br>
-    <label>ID producto:</label><input type="number" id="idprodcutoestado"><br>
-    <label>estado:</label><input type="number" id="estadomodificar"><input type="button" id="modificarEstado" value="Modificar Estado"><br><br>
-    
+<body class="contenedor elementos_columna elementos_centrados_v texto_large  botones_apartados">
 
-    <span>Avisar a usuarios de nuevos productos:</span><br>
-    <label>ID desceunto:</label><input type="number" id="iddescuentoaviso"><input type="button" id="avisarProducto" value="Avisar de Producto"><br><br>
+    <div class="texto_xxlarge">
+        <a href="inicio.html">Atás</a>
+    </div>
 
+    <div class="contenedor elementos_columna elementos_centrados_v separacion_2_m">
+        <div>
+                <label>Buscar por:</label>
+                <select id="tipoBusqueda">
+                    <option value="">Nada</option>
+                    <option value="id_producto">id_producto</option>
+                    <option value="nombre">nombre</option>
+                    <option value="descripcion">descripcion</option>
+                    <option value="tipo">tipo</option>
+                    <option value="stock">stock</option>
+                    <option value="precio">precio</option>
+                    <option value="activo">estado</option>
+                </select>
+                <label>Dato a buscar:</label>
+                <input type="text" id="contenidoBusqueda">
+                <label>Ordenar por:</label>
+                <select id="orden">
+                    <option value="">Nada</option>
+                    <option value="id_producto">id_producto</option>
+                    <option value="nombre">nombre</option>
+                    <option value="descripcion">descripcion</option>
+                    <option value="tipo">tipo</option>
+                    <option value="stock">stock</option>
+                    <option value="precio">precio</option>
+                    <option value="activo">estado</option>
+                </select>
+                <select id="tipo_orden">
+                    <option value="ASC" selected>ascendente</option>
+                    <option value="DESC">descendente</option>
+                </select>
+                <input type="button" id="aplicar" value="Aplicar">
+        </div>
+
+        <div class="contenedor elementos_fila ">
+            <div class="separacion_2_m">
+                <span>modificar stock:</span><br>
+                <label>ID producto:</label><br><input type="number" id="idprodcutomodificar"><br>
+                <label>Stock:</label><br><input type="number" id="stockmodificar"><br><input type="button" id="modificarStock" value="Modificar Stock"><br><br>
+            </div>
+            <div class="separacion_2_m">
+                <span>modificar estado:</span><br>
+                <label>ID producto:</label><br><input type="number" id="idprodcutoestado"><br>
+                <label>Estado:</label><br><input type="number" id="estadomodificar"><br><input type="button" id="modificarEstado" value="Modificar Estado"><br><br>
+            </div>
+
+            <div class="separacion_2_m">
+                <span>Avisar a usuarios de nuevos productos:</span><br>
+                <label>ID desceunto:</label><br><input type="number" id="iddescuentoaviso"><br><input type="button" id="avisarProducto" value="Avisar de Producto"><br><br>
+            </div>
+        </div>
+    </div>
+    <div class="tabla  fila_color">
     <table id="datos">
     </table>
+</div>
 </body>
 </html>
