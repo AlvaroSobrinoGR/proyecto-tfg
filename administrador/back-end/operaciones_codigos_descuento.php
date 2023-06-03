@@ -15,7 +15,7 @@ $conexion = conexionBaseDatos();
             $estado = 0;
         }
         
-        $consultaDescuento = "SELECT * FROM codigo_descuento WHERE id_cupon = '$codigo'";
+        $consultaDescuento = "SELECT * FROM codigo_descuento WHERE BINARY id_cupon = '$codigo'";
         $resultadoDescuento = $conexion->query($consultaDescuento);
 
             if ($resultadoDescuento->num_rows > 0) {
@@ -90,7 +90,7 @@ $conexion = conexionBaseDatos();
             
                         if ($resultado->num_rows > 0) {
                             $asunto = "Codigo de descuento para tus proximas compras";
-                            $mensaje = "<p>Con el codigo ".$id_cupon." prodras recibir un descuento del ".$porcentaje."% en tu proxima compra.<br><br>Enlace a la tienda: ";
+                            $mensaje = "<p>Con el codigo <b>".$id_cupon."</b> prodras recibir un descuento del ".$porcentaje."% en tu proxima compra.<br><br>Enlace a la tienda: ";
 
                             if(strpos($conexion->host_info,"localhost") !== false){
                                 $mensaje .= "http://localhost/proyecto%20tfg/</p>";

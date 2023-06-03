@@ -64,7 +64,7 @@ function pintarFactureaPedidos($pedido, $tipo){
 
             if($resultadoCupon->num_rows > 0){
                 $filaCupon = $resultadoCupon-> fetch_assoc();
-                $tabla .= '<td colspan="2"><b>Código Descuento: </b>'.$filaPedido["id_cupon"].'->'.$filaCupon["porcentaje"].'%</td>';
+                $tabla .= '<td colspan="2"><b>Código Descuento: </b>'.$filaPedido["id_cupon"].'&#8594;'.$filaCupon["porcentaje"].'%</td>';
             }else{
                 $tabla .= '<td colspan="2"><b>Código Descuento:</b> </td>';
             }
@@ -149,7 +149,7 @@ function pintarFactureaPedidos($pedido, $tipo){
                 $tabla .= '<td>'.$filaProductos["cantidad"].'</td>';
 
                     if($filaProductos["porcentaje_descuento"]>0){
-                        $tabla .='<td><del>'.$filaProductos["precio_unidad"].'</del>&euro;'.$filaProductos["porcentaje_descuento"].'%-->'.number_format((double)$filaProductos["precio_unidad"]-((double)$filaProductos["precio_unidad"]*(double)$filaProductos["porcentaje_descuento"]/100),2).'&euro;</td>';
+                        $tabla .='<td><del>'.$filaProductos["precio_unidad"].'</del>&euro;'.$filaProductos["porcentaje_descuento"].'% &#8594; '.number_format((double)$filaProductos["precio_unidad"]-((double)$filaProductos["precio_unidad"]*(double)$filaProductos["porcentaje_descuento"]/100),2).'&euro;</td>';
                     }else{
                         $tabla .='<td>'.$filaProductos["precio_unidad"].'&euro;</td>';
                     }

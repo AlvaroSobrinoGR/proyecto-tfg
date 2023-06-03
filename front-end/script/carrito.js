@@ -80,7 +80,7 @@ function funciones() {
             td.setAttribute("id", "precio;"+productos[i]["id_producto"])
 
             if(productos[i]["descuento"]>0){
-                td.innerHTML = "<del>"+Number(productos[i]["precio"]).toLocaleString("en-US",{minimumFractionDigits: 2, maximumFractionDigits:2})+"</del>&euro;"+" -"+productos[i]["descuento"]+"% "+Number(productos[i]["precio_con_descuento"]).toLocaleString("en-US",{minimumFractionDigits: 2, maximumFractionDigits:2})+"&euro;";
+                td.innerHTML = "<del>"+Number(productos[i]["precio"]).toLocaleString("en-US",{minimumFractionDigits: 2, maximumFractionDigits:2})+"</del>&euro;"+" -"+productos[i]["descuento"]+"% &#8594; "+Number(productos[i]["precio_con_descuento"]).toLocaleString("en-US",{minimumFractionDigits: 2, maximumFractionDigits:2})+"&euro;";
             }else{
                 td.innerHTML = productos[i]["precio"]+"&euro;"
             }
@@ -179,10 +179,9 @@ function funciones() {
         let precioUnitario = document.getElementById("precio;"+idproducto).innerText; 
         if(precioUnitario.includes('-')){
             precioUnitario = precioUnitario.split('→');
-            precioUnitario = precioUnitario[0].split('%');
             precioUnitario = precioUnitario[1].split('€');
             precioUnitario =precioUnitario[0].trim();
-            
+            console.log(precioUnitario)
         }else{
             precioUnitario = parseFloat(precioUnitario.split('€')[0])
         }

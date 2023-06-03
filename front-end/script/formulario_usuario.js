@@ -277,6 +277,8 @@ function funciones (){
 
         //recogemos el numero pedido
         let pedido = document.getElementById("id_compra;"+this.id.split(";")[1]).innerText;
+
+
         formulario.append("id_pedido", pedido);
  
         let xhr = new XMLHttpRequest();
@@ -518,14 +520,16 @@ function funciones (){
         formulario.append("id_pedido_devolver", document.getElementById("id_compra_devolucion").innerText);
         formulario.append("productos_cantidades", productos_cantidades)       
         
-        
         let xhr = new XMLHttpRequest();
         xhr.open("POST", "../back-end/usuario_devoluciones.php");
         xhr.addEventListener("load", (respuesta) => {
+
+            
             if(respuesta.target.response.includes("Algo ha fallado. Inténtelo de nuevo más tarde.")){
                 alert(respuesta.target.response)
             }else{
                 if(respuesta.target.response.includes("devoluciohn realizada")){
+                    console.log(respuesta.target.response)
                     alert("Devolución realizada, le hemos mandado un email con la factura actualizada")
                     location.reload(true);
                 }else{

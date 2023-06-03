@@ -16,21 +16,27 @@ $conexion = conexionBaseDatos();
         $resultadoProducto = $conexion->query($consultaProducto);
 
         if ($resultadoProducto->num_rows > 0) {
-            // Verificar si ya existe un descuento para el producto en la tabla descuentos
-            $consultaDescuento = "SELECT * FROM descuentos WHERE id_producto = '$idProducto'";
-            $resultadoDescuento = $conexion->query($consultaDescuento);
+            $fila = $resultadoProducto->fetch_assoc();
+            if($fila["activo"] == 1 && $fila["stock"] > 0){
+                // Verificar si ya existe un descuento para el producto en la tabla descuentos
+                $consultaDescuento = "SELECT * FROM descuentos WHERE id_producto = '$idProducto'";
+                $resultadoDescuento = $conexion->query($consultaDescuento);
 
-            if ($resultadoDescuento->num_rows > 0) {
-                echo "El producto ya tiene un descuento.";
-            } else {
-                // Insertar el descuento en la tabla descuentos
-                $insercionDescuento = "INSERT INTO descuentos (porcentaje, id_producto) VALUES ('$porcentaje', '$idProducto')";
-                if ($conexion->query($insercionDescuento) === TRUE) {
-                    echo "El descuento se ha agregado correctamente.";
+                if ($resultadoDescuento->num_rows > 0) {
+                    echo "El producto ya tiene un descuento.";
                 } else {
-                    echo "Error al agregar el descuento: " . $conexion->error;
+                    // Insertar el descuento en la tabla descuentos
+                    $insercionDescuento = "INSERT INTO descuentos (porcentaje, id_producto) VALUES ('$porcentaje', '$idProducto')";
+                    if ($conexion->query($insercionDescuento) === TRUE) {
+                        echo "El descuento se ha agregado correctamente.";
+                    } else {
+                        echo "Error al agregar el descuento: " . $conexion->error;
+                    }
                 }
+            }else{
+                echo "El producto esta inacivo o no tiene stock, no se le peude aplicar el descuento";
             }
+            
         } else {
             echo "El producto no existe.";
         }

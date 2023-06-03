@@ -3,7 +3,10 @@
 
 function conexionBaseDatos(){
     try {
-        // Intentar conexión con el primer host
+        // Intentar conexión con el primer hosT
+        //Esta es la conexion con XAMPP
+        //Esta es la conexion con XAMPP
+        //Esta es la conexion con XAMPP
         $conexion= new mysqli("localhost", "root", "", "tienda");
         mysqli_set_charset($conexion, "utf8");
     

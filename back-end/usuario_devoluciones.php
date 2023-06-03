@@ -25,9 +25,10 @@ if(isset($_POST["email"]) && isset($_POST["id_pedido_devolver"]) && isset($_POST
         $resultado = $conexion->query($consulta);
     
         if ($resultado->num_rows > 0) {
-    
+
             $productos_cantidades = explode(";", $productos_cantidades);
             $productos_cantidades = array_slice($productos_cantidades, 1, -1);
+
     
             if (count($productos_cantidades) > 0) {
                 for ($i = 0; $i < count($productos_cantidades); $i++) {
@@ -79,8 +80,9 @@ if(isset($_POST["email"]) && isset($_POST["id_pedido_devolver"]) && isset($_POST
                             } else {
                                 //hacer lo mismo que antes, pero como no son la mis a cantidad, habra que modificar la cantidad, sus avlores y despues los de la factura
                                 $temporal[1];
+                                $cambio_cantidad = $fila["cantidad"]-$temporal[1];
                                 $precio_unidad = $fila["precio_unidad"];
-                                $precio_total = $precio_unidad * $temporal[1];
+                                $precio_total = $precio_unidad * $cambio_cantidad;
                                 $porcentaje_descuento = $fila["porcentaje_descuento"];
                                 $total_tras_descuento = $precio_total - ($precio_total * $porcentaje_descuento / 100);
     
@@ -89,7 +91,7 @@ if(isset($_POST["email"]) && isset($_POST["id_pedido_devolver"]) && isset($_POST
                                 $conexion->autocommit(false);
     
                                 $consulta = "UPDATE compra_productos
-                                            SET cantidad = '$temporal[1]', precio_total= '$precio_total', total_tras_descuento= '$total_tras_descuento'
+                                            SET cantidad = '$cambio_cantidad', precio_total= '$precio_total', total_tras_descuento= '$total_tras_descuento'
                                             WHERE id_compra = '$id_compra' AND id_producto = '$temporal[0]'";
     
     
