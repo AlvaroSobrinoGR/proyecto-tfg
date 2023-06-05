@@ -27,10 +27,20 @@ function funciones() {
             if(respuesta.target.response.includes("Algo ha fallado. Inténtelo de nuevo más tarde.")){
                 alert(respuesta.target.response)
             }else{ 
-                let json = JSON.parse(respuesta.target.response)
-                numeroProductos = json.length;
-                pintarProductos(json)
-                calculos()
+                sessionStorage.setItem("carrito_tienda_minimalista", respuesta.target.response.split("ç")[1])
+                pintarNumeroProductos()
+                if(numeroProductosCarrito()==0){
+                    document.getElementById("contenido1").innerText = "No tienes productos que comprar"
+                    desbloquearBloqueo()
+                    document.getElementById("siguiente1").style.display = "none";
+                    sessionStorage.removeItem("carrito_tienda_minimalista")
+                }else{
+                    let json = JSON.parse(respuesta.target.response.split("ç")[0])
+                    numeroProductos = json.length;
+                    pintarProductos(json)
+                    calculos()
+                }
+                
             }
             desbloquearBloqueo()
         });
@@ -54,7 +64,7 @@ function funciones() {
                 input.setAttribute("value", 1)
                 input.setAttribute("onkeypress", "return false;")
                 td.appendChild(input);
-            }else{
+            }else if(productos[i]["stock"]==0){
                 let p = document.createElement("p");
                 p.setAttribute("id", "unidades;"+productos[i]["id_producto"])
                 p.innerText = "ya no quedan unidades"
@@ -384,6 +394,9 @@ function funciones() {
                     
                     if(resultado.target.response.includes("agotado")){
                         alert(resultado.target.response+". Elimine el producto de la cesta")
+                        location.reload()
+                    }else if(resultado.target.response.includes("inactivo")){
+                        alert(resultado.target.response+". El prodcuto sera eliminado de la cesta")
                         location.reload()
                     }else{
                         alert(resultado.target.response)

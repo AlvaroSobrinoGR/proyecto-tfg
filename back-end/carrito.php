@@ -3,6 +3,7 @@
     
     if($_POST["carrito"]){
         $carrito = $_POST["carrito"];
+        $lista_devolver = ";";
         $productos = explode(";", $carrito);
         $productos = array_slice($productos, 1, -1);
 
@@ -24,6 +25,7 @@
             if($fila["activo"]==1){
 
                 $id_producto = $fila["id_producto"];
+                $lista_devolver.=$id_producto.";";
                 $consulta_descuento = "SELECT * FROM descuentos WHERE id_producto = $id_producto";
                 $resultado_descuento = $conexion->query($consulta_descuento);
                 $descuento;
@@ -46,7 +48,7 @@
             }
         }
         $json = substr($json, 0, strlen($json)-1);
-        echo $json."]";
+        echo $json."]ç".$lista_devolver;
 
 
         $conexion->close();

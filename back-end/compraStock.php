@@ -16,13 +16,17 @@ if(isset($_POST["productos_cantidades"])){
         $resultado = $conexion->query($consulta);
         $fila = $resultado->fetch_assoc();
         $stock = $fila["stock"];
-        if($stock==0){
+        if($fila["activo"]==0){
             $nombre = $fila["nombre"];
-            echo "el producto \"$nombre\" esta agotado en estos momentos";
+            echo "El producto \"$nombre\" que quieres adquirir esta inactivo actualmente.";
+            $encontrado = true;
+        }else if($stock==0){
+            $nombre = $fila["nombre"];
+            echo "El producto \"$nombre\" esta agotado en estos momentos";
             $encontrado = true;
         }else if($temporal[1]>$stock){
             $nombre = $fila["nombre"];
-            echo "la cantidad de producto \"$nombre\" que quieres adquirir no esta disponible en el almacen.";
+            echo "La cantidad de producto \"$nombre\" que quieres adquirir no esta disponible en el almacen.";
             $encontrado = true;
         }
         if($encontrado){
