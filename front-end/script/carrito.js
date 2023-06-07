@@ -239,7 +239,7 @@ function funciones() {
                 alert(respuesta.target.response)
             }else{ 
                 let resultado = respuesta.target.response;
-                if(resultado!="el codigo esta desabilitado" && resultado!="el codigo no existe"){
+                if(resultado!="el codigo esta deshabilitado" && resultado!="el codigo no existe"){
                     document.getElementById("porcentajeCupon").innerHTML = "-"+resultado+"%"
                     document.getElementById("errorCupon").innerHTML = ""
                 }else{

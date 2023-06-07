@@ -17,7 +17,7 @@ require_once 'conexion_base_datos.php';
           $porcentajeDescuneto = $fila["porcentaje"];
           echo $porcentajeDescuneto;
         }else if($fila["estado"]==0){
-          echo "el codigo esta desabilitado";
+          echo "el codigo esta deshabilitado";
         }
       }
     }else{
